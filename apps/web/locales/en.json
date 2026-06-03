@@ -1,0 +1,130 @@
+{
+  "meta": {
+    "title": "F90+ — Predict the 2026 World Cup with friends",
+    "description": "The free, social way to predict every match of the 2026 World Cup. Virtual coins, global leaderboards, and a football-smart AI. No real money — just glory."
+  },
+  "nav": {
+    "how": "How it works",
+    "matches": "Matches",
+    "analyst": "Analyst",
+    "rankings": "Leaderboard",
+    "play": "Play free"
+  },
+  "common": {
+    "live": "Live",
+    "soon": "Soon",
+    "free": "Free",
+    "backHome": "Back home",
+    "worldCup": "World Cup 2026"
+  },
+  "localeSwitcher": {
+    "label": "Language",
+    "aria": "Change language"
+  },
+  "hero": {
+    "eyebrow": "World Cup 2026 · Social predictions",
+    "titleLead": "Predict the World Cup.",
+    "titleHighlight": "Live every minute.",
+    "subtitle": "Make your calls, earn virtual coins, and climb a global leaderboard with friends and rivals worldwide. Free forever — bragging rights are the only currency that's real.",
+    "ctaPrimary": "Start predicting — free",
+    "ctaSecondary": "How it works",
+    "chipFree": "100% free to play",
+    "chipCoins": "Virtual coins, zero risk",
+    "chipRanking": "Global leaderboard",
+    "liveNow": "Live now",
+    "featured": "Featured match",
+    "cardPrompt": "Who takes it?",
+    "cardHint": "Tap a side to make the call"
+  },
+  "countdown": {
+    "eyebrow": "Kickoff",
+    "label": "The tournament kicks off in",
+    "days": "Days",
+    "hours": "Hrs",
+    "minutes": "Min",
+    "seconds": "Sec",
+    "live": "The World Cup is LIVE",
+    "liveSub": "Matches are rolling — make your calls.",
+    "hosts": "USA · Canada · Mexico · 2026"
+  },
+  "matches": {
+    "eyebrow": "Matchday",
+    "title": "Tonight under the lights",
+    "subtitle": "Giant fixtures, instant calls. Pick a side and the table reacts in real time.",
+    "predict": "Predict",
+    "group": "Group {group}",
+    "today": "Today",
+    "tomorrow": "Tomorrow",
+    "draw": "Draw",
+    "viewAll": "See all fixtures"
+  },
+  "howItWorks": {
+    "eyebrow": "How it works",
+    "title": "Three taps to glory",
+    "subtitle": "No wallet, no risk, no nonsense. Just football and bragging rights.",
+    "step1Title": "Call the matches",
+    "step1Body": "Predict winners, scorelines and big moments before kickoff. Every call costs virtual coins — spend them wisely.",
+    "step2Title": "Climb the table",
+    "step2Body": "Nail your predictions to bank points and rise through a global leaderboard that moves with the World Cup.",
+    "step3Title": "Out-predict your friends",
+    "step3Body": "Build private leagues, talk some trash, and let our football-smart AI pundit challenge your gut with the stats."
+  },
+  "leaderboard": {
+    "eyebrow": "Global table",
+    "title": "The world is already predicting",
+    "subtitle": "A taste of the global leaderboard. Your name could be here in June.",
+    "colRank": "#",
+    "colPlayer": "Player",
+    "colPoints": "Points",
+    "points": "{points, number} pts",
+    "you": "You?",
+    "joinCta": "Claim your spot"
+  },
+  "cta": {
+    "title": "The World Cup hits different with skin in the game.",
+    "subtitle": "Virtual skin, that is. Join F90+ free and turn every match into a moment.",
+    "button": "Create your free profile",
+    "disclaimer": "No deposits. No payouts. No gambling. Just predictions and pride."
+  },
+  "footer": {
+    "tagline": "The social World Cup pick'em.",
+    "disclaimer": "F90+ is a free-to-play prediction game. It uses virtual coins only and involves no real money or gambling.",
+    "rights": "Built for the love of the game.",
+    "copyright": "© {year} F90+"
+  },
+  "copilot": {
+    "name": "The Analyst",
+    "sectionEyebrow": "Meet your copilot",
+    "sectionTitle": "Your personal football Analyst",
+    "sectionSubtitle": "Before every match, the Analyst reads the data — form, quality, head-to-head and the market — and gives you an honest, probabilistic call. No paid AI, no black box.",
+    "probabilities": "Win probability",
+    "recommendation": "Recommendation",
+    "why": "Why",
+    "rec": {
+      "home": "Lean: {team} to win",
+      "away": "Lean: {team} to win",
+      "draw": "Lean: a draw",
+      "tooClose": "Too close to call"
+    },
+    "confidence": {
+      "label": "Confidence",
+      "low": "low confidence",
+      "moderate": "moderate confidence",
+      "solid": "solid confidence",
+      "high": "high confidence"
+    },
+    "driver": {
+      "market": "The market makes {team} clear favourites ({pct}%)",
+      "elo": "{team} is the stronger side on rating",
+      "form": "{team} arrives in better form ({wins} of {n})",
+      "quality": "{team} creates the better chances",
+      "external": "Outside models favour {team} ({pct}%)",
+      "community": "{pct}% of F90+ players agree",
+      "h2h": "{team} holds the head-to-head edge",
+      "home": "{team} plays at home (host nation)",
+      "even": "The data sees this finely balanced"
+    },
+    "value": "Your model rates {team} {pct}% above the market — a contrarian angle.",
+    "disclaimer": "Probabilities for entertainment. Not betting advice — F90+ is free and virtual."
+  }
+}

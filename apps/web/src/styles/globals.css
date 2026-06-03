@@ -1,0 +1,415 @@
+@import 'tailwindcss';
+
+/* ════════════════════════════════════════════════════════════════════════
+   F90+ DESIGN TOKENS
+   The single source of visual truth. Tailwind v4 turns every token below into
+   utilities (bg-night-900, text-led-500, font-display, animate-rise, …).
+   Change a value here and the whole product follows.
+   ════════════════════════════════════════════════════════════════════════ */
+@theme {
+  /* ── Type ─────────────────────────────────────────────────────────────── */
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, 'SFMono-Regular', monospace;
+  --font-display: var(--font-space-grotesk), var(--font-geist-sans), sans-serif;
+
+  /* ── Night / surfaces (the stadium after dark) ───────────────────────── */
+  --color-night-950: #05080f;
+  --color-night-900: #080d1a;
+  --color-night-850: #0b1120;
+  --color-night-800: #101a2e;
+  --color-night-700: #18233b;
+  --color-night-600: #233149;
+
+  /* ── Mist / text (cool floodlit whites) ──────────────────────────────── */
+  --color-mist-50: #f6f8ff;
+  --color-mist-100: #e9eefb;
+  --color-mist-200: #cdd6ec;
+  --color-mist-300: #aab5d4;
+  --color-mist-400: #828fb2;
+  --color-mist-500: #5e6a8c;
+
+  /* ── LED blue · signature primary ────────────────────────────────────── */
+  --color-led-300: #86abff;
+  --color-led-400: #5b8cff;
+  --color-led-500: #3d74ff;
+  --color-led-600: #2a56e6;
+  --color-led-700: #1e3db0;
+
+  /* ── Volt cyan · glow partner ────────────────────────────────────────── */
+  --color-volt-300: #74f0ff;
+  --color-volt-400: #2bddf0;
+  --color-volt-500: #12c2d8;
+
+  /* ── Pitch green · field / data-viz semantics ────────────────────────── */
+  --color-pitch-300: #74f4c4;
+  --color-pitch-400: #2fe6a0;
+  --color-pitch-500: #15d389;
+  --color-pitch-600: #0bb873;
+
+  /* ── Lime · BRAND accent (the logo "+") — keep this consistent ────────── */
+  --color-lime-300: #d2ff7a;
+  --color-lime-400: #aef23a;
+  --color-lime-500: #8fd41e;
+  --color-lime-600: #6fae16;
+
+  /* ── Gold · floodlight warmth / trophy ───────────────────────────────── */
+  --color-gold-300: #ffdc8c;
+  --color-gold-400: #ffc44d;
+  --color-gold-500: #f5a623;
+
+  /* ── Flare · live / alert ────────────────────────────────────────────── */
+  --color-flare-400: #ff6f62;
+  --color-flare-500: #f5483a;
+
+  /* ── Radii ───────────────────────────────────────────────────────────── */
+  --radius-card: 1.25rem;
+  --radius-xl2: 1.75rem;
+  --radius-pill: 999px;
+
+  /* ── Motion tokens (→ animate-* utilities) ───────────────────────────── */
+  --animate-live-pulse: live-pulse 1.6s ease-in-out infinite;
+  --animate-glow-drift: glow-drift 16s ease-in-out infinite alternate;
+  --animate-rise: rise 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
+  --animate-marquee: marquee 38s linear infinite;
+  --animate-shimmer: shimmer 2.6s ease-in-out infinite;
+  --animate-float: float 7s ease-in-out infinite;
+  --animate-sheen: sheen 7s ease-in-out infinite;
+  --animate-breathe: breathe 9s ease-in-out infinite;
+}
+
+/* ════════════════════════════════════════════════════════════════════════
+   KEYFRAMES
+   ════════════════════════════════════════════════════════════════════════ */
+@keyframes live-pulse {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.45;
+    transform: scale(0.78);
+  }
+}
+
+@keyframes glow-drift {
+  0% {
+    transform: translate3d(-4%, -2%, 0) scale(1);
+    opacity: 0.75;
+  }
+  100% {
+    transform: translate3d(5%, 3%, 0) scale(1.12);
+    opacity: 1;
+  }
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes shimmer {
+  0%,
+  100% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+/* Slow light-sweep across gradient text (broadcast sheen) */
+@keyframes sheen {
+  0%,
+  100% {
+    background-position: 0% 0;
+  }
+  50% {
+    background-position: 100% 0;
+  }
+}
+
+/* Floodlights gently breathing */
+@keyframes breathe {
+  0%,
+  100% {
+    opacity: 0.45;
+  }
+  50% {
+    opacity: 0.9;
+  }
+}
+
+/* ════════════════════════════════════════════════════════════════════════
+   BASE
+   ════════════════════════════════════════════════════════════════════════ */
+@layer base {
+  :root {
+    color-scheme: dark;
+  }
+
+  * {
+    border-color: color-mix(in oklab, var(--color-mist-500) 14%, transparent);
+  }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+    scroll-behavior: smooth;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    background-color: var(--color-night-950);
+    color: var(--color-mist-100);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+  }
+
+  ::selection {
+    background: color-mix(in oklab, var(--color-led-500) 80%, transparent);
+    color: #fff;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-led-400);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-display);
+    letter-spacing: -0.02em;
+  }
+}
+
+/* ════════════════════════════════════════════════════════════════════════
+   COMPONENT HELPERS
+   Reusable atmosphere primitives. Kept here (not as Tailwind plugins) so the
+   visual language stays readable in one place.
+   ════════════════════════════════════════════════════════════════════════ */
+@layer components {
+  /* Frosted broadcast panel */
+  .glass {
+    background: linear-gradient(
+      160deg,
+      color-mix(in oklab, var(--color-night-800) 86%, transparent),
+      color-mix(in oklab, var(--color-night-900) 92%, transparent)
+    );
+    border: 1px solid color-mix(in oklab, var(--color-mist-200) 10%, transparent);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+  }
+
+  /* A 1px highlight along the top edge — the "lit rim" of premium cards */
+  .hairline {
+    position: relative;
+  }
+  .hairline::before {
+    content: '';
+    position: absolute;
+    inset: 0 0 auto 0;
+    height: 1px;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      color-mix(in oklab, var(--color-led-300) 60%, transparent),
+      transparent
+    );
+    opacity: 0.7;
+  }
+
+  /* Signature glows */
+  .glow-led {
+    box-shadow:
+      0 0 0 1px color-mix(in oklab, var(--color-led-400) 35%, transparent),
+      0 18px 60px -22px color-mix(in oklab, var(--color-led-500) 70%, transparent);
+  }
+  .glow-pitch {
+    box-shadow: 0 18px 60px -24px color-mix(in oklab, var(--color-pitch-500) 65%, transparent);
+  }
+  .glow-gold {
+    box-shadow: 0 18px 60px -24px color-mix(in oklab, var(--color-gold-400) 55%, transparent);
+  }
+  .glow-lime {
+    box-shadow: 0 18px 60px -24px color-mix(in oklab, var(--color-lime-400) 55%, transparent);
+  }
+
+  /* The "original glow" around the F90+ logo on dark surfaces (gold + lime halo) */
+  .logo-glow {
+    filter: drop-shadow(0 0 18px color-mix(in oklab, var(--color-gold-400) 38%, transparent))
+      drop-shadow(0 0 44px color-mix(in oklab, var(--color-lime-400) 16%, transparent));
+  }
+  .logo-glow-lg {
+    filter: drop-shadow(0 0 30px color-mix(in oklab, var(--color-gold-400) 52%, transparent))
+      drop-shadow(0 0 78px color-mix(in oklab, var(--color-lime-400) 26%, transparent));
+  }
+
+  /* Gradient clip text for hero highlights */
+  .text-gradient {
+    background: linear-gradient(
+      100deg,
+      var(--color-mist-50) 0%,
+      var(--color-led-300) 42%,
+      var(--color-volt-300) 100%
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  /* Same, with a slow broadcast light-sweep (very subtle) */
+  .text-gradient-sheen {
+    background-image: linear-gradient(
+      100deg,
+      var(--color-mist-50) 0%,
+      var(--color-led-300) 30%,
+      var(--color-volt-300) 50%,
+      var(--color-led-300) 70%,
+      var(--color-mist-50) 100%
+    );
+    background-size: 220% 100%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: var(--animate-sheen);
+  }
+
+  /* Faint broadcast grid for ambient depth */
+  .bg-broadcast-grid {
+    background-image:
+      repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 47px,
+        color-mix(in oklab, var(--color-mist-200) 3.5%, transparent) 47px,
+        color-mix(in oklab, var(--color-mist-200) 3.5%, transparent) 48px
+      ),
+      repeating-linear-gradient(
+        90deg,
+        transparent,
+        transparent 47px,
+        color-mix(in oklab, var(--color-mist-200) 3.5%, transparent) 47px,
+        color-mix(in oklab, var(--color-mist-200) 3.5%, transparent) 48px
+      );
+  }
+
+  /* Broadcast lower-third label, with a leading accent tick (broadcast cue) */
+  .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-family: var(--font-display);
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: var(--color-led-300);
+  }
+  .eyebrow::before {
+    content: '';
+    width: 1.4rem;
+    height: 2px;
+    flex: none;
+    border-radius: 2px;
+    background: linear-gradient(90deg, var(--color-lime-400), transparent);
+  }
+
+  /* Ultra-faint pitch markings (center circle + spot + halfway line) */
+  .pitch-markings {
+    background-image:
+      radial-gradient(
+        circle at 50% 50%,
+        transparent 70px,
+        color-mix(in oklab, var(--color-mist-100) 7%, transparent) 71px,
+        color-mix(in oklab, var(--color-mist-100) 7%, transparent) 72px,
+        transparent 73px
+      ),
+      radial-gradient(
+        circle at 50% 50%,
+        color-mix(in oklab, var(--color-mist-100) 7%, transparent) 0 3px,
+        transparent 4px
+      ),
+      linear-gradient(
+        90deg,
+        transparent calc(50% - 1px),
+        color-mix(in oklab, var(--color-mist-100) 6%, transparent) calc(50% - 1px),
+        color-mix(in oklab, var(--color-mist-100) 6%, transparent) calc(50% + 1px),
+        transparent calc(50% + 1px)
+      );
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+
+  /* Faint pitch lines for the hero floor */
+  .pitch-lines {
+    background-image:
+      linear-gradient(transparent 0, transparent calc(100% - 1px), color-mix(in oklab, var(--color-pitch-400) 16%, transparent) 100%),
+      repeating-linear-gradient(
+        90deg,
+        transparent,
+        transparent 78px,
+        color-mix(in oklab, var(--color-mist-200) 4%, transparent) 78px,
+        color-mix(in oklab, var(--color-mist-200) 4%, transparent) 80px
+      );
+  }
+
+  /* Subtle film grain for premium depth */
+  .grain::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.04;
+    mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  /* Tabular numerals for scores / points / countdown */
+  .nums {
+    font-variant-numeric: tabular-nums;
+    font-feature-settings: 'tnum' 1;
+  }
+}
+
+/* ════════════════════════════════════════════════════════════════════════
+   ACCESSIBILITY — honour reduced motion
+   ════════════════════════════════════════════════════════════════════════ */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}

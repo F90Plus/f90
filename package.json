@@ -1,0 +1,23 @@
+{
+  "name": "f90plus",
+  "private": true,
+  "version": "0.0.0",
+  "description": "F90+ — a social, free-to-play prediction experience for the 2026 World Cup.",
+  "packageManager": "pnpm@9.15.0",
+  "engines": {
+    "node": ">=20.9.0"
+  },
+  "scripts": {
+    "dev": "pnpm --filter @f90plus/web dev",
+    "build": "pnpm --filter @f90plus/web build",
+    "start": "pnpm --filter @f90plus/web start",
+    "lint": "pnpm --filter @f90plus/web lint",
+    "typecheck": "pnpm --filter @f90plus/web typecheck",
+    "format": "prettier --write \"**/*.{ts,tsx,js,mjs,md,json,css}\"",
+    "format:check": "prettier --check \"**/*.{ts,tsx,js,mjs,md,json,css}\""
+  },
+  "devDependencies": {
+    "prettier": "^3.4.2",
+    "prettier-plugin-tailwindcss": "^0.6.11"
+  }
+}

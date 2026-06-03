@@ -1,0 +1,34 @@
+# Dependencies
+node_modules/
+.pnp.*
+.yarn/*
+
+# Next.js / build output
+**/.next/
+**/out/
+**/build/
+**/dist/
+*.tsbuildinfo
+.turbo/
+
+# Environment (never commit real secrets — only .env.example is tracked)
+.env
+.env.*
+!.env.example
+
+# Logs
+*.log
+npm-debug.log*
+pnpm-debug.log*
+yarn-debug.log*
+
+# Testing
+coverage/
+
+# OS / editor noise
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json

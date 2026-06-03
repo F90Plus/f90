@@ -1,0 +1,91 @@
+'use client';
+
+import { useEffect, useState } from 'react';
+import { useTranslations } from 'next-intl';
+import { Card } from '@/components/ui/card';
+import { LiveDot } from '@/components/ui/live-dot';
+import { WORLD_CUP_KICKOFF_ISO } from '@/lib/constants';
+
+interface Remaining {
+  done: boolean;
+  days: number;
+  hours: number;
+  minutes: number;
+  seconds: number;
+}
+
+function remainingUntil(target: number): Remaining {
+  const ms = Math.max(0, target - Date.now());
+  const totalSeconds = Math.floor(ms / 1000);
+  return {
+    done: ms === 0,
+    days: Math.floor(totalSeconds / 86400),
+    hours: Math.floor((totalSeconds % 86400) / 3600),
+    minutes: Math.floor((totalSeconds % 3600) / 60),
+    seconds: totalSeconds % 60,
+  };
+}
+
+/** Live ticking countdown to the World Cup opener. */
+export function Countdown() {
+  const t = useTranslations('countdown');
+  const target = new Date(WORLD_CUP_KICKOFF_ISO).getTime();
+  const [time, setTime] = useState<Remaining>(() => remainingUntil(target));
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+    setTime(remainingUntil(target));
+    const id = window.setInterval(() => setTime(remainingUntil(target)), 1000);
+    return () => window.clearInterval(id);
+  }, [target]);
+
+  if (time.done) {
+    return (
+      <Card className="flex items-center gap-3 px-5 py-4">
+        <LiveDot />
+        <div>
+          <p className="font-display font-bold text-flare-400">{t('live')}</p>
+          <p className="text-sm text-mist-400">{t('liveSub')}</p>
+        </div>
+      </Card>
+    );
+  }
+
+  const units = [
+    { value: time.days, label: t('days') },
+    { value: time.hours, label: t('hours') },
+    { value: time.minutes, label: t('minutes') },
+    { value: time.seconds, label: t('seconds') },
+  ];
+
+  return (
+    <Card className="px-5 py-4">
+      <div className="mb-3 flex flex-wrap items-baseline gap-x-2 gap-y-1">
+        <span className="eyebrow">{t('eyebrow')}</span>
+        <span className="text-sm text-mist-400">{t('label')}</span>
+      </div>
+      <div className="grid grid-cols-4 gap-2">
+        {units.map((unit) => (
+          <div
+            key={unit.label}
+            className="flex flex-col items-center rounded-xl bg-night-900/60 py-3"
+          >
+            <span
+              className="nums font-display text-2xl font-extrabold text-mist-50 sm:text-3xl"
+              suppressHydrationWarning
+            >
+              {mounted ? String(unit.value).padStart(2, '0') : '--'}
+            </span>
+            <span className="mt-1 text-[0.65rem] uppercase tracking-widest text-mist-500">
+              {unit.label}
+            </span>
+          </div>
+        ))}
+      </div>
+      <p className="mt-4 text-center text-[0.65rem] tracking-[0.2em] text-mist-500 uppercase">
+        {t('hosts')}
+      </p>
+    </Card>
+  );
+}

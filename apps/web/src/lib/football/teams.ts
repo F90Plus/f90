@@ -1,0 +1,61 @@
+/**
+ * Team metadata keyed by openfootball's exact team-name strings.
+ * `code` = 3-letter broadcast code, `accent` = token-aligned hex for the team
+ * token, `strength` = internal rating (FIFA-ranking proxy) feeding the model.
+ * Unmapped teams degrade gracefully via `teamMeta()`.
+ */
+export interface TeamMeta {
+  code: string;
+  accent: string;
+  strength: number;
+}
+
+const TEAMS: Record<string, TeamMeta> = {
+  Spain: { code: 'ESP', accent: '#E63946', strength: 2090 },
+  Argentina: { code: 'ARG', accent: '#74ACE6', strength: 2080 },
+  France: { code: 'FRA', accent: '#3D74FF', strength: 2050 },
+  Brazil: { code: 'BRA', accent: '#EFC400', strength: 2050 },
+  England: { code: 'ENG', accent: '#5B8CFF', strength: 2010 },
+  Portugal: { code: 'POR', accent: '#1FA85C', strength: 2000 },
+  Netherlands: { code: 'NED', accent: '#FF8A3D', strength: 1990 },
+  Germany: { code: 'GER', accent: '#E8B500', strength: 1980 },
+  Belgium: { code: 'BEL', accent: '#E8B500', strength: 1970 },
+  Colombia: { code: 'COL', accent: '#EFC400', strength: 1950 },
+  Uruguay: { code: 'URU', accent: '#74ACE6', strength: 1930 },
+  Croatia: { code: 'CRO', accent: '#E63946', strength: 1920 },
+  Morocco: { code: 'MAR', accent: '#C0392B', strength: 1900 },
+  Japan: { code: 'JPN', accent: '#E6486A', strength: 1880 },
+  Switzerland: { code: 'SUI', accent: '#E63946', strength: 1865 },
+  'Ivory Coast': { code: 'CIV', accent: '#FF8A3D', strength: 1860 },
+  Ecuador: { code: 'ECU', accent: '#EFC400', strength: 1860 },
+  Sweden: { code: 'SWE', accent: '#5B8CFF', strength: 1855 },
+  USA: { code: 'USA', accent: '#5B8CFF', strength: 1850 },
+  Turkey: { code: 'TUR', accent: '#E63946', strength: 1850 },
+  Mexico: { code: 'MEX', accent: '#15D389', strength: 1835 },
+  Iran: { code: 'IRN', accent: '#1FA85C', strength: 1830 },
+  'South Korea': { code: 'KOR', accent: '#3D74FF', strength: 1825 },
+  'Czech Republic': { code: 'CZE', accent: '#5B8CFF', strength: 1820 },
+  Egypt: { code: 'EGY', accent: '#C0392B', strength: 1820 },
+  Canada: { code: 'CAN', accent: '#E63946', strength: 1810 },
+  Scotland: { code: 'SCO', accent: '#3D74FF', strength: 1800 },
+  Paraguay: { code: 'PAR', accent: '#E63946', strength: 1795 },
+  Tunisia: { code: 'TUN', accent: '#C0392B', strength: 1790 },
+  'Bosnia & Herzegovina': { code: 'BIH', accent: '#3D74FF', strength: 1785 },
+  Australia: { code: 'AUS', accent: '#EFC400', strength: 1765 },
+  Qatar: { code: 'QAT', accent: '#7A1F3D', strength: 1705 },
+  'South Africa': { code: 'RSA', accent: '#1FA85C', strength: 1700 },
+  'New Zealand': { code: 'NZL', accent: '#5B8CFF', strength: 1655 },
+  'Cape Verde': { code: 'CPV', accent: '#1FA85C', strength: 1650 },
+  'Curaçao': { code: 'CUW', accent: '#3D74FF', strength: 1610 },
+  Haiti: { code: 'HAI', accent: '#5B8CFF', strength: 1560 },
+};
+
+/** Derive a stable code for an unmapped team (fallback). */
+function deriveCode(name: string): string {
+  const letters = name.replace(/[^A-Za-z]/g, '');
+  return (letters.slice(0, 3) || 'TBD').toUpperCase();
+}
+
+export function teamMeta(name: string): TeamMeta {
+  return TEAMS[name] ?? { code: deriveCode(name), accent: '#828FB2', strength: 1740 };
+}

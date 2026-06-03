@@ -1,0 +1,130 @@
+{
+  "meta": {
+    "title": "F90+ — Predice el Mundial 2026 con tus amigos",
+    "description": "La forma gratuita y social de predecir cada partido del Mundial 2026. Monedas virtuales, rankings globales y una IA futbolera. Sin dinero real: solo gloria."
+  },
+  "nav": {
+    "how": "Cómo funciona",
+    "matches": "Partidos",
+    "analyst": "Analista",
+    "rankings": "Ranking",
+    "play": "Jugar gratis"
+  },
+  "common": {
+    "live": "En directo",
+    "soon": "Pronto",
+    "free": "Gratis",
+    "backHome": "Volver al inicio",
+    "worldCup": "Mundial 2026"
+  },
+  "localeSwitcher": {
+    "label": "Idioma",
+    "aria": "Cambiar idioma"
+  },
+  "hero": {
+    "eyebrow": "Mundial 2026 · Predicciones sociales",
+    "titleLead": "Predice el Mundial.",
+    "titleHighlight": "Vive cada minuto.",
+    "subtitle": "Moja, gana monedas virtuales y escala un ranking global con amigos y rivales de todo el mundo. Gratis para siempre: la única moneda real es presumir.",
+    "ctaPrimary": "Empieza a predecir — gratis",
+    "ctaSecondary": "Cómo funciona",
+    "chipFree": "100% gratis",
+    "chipCoins": "Monedas virtuales, cero riesgo",
+    "chipRanking": "Ranking global",
+    "liveNow": "En directo",
+    "featured": "Partido destacado",
+    "cardPrompt": "¿Quién gana?",
+    "cardHint": "Toca un lado para mojarte"
+  },
+  "countdown": {
+    "eyebrow": "El pitido inicial",
+    "label": "El torneo arranca en",
+    "days": "Días",
+    "hours": "Hrs",
+    "minutes": "Min",
+    "seconds": "Seg",
+    "live": "El Mundial está EN JUEGO",
+    "liveSub": "Los partidos ya ruedan: moja tus predicciones.",
+    "hosts": "EE. UU. · Canadá · México · 2026"
+  },
+  "matches": {
+    "eyebrow": "Jornada",
+    "title": "Esta noche, bajo los focos",
+    "subtitle": "Partidazos y predicciones al instante. Elige un lado y la mesa reacciona en tiempo real.",
+    "predict": "Predecir",
+    "group": "Grupo {group}",
+    "today": "Hoy",
+    "tomorrow": "Mañana",
+    "draw": "Empate",
+    "viewAll": "Ver todos los partidos"
+  },
+  "howItWorks": {
+    "eyebrow": "Cómo funciona",
+    "title": "Tres toques hacia la gloria",
+    "subtitle": "Sin cartera, sin riesgo, sin líos. Solo fútbol y orgullo.",
+    "step1Title": "Moja en los partidos",
+    "step1Body": "Predice ganadores, marcadores y momentazos antes del pitido inicial. Cada predicción cuesta monedas virtuales: gástalas con cabeza.",
+    "step2Title": "Escala en la tabla",
+    "step2Body": "Acierta tus predicciones para sumar puntos y subir en un ranking global que se mueve al ritmo del Mundial.",
+    "step3Title": "Gana a tus amigos",
+    "step3Body": "Crea ligas privadas, pícate y deja que nuestra IA futbolera rete a tu instinto con las estadísticas en la mano."
+  },
+  "leaderboard": {
+    "eyebrow": "Tabla global",
+    "title": "El mundo ya está prediciendo",
+    "subtitle": "Un adelanto del ranking global. Tu nombre podría estar aquí en junio.",
+    "colRank": "#",
+    "colPlayer": "Jugador",
+    "colPoints": "Puntos",
+    "points": "{points, number} pts",
+    "you": "¿Tú?",
+    "joinCta": "Reclama tu sitio"
+  },
+  "cta": {
+    "title": "El Mundial se vive distinto cuando te juegas algo.",
+    "subtitle": "Algo virtual, claro. Únete a F90+ gratis y convierte cada partido en un momentazo.",
+    "button": "Crea tu perfil gratis",
+    "disclaimer": "Sin depósitos. Sin premios en dinero. Sin apuestas. Solo predicciones y orgullo."
+  },
+  "footer": {
+    "tagline": "La porra social del Mundial.",
+    "disclaimer": "F90+ es un juego de predicciones gratuito. Usa solo monedas virtuales y no implica dinero real ni apuestas.",
+    "rights": "Hecho por amor al fútbol.",
+    "copyright": "© {year} F90+"
+  },
+  "copilot": {
+    "name": "El Analista",
+    "sectionEyebrow": "Conoce a tu copiloto",
+    "sectionTitle": "Tu Analista futbolero personal",
+    "sectionSubtitle": "Antes de cada partido, el Analista lee los datos —forma, calidad, head-to-head y mercado— y te da una valoración honesta y probabilística. Sin IA de pago, sin caja negra.",
+    "probabilities": "Probabilidad de victoria",
+    "recommendation": "Recomendación",
+    "why": "Por qué",
+    "rec": {
+      "home": "Se inclina por {team}",
+      "away": "Se inclina por {team}",
+      "draw": "Se inclina por el empate",
+      "tooClose": "Demasiado igualado"
+    },
+    "confidence": {
+      "label": "Confianza",
+      "low": "confianza baja",
+      "moderate": "confianza media",
+      "solid": "confianza sólida",
+      "high": "confianza alta"
+    },
+    "driver": {
+      "market": "El mercado ve a {team} claro favorito ({pct}%)",
+      "elo": "{team} es superior sobre el papel",
+      "form": "{team} llega en mejor forma ({wins} de {n})",
+      "quality": "{team} genera más ocasiones claras",
+      "external": "Los modelos externos favorecen a {team} ({pct}%)",
+      "community": "El {pct}% de la comunidad F90+ coincide",
+      "h2h": "{team} domina el head-to-head",
+      "home": "{team} juega en casa (anfitrión)",
+      "even": "Los datos lo ven muy igualado"
+    },
+    "value": "Tu modelo ve a {team} un {pct}% por encima del mercado — un ángulo contrarian.",
+    "disclaimer": "Probabilidades con fines de entretenimiento. No es consejo de apuestas — F90+ es gratis y virtual."
+  }
+}
