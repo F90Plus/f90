@@ -35,15 +35,25 @@ export async function generateMetadata({
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: 'meta' });
 
+  const base = process.env.NEXT_PUBLIC_APP_URL ?? 'https://f90.xyz';
+  const path = locale === routing.defaultLocale ? '/' : `/${locale}`;
+
   return {
     title: t('title'),
     description: t('description'),
-    metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL ?? 'http://localhost:3000'),
+    metadataBase: new URL(base),
+    alternates: {
+      canonical: path,
+      languages: { es: '/', en: '/en', 'x-default': '/' },
+    },
     openGraph: {
       title: t('title'),
       description: t('description'),
       type: 'website',
       siteName: 'F90+',
+      url: path,
+      locale: locale === 'es' ? 'es_ES' : 'en_US',
+      alternateLocale: locale === 'es' ? 'en_US' : 'es_ES',
       images: [{ url: BRAND.og, width: 1200, height: 630, alt: 'F90+' }],
     },
     twitter: {

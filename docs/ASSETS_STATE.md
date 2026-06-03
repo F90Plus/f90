@@ -16,9 +16,13 @@ public/
 ├── atmosphere/
 │   ├── stadium-wide.webp        (185KB)  CTA band backdrop
 │   └── stadium-stands.webp      (135KB)  spare section backdrop (unused — available)
-└── worldcup/
-    ├── globe-flags.webp         (164KB)  leaderboard backdrop + key art
-    └── og.webp                  (109KB)  Open Graph / social card (1200×630)
+├── worldcup/
+│   ├── globe-flags.webp         (164KB)  key art · leaderboard backdrop · globe FALLBACK
+│   └── og.webp                  (109KB)  Open Graph / social card (1200×630)
+└── globe/        # 3D hero globe — vendored (NO runtime CDN); public-domain sources
+    ├── earth-night.jpg          (698KB)  Earth Night texture (NASA Black Marble, PD)
+    ├── earth-topology.png       (369KB)  bump / topology (NASA, PD)
+    └── countries-110m.geojson   (477KB)  country polygons (Natural Earth 110m, PD)
 ```
 (Favicon/app-icon are served via Next file conventions `app/icon.png` + `app/apple-icon.png`.)
 Future folders per convention: `overlays/`, `broadcast/`, `textures/` (add as needed).
@@ -53,8 +57,10 @@ Future folders per convention: `overlays/`, `broadcast/`, `textures/` (add as ne
 
 ## Pending / wanted assets
 - A premium **hero** photo upgrade if desired (current is good; founder-owned).
-- **Globe** assets/data for the 3D phase (see GLOBE_PHASE_PLAN) — `globe-flags.webp`
-  doubles as the **mobile/no-WebGL fallback**.
+- ✅ **Globe** assets vendored locally (`public/globe/`: Earth Night + topology +
+  countries geojson — public domain, no runtime CDN). `globe-flags.webp` is wired as the
+  **no-WebGL / error fallback**. (Optional later: shrink `countries-110m.geojson` by
+  stripping unused properties.)
 - Optional: `overlays/` (broadcast lower-thirds), `textures/` (grain variants).
 - A **logo variant** ("PREDICT. PLAY. WIN.") exists but isn't adopted (decision pending).
 

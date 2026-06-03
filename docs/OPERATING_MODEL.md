@@ -28,11 +28,39 @@ one coherent operator*, not separate characters.
 | **Creative Director** | Branding, atmosphere, the premium World Cup feeling |
 | **Design Lead** | Design system, visual consistency, tokens, accessibility |
 
+## Craft bar (standard of work)
+
+> Standing directive (founder, 2026-06-03 — [DECISIONS.md](DECISIONS.md) D-020). F90+
+> is built like a complete premium studio producing the **official digital experience
+> of a World Cup** — at maximum craft, *by default*, without being asked each time.
+
+- **Operate every discipline at its highest level**, always: deep reasoning, advanced
+  visual judgment, systems thinking, premium composition, motion craft, clean
+  architecture, careful UX, broadcast-grade art direction.
+- **Use the full toolbox by default** — tools, plugins, previews, research, visual
+  comparatives, and *real* validations (browser · ES/EN · mobile) — without waiting to
+  be told.
+- **Fewer things, done excellently.** Depth over speed. Reject quick fixes,
+  vibe-coding, tech demos, "because-it-works" elements, and impressive-but-poorly-
+  integrated features.
+- **Premium-or-don't-ship.** If a piece can't reach the FIFA / Apple Sports / UEFA
+  flagship bar, don't force it — flag it and propose the premium path.
+- **Constant initiative** on visual problems, UX, atmosphere, composition, motion,
+  legibility and art direction — surface and fix without waiting for exact instructions.
+- This sits **on top of** the Definition of Done and the standing invariants below.
+
 ## Standing invariants (never violated without explicit founder sign-off)
 
 1. **Total isolation** from other ecosystems (PMS / PT / Chiribito / XPrediction) —
    no shared repos, infra, branding, code or accounts.
-2. **Mobile-first**, always.
+2. **Dual-surface parity (mobile + desktop, validated together).** Every decision is
+   formulated *and* validated on mobile and desktop simultaneously — never
+   desktop-first-then-shrunk. Mobile must feel equally premium, emotional and
+   broadcast-quality within its limits (a hero object like the globe must read as the
+   *living presence* of the World Cup, not a compressed widget). Composition, spacing,
+   motion, glow, overlays and hierarchy are designed from the first stroke for real
+   responsive, mobile performance, legibility-over-movement, safe areas, thumb
+   ergonomics, reduced-motion and GPU stability. (See [DECISIONS.md](DECISIONS.md) D-021.)
 3. **Premium football atmosphere** — night stadium / broadcast, never casino.
 4. **World Cup 2026 identity** front and center.
 5. **Social-first**.
@@ -80,7 +108,7 @@ document*. [ROADMAP.md](ROADMAP.md) tracks where we are;
 
 | Area | Doc |
 | --- | --- |
-| Product vision | [PROJECT_VISION.md](PROJECT_VISION.md) |
+| Product vision | [PROJECT_VISION.md](PROJECT_VISION.md) · [EXPERIENCE_SYSTEM.md](EXPERIENCE_SYSTEM.md) |
 | Visual direction | [DESIGN_DIRECTION.md](DESIGN_DIRECTION.md) · [BRAND_GUIDELINES.md](BRAND_GUIDELINES.md) |
 | Architecture | [ARCHITECTURE.md](ARCHITECTURE.md) |
 | Roadmap | [ROADMAP.md](ROADMAP.md) |

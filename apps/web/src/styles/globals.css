@@ -398,6 +398,34 @@
     font-variant-numeric: tabular-nums;
     font-feature-settings: 'tnum' 1;
   }
+
+  /* Hero composition — globe centerpiece + countdown pedestal (GLOBE_HERO_SPEC).
+     Mobile (emotion-first): headline → globe → countdown → details (CTA hinted below).
+     Desktop: copy on the left (head + details), globe + countdown on the right. */
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-areas: 'head' 'globe' 'details';
+    gap: 1.5rem;
+    align-items: center;
+  }
+  .hero-area-head {
+    grid-area: head;
+  }
+  .hero-area-globe {
+    grid-area: globe;
+  }
+  .hero-area-details {
+    grid-area: details;
+  }
+  @media (min-width: 1024px) {
+    .hero-grid {
+      grid-template-columns: 0.92fr 1.08fr;
+      grid-template-areas: 'head globe' 'details globe';
+      column-gap: 3rem;
+      row-gap: 1rem;
+    }
+  }
 }
 
 /* ════════════════════════════════════════════════════════════════════════

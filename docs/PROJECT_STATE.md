@@ -1,15 +1,20 @@
 # F90+ — Project State (Checkpoint)
 
 > **Resume entry point.** Read this first, then [OPERATING_MODEL.md](OPERATING_MODEL.md)
-> + [DECISIONS.md](DECISIONS.md). Snapshot date: **2026-06-03**. Phase: **Foundation +
-> real data + cinematic imagery shipped (local). No backend yet.**
+> + [DECISIONS.md](DECISIONS.md). Snapshot date: **2026-06-03**. Phase: **FOUNDATION
+> CLOSED — production-ready.** Globe hero shipped-local + verified; vision canonized.
+> Next: public deploy ([DEPLOY_RUNBOOK.md](DEPLOY_RUNBOOK.md)) → Phase 1. No backend yet.
 
 ## TL;DR
-F90+ is a social, free-to-play **2026 World Cup prediction** web app. The foundation,
-bilingual i18n, premium branding, a deterministic AI Copilot ("The Analyst"), **real
-WC2026 fixtures**, and **real cinematic stadium imagery** are built and verified
-locally. No accounts/backend/deploy yet. Next flagship: the **3D World Cup Globe**
-(planned, not started — see [GLOBE_PHASE_PLAN.md](GLOBE_PHASE_PLAN.md)).
+F90+ is the **living experience of the 2026 World Cup** — predictions, fantasy, player
+portfolio, markets, rankings and narrative fused into one world (vision:
+[PROJECT_VISION.md](PROJECT_VISION.md) · [EXPERIENCE_SYSTEM.md](EXPERIENCE_SYSTEM.md)).
+Foundation, bilingual i18n, premium branding, a deterministic AI Copilot ("The Analyst"),
+**real WC2026 fixtures**, **cinematic imagery**, and the flagship **3D World Cup globe
+hero** (a living official map — gold hosts / green qualified, from real data) are built and
+**verified locally**. **The foundation is CLOSED / production-ready.** No accounts/backend
+or public deploy yet — next is the public launch ([DEPLOY_RUNBOOK.md](DEPLOY_RUNBOOK.md)),
+then **Phase 1**.
 
 ## How to run
 ```bash
@@ -88,7 +93,14 @@ are **modeled** until a football-data key is added. See [NEXT_PHASES.md](NEXT_PH
 - No automated tests yet; no LICENSE yet.
 
 ## Where to resume
-Recommended next step: build the **World Cup Globe** ([GLOBE_PHASE_PLAN.md](GLOBE_PHASE_PLAN.md)),
-or wire **Supabase auth/profiles** (Phase 1) — see [NEXT_PHASES.md](NEXT_PHASES.md).
+**Product vision is CANONICAL** — read [PROJECT_VISION.md](PROJECT_VISION.md) +
+[EXPERIENCE_SYSTEM.md](EXPERIENCE_SYSTEM.md): the "living World Cup" model (one **world**
+· **identity** · **economy** · **time**, with Momentum/Heat, Discovery, Narrative-AI,
+Country hubs) — decisions **D-024** (model), **D-025** (own-IP players), **D-026**
+(non-punitive elimination).
+**Active build: the World Cup Globe hero** — direction **LOCKED + validated** (desktop +
+mobile); build to **[GLOBE_HERO_SPEC.md](GLOBE_HERO_SPEC.md)** (D-022/D-023) with
+`react-globe.gl` + **vendored** assets (no runtime CDN). **Pre-Phase-1 order:** hero
+production-ready → connect domain → metadata/social/loading/perf → Phase 1 definition.
 Visual north star: [VISUAL_DIRECTION.md](VISUAL_DIRECTION.md). Assets:
 [ASSETS_STATE.md](ASSETS_STATE.md).

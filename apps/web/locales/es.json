@@ -30,11 +30,7 @@
     "ctaSecondary": "Cómo funciona",
     "chipFree": "100% gratis",
     "chipCoins": "Monedas virtuales, cero riesgo",
-    "chipRanking": "Ranking global",
-    "liveNow": "En directo",
-    "featured": "Partido destacado",
-    "cardPrompt": "¿Quién gana?",
-    "cardHint": "Toca un lado para mojarte"
+    "chipRanking": "Ranking global"
   },
   "countdown": {
     "eyebrow": "El pitido inicial",
@@ -46,6 +42,16 @@
     "live": "El Mundial está EN JUEGO",
     "liveSub": "Los partidos ya ruedan: moja tus predicciones.",
     "hosts": "EE. UU. · Canadá · México · 2026"
+  },
+  "globe": {
+    "a11y": "Globo interactivo del Mundial 2026: anfitriones y selecciones clasificadas",
+    "hostBadge": "Anfitrión",
+    "qualifiedBadge": "Clasificado",
+    "hosts": {
+      "usa": "EE. UU.",
+      "canada": "Canadá",
+      "mexico": "México"
+    }
   },
   "matches": {
     "eyebrow": "Jornada",

@@ -1,5 +1,6 @@
 import { setRequestLocale } from 'next-intl/server';
 import { getHomeMatches } from '@/lib/football';
+import { getWorldCupStatus } from '@/lib/football/nations';
 import { Hero } from '@/features/home/hero';
 import { MatchesRail } from '@/features/home/matches-rail';
 import { HowItWorks } from '@/features/home/how-it-works';
@@ -11,13 +12,13 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
   const { locale } = await params;
   setRequestLocale(locale);
 
-  // Real WC2026 fixtures (openfootball, cache-first) with graceful mock fallback.
-  const matches = await getHomeMatches();
+  // Real WC2026 fixtures + globe country states — both from real sources, cache-first.
+  const [matches, wcStatus] = await Promise.all([getHomeMatches(), getWorldCupStatus()]);
   const featured = matches[0];
 
   return (
     <>
-      {featured ? <Hero featured={featured} /> : null}
+      <Hero wcStatus={wcStatus} />
       <MatchesRail matches={matches} />
       {featured ? <AnalystSection featured={featured} /> : null}
       <HowItWorks />

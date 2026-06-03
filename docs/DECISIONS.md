@@ -201,3 +201,130 @@ dark); **leaderboard** = globe-of-nations key art (faint, thematic); **OG/social
 **Consequences:** F90+ now carries genuine "World Cup night" presence with real
 imagery, cleanly integrated. Sources are founder-owned (no stock/licensing issue).
 Replacing/adding images = drop a file + one manifest line.
+
+### D-020 — Studio craft bar: maximum-level, premium-or-don't-ship ✅
+**Context:** The founder set a standing standard (2026-06-03) for **all** future
+phases: F90+ must be built like a complete premium studio producing the **official
+digital experience of a World Cup** — never quick solutions, vibe-coding, tech demos,
+improvised decisions, or impressive-but-poorly-integrated features.
+**Decision:** Every change is executed at **maximum craft across all studio
+disciplines** (Creative Director · Product Lead · Art Director · Motion Designer ·
+Systems Architect · UX Lead · premium web designer · football-broadcast designer),
+using deep reasoning, advanced visual judgment, systems thinking, and premium
+composition — and, **by default without being asked**, the full toolbox: tools,
+plugins, previews, research, visual comparatives, and *real* validations (browser,
+ES/EN, mobile). The studio takes **constant initiative** on visual problems, UX,
+atmosphere, composition, motion, legibility and art direction. **Quality rule: fewer
+things, done excellently** (depth over speed). **Premium-or-don't-ship:** if a piece
+cannot reach the FIFA / Apple Sports / UEFA flagship bar, it is **not forced in** —
+it is flagged and a premium path proposed. This sits **on top of** the Definition of
+Done and the standing invariants (mobile-first, responsive, GPU-friendly,
+reduced-motion safe, portable/tool-agnostic, no lock-in, impeccable docs).
+**Consequences:** Premium coherence is the default operating mode; "works
+technically" is necessary but not sufficient. Per-feature velocity may be lower by
+design. Decisions stay justified and recorded; the experience stays emotionally
+coherent. See [OPERATING_MODEL.md](OPERATING_MODEL.md) → "Craft bar".
+
+### D-021 — Dual-surface parity: mobile + desktop, formulated and validated together ✅
+**Context:** Founder standing rule (2026-06-03): mobile must **never** be a shrunk-down
+desktop. Every decision must be conceived AND validated on mobile and desktop at once;
+mobile has to feel equally premium, emotional and broadcast-quality within its limits.
+**Decision:** Composition, spacing, motion, glow, overlays and hierarchy are designed
+for **real responsive from the first stroke** — accounting for mobile performance,
+legibility-over-movement, safe areas, thumb ergonomics, reduced-motion and GPU
+stability. On mobile, hero objects (e.g. the globe) must read as the *living presence*
+of the World Cup, not a compressed interactive widget. Visual decisions are **validated
+on both surfaces at real scale** before they're considered done — every spec/plan
+carries the mobile composition as a first-class artifact, not an afterthought.
+**Operating creed carried forward:** composition-first · premium-or-don't-ship ·
+football-first · atmosphere-before-features · less-but-better ·
+emotional-coherence-over-technical-spectacle.
+**Consequences:** No "desktop-first then adapt" work. Extends invariant #2 and sits
+with the craft bar (D-020).
+
+### D-022 — The hero centerpiece is an interactive 3D globe (direction locked) ✅
+**Context:** Founder direction: the hero's featured prediction card is replaced by a
+premium, interactive **World Cup globe** as the emotional center and signature symbol
+of F90+. Direction chosen via a real comparative (static composition mockups → then a
+real three-globe prototype), validated on desktop + mobile.
+**Decision:** The hero centerpiece is an **interactive 3D globe** (real
+**`react-globe.gl` / three-globe**), replacing the featured `MatchCard`. Locked
+direction = **"A+C calibrated per surface"** (broadcast opening sequence + cinematic
+immersion): the globe is integrated *into* the night-stadium scene (one scene, not
+stacked widgets); copy reads as a broadcast lower-third over a legibility scrim; the
+**countdown sits as a pedestal directly under the globe** (more presence than at the
+top). Visual base = dark **Earth Night** (city lights) + country **polygons** (defined
+borders) + blue **atmosphere** + slow **auto-rotate**, default **POV centered on the
+hosts**. **Mobile = emotion-first (option A):** globe (living presence) + countdown own
+the first impact; the primary CTA is **hinted just below the fold** (partial/fade),
+short natural scroll. Honors dual-surface parity (D-021). The featured opener stays in
+the matches rail + Analyst; in-hero it becomes a globe state, not a separate card.
+**Consequences:** Validated via a throwaway real-globe prototype (globe.gl via CDN —
+operator tooling under `~/.claude`, never the repo). Full contract in
+[GLOBE_HERO_SPEC.md](GLOBE_HERO_SPEC.md) (supersedes GLOBE_PHASE_PLAN.md). Build uses
+`react-globe.gl` + `three`, client-only (`ssr:false`), error-boundaried, with an image
+fallback. Note: animated `ringsData` wedged WebGL screenshotting in the prototype —
+host "pulse" must be implemented carefully + perf-tested in the real build.
+
+### D-023 — Globe data fidelity: real states only, no invented ones ✅
+**Context:** The validation prototype fabricated team states (e.g. **Italy** shown as
+qualified/"favorite" though it is not in the WC2026 field). The founder mandates
+**absolute accuracy** — no invented qualified/eliminated nations, no visual predictions.
+**Decision:** The globe is a **living official map**. States are **gold = host · green =
+officially qualified · red = eliminated during the tournament · neutral = not in the
+field**. **No "pending" and no "favorites" state.** The qualified set is read from the
+**same real source the app already uses** — `openfootball/worldcup.json` (2026, D-014):
+the 48-team field, **verified live** (e.g. **Italy is not in it**), derived from the real
+group-stage participants and mapped team-name → country, **never hand-authored**. **Now:**
+hosts in gold (most prominent) + **all** officially qualified in green + everyone else
+neutral. **During the tournament:** nations turn **red progressively as they are really
+eliminated** (from real results); "live" shows only when a match is truly in progress.
+green/red change **only when real data justifies it**; unknown → neutral. Arcs/routes are
+likewise **real-fixture-driven**. (Resolution note: nations with no polygon in a low-res
+geojson — e.g. Cape Verde, Curaçao — appear via point markers / a richer geojson so
+**all** qualified nations show.)
+**Consequences:** The globe is spectacular **and** rigorously correct — a pure function
+of verified real data, **validated against the live openfootball field before painting**.
+Expresses invariant #9 (intelligence from real data, honestly) and the no-fabricated-data
+rule. **Always verify real data before painting any country.**
+
+### D-024 — The "living World Cup" experience model (unified, not a feature mix) ✅
+**Context:** Founder locked the product identity: F90+ is **not** just fantasy / betting /
+prediction market / tracker — it **fuses all of it into ONE living experience** where the
+user builds their own evolving story during the tournament.
+**Decision:** The product rests on **four shared layers** under every pillar — **World**
+(the globe + the planet's live pulse), **Identity** (public profile / reputation /
+country), **Economy** (virtual coins + points + reputation), **Time** (everything live
+with the real tournament). Pillars — predictions · fantasy XI · player portfolio &
+discovery · markets · rankings/reputation · narrative · country hubs · live tracking —
+all **feed and draw from** those layers. Differentiating layers: **Momentum/Heat** (the
+living global pulse), **Discovery** (sleepers / early signings / smart portfolio —
+strategic, not arcade), **Narrative/Analyst** (editorial soul over everything),
+**Country hubs + country identity**. Vision documented in full; built in coherent slices;
+**Phase 1 = first MVP slice**. Full blueprint: [EXPERIENCE_SYSTEM.md](EXPERIENCE_SYSTEM.md).
+**Consequences:** Coherence is **structural** (shared layers), not cosmetic. New features
+must plug into the spine or they don't belong. The experience evolves automatically with
+the real tournament (data-real, D-023).
+
+### D-025 — Player representation = own IP, zero license dependency ✅
+**Context:** Founder: no dependency on fragile official assets/licenses (FIFA/Panini/EA);
+prefer an original, recognizable, premium F90+ visual language.
+**Decision:** Players are represented with an **original F90+ card system**, **stylized
+avatars / composable tokens** (role + nation + accent + number/initials → premium token →
+original illustrated portrait), and **own iconography**. **Player names + real stats =
+facts** (used by all fantasy, not copyrightable) and are fine; **official crests, kits,
+photos and trade dress are avoided**; national flags are neutral symbols.
+**Consequences:** A potential copyright liability becomes a **brand moat** — no licensing
+cost or fragility, and a distinctive look we fully own.
+
+### D-026 — Elimination is non-punitive; the game stays playable for all ✅
+**Context:** Founder changed course on elimination: it must **never** punish or remove a
+user from the experience.
+**Decision:** If a user's chosen country is eliminated, the user **keeps their account and
+every mechanic** (predictions, portfolio, fantasy, rankings) for the rest of the
+tournament. **Only the emotional narrative shifts** (their nation is out; the hub mood
+changes). **No frustrating or punitive mechanic removes anyone before the final.**
+(A country shown "eliminated" = red on the globe per D-023 is a **narrative** state, never
+a gate on the user.)
+**Consequences:** The World Cup stays alive for **everyone** to the end; engagement is not
+cut by real-world results. Country identity adds emotional stakes without lock-out.

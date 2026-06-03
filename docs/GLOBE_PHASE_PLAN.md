@@ -1,5 +1,10 @@
 # F90+ — The World Cup Globe (Phase Plan)
 
+> ⚠️ **SUPERSEDED (2026-06-03) by [GLOBE_HERO_SPEC.md](GLOBE_HERO_SPEC.md)** — the
+> canonical, validated implementation contract. This file is kept for history only.
+> The spec locks the direction (DECISIONS D-022) and the data-fidelity rule (D-023);
+> **follow the spec, not this plan.**
+>
 > Plan only — **not implemented**. The flagship interactive feature. Deferred to a
 > dedicated phase to hit the FIFA/Apple bar and handle WebGL/perf/mobile correctly.
 

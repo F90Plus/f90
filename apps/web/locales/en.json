@@ -30,11 +30,7 @@
     "ctaSecondary": "How it works",
     "chipFree": "100% free to play",
     "chipCoins": "Virtual coins, zero risk",
-    "chipRanking": "Global leaderboard",
-    "liveNow": "Live now",
-    "featured": "Featured match",
-    "cardPrompt": "Who takes it?",
-    "cardHint": "Tap a side to make the call"
+    "chipRanking": "Global leaderboard"
   },
   "countdown": {
     "eyebrow": "Kickoff",
@@ -46,6 +42,16 @@
     "live": "The World Cup is LIVE",
     "liveSub": "Matches are rolling — make your calls.",
     "hosts": "USA · Canada · Mexico · 2026"
+  },
+  "globe": {
+    "a11y": "Interactive 2026 World Cup globe: hosts and qualified teams",
+    "hostBadge": "Host",
+    "qualifiedBadge": "Qualified",
+    "hosts": {
+      "usa": "USA",
+      "canada": "Canada",
+      "mexico": "Mexico"
+    }
   },
   "matches": {
     "eyebrow": "Matchday",
