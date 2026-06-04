@@ -16,10 +16,13 @@ export async function updateSession(
   request: NextRequest,
   response: NextResponse,
 ): Promise<NextResponse> {
-  const supabase = createServerClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY!,
-    {
+  const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  const key = process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY;
+  // Without Supabase env (e.g. a preview deploy of the public site), skip the
+  // auth session refresh so the public pages still render. Inert when env is set.
+  if (!url || !key) return response;
+
+  const supabase = createServerClient(url, key, {
       cookies: {
         getAll() {
           return request.cookies.getAll();

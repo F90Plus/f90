@@ -38,6 +38,11 @@ export async function createClient() {
  * Always verifies the session against Supabase — never trusts cookies blindly.
  */
 export async function getCurrentUser() {
+  // Public pages must render even without Supabase env (e.g. a preview deploy):
+  // treat "no auth backend" as "signed out". Inert when env is set.
+  if (!process.env.NEXT_PUBLIC_SUPABASE_URL || !process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY) {
+    return null;
+  }
   const supabase = await createClient();
   const {
     data: { user },
