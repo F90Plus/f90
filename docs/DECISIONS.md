@@ -621,3 +621,24 @@ Illustrative market data lives in `data/markets.ts` (probability + spark + parti
 desktop + mobile, ES + EN, **0 console errors**. Branch `feat/phase-1-identity`, **NOT pushed**, `main`
 untouched. The throwaway validation mock (`public/__mock-*.html`) was deleted. **Next: resume Phase 1 at
 T9 (rankings).**
+
+### D-042 — Two surfaces: public discovery (Analyst Center) vs private portfolio dashboard (documented, not built) ✅ (founder, 2026-06-04)
+**Context:** With the Analyst Center now reading as a live market (D-041), the founder set the forward
+product direction — **documentation only, no implementation now** — clarifying that the live-market
+feel splits across **two distinct surfaces** with different jobs.
+**Decision (reserved, not built):** (1) **Home / Analyst Center = the PUBLIC DISCOVERY surface** —
+its job is to **discover opportunities** (World Cup markets + the Analyst's conviction), exactly as
+shipped in D-041; it stays public, broadcast, scannable. (2) **The private user DASHBOARD / profile
+evolves into a deeper, Polymarket-inspired experience** — *bigger markets, a wallet/cartera, open
+**positions**, **F90 exposure**, **entry history**, **conviction**, **performance / P&L**, and
+**position tracking***. (3) **Division of labour is the invariant:** **Home = discover opportunities ·
+personal dashboard = manage portfolio + reputation.** (4) It introduces **no new economic primitives**
+— it is a **read/management view over the same wallet + append-only ledgers + the market layer**
+(D-027 three-currency economy · D-034 generic economy absorbing markets/positions · **D-037
+probability-not-odds + the no-betting vocabulary law, still binding**). Sequenced **after the engine**
+(Phase 2 economy → Phase 3 market/Fantasy → reserved **Phase 3.5 Entity Layer**), so the dashboard is
+designed *with* the economy, not bolted on.
+**Consequences:** **None now** — pure documentation; Phase 1 (T9→DoD) and the ROADMAP are unaffected.
+Reserves the direction so the eventual dashboard phase plans for portfolio/positions/exposure/history
+as first-class. The public Analyst Center (D-041) and the private portfolio dashboard are **two views
+over one economy, one Analyst, one F90 wallet** — never a second app.
