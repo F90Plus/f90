@@ -8,6 +8,7 @@
     "matches": "Matches",
     "analyst": "Analyst",
     "rankings": "Leaderboard",
+    "fantasy": "Fantasy",
     "play": "Play free"
   },
   "common": {
@@ -183,6 +184,29 @@
     "step2Body": "Nail your predictions to bank points and rise through a global leaderboard that moves with the World Cup.",
     "step3Title": "Out-predict your friends",
     "step3Body": "Build private leagues, talk some trash, and let our football-smart AI pundit challenge your gut with the stats."
+  },
+  "fantasy": {
+    "eyebrow": "The F90+ ecosystem",
+    "title": "Build your dream squad",
+    "subtitle": "More than predicting: earn Tokens F90, enter the markets, sign players and field your XI. The World Cup like you've never played it.",
+    "tag": "Soon",
+    "bench": "Bench",
+    "pos": {
+      "gk": "GK",
+      "def": "DEF",
+      "mid": "MID",
+      "fwd": "FWD"
+    },
+    "steps": {
+      "earn": "Earn Tokens F90",
+      "markets": "Enter the markets",
+      "trade": "Buy and sell players",
+      "squad": "Build your squad",
+      "xi": "Pick your starting XI",
+      "bench": "Manage your bench",
+      "compete": "Compete on the leaderboards"
+    },
+    "cta": "Start free"
   },
   "leaderboard": {
     "eyebrow": "Global table",

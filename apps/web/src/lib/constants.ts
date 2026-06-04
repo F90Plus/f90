@@ -21,6 +21,7 @@ export const NAV_LINKS = [
   { key: 'matches', href: '#tournament' },
   { key: 'analyst', href: '#analyst' },
   { key: 'how', href: '#how-it-works' },
+  { key: 'fantasy', href: '#fantasy' },
   { key: 'rankings', href: '#leaderboard' },
 ] as const;
 

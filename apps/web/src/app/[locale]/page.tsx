@@ -4,6 +4,7 @@ import { Hero } from '@/features/home/hero';
 import { MarketTicker } from '@/features/markets/market-ticker';
 import { TournamentCenter } from '@/features/tournament/tournament-center';
 import { HowItWorks } from '@/features/home/how-it-works';
+import { FantasyTeaser } from '@/features/home/fantasy-teaser';
 import { LeaderboardTeaser } from '@/features/home/leaderboard-teaser';
 import { CtaBand } from '@/features/home/cta-band';
 
@@ -22,6 +23,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
       <Hero wcStatus={wcStatus} />
       <TournamentCenter />
       <HowItWorks />
+      <FantasyTeaser />
       <LeaderboardTeaser />
       <CtaBand />
     </>

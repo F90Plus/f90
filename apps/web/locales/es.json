@@ -8,6 +8,7 @@
     "matches": "Partidos",
     "analyst": "Analista",
     "rankings": "Ranking",
+    "fantasy": "Fantasy",
     "play": "Jugar gratis"
   },
   "common": {
@@ -183,6 +184,29 @@
     "step2Body": "Acierta tus predicciones para sumar puntos y subir en un ranking global que se mueve al ritmo del Mundial.",
     "step3Title": "Gana a tus amigos",
     "step3Body": "Crea ligas privadas, pícate y deja que nuestra IA futbolera rete a tu instinto con las estadísticas en la mano."
+  },
+  "fantasy": {
+    "eyebrow": "El ecosistema F90+",
+    "title": "Construye tu selección ideal",
+    "subtitle": "Más que predecir: gana Tokens F90, entra en los mercados, ficha jugadores y arma tu XI. El Mundial como nunca lo jugaste.",
+    "tag": "Pronto",
+    "bench": "Suplentes",
+    "pos": {
+      "gk": "POR",
+      "def": "DEF",
+      "mid": "MED",
+      "fwd": "DEL"
+    },
+    "steps": {
+      "earn": "Gana Tokens F90",
+      "markets": "Entra en los mercados",
+      "trade": "Compra y vende jugadores",
+      "squad": "Construye tu plantilla",
+      "xi": "Elige tu XI titular",
+      "bench": "Gestiona los suplentes",
+      "compete": "Compite en los rankings"
+    },
+    "cta": "Empieza gratis"
   },
   "leaderboard": {
     "eyebrow": "Tabla global",
