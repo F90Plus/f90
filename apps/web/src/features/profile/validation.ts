@@ -47,6 +47,18 @@ export function parseCountryCode(value: unknown, valid: ReadonlySet<string>): Co
   return { ok: true, code: value };
 }
 
+/**
+ * Has the user finished onboarding? True once they actively chose a handle
+ * (`username_changed_at` set by `updateProfile`) AND a country. The `handle_new_user`
+ * trigger leaves both unset, so this cleanly distinguishes a fresh account from an
+ * onboarded one — without guessing at the `fan_*` default username.
+ */
+export function isProfileComplete(
+  profile: { country_code: string | null; username_changed_at: string | null } | null,
+): boolean {
+  return Boolean(profile && profile.country_code && profile.username_changed_at);
+}
+
 /** Onboarding form state for `useActionState`. Error keys map to `onboarding.errors.*`. */
 export type OnboardingState =
   | { status: 'idle' }

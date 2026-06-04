@@ -92,6 +92,21 @@
       "failed": "No se pudo guardar. Inténtalo de nuevo."
     }
   },
+  "app": {
+    "home": {
+      "metaTitle": "Tu F90+",
+      "eyebrow": "Tu vestuario",
+      "greeting": "Hola, @{handle}",
+      "subtitle": "Tu Mundial empieza aquí.",
+      "balanceLabel": "Tu cartera",
+      "balanceValue": "{amount, number} Tokens F90",
+      "pointsLabel": "Puntos",
+      "pointsValue": "{points, number}",
+      "backing": "Vas con {country}",
+      "soon": "Las predicciones y los mercados llegan muy pronto. Mientras, explora el Mundial.",
+      "exploreCta": "Explorar el Mundial"
+    }
+  },
   "markets": {
     "label": "Mercados",
     "tag": "Pronto",

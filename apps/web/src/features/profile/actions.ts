@@ -78,5 +78,5 @@ export async function updateProfile(
     return { status: 'error', error: 'failed' };
   }
 
-  redirect(localePathname(locale, '/'));
+  redirect(localePathname(locale, '/home')); // onboarded → the authed app home (T6)
 }

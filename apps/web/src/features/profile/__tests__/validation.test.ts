@@ -1,5 +1,10 @@
 import { describe, expect, it } from 'vitest';
-import { parseCountryCode, parseUsername, RESERVED_USERNAMES } from '../validation';
+import {
+  isProfileComplete,
+  parseCountryCode,
+  parseUsername,
+  RESERVED_USERNAMES,
+} from '../validation';
 
 describe('parseUsername', () => {
   it('accepts a valid handle and normalises it (trim + lowercase)', () => {
@@ -32,6 +37,25 @@ describe('parseUsername', () => {
     expect(RESERVED_USERNAMES.has('admin')).toBe(true);
     expect(parseUsername('ADMIN')).toEqual({ ok: false, error: 'usernameReserved' });
     expect(parseUsername('Root')).toEqual({ ok: false, error: 'usernameReserved' });
+  });
+});
+
+describe('isProfileComplete', () => {
+  it('is complete only when the user chose a handle AND a country', () => {
+    expect(isProfileComplete({ country_code: 'ESP', username_changed_at: '2026-06-04T00:00:00Z' })).toBe(true);
+  });
+
+  it('is incomplete straight after the trigger (no country, no handle change)', () => {
+    expect(isProfileComplete({ country_code: null, username_changed_at: null })).toBe(false);
+  });
+
+  it('is incomplete if either piece is missing', () => {
+    expect(isProfileComplete({ country_code: 'ESP', username_changed_at: null })).toBe(false);
+    expect(isProfileComplete({ country_code: null, username_changed_at: '2026-06-04T00:00:00Z' })).toBe(false);
+  });
+
+  it('treats a missing profile as incomplete', () => {
+    expect(isProfileComplete(null)).toBe(false);
   });
 });
 
