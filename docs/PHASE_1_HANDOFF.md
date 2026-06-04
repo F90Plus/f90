@@ -7,13 +7,13 @@
 
 ## Executive summary
 
-Phase 1 (Identity & Accounts) is **~85% built**: the data + auth + onboarding + app gate + the public
-profile are LIVE. The Supabase schema + economy + 48-country seed are **applied and verified**; **T4
-(auth)**, **T5 (onboarding)**, **T6 (protected `(app)` group + `/home`)** and **T7 (public profile
-`/u/[username]` + dynamic OG)** are **SHIPPED + verified**. The welcome bonus is **20,026 Tokens F90**
-(D-039); the live-market ticker is now a **sticky bar** under the header (above the Hero). What remains
-is **settings + 30-day cooldown (T8), rankings teaser (T9), i18n/token sweep (T10) and the DoD gate
-(T11)**.
+Phase 1 (Identity & Accounts) is **~90% built**: data + auth + onboarding + app gate + public profile +
+settings are LIVE. The Supabase schema + economy + 48-country seed are **applied and verified**; **T4
+(auth)**, **T5 (onboarding)**, **T6 (`(app)` group + `/home`)**, **T7 (public profile + dynamic OG)**
+and **T8 (settings + 30-day cooldown)** are **SHIPPED + verified**. The welcome bonus is **20,026
+Tokens F90** (D-039); the live-market ticker is a **sticky bar**, and the landing carries a **Fantasy
+discovery section** + nav item. What remains is **the rankings teaser (T9), i18n/token sweep (T10) and
+the DoD gate (T11)**.
 
 All work is on branch **`feat/phase-1-identity`** (**not pushed**, `main` untouched). Vision
 **D-034** is baked into a **generic economy** so markets/players/fantasy plug in later without
@@ -23,7 +23,7 @@ subsystem-specific coupling (D-035).
 ## Repository state
 
 - **Branch:** `feat/phase-1-identity` (off `main` = `b6bff60`, Phase 0.6)
-- **Last code commit:** `972a240` — `feat(profile): T7 — public profile /u/[username] + dynamic OG card` (this docs commit lands on top). Since T6: sticky ticker (`cb3c2b3`), Founding Squad doc (D-040, `66139b2`), T7 (`972a240`).
+- **Last code commit:** `5872c27` — `feat(profile): T8 — settings (edit profile) + 30-day cooldown` (this docs commit lands on top). Since T7: Fantasy discovery section + nav (`20b0587`), T8 (`5872c27`).
 - **Working tree:** clean.
 - **Not pushed; `main` untouched.**
 - **Commits this session (oldest → newest):**
@@ -205,15 +205,24 @@ by handle (citext); `notFound()` for unknown handles. Per-user OG via `next/og` 
 - **Verified:** `/u/proftest` renders (name · @handle · "Va con España" · join date · points · rank
   teaser · avatar); unknown handle → 404; the OG route returns a valid 64 KB `image/png`.
 
-## Next step (exact) — T8: Settings (edit profile) + 30-day cooldown
+## T8 — Settings + 30-day cooldown ✅ DONE (verified E2E 2026-06-04)
 
-`app/[locale]/(app)/settings/page.tsx` (gated by the `(app)` group, T6): edit `display_name`, `bio`
-(≤280, the DB check), and the avatar token; **username/country changes honour the 30-day cooldown**
-(D-031) computed from `username_changed_at` / `country_changed_at` (a pure, testable helper —
-`canChangeAfterCooldown(stampedAt, now)`). `updateProfile`-style Server Action writing via the RLS
-self-update policy; reuse `features/profile/validation.ts`. New `settings` i18n namespace. **Done when:**
-edits persist, the cooldown is enforced with a localized "you can change this again on <date>" message,
-and the form is ES/EN.
+`app/[locale]/(app)/settings/page.tsx` (gated) + `features/profile/settings-form.tsx` + `updateSettings`
+action + `canChangeAfterCooldown` (pure, 4 tests) + `settings` i18n. `display_name`/`bio` (≤280) edit
+freely; `username`/`country` are gated by the 30-day cooldown (D-031) from the `*_changed_at` stamps.
+- **Gates:** `pnpm typecheck` ✅ · `pnpm test` ✅ 88 · `pnpm build` ✅.
+- **Verified E2E:** `/settings` loads for an onboarded session; username + country disabled with
+  "Podrás cambiarlo el 4 de julio" (change + 30 days); editing `display_name` + `bio` persisted to the
+  DB via RLS, cooldown fields untouched.
+
+## Next step (exact) — T9: Rankings teaser (replace the mock)
+
+Replace the `data/leaderboard.ts` mock consumption (in `features/home/leaderboard-teaser.tsx`) with a
+real query over the **`global_rankings`** view (already built + public, T2): top-N by `total_points`,
+rendered with an **empty-state teaser** (everyone is at 0 until Phase 2 scoring — so frame it as "the
+board opens when predictions start", reusing the avatar token + country flag). New `rankings` i18n
+namespace; **remove the mock import**. **Done when:** the leaderboard surface reads real data (empty
+now), no `data/leaderboard.ts` import remains, ES/EN.
 
 ## PHASE 1 STATUS
 
@@ -227,7 +236,7 @@ and the form is ES/EN.
 | T5 — Onboarding (username + country) | ✅ completado (verificado E2E + DB) |
 | T6 — Protected routes + auth-aware header | ✅ completado (verificado E2E) |
 | T7 — Public profile `/u/[username]` + OG | ✅ completado (verificado: render · 404 · OG png) |
-| T8 — Settings + 30-day cooldown | ⏳ pendiente (NEXT) |
-| T9 — Rankings teaser (replace mock) | ⏳ pendiente |
+| T8 — Settings + 30-day cooldown | ✅ completado (verificado E2E + DB) |
+| T9 — Rankings teaser (replace mock) | ⏳ pendiente (NEXT) |
 | T10 — i18n parity + tokens sweep | ⏳ pendiente |
 | T11 — Phase DoD gate | ⏳ pendiente |
