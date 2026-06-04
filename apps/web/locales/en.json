@@ -21,6 +21,50 @@
     "label": "Language",
     "aria": "Change language"
   },
+  "auth": {
+    "login": {
+      "title": "Welcome back",
+      "subtitle": "Sign in and keep calling the World Cup.",
+      "metaTitle": "Sign in"
+    },
+    "signup": {
+      "title": "Join F90+",
+      "subtitle": "Create your free profile. Virtual coins, zero risk.",
+      "metaTitle": "Create account"
+    },
+    "emailLabel": "Email",
+    "emailPlaceholder": "you@email.com",
+    "divider": "or",
+    "magic": {
+      "submit": "Send magic link",
+      "sending": "Sending…",
+      "sentTitle": "Check your inbox",
+      "sentBody": "We sent a sign-in link to {email}. Open it to continue."
+    },
+    "google": {
+      "label": "Continue with Google",
+      "connecting": "Connecting…"
+    },
+    "switch": {
+      "toSignupLead": "New to F90+?",
+      "toSignup": "Join free",
+      "toLoginLead": "Already have an account?",
+      "toLogin": "Sign in"
+    },
+    "disclaimer": "No real money, no gambling. Just predictions and pride.",
+    "errors": {
+      "invalidEmail": "Enter a valid email.",
+      "sendFailed": "We couldn't send the link. Try again.",
+      "auth": "We couldn't complete sign-in. Try again.",
+      "oauth": "We couldn't connect to Google. Try again."
+    },
+    "account": {
+      "signIn": "Sign in",
+      "menu": "Account menu",
+      "signedInAs": "Signed in as",
+      "signOut": "Sign out"
+    }
+  },
   "hero": {
     "eyebrow": "World Cup 2026 · Social predictions",
     "titleLead": "Predict the World Cup.",

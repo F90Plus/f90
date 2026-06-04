@@ -21,6 +21,50 @@
     "label": "Idioma",
     "aria": "Cambiar idioma"
   },
+  "auth": {
+    "login": {
+      "title": "Bienvenido de vuelta",
+      "subtitle": "Entra y sigue mojando en el Mundial.",
+      "metaTitle": "Iniciar sesión"
+    },
+    "signup": {
+      "title": "Únete a F90+",
+      "subtitle": "Crea tu perfil gratis. Monedas virtuales, cero riesgo.",
+      "metaTitle": "Crear cuenta"
+    },
+    "emailLabel": "Email",
+    "emailPlaceholder": "tu@email.com",
+    "divider": "o",
+    "magic": {
+      "submit": "Enviar enlace mágico",
+      "sending": "Enviando…",
+      "sentTitle": "Revisa tu correo",
+      "sentBody": "Te enviamos un enlace de acceso a {email}. Ábrelo para entrar."
+    },
+    "google": {
+      "label": "Continuar con Google",
+      "connecting": "Conectando…"
+    },
+    "switch": {
+      "toSignupLead": "¿Aún no tienes cuenta?",
+      "toSignup": "Únete gratis",
+      "toLoginLead": "¿Ya tienes cuenta?",
+      "toLogin": "Inicia sesión"
+    },
+    "disclaimer": "Sin dinero real, sin apuestas. Solo predicciones y orgullo.",
+    "errors": {
+      "invalidEmail": "Introduce un email válido.",
+      "sendFailed": "No pudimos enviar el enlace. Inténtalo de nuevo.",
+      "auth": "No pudimos completar el acceso. Inténtalo de nuevo.",
+      "oauth": "No pudimos conectar con Google. Inténtalo de nuevo."
+    },
+    "account": {
+      "signIn": "Iniciar sesión",
+      "menu": "Menú de cuenta",
+      "signedInAs": "Sesión iniciada como",
+      "signOut": "Cerrar sesión"
+    }
+  },
   "hero": {
     "eyebrow": "Mundial 2026 · Predicciones sociales",
     "titleLead": "Predice el Mundial.",
