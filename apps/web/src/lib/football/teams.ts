@@ -11,7 +11,7 @@ export interface TeamMeta {
   strength: number;
 }
 
-const TEAMS: Record<string, TeamMeta> = {
+export const TEAMS: Record<string, TeamMeta> = {
   Spain: { code: 'ESP', accent: '#E63946', strength: 2090 },
   Argentina: { code: 'ARG', accent: '#74ACE6', strength: 2080 },
   France: { code: 'FRA', accent: '#3D74FF', strength: 2050 },
