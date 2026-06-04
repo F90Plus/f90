@@ -58,19 +58,20 @@ read fans out into the canonical tournament spine later phases attach to. Decisi
 
 ---
 
-## 🔜 Phase 1 — Identity & Accounts
+## 🟢 Phase 1 — Identity & Accounts  *(IN PROGRESS — T8 of 11; checkpoint 2026-06-04)*
 
-Let people *be someone* on F90+ — and lay the **server-authoritative economy** the whole
-loop runs on. **Fully designed & ready to implement:**
+Let people *be someone* on F90+ — and lay the **server-authoritative economy** the whole loop runs on.
+**Live state + the full checkpoint:** [PHASE_1_HANDOFF.md](PHASE_1_HANDOFF.md) (contracts:
 [PHASE_1_IDENTITY.md](PHASE_1_IDENTITY.md) · [SCHEMA_V1.md](SCHEMA_V1.md) ·
-[PHASE_1_IMPLEMENTATION_PLAN.md](PHASE_1_IMPLEMENTATION_PLAN.md).
+[PHASE_1_IMPLEMENTATION_PLAN.md](PHASE_1_IMPLEMENTATION_PLAN.md)).
 
-- [ ] Isolated Supabase + `@supabase/ssr`; middleware composed with next-intl
-- [ ] Auth: magic-link + Google + Apple (D-030)
-- [ ] Public **profile** (`/u/[username]`, OG-shareable), favourite **country**, own-IP avatar
-- [ ] **Wallet + append-only ledgers** (coins + points) via `SECURITY DEFINER` functions — latent
-- [ ] Rankings teaser (replaces the mock); protected routes + auth-aware header
-- [ ] DB schema v1: `profiles`, `wallets`, `coin_ledger`, `score_ledger`, `countries`
+- [x] Isolated Supabase + `@supabase/ssr`; middleware composed with next-intl *(T1)*
+- [x] Auth: magic-link + Google *(T4; Apple deferred)* + **onboarding** *(T5)*
+- [x] Public **profile** (`/u/[username]`, dynamic OG, own-IP avatar) *(T7)* + **settings/30-day cooldown** *(T8)*
+- [x] **Wallet + append-only ledgers** + economy functions — latent; welcome bonus **20,026 Tokens F90** *(T2; D-039)*
+- [x] Protected `(app)` group + auth-aware header + `/home` *(T6)*  ·  [ ] **Rankings teaser** *(T9, next)*
+- [x] DB schema v1: `profiles`, `wallets`, `coin_ledger`, `score_ledger`, `countries`, `global_rankings` *(T2/T3)*
+- **Pending:** **T9** rankings teaser · **T10** i18n parity + token sweep · **T11** Phase DoD gate.
 
 ## ⏳ Phase 2 — Predictions Core & Scoring  *(generates the economy)*
 

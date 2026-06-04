@@ -1,9 +1,13 @@
 # F90+ — Phase 1 Handoff (Identity & Accounts)
 
-> **Session checkpoint — snapshot 2026-06-04. Resume from here.**
+> **🟢 FORMAL CHECKPOINT — Phase 1 PAUSED at T8 of 11 (clean resume point). Snapshot 2026-06-04.**
+> T1–T8 **done + verified**; T9–T11 **pending**. Working tree **clean**; branch
+> `feat/phase-1-identity` **NOT pushed**; `main` untouched. **Resume point = T9 (rankings teaser)** —
+> see "Next step (exact)" below. Nothing is mid-flight; no uncommitted work.
 > Read order to resume: this file → [PHASE_1_IDENTITY.md](PHASE_1_IDENTITY.md) (spec) →
 > [SCHEMA_V1.md](SCHEMA_V1.md) (DB) → [PHASE_1_IMPLEMENTATION_PLAN.md](PHASE_1_IMPLEMENTATION_PLAN.md)
-> (tasks) → [DECISIONS.md](DECISIONS.md) (D-034 + the why). Strategy B (premium, no shortcuts).
+> (tasks) → [DECISIONS.md](DECISIONS.md) → [ECOSYSTEM_VISION.md](ECOSYSTEM_VISION.md) (future phases).
+> Strategy B (premium, no shortcuts).
 
 ## Executive summary
 
@@ -20,22 +24,71 @@ All work is on branch **`feat/phase-1-identity`** (**not pushed**, `main` untouc
 reshaping Identity; T4's auth/identity surface is provider-agnostic and carries no
 subsystem-specific coupling (D-035).
 
+## Checkpoint — at a glance (2026-06-04)
+
+**✅ Done (T1–T8, all verified):**
+- **T1** SSR clients + composed next-intl/Supabase middleware · **T2** schema/RLS/economy (migration
+  `0001`) · **T3** 48-country seed (`0002`)
+- **T4** auth flows — magic-link + Google, dual-mode callback (`code` + `token_hash`), auth-aware header
+- **T5** onboarding — username + favourite country (RLS self-update)
+- **T6** protected `(app)` group + the `/home` authed surface
+- **T7** public profile `/u/[username]` + dynamic OG card
+- **T8** settings + 30-day cooldown (D-031)
+- **Landing (extra):** market ticker now a **sticky bar**; **Fantasy discovery section** + a `Fantasy`
+  nav item; redundant "Qualified Nations" grid removed
+
+**🔬 Verified:** `pnpm typecheck` ✅ · `pnpm test` ✅ **88 unit tests** · `pnpm build` ✅ (no
+`ignore*Errors`). **E2E through real Supabase sessions** (admin `generate_link` → our own token-hash
+`/callback`): onboarding → `/home` (showing **20,026 Tokens F90**) → public profile + a valid OG PNG →
+settings cooldown ("Podrás cambiarlo el 4 de julio"). All test users created **and cleaned up** (DB
+clean). ES + EN + mobile, 0 console errors. *(Caveat: home-page screenshots are flaky in the preview
+due to WebGL `networkidle`; verification was via DOM/E2E + DB + fetch — conclusive.)*
+
+**🗄️ Applied in Supabase (`f90-production`):** migrations **`0001`** (schema/RLS/functions/view/grants)
++ **`0002`** (48 countries) + **`0003`** (welcome bonus → **20,026 Tokens F90**, D-039). Redirect
+allow-list gained `http://localhost:3300/**` (dev). Google + email providers ON. **No schema work
+remains for T9–T11** (they consume existing tables/views).
+
+**📐 Documented for future phases (NOT built):** **D-034** expanded vision · **D-038** +
+[ECOSYSTEM_VISION.md](ECOSYSTEM_VISION.md) (nation hubs `/nations/[code]`, player profiles
+`/players/[slug]`, a Fantasy vertical, a "What is F90+?" discovery page → reserved **"Phase 3.5 —
+Entity Layer & Fantasy"**) · **D-040** Founding Squad / "Pack Fundación F90". Routes reserved; English
+(D-003).
+
+**⏳ Pending (resume here):** **T9** rankings teaser over `global_rankings` (replace the
+`data/leaderboard.ts` mock) · **T10** i18n parity + design-token sweep · **T11** Phase DoD gate.
+**→ Resume = T9.**
+
+## Product decisions registered (ledger)
+
+| # | Decision (one-line — full text + rationale in [DECISIONS.md](DECISIONS.md)) |
+| --- | --- |
+| **D-034** | Expanded vision: Polymarket-style markets + persistent wallet + player trading + squad XI/bench + portfolio — designed on a **generic economy**, not built. The anchor for everything below. |
+| **D-035** | Auth flows: **one dual-mode callback** (`code` + `token_hash`), locale-safe + open-redirect-guarded redirects, passwordless **login = signup**. |
+| **D-036** | Landing speaks "market": live **ticker** added (probability, not odds); redundant **"Qualified Nations"** grid removed. |
+| **D-037** | **Prediction-market identity LOCKED** — probability %, **never** bookmaker odds (founder-ratified brand invariant). |
+| **D-038** | **Ecosystem reserved**: nation hubs `/nations/[code]`, player profiles `/players/[slug]`, **Fantasy** as a top-level vertical, "What is F90+?" discovery → **"Phase 3.5 — Entity Layer & Fantasy"** (English routes; [ECOSYSTEM_VISION.md](ECOSYSTEM_VISION.md)). |
+| **D-039** | Currency = "**Tokens F90**"; welcome bonus = **20,026** (supersedes D-031's 1,000); migration `0003` applied + verified. |
+| **D-040** | Founding Squad / "**Pack Fundación F90**": new users own a **value-equal** starter squad (XI + bench + portfolio) from minute one; build with Phase 3 ([ECOSYSTEM_VISION.md](ECOSYSTEM_VISION.md) §9). |
+
+> Earlier Phase-1 decisions still in force: **D-027** (three-currency economy), **D-028** (latent
+> foundations), **D-030** (auth methods), **D-031** (identity defaults — its 1,000 bonus superseded by
+> D-039), **D-033** (Vercel manual deploy / Chiribito-shared team).
+
 ## Repository state
 
 - **Branch:** `feat/phase-1-identity` (off `main` = `b6bff60`, Phase 0.6)
 - **Last code commit:** `5872c27` — `feat(profile): T8 — settings (edit profile) + 30-day cooldown` (this docs commit lands on top). Since T7: Fantasy discovery section + nav (`20b0587`), T8 (`5872c27`).
 - **Working tree:** clean.
 - **Not pushed; `main` untouched.**
-- **Commits this session (oldest → newest):**
-  - `4f68053` refactor(football): unify the openfootball source URL in util
-  - `0c0c9a9` test(copilot): guard model, engine and openfootball parsing
-  - `769fd05` chore(env): document real env var names in .env.example
-  - `031ea5c` docs(decisions): record the expanded product vision (D-034)
-  - `30ae5df` feat(auth): Supabase SSR clients + composed session middleware (T1)
-  - `faa978b` feat(db): Phase 1 identity & economy schema (0001) (T2)
-  - `901e796` feat(db): seed 48 WC2026 countries + coherence test (0002) (T3)
-  - `fa83bde` fix(db): grant Data API privileges (RLS-gated)
-  - `b902e8e` feat(auth): T4 — magic-link + Google, dual-mode callback, auth-aware header
+- **Ahead of `main`:** 27 commits (`git rev-list --count main..HEAD`).
+- **Key commits (Phase 1 arc — each `feat` is paired with its `docs(...)`):**
+  - `30ae5df` T1 SSR + middleware · `faa978b` T2 schema (`0001`) · `901e796` T3 seed (`0002`) · `fa83bde` grants
+  - `b902e8e` **T4** auth flows · `16c84c6` landing (ticker + drop Nations, D-036) · `11f86a5` **T5** onboarding
+  - `101ec1d` D-037 + D-038 vision · `c727644` **D-039** Tokens F90 (`0003`) · `441cd33` **T6** `(app)` + `/home`
+  - `cb3c2b3` sticky ticker · `66139b2` **D-040** Founding Squad · `972a240` **T7** profile + OG
+  - `20b0587` Fantasy discovery section · `5872c27` **T8** settings + cooldown · `52976ea` docs(T8)
+  - Full graph: `git log --oneline main..HEAD`.
 
 ## Supabase state
 
@@ -52,8 +105,10 @@ subsystem-specific coupling (D-035).
 
 - `20260604000001_identity.sql` — **APPLIED ✅** (schema, RLS, functions, view, grants)
 - `20260604000002_countries_seed.sql` — **APPLIED ✅** (48 nations)
+- `20260604000003_welcome_bonus.sql` — **APPLIED ✅** (D-039: `handle_new_user` credits **20,026** Tokens F90; verified — a real signup → `coins_balance=20026`)
 
-Verified live: 5 tables (all RLS on), 3 functions, `global_rankings` view, 48 countries / 3 hosts.
+Verified live: 5 tables (all RLS on), 3 functions, `global_rankings` view, 48 countries / 3 hosts,
+welcome bonus = 20,026. **No pending migrations** (T9–T11 need none).
 
 ## Seeds applied
 

@@ -1,13 +1,15 @@
 # F90+ — Project State (Checkpoint)
 
-> **Resume entry point.** Snapshot date: **2026-06-04**. Phase: **FOUNDATION + PHASE 0.5/0.6 LIVE
-> at https://f90.xyz · PHASE 1 (Identity & Accounts) IN PROGRESS — T1–T8 done (auth + onboarding +
-> protected app gate + public profile + settings/cooldown shipped & verified; welcome bonus = 20,026
-> Tokens F90; sticky market ticker + Fantasy discovery section), data foundation live & verified.**
+> **🟢 FORMAL CHECKPOINT (2026-06-04) — Resume entry point.** Phase: **FOUNDATION + PHASE 0.5/0.6 LIVE
+> at https://f90.xyz · PHASE 1 (Identity & Accounts) PAUSED at T8 of 11** (T1–T8 done + verified;
+> T9–T11 pending). Shipped & verified: auth + onboarding + protected `(app)` gate + public profile +
+> settings/30-day cooldown; welcome bonus = **20,026 Tokens F90**; sticky market ticker + Fantasy
+> discovery section. **Working tree clean; branch NOT pushed; `main` untouched; nothing mid-flight.**
 >
-> **▶ To resume Phase 1, read [PHASE_1_HANDOFF.md](PHASE_1_HANDOFF.md) FIRST** (branch
-> `feat/phase-1-identity`, not pushed; Supabase schema + 48-country seed applied & verified; auth +
-> onboarding + `(app)` gate + profile + settings shipped; **next = T9 rankings teaser**). Then [OPERATING_MODEL.md](OPERATING_MODEL.md) + [DECISIONS.md](DECISIONS.md).
+> **▶ To resume Phase 1, read [PHASE_1_HANDOFF.md](PHASE_1_HANDOFF.md) FIRST** (the full checkpoint:
+> what's done/verified/applied-in-Supabase/documented/pending + the decision ledger). Branch
+> `feat/phase-1-identity`; **resume point = T9 (rankings teaser)**. Then [OPERATING_MODEL.md](OPERATING_MODEL.md) + [DECISIONS.md](DECISIONS.md)
+> + [ECOSYSTEM_VISION.md](ECOSYSTEM_VISION.md) (D-038/D-040 future phases).
 > Contracts: [PHASE_1_IDENTITY.md](PHASE_1_IDENTITY.md) · [SCHEMA_V1.md](SCHEMA_V1.md) ·
 > [PHASE_1_IMPLEMENTATION_PLAN.md](PHASE_1_IMPLEMENTATION_PLAN.md).
 
