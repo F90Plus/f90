@@ -222,3 +222,17 @@ as
   select id as user_id, username, display_name, country_code, avatar, total_points,
          rank() over (order by total_points desc) as rank
   from public.profiles;
+
+-- Data API exposure -----------------------------------------------------------
+-- Table-level privileges are the FIRST gate (RLS above governs WHICH rows). New
+-- Supabase projects do not auto-grant, so we grant explicitly:
+--   * countries / profiles / global_rankings: world-readable (anon + authenticated).
+--   * wallets / ledgers: authenticated only (RLS then filters to the owner).
+--     anon is granted NOTHING here -> cannot even query them (defence in depth).
+grant select on public.countries      to anon, authenticated;
+grant select on public.profiles       to anon, authenticated;
+grant update on public.profiles       to authenticated;
+grant select on public.wallets        to authenticated;
+grant select on public.coin_ledger    to authenticated;
+grant select on public.score_ledger   to authenticated;
+grant select on public.global_rankings to anon, authenticated;
