@@ -515,3 +515,34 @@ mirroring the existing leaderboard teaser pattern (`data/leaderboard.ts`).
 rhythm. When the real markets engine lands, the ticker swaps illustrative rows for live `markets`
 reads with no layout change. Verified: ES + EN + mobile render (0 console errors), `typecheck` + 63
 tests + `build` green. Subjects are real teams/players (facts, D-025).
+
+### D-037 — Prediction-market identity LOCKED: probability %, never bookmaker odds ✅ (founder-ratified 2026-06-04)
+**Context:** D-036 chose implied probability over decimal odds for the market ticker as an autonomous
+call, flagged for confirmation. The founder confirmed and elevated it to a brand invariant.
+**Decision:** F90+ markets ALWAYS express implied **probability (%)**, never decimal/fractional/
+American **odds**. Probability communicates a prediction market + collective intelligence; odds read
+as a traditional sportsbook, which F90+ explicitly is not (a non-goal — see ROADMAP "Non-goals":
+real-money betting/payouts/gambling). This governs the ticker, future market pages, player markets,
+and any price surface. Movement deltas (▲/▼ %) and "chance" framing are the house language.
+**Consequences:** No surface introduces odds, "bookmaker", "bet/wager/stake" framing, or fractional/
+decimal price formats. "Predict / chance / market / position" is the vocabulary. Reinforces the
+responsible, signal-not-wager positioning across the whole product.
+
+### D-038 — Ecosystem vision recorded + architecture reserved (Entity Layer & Fantasy) ✅ (founder, 2026-06-04)
+**Context:** The founder set the long-term direction: per-nation **hubs** (`/nations/<slug>` with
+Overview/Players/Stats/Matches/Markets/Predictions), first-class **player profiles**
+(`/players/<slug>`), **Fantasy as a visible top-level vertical** (nav → World Cup · Markets · Fantasy ·
+Rankings), and a landing **"What is F90+?"** discovery section. Asked for analysis + documentation
+only — **no implementation now**.
+**Decision:** Recorded in full in [ECOSYSTEM_VISION.md](ECOSYSTEM_VISION.md). It is a **faithful
+expansion of D-034** (adds the *navigable entity layer + Fantasy framing + discovery*, no new economic
+primitives). Adopt as a recognised milestone cluster **"Phase 3.5 — Entity Layer & Fantasy"**,
+**sequenced after** the engine (Phase 2 economy → Phase 3 players/market/XI), since entity pages are
+read-models over that data. **Reserve the route namespaces now** (`/nations/[code]/*`,
+`/players/[slug]`, `/markets/*`, `/fantasy/*`) so nothing collides. Routes/slugs stay **English**
+(D-003) — the ES UI localizes labels, not URLs. The player is the **shared primitive**: one market
+price viewed three ways (market value · trading P&L · fantasy value), one wallet, one points total.
+**Early wins allowed before the engine:** the discovery section and **read-only** nation hubs
+(over openfootball data). **Consequences:** T6+ build *toward* this (and must not reuse the reserved
+namespaces). Open questions O-1..O-4 (slug, market model, Fantasy v1 scope, player likeness) are
+parked in the vision doc for when the cluster starts. NOT on the critical path for Phase 1.

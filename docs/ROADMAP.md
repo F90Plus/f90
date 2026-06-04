@@ -92,6 +92,19 @@ Turn earned coins into a team.
 - [ ] **Real-performance points** (`player_match_scores`, FPL-style) feed profile points
 - [ ] Player data adapter (football-data / api-football; `names+stats=facts`)
 
+## ⏳ Phase 3.5 — Entity Layer & Fantasy  *(reserved — D-038)*
+
+The presentation/IA layer that makes D-034's economy explorable. **Full design + the 8-point
+analysis: [ECOSYSTEM_VISION.md](ECOSYSTEM_VISION.md).** Sequenced *after* the Phase 2/3 engine
+(entity pages are read-models over that data). Routes reserved now; build *toward* it from T6.
+
+- [ ] **Nation hubs** `/nations/[code]` (Overview/Players/Stats/Matches/Markets/Predictions) —
+      read-only tabs can land early over openfootball; economic tabs light up with Phase 2/3
+- [ ] **Player profiles** `/players/[slug]` — the shared primitive (price · portfolio · Fantasy · XI)
+- [ ] **Fantasy** promoted to a named top-level vertical (squad · budget · XI + bench · live value)
+- [ ] **"What is F90+?"** landing discovery section (early win — explains the loop, pre-engine)
+- [ ] Top-nav evolves to **World Cup · Markets · Fantasy · Rankings** + ⌘K entity search
+
 ## ⏳ Phase 4 — Rankings, Leagues & Reputation  *(the viral loop)*
 
 Turn scoring into competition.
