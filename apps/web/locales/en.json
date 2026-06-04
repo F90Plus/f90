@@ -65,6 +65,20 @@
       "signOut": "Sign out"
     }
   },
+  "markets": {
+    "label": "Markets",
+    "tag": "Soon",
+    "a11y": "F90+ prediction markets (preview)",
+    "q": {
+      "winner": "to win the World Cup",
+      "topScorer": "top scorer",
+      "semifinalist": "to reach the semis",
+      "groupWinner": "to win Group {group}",
+      "reachFinal": "to reach the final",
+      "last16": "to reach the last 16",
+      "goldenBall": "Golden Ball"
+    }
+  },
   "hero": {
     "eyebrow": "World Cup 2026 · Social predictions",
     "titleLead": "Predict the World Cup.",
@@ -186,14 +200,6 @@
       "groups": "Groups",
       "matches": "Matches",
       "venues": "Host cities"
-    },
-    "nations": {
-      "eyebrow": "Qualified nations",
-      "title": "The 48 are in",
-      "subtitle": "Every nation that earned its place at the 2026 World Cup — filter by confederation.",
-      "all": "All",
-      "host": "Host",
-      "count": "{count} nations"
     },
     "groups": {
       "eyebrow": "The draw",

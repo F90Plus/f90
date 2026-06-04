@@ -1,6 +1,7 @@
 import { setRequestLocale } from 'next-intl/server';
 import { getWorldCupStatus } from '@/lib/football/nations';
 import { Hero } from '@/features/home/hero';
+import { MarketTicker } from '@/features/markets/market-ticker';
 import { TournamentCenter } from '@/features/tournament/tournament-center';
 import { HowItWorks } from '@/features/home/how-it-works';
 import { LeaderboardTeaser } from '@/features/home/leaderboard-teaser';
@@ -17,6 +18,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
   return (
     <>
       <Hero wcStatus={wcStatus} />
+      <MarketTicker />
       <TournamentCenter />
       <HowItWorks />
       <LeaderboardTeaser />

@@ -65,6 +65,20 @@
       "signOut": "Cerrar sesión"
     }
   },
+  "markets": {
+    "label": "Mercados",
+    "tag": "Pronto",
+    "a11y": "Mercados de predicción de F90+ (vista previa)",
+    "q": {
+      "winner": "Gana el Mundial",
+      "topScorer": "Máximo goleador",
+      "semifinalist": "Llega a semifinales",
+      "groupWinner": "Gana el Grupo {group}",
+      "reachFinal": "Llega a la final",
+      "last16": "Pasa a octavos",
+      "goldenBall": "Balón de Oro"
+    }
+  },
   "hero": {
     "eyebrow": "Mundial 2026 · Predicciones sociales",
     "titleLead": "Predice el Mundial.",
@@ -186,14 +200,6 @@
       "groups": "Grupos",
       "matches": "Partidos",
       "venues": "Sedes"
-    },
-    "nations": {
-      "eyebrow": "Selecciones clasificadas",
-      "title": "Las 48 ya están",
-      "subtitle": "Todas las selecciones que se ganaron su sitio en el Mundial 2026 — filtra por confederación.",
-      "all": "Todas",
-      "host": "Anfitrión",
-      "count": "{count} selecciones"
     },
     "groups": {
       "eyebrow": "El sorteo",
