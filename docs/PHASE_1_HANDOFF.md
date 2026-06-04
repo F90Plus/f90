@@ -7,14 +7,13 @@
 
 ## Executive summary
 
-Phase 1 (Identity & Accounts) is **~75% built and the data + auth + onboarding + app gate are LIVE**.
-The Supabase schema + economy + 48-country seed are **applied and verified end-to-end**; **T4 (auth
-flows)**, **T5 (onboarding)** and **T6 (protected `(app)` group + the `/home` authed surface)** are
-**SHIPPED + verified end-to-end** (a real token-hash session was forced through onboarding, set a
-unique username + nation via RLS self-update, and landed on `/home` showing its **20,026 Tokens F90**
-balance — all at the DB level, then cleaned up). The welcome bonus is now **20,026 Tokens F90** (D-039).
-What remains is **public profile (T7), settings (T8), rankings teaser (T9), i18n/token sweep (T10) and
-the DoD gate (T11)**.
+Phase 1 (Identity & Accounts) is **~85% built**: the data + auth + onboarding + app gate + the public
+profile are LIVE. The Supabase schema + economy + 48-country seed are **applied and verified**; **T4
+(auth)**, **T5 (onboarding)**, **T6 (protected `(app)` group + `/home`)** and **T7 (public profile
+`/u/[username]` + dynamic OG)** are **SHIPPED + verified**. The welcome bonus is **20,026 Tokens F90**
+(D-039); the live-market ticker is now a **sticky bar** under the header (above the Hero). What remains
+is **settings + 30-day cooldown (T8), rankings teaser (T9), i18n/token sweep (T10) and the DoD gate
+(T11)**.
 
 All work is on branch **`feat/phase-1-identity`** (**not pushed**, `main` untouched). Vision
 **D-034** is baked into a **generic economy** so markets/players/fantasy plug in later without
@@ -24,7 +23,7 @@ subsystem-specific coupling (D-035).
 ## Repository state
 
 - **Branch:** `feat/phase-1-identity` (off `main` = `b6bff60`, Phase 0.6)
-- **Last code commit:** `441cd33` — `feat(app): T6 — protected (app) group + the /home authed surface` (this docs commit lands on top). Since T5: vision docs (D-037/D-038, `101ec1d`), Tokens F90 bonus (`c727644`, D-039), T6 (`441cd33`).
+- **Last code commit:** `972a240` — `feat(profile): T7 — public profile /u/[username] + dynamic OG card` (this docs commit lands on top). Since T6: sticky ticker (`cb3c2b3`), Founding Squad doc (D-040, `66139b2`), T7 (`972a240`).
 - **Working tree:** clean.
 - **Not pushed; `main` untouched.**
 - **Commits this session (oldest → newest):**
@@ -197,14 +196,24 @@ group (no redirect loop).
   forced to `/onboarding`; (3) after onboarding → `/home` renders "Hola, @t6_user" · **20.026 Tokens
   F90** · "Vas con Argentina". Test users cleaned up.
 
-## Next step (exact) — T7: Public profile `/u/[username]` + dynamic OG
+## T7 — Public profile ✅ DONE (verified 2026-06-04)
 
-`app/[locale]/u/[username]/page.tsx`: a **public** RSC reading `profiles` (+ `global_rankings` for the
-rank teaser) by username (citext) — avatar (own-IP token), country badge, join date, points (0), rank;
-`generateMetadata` → per-user OG card; 404 for unknown handles. New i18n namespace `profile`. Reuse
-`getCountries` for the country badge and the `NationFlag`/flag pattern. **Done when:** `/u/<handle>`
-renders the public card, the OG previews, and unknown handles 404. (This is a *public* page — not under
-`(app)` — so don't gate it.)
+`app/[locale]/u/[username]/` (public `page.tsx` + `opengraph-image.tsx`), `components/ui/avatar.tsx`,
+`lib/avatar.ts` (own-IP gradient+initial, pure, 6 tests), `profile` i18n namespace. Reads `profiles`
+by handle (citext); `notFound()` for unknown handles. Per-user OG via `next/og` ImageResponse.
+- **Gates:** `pnpm typecheck` ✅ · `pnpm test` ✅ 84 · `pnpm build` ✅.
+- **Verified:** `/u/proftest` renders (name · @handle · "Va con España" · join date · points · rank
+  teaser · avatar); unknown handle → 404; the OG route returns a valid 64 KB `image/png`.
+
+## Next step (exact) — T8: Settings (edit profile) + 30-day cooldown
+
+`app/[locale]/(app)/settings/page.tsx` (gated by the `(app)` group, T6): edit `display_name`, `bio`
+(≤280, the DB check), and the avatar token; **username/country changes honour the 30-day cooldown**
+(D-031) computed from `username_changed_at` / `country_changed_at` (a pure, testable helper —
+`canChangeAfterCooldown(stampedAt, now)`). `updateProfile`-style Server Action writing via the RLS
+self-update policy; reuse `features/profile/validation.ts`. New `settings` i18n namespace. **Done when:**
+edits persist, the cooldown is enforced with a localized "you can change this again on <date>" message,
+and the form is ES/EN.
 
 ## PHASE 1 STATUS
 
@@ -217,8 +226,8 @@ renders the public card, the OG previews, and unknown handles 404. (This is a *p
 | T4 — Auth flows (magic-link + Google, routes, i18n) | ✅ completado (verificado funcionalmente) |
 | T5 — Onboarding (username + country) | ✅ completado (verificado E2E + DB) |
 | T6 — Protected routes + auth-aware header | ✅ completado (verificado E2E) |
-| T7 — Public profile `/u/[username]` + OG | ⏳ pendiente (NEXT) |
-| T8 — Settings + 30-day cooldown | ⏳ pendiente |
+| T7 — Public profile `/u/[username]` + OG | ✅ completado (verificado: render · 404 · OG png) |
+| T8 — Settings + 30-day cooldown | ⏳ pendiente (NEXT) |
 | T9 — Rankings teaser (replace mock) | ⏳ pendiente |
 | T10 — i18n parity + tokens sweep | ⏳ pendiente |
 | T11 — Phase DoD gate | ⏳ pendiente |
