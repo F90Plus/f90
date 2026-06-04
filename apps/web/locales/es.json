@@ -132,5 +132,59 @@
     },
     "value": "Tu modelo ve a {team} un {pct}% por encima del mercado — un ángulo contrarian.",
     "disclaimer": "Probabilidades con fines de entretenimiento. No es consejo de apuestas — F90+ es gratis y virtual."
+  },
+  "tournament": {
+    "field": {
+      "eyebrow": "El cuadro está cerrado",
+      "title": "48 selecciones. Un trofeo.",
+      "analyst": "El sorteo está hecho. 48 selecciones, 12 grupos, un solo camino hacia la final del MetLife el 19 de julio. Explora quién lo logró, cómo quedó el sorteo y el cuadro que lo decide todo.",
+      "nations": "Selecciones",
+      "groups": "Grupos",
+      "matches": "Partidos",
+      "venues": "Sedes"
+    },
+    "nations": {
+      "eyebrow": "Selecciones clasificadas",
+      "title": "Las 48 ya están",
+      "subtitle": "Todas las selecciones que se ganaron su sitio en el Mundial 2026 — filtra por confederación.",
+      "all": "Todas",
+      "host": "Anfitrión",
+      "count": "{count} selecciones"
+    },
+    "groups": {
+      "eyebrow": "El sorteo",
+      "title": "Doce grupos, un camino",
+      "subtitle": "La fase de grupos tal como se sorteó en Washington D. C. Los dos primeros de cada grupo —y los ocho mejores terceros— pasan a las eliminatorias.",
+      "groupOfDeath": "Grupo de la muerte",
+      "analyst": "El grupo más duro para el Analista: Grupo {group} — cuatro selecciones que pueden soñar con los dieciseisavos."
+    },
+    "bracket": {
+      "eyebrow": "El camino",
+      "title": "El cuadro hacia la final",
+      "subtitle": "Tras los grupos, 32 selecciones entran en una eliminatoria directa — hasta el MetLife Stadium el 19 de julio.",
+      "favourites": "Favoritos del Analista",
+      "rounds": {
+        "R32": "Dieciseisavos",
+        "R16": "Octavos",
+        "QF": "Cuartos",
+        "SF": "Semifinales",
+        "THIRD": "Tercer puesto",
+        "FINAL": "Final"
+      },
+      "slot": {
+        "groupWinner": "1.º · Grupo {group}",
+        "groupRunner": "2.º · Grupo {group}",
+        "third": "3.º · {groups}",
+        "matchWinner": "Ganador · Partido {match}",
+        "matchLoser": "Perdedor · Partido {match}",
+        "tbd": "Por decidir"
+      }
+    },
+    "key": {
+      "eyebrow": "Partidos clave",
+      "title": "Los partidos que importan",
+      "subtitle": "El inaugural y los duelos estelares — con la lectura del Analista antes de que ruede el balón.",
+      "predictSoon": "Predicciones muy pronto"
+    }
   }
 }
