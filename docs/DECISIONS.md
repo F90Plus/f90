@@ -492,3 +492,26 @@ is still `http://localhost:3000` (should become the production origin); the redi
 `https://f90.xyz/**` — add it before production OAuth/magic-link; production magic-link still needs its
 own SMTP (Resend) — dev SMTP is rate-limited. Full Google-consent + email-click completion needs a
 real account/inbox (founder), and is the only hop not machine-verifiable headless.
+
+### D-036 — Landing speaks "market" (D-034): live-market ticker in, "Qualified Nations" out ✅ (2026-06-04)
+**Context:** The landing communicated too much "World Cup information" and not enough "prediction
+market". Per the expanded vision (D-034 — Polymarket-style markets, wallet, player trading, fantasy),
+the homepage should start signalling that direction. Separately, the "Qualified Nations" grid ("Las 48
+ya están") duplicated the Groups section right below it (which already shows all 48 nations in
+context) and consumed a lot of vertical space for little added value.
+**Decision:** (1) **Removed** the `QualifiedNations` section and its dead code (`qualified-nations.tsx`,
+`nation-card.tsx`, the `tournament.nations` i18n) — keeping `NationFlag` and the `confederations` lib
+(still used by Groups + Bracket). The Tournament Center now flows Field-Is-Set → Groups → Bracket →
+Key Matches. (2) **Added a live-market ticker** (`features/markets/market-ticker.tsx` + illustrative
+`data/markets.ts`) directly under the Hero: a seamless, financial-terminal tape (subject · outcome ·
+probability% · green ▲ / red ▼ 24h move), premium not casino — pure-CSS marquee, hover-pause,
+reduced-motion-safe. (3) **Values are implied probabilities (Polymarket-style), NOT decimal odds.**
+Decimal odds are the language of sportsbooks (an explicit anti-goal), so this deviates from the
+founder's illustrative "4.50" examples while honouring the stated anti-betting principle — a trivial
+format swap if odds are preferred. (4) Data is **illustrative** (the markets engine is a later
+subsystem per D-034/D-035), framed honestly with a "Pronto/Soon" tag + an aria "preview" label,
+mirroring the existing leaderboard teaser pattern (`data/leaderboard.ts`).
+**Consequences:** The landing now reads as a prediction market within seconds, with a tighter vertical
+rhythm. When the real markets engine lands, the ticker swaps illustrative rows for live `markets`
+reads with no layout change. Verified: ES + EN + mobile render (0 console errors), `typecheck` + 63
+tests + `build` green. Subjects are real teams/players (facts, D-025).
