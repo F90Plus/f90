@@ -1,7 +1,7 @@
 {
   "meta": {
     "title": "F90+ — Predice el Mundial 2026 con tus amigos",
-    "description": "La forma gratuita y social de predecir cada partido del Mundial 2026. Monedas virtuales, rankings globales y una IA futbolera. Sin dinero real: solo gloria."
+    "description": "La forma gratuita y social de predecir cada partido del Mundial 2026. Tokens F90, rankings globales y una IA futbolera. Sin dinero real: solo gloria."
   },
   "nav": {
     "how": "Cómo funciona",
@@ -29,7 +29,7 @@
     },
     "signup": {
       "title": "Únete a F90+",
-      "subtitle": "Crea tu perfil gratis. Monedas virtuales, cero riesgo.",
+      "subtitle": "Crea tu perfil gratis. Tokens F90, cero riesgo.",
       "metaTitle": "Crear cuenta"
     },
     "emailLabel": "Email",
@@ -110,11 +110,11 @@
     "eyebrow": "Mundial 2026 · Predicciones sociales",
     "titleLead": "Predice el Mundial.",
     "titleHighlight": "Vive cada minuto.",
-    "subtitle": "Moja, gana monedas virtuales y escala un ranking global con amigos y rivales de todo el mundo. Gratis para siempre: la única moneda real es presumir.",
+    "subtitle": "Moja, gana Tokens F90 y escala un ranking global con amigos y rivales de todo el mundo. Gratis para siempre: la única moneda real es presumir.",
     "ctaPrimary": "Empieza a predecir — gratis",
     "ctaSecondary": "Cómo funciona",
     "chipFree": "100% gratis",
-    "chipCoins": "Monedas virtuales, cero riesgo",
+    "chipCoins": "{amount, number} Tokens F90 gratis",
     "chipRanking": "Ranking global"
   },
   "countdown": {
@@ -154,7 +154,7 @@
     "title": "Tres toques hacia la gloria",
     "subtitle": "Sin cartera, sin riesgo, sin líos. Solo fútbol y orgullo.",
     "step1Title": "Moja en los partidos",
-    "step1Body": "Predice ganadores, marcadores y momentazos antes del pitido inicial. Cada predicción cuesta monedas virtuales: gástalas con cabeza.",
+    "step1Body": "Predice ganadores, marcadores y momentazos antes del pitido inicial. Cada predicción cuesta Tokens F90: gástalos con cabeza.",
     "step2Title": "Escala en la tabla",
     "step2Body": "Acierta tus predicciones para sumar puntos y subir en un ranking global que se mueve al ritmo del Mundial.",
     "step3Title": "Gana a tus amigos",
@@ -179,7 +179,7 @@
   },
   "footer": {
     "tagline": "La porra social del Mundial.",
-    "disclaimer": "F90+ es un juego de predicciones gratuito. Usa solo monedas virtuales y no implica dinero real ni apuestas.",
+    "disclaimer": "F90+ es un juego de predicciones gratuito. Usa solo Tokens F90 virtuales y no implica dinero real ni apuestas.",
     "rights": "Hecho por amor al fútbol.",
     "copyright": "© {year} F90+"
   },

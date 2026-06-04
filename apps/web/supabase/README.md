@@ -42,6 +42,6 @@ reviewed like code — **no schema change happens outside a migration file**.
 
 - `select count(*) from public.countries;` → **48**
 - Create a test user → a `profiles` row, a `wallets` row, and a `coin_ledger`
-  `signup_bonus` of **1000** appear; `wallets.coins_balance` = 1000.
+  `signup_bonus` of **20026** appear; `wallets.coins_balance` = 20026 (Tokens F90, D-039; migration 0003).
 - Anonymous reads of `wallets` / `coin_ledger` / `score_ledger` return **0 rows**
   (RLS); `countries` and `profiles` are publicly readable.

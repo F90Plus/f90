@@ -7,6 +7,7 @@ import { Badge } from '@/components/ui/badge';
 import { buttonVariants } from '@/components/ui/button';
 import { fadeUp, staggerParent } from '@/lib/motion';
 import { PLAY_HREF } from '@/lib/constants';
+import { WELCOME_BONUS_TOKENS } from '@/lib/economy';
 import { Logo } from '@/components/layout/logo';
 import { StadiumScene } from '@/components/atmosphere/stadium-scene';
 import { GlobeMount } from '@/features/globe/globe-mount';
@@ -102,7 +103,7 @@ export function Hero({ wcStatus }: { wcStatus: WorldCupStatus }) {
               </li>
               <li className="flex items-center gap-2">
                 <ChipDot />
-                {t('chipCoins')}
+                {t('chipCoins', { amount: WELCOME_BONUS_TOKENS })}
               </li>
               <li className="flex items-center gap-2">
                 <ChipDot />

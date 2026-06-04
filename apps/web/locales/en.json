@@ -1,7 +1,7 @@
 {
   "meta": {
     "title": "F90+ — Predict the 2026 World Cup with friends",
-    "description": "The free, social way to predict every match of the 2026 World Cup. Virtual coins, global leaderboards, and a football-smart AI. No real money — just glory."
+    "description": "The free, social way to predict every match of the 2026 World Cup. Tokens F90, global leaderboards, and a football-smart AI. No real money — just glory."
   },
   "nav": {
     "how": "How it works",
@@ -29,7 +29,7 @@
     },
     "signup": {
       "title": "Join F90+",
-      "subtitle": "Create your free profile. Virtual coins, zero risk.",
+      "subtitle": "Create your free profile. Tokens F90, zero risk.",
       "metaTitle": "Create account"
     },
     "emailLabel": "Email",
@@ -110,11 +110,11 @@
     "eyebrow": "World Cup 2026 · Social predictions",
     "titleLead": "Predict the World Cup.",
     "titleHighlight": "Live every minute.",
-    "subtitle": "Make your calls, earn virtual coins, and climb a global leaderboard with friends and rivals worldwide. Free forever — bragging rights are the only currency that's real.",
+    "subtitle": "Make your calls, earn Tokens F90, and climb a global leaderboard with friends and rivals worldwide. Free forever — bragging rights are the only currency that's real.",
     "ctaPrimary": "Start predicting — free",
     "ctaSecondary": "How it works",
     "chipFree": "100% free to play",
-    "chipCoins": "Virtual coins, zero risk",
+    "chipCoins": "{amount, number} Tokens F90 free",
     "chipRanking": "Global leaderboard"
   },
   "countdown": {
@@ -154,7 +154,7 @@
     "title": "Three taps to glory",
     "subtitle": "No wallet, no risk, no nonsense. Just football and bragging rights.",
     "step1Title": "Call the matches",
-    "step1Body": "Predict winners, scorelines and big moments before kickoff. Every call costs virtual coins — spend them wisely.",
+    "step1Body": "Predict winners, scorelines and big moments before kickoff. Every call costs Tokens F90 — spend them wisely.",
     "step2Title": "Climb the table",
     "step2Body": "Nail your predictions to bank points and rise through a global leaderboard that moves with the World Cup.",
     "step3Title": "Out-predict your friends",
@@ -179,7 +179,7 @@
   },
   "footer": {
     "tagline": "The social World Cup pick'em.",
-    "disclaimer": "F90+ is a free-to-play prediction game. It uses virtual coins only and involves no real money or gambling.",
+    "disclaimer": "F90+ is a free-to-play prediction game. It uses virtual Tokens F90 only and involves no real money or gambling.",
     "rights": "Built for the love of the game.",
     "copyright": "© {year} F90+"
   },
