@@ -89,6 +89,10 @@ Verified live: 5 tables (all RLS on), 3 functions, `global_rankings` view, 48 co
 - **DONE + verified:** `wallets`, `coin_ledger`, `score_ledger` + `award_coins`/`award_points`
   (`SECURITY DEFINER`, EXECUTE revoked from clients, granted to `service_role`).
   Server-authoritative; `check (coins_balance >= 0)`. **Latent** until spending (Phase 3).
+- **Welcome bonus = 20,026 Tokens F90** (migration **0003**, D-039 — supersedes the 1,000 of D-031).
+  Currency single-source: `lib/economy.ts` (`WELCOME_BONUS_TOKENS`, `CURRENCY_NAME`). **Verified E2E**:
+  a fresh signup credited `coins_balance=20026` + a `signup_bonus` ledger row of `20026`. The earlier
+  T4/T5 notes saying "1000/`fan_e1632271`=1000" are historical (bonus was 1,000 then).
 - `ledger_kind` already includes `market_trade`/`player_purchase`/`player_sale`/`fantasy_reward` (D-034 forward).
 
 ## Rankings state

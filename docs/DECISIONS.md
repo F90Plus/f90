@@ -381,7 +381,7 @@ gate after `f90.xyz` connects.
 ### D-031 — Identity defaults: welcome bonus, mutability, shareable profile, own-IP avatars (studio defaults, reversible) ✅
 **Context:** Several reversible Identity parameters needed sensible defaults to unblock the
 build without escalating each one.
-**Decision:** (a) **1,000-coin welcome bonus** at signup (seeds the economy; spendable once
+**Decision:** (a) **1,000-coin welcome bonus** at signup *(superseded by **D-039** → 20,026 Tokens F90)* (seeds the economy; spendable once
 the market exists). (b) `username` + favourite **country** are changeable with a **30-day
 cooldown** (anti link-rot / impersonation / tribe-hopping). (c) The **public profile is
 first-class and OG-shareable** (`/u/[username]`) to power the growth loop. (d) **Avatars
@@ -546,3 +546,24 @@ price viewed three ways (market value · trading P&L · fantasy value), one wall
 (over openfootball data). **Consequences:** T6+ build *toward* this (and must not reuse the reserved
 namespaces). Open questions O-1..O-4 (slug, market model, Fantasy v1 scope, player likeness) are
 parked in the vision doc for when the cluster starts. NOT on the critical path for Phase 1.
+
+### D-039 — Currency = "Tokens F90"; welcome bonus = 20,026 (supersedes the 1,000 of D-031) ✅ (founder, 2026-06-04)
+**Context:** The generic 1,000-coin welcome bonus (D-031, migration 0001) read as a placeholder. The
+founder rebranded the virtual currency to **"Tokens F90"** and set the welcome bonus to **20,026** —
+a number that ties to the **2026 World Cup**, carries more personality than 1,000/10,000, and scales
+better for future markets / Fantasy / player trading. Tokens F90 remain **virtual** (free-to-play,
+no real money, no gambling) — the legal/safety framing is unchanged.
+**Decision:** (1) Migration **0003** (`CREATE OR REPLACE handle_new_user`) credits **20,026** via
+`award_coins(..., 'signup_bonus', ...)` — applied to the live `f90-production` DB; the trigger
+`on_auth_user_created` is unchanged. The economy stays generic (D-034): same wallet, ledger and
+`award_coins` — only the amount moved. (2) **Single source** in code: `lib/economy.ts`
+(`WELCOME_BONUS_TOKENS = 20_026`, `CURRENCY_NAME = 'Tokens F90'`, 2 unit tests) — **must match the DB
+trigger**. (3) **Copy** rebranded "monedas virtuales / virtual coins" → **"Tokens F90"** across the
+landing/auth (meta, hero, how-it-works, footer, signup), keeping the virtual/free/no-gambling
+disclaimers; the hero chip features the bonus via the constant (`{amount} Tokens F90`, locale-
+formatted, no drift). "Tokens F90" is a proper noun — identical in ES + EN.
+**Consequences:** Verified E2E — a real admin-created signup fired the trigger → `coins_balance=20026`,
+`signup_bonus` ledger `amount=20026`, `balance_after=20026`; auth + onboarding unaffected; typecheck +
+74 tests + build green. Internal schema names (`coins_balance`, `coin_ledger`, `award_coins`) stay
+generic/unchanged (D-034) — "Tokens F90" is the user-facing brand, not a column rename. Future
+balance/wallet UIs read `WELCOME_BONUS_TOKENS` / `CURRENCY_NAME`.
