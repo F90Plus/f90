@@ -7,6 +7,44 @@
 > account — never shared with PMS / PT / Chiribito / XPrediction. Log into the F90+
 > identity before any Vercel action.
 
+---
+
+## ⚠️ REALITY CHECK — how F90+ actually deploys (corrected 2026-06-04, D-033)
+
+The auto-deploy assumptions further below (§4 "push to `main`", §6 "Production Branch: main →
+serves f90.xyz") **do NOT match reality.** Verified on 2026-06-04 while publishing Phase 0.6:
+
+- **No GitHub→Vercel auto-deploy.** The `f90` project is **not** git-connected for automatic
+  deploys — pushing/merging to `main` triggers **nothing** (GitHub shows 0 deployments / 0 checks
+  on the commits; the deployed production deployment has empty git metadata). **Production is
+  published MANUALLY via `vercel --prod`.**
+- **NOT an isolated Vercel account.** The `f90` project lives in the Vercel team
+  **`chiribito293-7173s-projects`** — the **same team as Chiribito** (`chiribito-play`,
+  `chiribito-web`), `xpredict`, `xprediction-demo`, etc. This **contradicts** the "isolated F90+
+  Vercel account" claim in the intro / §2 / §6. *(Open governance item: migrate `f90` to a truly
+  isolated F90+ Vercel team, or accept the shared team. Until decided, log into
+  `chiribito293-7173` for any `f90` Vercel action.)*
+- **Canonical domain is `www.f90.xyz`.** The apex `f90.xyz` **308-redirects to `www.f90.xyz`**
+  (the intended "apex primary, www→apex" is reversed in practice).
+
+### Manual production deploy — the ACTUAL procedure
+From the repo root, with the working tree on the commit you want live (e.g. `main`):
+```
+vercel link --project f90 --yes --scope chiribito293-7173s-projects
+vercel --prod --yes
+```
+Builds the **local working tree** on Vercel and, on success, aliases **`www.f90.xyz`** to the new
+deployment. Verify: `https://www.f90.xyz/` (ES) and `https://www.f90.xyz/en` (EN) show the current
+build; response header `x-vercel-cache: PRERENDER, age: 0` confirms a fresh deploy.
+**Repeat after every phase** unless/until GitHub auto-deploy is connected.
+
+### To switch to proper auto-deploy (optional, recommended)
+Vercel → `f90` project → Settings → Git → **Connect Git Repository** → `F90Plus/f90`,
+Production Branch = `main` (the Vercel GitHub App needs access to the `F90Plus` org). Then pushes
+to `main` auto-deploy and the manual step above is no longer needed.
+
+---
+
 ## 0. Prerequisites
 - The local repo at `Documents\F90PLUS\f90plus` (git initialized; foundation committed).
 - A GitHub account/org for F90+ and a Vercel account/team for F90+ (isolated).

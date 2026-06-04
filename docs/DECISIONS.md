@@ -419,3 +419,26 @@ founder gate). Flags vendored from flagcdn under `public/flags/`. Note: the repo
 is broken at the tooling level (no flat-config file; `@eslint/eslintrc` circular-structure) —
 **pre-existing and unrelated to this phase** (verified: only Vitest was added; `next` unchanged);
 flagged for a separate tooling fix. typecheck + Vitest + build are the effective quality gates.
+
+### D-033 — Vercel reality: F90+ deploys MANUALLY (`vercel --prod`), in Chiribito's Vercel team ✅ (2026-06-04)
+**Context:** Phase 0.6 was merged to `main` (`f2be258`) but never appeared on production. A
+root-cause audit (2026-06-04) found the deploy assumptions in [DEPLOY_RUNBOOK.md](DEPLOY_RUNBOOK.md)
+§4/§6 were wrong: pushing to `main` deploys nothing.
+**Findings (verified):** (a) The `f90` Vercel project is **not git-connected for auto-deploy** —
+GitHub shows 0 deployments / 0 checks on recent commits; the live production deployment had **empty
+git metadata** (`githubCommitSha`/`gitSource` all blank) → it was a **manual `vercel --prod`**.
+(b) The `f90` project lives in the Vercel team **`chiribito293-7173s-projects`** — the **same team
+as Chiribito / xpredict / xprediction-demo**, NOT an isolated F90+ Vercel account (contradicts the
+runbook's isolation claim). (c) Canonical domain is **`www.f90.xyz`**; the apex `f90.xyz`
+**308→www**.
+**Decision:** Until GitHub auto-deploy is connected, **production is published by hand** —
+`vercel link --project f90 --yes --scope chiribito293-7173s-projects` then `vercel --prod --yes`
+from the repo root (builds the local working tree; aliases `www.f90.xyz`). Phase 0.6 was published
+this way (deployment `dpl_ETMNzrovfdWkU3z1meLJUaRvkNLe`, READY; `www.f90.xyz` aliased; EN + ES
+verified live). DEPLOY_RUNBOOK updated with a REALITY CHECK + the exact procedure.
+**Open governance item (NOT decided — founder call):** migrate `f90` to a truly isolated F90+
+Vercel team vs. accept the shared Chiribito team; and optionally connect GitHub auto-deploy
+(Settings → Git → Connect `F90Plus/f90`, Production Branch `main`).
+**Consequences:** Each phase must be manually `vercel --prod`-ed until auto-deploy is wired. The
+"isolated Vercel account" invariant is currently **violated at the team level** and needs a founder
+decision. Code isolation (separate repo `F90Plus/f90`) is intact.

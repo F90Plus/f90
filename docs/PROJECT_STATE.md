@@ -12,21 +12,26 @@ F90+ is the **living experience of the 2026 World Cup** — predictions, fantasy
 player portfolio, rankings and narrative fused into one world (vision:
 [PROJECT_VISION.md](PROJECT_VISION.md) · [EXPERIENCE_SYSTEM.md](EXPERIENCE_SYSTEM.md);
 economy ratified in [DECISIONS.md](DECISIONS.md) D-027). The **foundation is CLOSED and now
-LIVE in production at https://f90.xyz** (GitHub `F90Plus/f90` → isolated Vercel → `f90.xyz`
-+ SSL): bilingual i18n, premium branding, a deterministic AI Copilot ("The Analyst"), **real
+LIVE in production at https://www.f90.xyz** (GitHub `F90Plus/f90` → Vercel `f90` *(shared team,
+manual deploy — D-033)* → `www.f90.xyz` + SSL): bilingual i18n, premium branding, a deterministic AI Copilot ("The Analyst"), **real
 WC2026 fixtures**, **cinematic imagery**, and the flagship **3D World Cup globe hero** (gold
 hosts / green qualified, from real data). No accounts/backend yet — next is **Phase 1**
 (designed, documented, ready to build).
 
-## Deploy state ✅ LIVE (milestone — 2026-06-04)
+## Deploy state ✅ LIVE — incl. Phase 0.6 (updated 2026-06-04, D-033)
 - **GitHub:** `F90Plus/f90` — **own isolated org** (NOT PMS/PT/Chiribito/XPrediction),
-  branch **`main`**, repo synced (3 commits, incl. all Phase 1 docs).
-- **Vercel:** isolated F90+ project, **Root Directory `apps/web`**, production + preview
-  pipeline live.
-- **Domain:** **`f90.xyz` connected + validated**, **SSL active**.
-- **Validated in production:** hero · 3D globe · countdown · desktop · mobile · ES (`/`) +
-  EN (`/en`). Runbook + rollback: [DEPLOY_RUNBOOK.md](DEPLOY_RUNBOOK.md).
-- **Isolation intact** — F90+ shares no repo/infra/account with any other ecosystem.
+  branch **`main`** = `f2be258` (Phase 0.6). Repo synced.
+- **Production: Phase 0.6 LIVE** on **`www.f90.xyz`** (canonical; apex `f90.xyz` **308→www**),
+  deployment `dpl_ETMNzrovfdWkU3z1meLJUaRvkNLe` (READY). EN + ES verified (Tournament Center,
+  bracket, flags; fresh `x-vercel-cache: PRERENDER`).
+- **Vercel — IMPORTANT (D-033):** the `f90` project lives in the Vercel team
+  **`chiribito293-7173s-projects`** (shared with Chiribito / xpredict), **NOT** an isolated F90+
+  account, and is **NOT git-connected** → **production is published MANUALLY via `vercel --prod`**
+  (Root Directory `apps/web`). Exact procedure + governance item: [DEPLOY_RUNBOOK.md](DEPLOY_RUNBOOK.md)
+  → "REALITY CHECK".
+- **Domain:** `www.f90.xyz` + **SSL active** (apex `f90.xyz` redirects to www).
+- **Isolation:** code/repo isolated (`F90Plus/f90`); **Vercel team is currently shared with
+  Chiribito** — open governance item (D-033). No Supabase/backend yet.
 
 ## Phase 0.6 — Tournament Center ✅ CLOSED (2026-06-04)
 The premium, living **World Cup band** after the Hero — makes F90+ feel alive in the tournament's
