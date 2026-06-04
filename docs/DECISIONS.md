@@ -585,3 +585,39 @@ Adopt as an official design pillar of the Fantasy/economy phase (**Phase 3 / res
 questions O-5 (flavour must not bias upside) + O-6 (net-worth split, reveal UX, grant ledger `kind`)
 parked in the vision doc. **Consequences:** none now — Phase 1 (T7→DoD) is unaffected; ROADMAP
 untouched per the founder's instruction. Reserves the design so Phase 3 can plan for it.
+
+### D-041 — Pre-T9 product/visual refinement: the Analyst Center IS a live market (in place) ✅ (founder, 2026-06-04)
+**Context:** Before resuming Phase 1 (T9), the founder asked for a refinement pass on the landing
+across four areas: markets, the AI Copilot, Fantasy and the XI Ideal. A first pass overreached by
+adding a **separate `#markets` section + nav item**; the founder corrected hard: **no new section,
+no new nav, no new grid, no new surface** — the existing section **"Los partidos que importan"**
+(`#analyst` / `KeyMatches`) **IS** the market and must be **transformed in place** (same architecture
+and layout). "Polymarket inspiration" = the *sensation* of a live market + positioning **inside these
+same cards**, never betting terminology. A throwaway HTML mock validated the card direction first; the
+founder then chose the action model (**quick F90 chips on single-outcome markets + one "Tomar
+posición" CTA on 1X2**).
+**Decision:** (1) **Reverted** the standalone `#markets` section + the `markets` nav entry
+(net-zero — the liked architecture is restored). (2) **Transformed `KeyMatches` in place** into a
+single live-market surface, same layout (hero + secondary grid): the **hero is the evolved
+`AnalystCard`** (the real deterministic engine read on the opener — kept server-side so the engine
+never enters the client bundle) now carrying market framing — live **participation** (participantes +
+"+N hoy") and a **"Tomar posición"** CTA (the opener is a 1X2 market); the **grid is ONE surface**
+mixing **outcome `MarketCard`s** (selecciones · jugadores · a narrativa) with quick-chip allocation
+(`+10/+50/+100 F90`) and the **fixtures as 1X2 `MatchCard`s** (priced outcomes, the Analyst's lean lit,
+single "Tomar posición" CTA). (3) **The Analyst is on every card** — an own-IP identity **mark**
+(`AnalystMark`, D-025) + a per-card **conviction** line (`+X% sobre el consenso`). (4) **Vocabulary is
+law (extends D-037):** probabilidad · posición · convicción · exposición · asignar F90 · participantes;
+**never** apuesta / cuota / stake / bet / ganancias / buy shares / odds. (5) **Honest preview:** the
+markets/economy engine is Phase 2/3 (D-034), so every chip/CTA is a preview that routes to **sign-up**
+("to take a position, create your profile") — no fabricated balances; the ticker keeps its "Pronto"
+tag. (6) **Same pass also** enriched the **Fantasy / XI Ideal** pitch (rich broadcast field, real
+markings, nation-accented 4-3-3, gold captain, squad value in F90, "road to the final" framing) — kept
+**independent and untouched** per the founder — and added the Analyst identity to the hero header.
+Illustrative market data lives in `data/markets.ts` (probability + spark + participants + edge); a pure
+`sparkPath` helper is unit-tested.
+**Consequences:** No new section/nav/surface — `Hero → TournamentCenter (… → KeyMatches) → HowItWorks
+→ FantasyTeaser → LeaderboardTeaser → CtaBand` unchanged. Gates green: `tsc` ✅, **99** unit tests ✅
+(incl. 11 new markets tests), `next build` ✅, i18n parity **261/261** (es+en). Verified in-browser:
+desktop + mobile, ES + EN, **0 console errors**. Branch `feat/phase-1-identity`, **NOT pushed**, `main`
+untouched. The throwaway validation mock (`public/__mock-*.html`) was deleted. **Next: resume Phase 1 at
+T9 (rankings).**

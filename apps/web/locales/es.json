@@ -146,6 +146,16 @@
     "label": "Mercados",
     "tag": "Pronto",
     "a11y": "Mercados de predicción de F90+ (vista previa)",
+    "participants": "participantes",
+    "today": "hoy",
+    "consensus": "+{edge}% sobre el consenso",
+    "lean": "El Analista se inclina por {pick}",
+    "opportunity": "Oportunidad",
+    "position": {
+      "label": "Tu posición",
+      "cta": "Tomar posición",
+      "from": "desde 10 F90"
+    },
     "q": {
       "winner": "Gana el Mundial",
       "topScorer": "Máximo goleador",
@@ -153,7 +163,8 @@
       "groupWinner": "Gana el Grupo {group}",
       "reachFinal": "Llega a la final",
       "last16": "Pasa a octavos",
-      "goldenBall": "Balón de Oro"
+      "goldenBall": "Balón de Oro",
+      "debutChampion": "¿Campeón debutante?"
     }
   },
   "hero": {
@@ -211,17 +222,22 @@
     "step3Body": "Crea ligas privadas, pícate y deja que nuestra IA futbolera rete a tu instinto con las estadísticas en la mano."
   },
   "fantasy": {
-    "eyebrow": "El ecosistema F90+",
+    "eyebrow": "Tu selección para el Mundial",
     "title": "Construye tu selección ideal",
     "subtitle": "Más que predecir: gana Tokens F90, entra en los mercados, ficha jugadores y arma tu XI. El Mundial como nunca lo jugaste.",
     "tag": "Pronto",
-    "bench": "Suplentes",
-    "pos": {
-      "gk": "POR",
-      "def": "DEF",
-      "mid": "MED",
-      "fwd": "DEL"
+    "xiTitle": "Tu XI ideal",
+    "teamValue": "Valor del equipo",
+    "road": {
+      "title": "Tu camino a la final",
+      "groups": "Grupos",
+      "r16": "Octavos",
+      "qf": "Cuartos",
+      "sf": "Semis",
+      "final": "Final",
+      "venue": "MetLife · 19 jul"
     },
+    "bench": "Suplentes",
     "steps": {
       "earn": "Gana Tokens F90",
       "markets": "Entra en los mercados",
@@ -258,6 +274,7 @@
   },
   "copilot": {
     "name": "El Analista",
+    "status": "Analizando el Mundial",
     "sectionEyebrow": "Conoce a tu copiloto",
     "sectionTitle": "Tu Analista futbolero personal",
     "sectionSubtitle": "Antes de cada partido, el Analista lee los datos —forma, calidad, head-to-head y mercado— y te da una valoración honesta y probabilística. Sin IA de pago, sin caja negra.",
@@ -333,7 +350,7 @@
     "key": {
       "eyebrow": "Partidos clave",
       "title": "Los partidos que importan",
-      "subtitle": "El inaugural y los duelos estelares — con la lectura del Analista antes de que ruede el balón.",
+      "subtitle": "El inaugural, los duelos estelares y los mercados del Mundial — con la convicción del Analista. Toma posición con tus F90.",
       "predictSoon": "Predicciones muy pronto"
     }
   }

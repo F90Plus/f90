@@ -146,6 +146,16 @@
     "label": "Markets",
     "tag": "Soon",
     "a11y": "F90+ prediction markets (preview)",
+    "participants": "participants",
+    "today": "today",
+    "consensus": "+{edge}% above the consensus",
+    "lean": "The Analyst leans {pick}",
+    "opportunity": "Opportunity",
+    "position": {
+      "label": "Your position",
+      "cta": "Take a position",
+      "from": "from 10 F90"
+    },
     "q": {
       "winner": "to win the World Cup",
       "topScorer": "top scorer",
@@ -153,7 +163,8 @@
       "groupWinner": "to win Group {group}",
       "reachFinal": "to reach the final",
       "last16": "to reach the last 16",
-      "goldenBall": "Golden Ball"
+      "goldenBall": "Golden Ball",
+      "debutChampion": "A first-time champion?"
     }
   },
   "hero": {
@@ -211,17 +222,22 @@
     "step3Body": "Build private leagues, talk some trash, and let our football-smart AI pundit challenge your gut with the stats."
   },
   "fantasy": {
-    "eyebrow": "The F90+ ecosystem",
+    "eyebrow": "Your World Cup squad",
     "title": "Build your dream squad",
     "subtitle": "More than predicting: earn Tokens F90, enter the markets, sign players and field your XI. The World Cup like you've never played it.",
     "tag": "Soon",
-    "bench": "Bench",
-    "pos": {
-      "gk": "GK",
-      "def": "DEF",
-      "mid": "MID",
-      "fwd": "FWD"
+    "xiTitle": "Your dream XI",
+    "teamValue": "Squad value",
+    "road": {
+      "title": "Your road to the final",
+      "groups": "Groups",
+      "r16": "Last 16",
+      "qf": "Quarters",
+      "sf": "Semis",
+      "final": "Final",
+      "venue": "MetLife · Jul 19"
     },
+    "bench": "Bench",
     "steps": {
       "earn": "Earn Tokens F90",
       "markets": "Enter the markets",
@@ -258,6 +274,7 @@
   },
   "copilot": {
     "name": "The Analyst",
+    "status": "Analyzing the World Cup",
     "sectionEyebrow": "Meet your copilot",
     "sectionTitle": "Your personal football Analyst",
     "sectionSubtitle": "Before every match, the Analyst reads the data — form, quality, head-to-head and the market — and gives you an honest, probabilistic call. No paid AI, no black box.",
@@ -333,7 +350,7 @@
     "key": {
       "eyebrow": "Key matches",
       "title": "The fixtures that matter",
-      "subtitle": "The opener and the marquee ties — read by the Analyst before a ball is kicked.",
+      "subtitle": "The opener, the marquee ties and the World Cup markets — with the Analyst's conviction. Take your position with F90.",
       "predictSoon": "Predictions open soon"
     }
   }
