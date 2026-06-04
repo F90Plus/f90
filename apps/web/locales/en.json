@@ -132,5 +132,59 @@
     },
     "value": "Your model rates {team} {pct}% above the market — a contrarian angle.",
     "disclaimer": "Probabilities for entertainment. Not betting advice — F90+ is free and virtual."
+  },
+  "tournament": {
+    "field": {
+      "eyebrow": "The field is set",
+      "title": "48 nations. One trophy.",
+      "analyst": "The draw is done. 48 nations, 12 groups, one road to the final at MetLife on July 19. Explore who made it, how they're drawn, and the bracket that settles it all.",
+      "nations": "Nations",
+      "groups": "Groups",
+      "matches": "Matches",
+      "venues": "Host cities"
+    },
+    "nations": {
+      "eyebrow": "Qualified nations",
+      "title": "The 48 are in",
+      "subtitle": "Every nation that earned its place at the 2026 World Cup — filter by confederation.",
+      "all": "All",
+      "host": "Host",
+      "count": "{count} nations"
+    },
+    "groups": {
+      "eyebrow": "The draw",
+      "title": "Twelve groups, one road",
+      "subtitle": "The group stage as drawn in Washington, D.C. The top two of each group — plus the eight best third-placed sides — reach the knockouts.",
+      "groupOfDeath": "Group of the Death",
+      "analyst": "The Analyst's toughest draw: Group {group} — four sides who can all dream of the last 32."
+    },
+    "bracket": {
+      "eyebrow": "The road",
+      "title": "The bracket to the final",
+      "subtitle": "After the groups, 32 nations enter a straight knockout — all the way to MetLife Stadium on July 19.",
+      "favourites": "Analyst's favourites",
+      "rounds": {
+        "R32": "Round of 32",
+        "R16": "Round of 16",
+        "QF": "Quarter-finals",
+        "SF": "Semi-finals",
+        "THIRD": "Third place",
+        "FINAL": "Final"
+      },
+      "slot": {
+        "groupWinner": "Winner · Group {group}",
+        "groupRunner": "Runner-up · Group {group}",
+        "third": "3rd · {groups}",
+        "matchWinner": "Winner · Match {match}",
+        "matchLoser": "Loser · Match {match}",
+        "tbd": "To be decided"
+      }
+    },
+    "key": {
+      "eyebrow": "Key matches",
+      "title": "The fixtures that matter",
+      "subtitle": "The opener and the marquee ties — read by the Analyst before a ball is kicked.",
+      "predictSoon": "Predictions open soon"
+    }
   }
 }

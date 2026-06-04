@@ -18,6 +18,7 @@ export interface TournamentTeam {
   name: string;
   code: string;
   accent: string;
+  strength: number;
   flag: string | null;
   confederation: Confederation | null;
   isHost: boolean;
@@ -103,6 +104,7 @@ export function toTournamentTeam(name: string): TournamentTeam {
     name,
     code: meta.code,
     accent: meta.accent,
+    strength: meta.strength,
     flag: flagAssetFor(name),
     confederation: confederationOf(name),
     isHost: HOST_NAMES.has(name),
