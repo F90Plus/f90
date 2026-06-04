@@ -1,7 +1,8 @@
 # F90+ — AI Copilot Architecture V1
 
-> Design only — not implemented, no APIs connected. This describes how the pieces
-> fit so that, when we build, it's a known path. Companion docs:
+> **Engine implemented** (`lib/copilot`, deterministic + mock-fed); the live-data layers
+> (external APIs — L0/L1 ingest + L4 personalization) are **not yet connected** (Phase 2).
+> This describes how the pieces fit. Companion docs:
 > [VISION](AI_COPILOT_VISION.md) · [ENGINE](PREDICTION_ENGINE_V1.md) ·
 > [DATA SOURCES](DATA_SOURCES_RESEARCH.md).
 

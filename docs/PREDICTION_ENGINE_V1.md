@@ -1,7 +1,8 @@
 # F90+ — Prediction Engine V1 (no LLM)
 
-> Design only — not implemented. This is the deterministic core that turns real
-> football data into an honest, explainable recommendation. No machine learning,
+> **Implemented** (deterministic core in `lib/copilot/engine` + `lib/football/model`),
+> **mock-fed**; live-data APIs not yet connected (Phase 2). This is the core that turns
+> real football data into an honest, explainable recommendation. No machine learning,
 > no LLM: just well-combined signals.
 
 ## Mental model

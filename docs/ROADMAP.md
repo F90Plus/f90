@@ -29,14 +29,14 @@ Visual identity, design system, i18n, real data, and a cinematic homepage — pr
 
 ---
 
-## 🔜 Phase 0.5 — Public launch *(founder)*
+## ✅ Phase 0.5 — Public launch *(done — 2026-06-04, live at https://f90.xyz)*
 
-Ship the foundation. Steps in [DEPLOY_RUNBOOK.md](DEPLOY_RUNBOOK.md).
+Foundation shipped to production. Steps + rollback in [DEPLOY_RUNBOOK.md](DEPLOY_RUNBOOK.md).
 
-- [ ] Official GitHub repo (isolated) + push
-- [ ] Vercel project (isolated) — root `apps/web`
-- [ ] Connect `f90.xyz` (DNS + SSL) + `NEXT_PUBLIC_APP_URL`
-- [ ] First production deploy + preview pipeline
+- [x] Official GitHub repo (isolated): **`F90Plus/f90`**, branch `main`, synced
+- [x] Vercel project (isolated) — root `apps/web`, production + preview pipeline
+- [x] Connect `f90.xyz` (DNS + **SSL active**) + `NEXT_PUBLIC_APP_URL`
+- [x] First production deploy — validated (hero · globe · countdown · desktop · mobile · ES/EN)
 
 ---
 
