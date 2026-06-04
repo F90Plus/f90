@@ -1,10 +1,11 @@
 # F90+ — Project State (Checkpoint)
 
 > **Resume entry point.** Read this first, then [OPERATING_MODEL.md](OPERATING_MODEL.md)
-> + [DECISIONS.md](DECISIONS.md). Snapshot date: **2026-06-04**. Phase: **FOUNDATION CLOSED
-> + LAUNCHED LIVE IN PRODUCTION.** Live at **https://f90.xyz**. Next: **Phase 1 — Identity &
-> Accounts**, fully designed and ready to build ([PHASE_1_IDENTITY.md](PHASE_1_IDENTITY.md) ·
-> [SCHEMA_V1.md](SCHEMA_V1.md) · [PHASE_1_IMPLEMENTATION_PLAN.md](PHASE_1_IMPLEMENTATION_PLAN.md)).
+> + [DECISIONS.md](DECISIONS.md). Snapshot date: **2026-06-04**. Phase: **FOUNDATION + PHASE 0.5
+> LAUNCHED LIVE · PHASE 0.6 TOURNAMENT CENTER CLOSED (merged to `main`, deployed).** Live at
+> **https://f90.xyz**. Next: **Phase 1 — Identity & Accounts**, fully designed and ready to build
+> ([PHASE_1_IDENTITY.md](PHASE_1_IDENTITY.md) · [SCHEMA_V1.md](SCHEMA_V1.md) ·
+> [PHASE_1_IMPLEMENTATION_PLAN.md](PHASE_1_IMPLEMENTATION_PLAN.md)).
 
 ## TL;DR
 F90+ is the **living experience of the 2026 World Cup** — predictions, fantasy, ideal XI,
@@ -26,6 +27,21 @@ hosts / green qualified, from real data). No accounts/backend yet — next is **
 - **Validated in production:** hero · 3D globe · countdown · desktop · mobile · ES (`/`) +
   EN (`/en`). Runbook + rollback: [DEPLOY_RUNBOOK.md](DEPLOY_RUNBOOK.md).
 - **Isolation intact** — F90+ shares no repo/infra/account with any other ecosystem.
+
+## Phase 0.6 — Tournament Center ✅ CLOSED (2026-06-04)
+The premium, living **World Cup band** after the Hero — makes F90+ feel alive in the tournament's
+peak window (opener 11 Jun). **One cache-first openfootball read (`lib/football/tournament.ts` →
+`getTournament`) = the canonical tournament spine** Phases 1–4 attach to. Five modules in
+`features/tournament/`: **Field Is Set** (count-up 48/12/104/16), **Qualified Nations**
+(confederation filter + real vendored flags, `public/flags/*.svg`, code-token fallback), **The
+Draw** (12 groups + the Analyst's group-of-death from model strengths), **The Road** (full 2026
+bracket R32→Final — **desktop wallchart / mobile round-navigator**), **Key Matches** (marquee
+`AnalystCard` + fixtures grid — **supersedes the old MatchesRail + standalone AnalystSection**).
+The Analyst is woven throughout (`AnalystNote`). Data fidelity extends D-023 (groups/bracket/
+fixtures from openfootball; confederation + flag = factual reference maps; **live scores = V2**).
+**Vitest wired**, data layer TDD'd (**34 tests**). Decision: **D-032**. Validated: `tsc` +
+`next build` + 34 tests green; browser desktop (wallchart) + mobile (round-nav, no overflow) +
+ES/EN, **0 console errors**.
 
 ## How to run (local)
 ```bash
@@ -65,8 +81,8 @@ Featured-card hero replaced by the globe (D-022).
 - **Model probabilities** from Elo (`lib/football/model.ts`) — honest "the model's view".
 - **football-data.org** (`lib/football/football-data.ts`): real adapter, **env-gated** +
   currently a no-op enrich (queued for Phase 2).
-- Coverage note: `teams.ts` maps 37 of 48 nations — the other 11 fall back to a gray token
-  (queued in Phase 1 pre-flight P1).
+- `teams.ts` maps **all 48** nations (code/accent/strength) — completed in Phase 0.6, which
+  also fixed the Austria/Australia derived-code collision. No gray fallbacks for the field.
 
 ## Copilot ("The Analyst") state ✅ (V1, no paid LLM)
 - Deterministic engine (`lib/copilot/engine`): 8 signals → log-linear blend → P(H/D/A) +
@@ -91,14 +107,19 @@ Predictions generates the economy that Fantasy spends (D-029).
 - pnpm via Corepack (PATH note above).
 - Headless preview can't reliably screenshot WebGL — verify in a real browser.
 - A logo variant ("PREDICT. PLAY. WIN.") exists but was **not** adopted; gold-trophy primary.
-- No automated tests yet (Vitest queued in Phase 1 pre-flight); no LICENSE yet.
+- **Vitest wired** (data-layer unit tests, 34, Phase 0.6); broader coverage (copilot engine,
+  Playwright) still queued. No LICENSE yet. Repo `eslint .` has a **pre-existing** flat-config
+  gap (no `eslint.config.*`; `@eslint/eslintrc` circular-structure) — typecheck + Vitest +
+  `next build` are the effective gates; a fix task is queued separately.
 
 ## Where to resume
 1. ✅ **Public launch — DONE** (GitHub + Vercel + `f90.xyz` + SSL, live & validated).
-2. **Phase 1 — Identity & Accounts (next):** start with the **pre-flight** (complete
-   `teams.ts` to 48, unify the openfootball source, add Vitest, fix `.env.example`), then
-   **T0** (isolated Supabase) → **T1** (compose `@supabase/ssr` with the next-intl
-   middleware) → schema → auth → profile. Full map:
+2. ✅ **Phase 0.6 — Tournament Center — DONE** (merged to `main`, deployed; D-032).
+3. **Phase 1 — Identity & Accounts (next session):** pre-flight is **partly done by Phase 0.6**
+   — ✅ `teams.ts` completed to 48, ✅ Vitest added. **Remaining pre-flight:** unify the
+   openfootball source + fix `.env.example`. Then **T0** (create the isolated Supabase project —
+   **founder gate**) → **T1** (compose `@supabase/ssr` with the next-intl middleware in
+   `proxy.ts`) → schema → auth → profile. Full map:
    [PHASE_1_IMPLEMENTATION_PLAN.md](PHASE_1_IMPLEMENTATION_PLAN.md).
 **After Identity → Phase 2 (Predictions Core & Scoring):** the engine that generates the
 economy (correct call → points + coins), the daily-use driver.
