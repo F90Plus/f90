@@ -442,3 +442,28 @@ Vercel team vs. accept the shared Chiribito team; and optionally connect GitHub 
 **Consequences:** Each phase must be manually `vercel --prod`-ed until auto-deploy is wired. The
 "isolated Vercel account" invariant is currently **violated at the team level** and needs a founder
 decision. Code isolation (separate repo `F90Plus/f90`) is intact.
+
+### D-034 — Expanded product vision: prediction markets + virtual economy + player trading (designed, not built) ✅ (founder, 2026-06-04)
+**Context:** The founder clarified the target vision goes **beyond sports predictions**. F90+ will
+also include: **Polymarket-style prediction markets** (no real money), a **persistent virtual
+wallet**, a **virtual economy** driven by correct calls + real performance, **player buy/sell** with
+**dynamic in-tournament prices**, full **squad building** (starting XI + bench + total team value),
+**social rankings + private leagues**, and a **player/asset portfolio**. This refines and extends the
+living-World-Cup model (D-024) and the three-currency economy (D-027); most of it is already in the
+[SCHEMA_V1.md](SCHEMA_V1.md) forward contract (`players`, `squads`, `lineups`, `leagues`,
+`predictions`). The **new** emphasis is a market layer (a price/position per outcome, Polymarket-style)
+**on top of** — not replacing — the difficulty-honest 1X2/score/bracket predictions.
+**Decision:** **Phase 1 scope is UNCHANGED** (Identity & Accounts only). But every
+Identity/auth/profile/wallet/onboarding decision stays **generic and extensible** so these systems
+plug in later **without reshaping Identity**. Already true by design and to be preserved: (a) the
+wallet + append-only `coin_ledger`/`score_ledger` with generic `(kind, ref_type, ref_id)` absorb
+**any** economic source — prediction settlement, market trades, player purchases, fantasy rewards;
+(b) `award_coins`/`award_points` (`SECURITY DEFINER`) are the **single, reusable** write path;
+(c) `profiles` carry no system-specific fields; (d) auth is provider-agnostic. The Polymarket-style
+**market is a NEW subsystem** to design in its own phase (an extension around Phase 2/3): it adds
+market/position/settlement tables (AMM vs simple order model — TBD), but reads the **same wallet** and
+feeds the **same points** — one character, one economy.
+**Consequences:** No Phase 1 rework when markets/portfolio/dynamic-pricing land; the economy stays
+server-authoritative and tamper-proof by construction. A dedicated market-design doc + ADR will
+precede that build. The 1X2/score/bracket predictions (D-027) and the market layer **coexist** as two
+prediction surfaces over one economy.
