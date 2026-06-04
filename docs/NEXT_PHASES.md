@@ -1,8 +1,9 @@
 # F90+ — Next Phases (Ordered Roadmap)
 
-> Where we go from the current checkpoint. Ordered by dependency + impact. The World
-> Cup opener is **11 Jun 2026** — the natural pull date for the core loop.
-> Complements [ROADMAP.md](ROADMAP.md) (product phases) with execution order.
+> ⚠️ **SUPERSEDED (2026-06-04) by [ROADMAP.md](ROADMAP.md)** — the canonical roadmap,
+> reordered around the loop (D-029). Foundation + the 3D globe are **DONE and LIVE** at
+> f90.xyz; the next phase is **Phase 1 — Identity** ([PHASE_1_IDENTITY.md](PHASE_1_IDENTITY.md)),
+> not the globe. Kept for history. The World Cup opener is **11 Jun 2026**.
 
 ## ✅ Done (this checkpoint)
 Foundation · i18n (ES/EN) · branding (gold-trophy logo + derived icons) · design

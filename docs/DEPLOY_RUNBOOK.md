@@ -1,7 +1,8 @@
 # F90+ — Deploy Runbook (GitHub + Vercel + f90.xyz)
 
-> The exact, step-by-step public-launch procedure. The studio left everything
-> **deploy-ready**; this is the founder's checklist to ship. **Domain: `f90.xyz`.**
+> The exact, step-by-step public-launch procedure. **STATUS: ✅ EXECUTED (2026-06-04) —
+> live at https://f90.xyz** (GitHub `F90Plus/f90` → isolated Vercel root `apps/web` → DNS +
+> SSL active). Kept as the reference + **rollback** runbook. **Domain: `f90.xyz`.**
 > **Isolation:** F90+ uses its **own** GitHub repo and its **own** Vercel project /
 > account — never shared with PMS / PT / Chiribito / XPrediction. Log into the F90+
 > identity before any Vercel action.

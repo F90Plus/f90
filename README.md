@@ -2,6 +2,9 @@
 
 **The social, free-to-play way to predict the 2026 World Cup.**
 
+> 🟢 **Live in production:** **[f90.xyz](https://f90.xyz)** — the foundation is deployed
+> (GitHub `F90Plus/f90` · isolated Vercel · SSL). Next up: **Phase 1 — Identity & Accounts**.
+
 F90+ turns every match of the World Cup into a moment: make your calls, earn
 **virtual** coins, climb a **global leaderboard**, and out-predict your friends —
 helped (or trolled) by a football-smart AI pundit.

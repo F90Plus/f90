@@ -1,9 +1,10 @@
 # F90+ — Foundation Final (consolidation — CLOSED)
 
-> **STATUS: ✅ FOUNDATION CLOSED (2026-06-03).** Extremely solid, clean, production-ready
-> base — ready to stop with zero conceptual debt and resume from a mature state.
-> The only remaining step is the **public launch** (founder, via
-> [DEPLOY_RUNBOOK.md](DEPLOY_RUNBOOK.md)).
+> **STATUS: ✅ FOUNDATION CLOSED (2026-06-03) + LAUNCHED LIVE (2026-06-04).** Extremely
+> solid, clean, production-ready base, now **deployed to production at https://f90.xyz**.
+> The public launch (GitHub `F90Plus/f90` → isolated Vercel root `apps/web` → `f90.xyz` +
+> SSL) is **done** ([DEPLOY_RUNBOOK.md](DEPLOY_RUNBOOK.md)). Next: **Phase 1 — Identity &
+> Accounts** ([PHASE_1_IDENTITY.md](PHASE_1_IDENTITY.md)).
 > Vision: [PROJECT_VISION.md](PROJECT_VISION.md) · [EXPERIENCE_SYSTEM.md](EXPERIENCE_SYSTEM.md).
 > Hero contract: [GLOBE_HERO_SPEC.md](GLOBE_HERO_SPEC.md).
 
@@ -45,11 +46,14 @@ cohesion over speed. No new systems.**
    `f90.xyz` DNS → production + previews). The public step is the founder's.
 10. ✅ **Final docs + handoff + clean state** — PROJECT_VISION + EXPERIENCE_SYSTEM
     canonized; PROJECT_STATE + ASSETS_STATE updated; DEPLOY_RUNBOOK written; this tracker
-    is the handoff; **local commit** captures the closed foundation (no push).
+    is the handoff; the closed foundation was **committed and pushed** to `F90Plus/f90`
+    (`main`) and is **live at https://f90.xyz** (2026-06-04).
 
-## Deferred to the public-launch session (founder, with calm + full control)
-- Create the official clean GitHub repo · connect the isolated Vercel project · connect
-  `f90.xyz` · public deploy. → [DEPLOY_RUNBOOK.md](DEPLOY_RUNBOOK.md). Then start **Phase 1**.
+## Public launch — DONE ✅ (2026-06-04)
+- GitHub repo **`F90Plus/f90`** (own isolated org) · branch `main` · synced · isolated
+  Vercel project (root `apps/web`, production + preview) · **`f90.xyz` connected + SSL
+  active** · production deploy live; hero · globe · countdown · desktop · mobile · ES/EN all
+  validated in production. → [DEPLOY_RUNBOOK.md](DEPLOY_RUNBOOK.md). Next: **Phase 1**.
 
 ## Done ✅
 Vision canonized · definitive stable hero · metadata/SEO/social · performance/fallback/

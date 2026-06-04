@@ -5,8 +5,9 @@
 > The spec locks the direction (DECISIONS D-022) and the data-fidelity rule (D-023);
 > **follow the spec, not this plan.**
 >
-> Plan only — **not implemented**. The flagship interactive feature. Deferred to a
-> dedicated phase to hit the FIFA/Apple bar and handle WebGL/perf/mobile correctly.
+> **Now BUILT and LIVE (2026-06-04)** per the spec — the 3D globe hero ships in production
+> at f90.xyz (`features/globe/`, vendored assets, perf-hardened). This file is history only;
+> the implementation contract is [GLOBE_HERO_SPEC.md](GLOBE_HERO_SPEC.md).
 
 ## Vision
 A cinematic, interactive **3D globe** that turns F90+ into *the living World Cup* —
