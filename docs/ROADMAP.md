@@ -40,6 +40,24 @@ Foundation shipped to production. Steps + rollback in [DEPLOY_RUNBOOK.md](DEPLOY
 
 ---
 
+## ✅ Phase 0.6 — Tournament Center *(done — 2026-06-04)*
+
+The premium, living World Cup band after the Hero — makes F90+ feel alive **before** users
+arrive, in the tournament's peak-attention window (opener 11 Jun). One cache-first openfootball
+read fans out into the canonical tournament spine later phases attach to. Decision: D-032.
+
+- [x] **The field is set** — count-up stats (48 nations · 12 groups · 104 matches · 16 cities)
+- [x] **Qualified Nations** — confederation filter + real vendored flags (code-token fallback)
+- [x] **The Draw** — 12 groups + the Analyst's "group of the death" (from model strengths)
+- [x] **The Road** — full 2026 bracket R32→Final (desktop wallchart / mobile round-navigator)
+- [x] **Key Matches** — marquee Analyst read + fixtures grid (supersedes MatchesRail)
+- [x] Analyst woven through groups/bracket/key-matches; ES/EN; mobile-first; data-real (D-023)
+- [x] Data layer TDD'd (Vitest, 34 tests); build + typecheck green; validated desktop + mobile
+
+**Exit:** the home carries a living, premium Tournament Center built from real openfootball data.
+
+---
+
 ## 🔜 Phase 1 — Identity & Accounts
 
 Let people *be someone* on F90+ — and lay the **server-authoritative economy** the whole
@@ -108,7 +126,7 @@ The planet's living pulse (World × Time).
 
 - [ ] Localized country names (codes already i18n-neutral; `countries` carries name_en/name_es)
 - [ ] Typed i18n messages (next-intl augmentation)
-- [ ] Testing — Vitest from pre-flight; Playwright as features land
+- [ ] Testing — Vitest **wired** (data-layer unit tests, Phase 0.6 / D-032); Playwright as features land
 - [ ] LICENSE — choose and add before any public, open release
 - [ ] Accessibility pass (focus rings, skip link — flagged in the audit)
 - [ ] More languages — architecture supports it; add on demand

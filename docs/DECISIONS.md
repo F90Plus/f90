@@ -389,3 +389,33 @@ are own-IP composite tokens** (initials + country accent + pattern), never photo
 extends D-025. Default-and-proceed; reversible on founder call.
 **Consequences:** Onboarding and the profile are fully specified for implementation; all
 four are tunable later without schema changes.
+
+### D-032 — Phase 0.6: the Tournament Center (the pre-user "feel alive" band) ✅ (founder-ratified 2026-06-04)
+**Context:** Foundation shipped (f90.xyz live) but the home had no living World Cup content.
+With the opener 7 days out (11 Jun 2026), the qualification race is over and the draw is set —
+the highest-attention window for World Cup content, and the moment to make F90+ feel alive
+*before* Identity (Phase 1) brings users. A pre-Phase-1 mini-phase was approved after a
+product audit + implementation SPEC.
+**Decision:** Insert **Phase 0.6 — Tournament Center** between 0.5 and 1: a premium band after
+the Hero, five modules from **one cache-first openfootball read** (`getTournament()` — the
+canonical tournament spine all later phases attach to): **Field Is Set** (count-up
+48/12/104/16), **Qualified Nations** (confederation filter + real vendored flags w/ code-token
+fallback), **The Draw** (12 groups + the Analyst's "group of the death" from model strengths),
+**The Road** (full 2026 bracket R32→Final — desktop wallchart / mobile round-navigator; slot
+codes 1A/2B/3A-/W##/L## decoded + i18n'd), **Key Matches** (marquee `AnalystCard` + fixtures
+grid). The **Analyst is woven through** groups/bracket/key-matches (founder emphasis:
+experience, not a data table). Data fidelity (extends D-023): groups/bracket/fixtures from
+openfootball; confederation + flag are **factual reference maps**; live scores/results are
+out of scope (V2 live layer). `getTournament()` = pure `parseTournament` + thin fetch wrapper,
+never throws, degrades honestly (`source: 'fallback'`). `MatchesRail` + the standalone
+`AnalystSection` are **folded into Key Matches and retired**; nav repointed. **Vitest** wired
+(per the backlog's "Vitest from pre-flight") — the data layer is TDD'd (34 unit tests). No
+auth/Supabase/paid-API/persisted-predictions (those are Phase 1+).
+**Consequences:** The home is alive for the tournament's peak window at **$0** (no new paid
+dependency), and Phases 1–4 plug into an existing object spine (nations/groups/fixtures/bracket)
+instead of inventing one. Build + typecheck + 34 tests green; validated on desktop + mobile,
+ES + EN, zero console errors. Branch `feat/phase-0.6-tournament-center` (not yet pushed/merged —
+founder gate). Flags vendored from flagcdn under `public/flags/`. Note: the repo's `eslint .`
+is broken at the tooling level (no flat-config file; `@eslint/eslintrc` circular-structure) —
+**pre-existing and unrelated to this phase** (verified: only Vitest was added; `next` unchanged);
+flagged for a separate tooling fix. typecheck + Vitest + build are the effective quality gates.
