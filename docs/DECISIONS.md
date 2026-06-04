@@ -567,3 +567,21 @@ formatted, no drift). "Tokens F90" is a proper noun — identical in ES + EN.
 74 tests + build green. Internal schema names (`coins_balance`, `coin_ledger`, `award_coins`) stay
 generic/unchanged (D-034) — "Tokens F90" is the user-facing brand, not a column rename. Future
 balance/wallet UIs read `WELCOME_BONUS_TOKENS` / `CURRENCY_NAME`.
+
+### D-040 — Founding Squad ("Pack Fundación F90") recorded for a future phase ✅ (founder, 2026-06-04)
+**Context:** The founder's forward vision: a new user shouldn't start with a full wallet and an empty
+team. On first entry they should already **own a starter squad** (XI + bench + a small portfolio)
+alongside the 20,026 Tokens F90 — something to *manage* from minute one — with **equal starting net
+worth for everyone, no random advantage, and no broken economy**. Asked for analysis + documentation
+only; **no implementation, no roadmap change now**.
+**Decision:** Full 7-point analysis in [ECOSYSTEM_VISION.md](ECOSYSTEM_VISION.md) §9. Recommend
+**"Pack Fundación F90" = value-equivalent squad (B) + light value-normalised favourite-nation flavour
+(C)** under a hard **equal-founding-net-worth** rule (20,026 Tokens F90 + an identical-value starter
+squad for all). **Equal start, divergent outcomes** is the invariant — flavour changes *who* you
+start with, never *how strong*. Fits D-034 with **no new primitives** (provisions `squad_players` +
+a default `lineup` server-side at onboarding, like the coin bonus); it is the **on-ramp to Fantasy**.
+Adopt as an official design pillar of the Fantasy/economy phase (**Phase 3 / reserved 3.5**),
+**built when `players` + the market exist** — designed *with* the engine, not bolted on. Open
+questions O-5 (flavour must not bias upside) + O-6 (net-worth split, reveal UX, grant ledger `kind`)
+parked in the vision doc. **Consequences:** none now — Phase 1 (T7→DoD) is unaffected; ROADMAP
+untouched per the founder's instruction. Reserves the design so Phase 3 can plan for it.

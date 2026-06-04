@@ -162,6 +162,73 @@ the natural next storytelling beat and is **safe to build before the economy eng
 
 ---
 
+## 9. Founding Squad / "Pack Fundación F90" (cold-start ownership)
+
+**The idea (founder, forward):** a new user shouldn't land on a full wallet and an empty team. On
+first entry they should already **own a starter squad** — a starting XI + bench + a small player
+portfolio — *alongside* the 20,026 Tokens F90 (D-039). Something to **manage** from minute one:
+players, a lineup, decisions, ownership — not just a balance. Hard constraints: **no random
+advantage, equal starting net worth for everyone, don't break the economy.**
+
+**1. Does it add value?** Strongly. The "empty wallet, nothing to do" cold-start is the classic
+retention killer for economy/fantasy products. A starter squad turns the end of onboarding from
+"here's your balance" into "here's your team — set your XI": instant ownership, a first decision, a
+reason to return. Proven pattern (FUT starter packs, Comunio's opening budget→squad). The fairness
+rule keeps it non-exploitative.
+
+**2. Best model?** The founder's **B+C** instinct is right. **Recommendation: "Pack Fundación F90" =
+value-equivalent (B) + a light favourite-nation flavour (C), under a hard equal-net-worth rule.**
+- Every user starts with the **same founding net worth** = 20,026 Tokens F90 (cash) **+ a starter
+  squad of identical total player value** for all.
+- The squad is a **balanced, valid template** (positions to field a legal XI + a few bench slots) —
+  not a random grab-bag.
+- A **few** slots are **flavoured** by the favourite nation (identity), but each flavoured player is
+  swapped for a **value-equivalent** one (same price tier) — it changes *who* you start with, never
+  *how strong*. Pure A (identical) is fair but characterless; pure C (nation-based) risks favouritism
+  + value imbalance (strong nations' players cost more). **B+C with value-normalisation** is the sweet
+  spot the founder intuited — more emotional identity, zero competitive edge.
+
+**3. Economic risks (and guardrails):**
+- **Equal start, divergent outcomes is the invariant.** Everyone begins with identical net worth;
+  player values then move with the real tournament + each user's trades. Diverging *outcomes* is
+  gameplay, not an unfair *start*.
+- **Flavour must not bias upside.** If the nation slots are "your nation's stars" and home/popular
+  nations rise faster, that's a subtle starting edge. Guardrail: keep flavour to a couple of identity
+  slots, value-normalised, and **not necessarily the nation's best risers** — cosmetic identity, not a
+  hot pick (O-5).
+- **Wealth injection / market calibration.** Each signup mints a fixed value bundle → the market
+  engine (AMM vs model price, O-2) must be calibrated for this constant inflow. Identical for all, so
+  fairness holds; it's a supply-tuning concern, not a fairness one.
+- **Sybil / multi-account harvesting.** A valuable pack invites fake accounts. Mitigant: value is
+  **virtual, non-cashable, locked to the game**, behind the email/OAuth gate. Low risk.
+
+**4. Onboarding impact:** Strongly positive **if kept lean**. Keep the onboarding *form* (T5) minimal
+(handle + nation); grant the squad **server-side** on completion (like the coin bonus — an RPC /
+trigger extension), and **reveal** it as a premium *"Your Founding Squad"* moment on `/home`. Don't
+bloat the form with squad-building; the first XI tweak is an optional follow-on, never a blocker.
+
+**5. Relation to D-034:** Perfect fit, **no new primitives**. SCHEMA_V1 already designs `players`,
+`squads`, `squad_players`, `lineups`. The starter squad = a server-authoritative provisioning of
+`squad_players` + a default `lineup` at signup, alongside the wallet bonus, with a ledger entry (a new
+`kind` like `founding_grant`, or reuse) recording it. The generic economy (D-034) absorbs it.
+
+**6. Fit with the Fantasy vertical:** It is the **on-ramp** to Fantasy. The starter squad *is* the
+user's first fantasy squad — an XI + bench to field, value to watch, players to trade, from minute
+one, instead of "go buy 15 players first". It accelerates Fantasy adoption and keeps the vertical
+populated on day one.
+
+**7. Official decision?** **Yes** — recommend it as an **official design pillar of the Fantasy/economy
+phase** (Phase 3 / the reserved 3.5), recorded now (**D-040**), implemented when `players` + the market
+exist. It shapes the player-grant mechanism + market calibration, so design it *with* the engine, not
+bolted on.
+
+**Recommendation:** adopt **"Pack Fundación F90"** — equal founding net worth for all (20,026 Tokens
+F90 + a value-equal starter squad), a balanced valid-XI+bench template, light value-normalised nation
+flavour, granted server-side at onboarding completion and revealed as a premium moment. **Build with
+Phase 3** (needs players + the market). Not on Phase 1's path.
+
+---
+
 ## Reserved routes & namespaces (so nothing collides)
 
 Claim these now; T6+ must not reuse them for anything else:
@@ -183,6 +250,10 @@ Claim these now; T6+ must not reuse them for anything else:
   Drives how trading P&L + fantasy value are computed (D-034 left this TBD).
 - **O-3 Fantasy scope v1:** whole-tournament squad vs per-matchday lineups vs both?
 - **O-4 Player likeness:** confirm the own-IP visual system scales to hundreds of players (D-025).
+- **O-5 Founding Squad flavour:** how the favourite-nation flavour stays cosmetic identity (value-
+  normalised, not the nation's best risers) so it never becomes a starting edge (§9).
+- **O-6 Founding net worth:** the cash-vs-squad-value split, the reveal UX ("Your Founding Squad"
+  moment), and the grant ledger `kind` (`founding_grant` vs reuse) (§9, D-040).
 
 ## Bottom line
 
