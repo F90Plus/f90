@@ -7,10 +7,7 @@
  * never hand-authored. We only map a few team names to geojson polygon names, and add
  * point fallbacks for qualified nations that have no polygon at 110m resolution.
  */
-import { isRealTeam } from './util';
-
-const OPENFOOTBALL_URL =
-  'https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json';
+import { isRealTeam, OPENFOOTBALL_URL } from './util';
 
 /** The three confirmed hosts (geojson ADMIN names). */
 export const WC_HOST_ADMINS = ['United States of America', 'Canada', 'Mexico'] as const;
