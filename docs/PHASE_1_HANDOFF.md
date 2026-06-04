@@ -7,21 +7,23 @@
 
 ## Executive summary
 
-Phase 1 (Identity & Accounts) is **~40% built and the data foundation is LIVE**. The
-Supabase schema + economy + 48-country seed are **applied and verified end-to-end** on the
-isolated `f90-production` project; the auth **infrastructure** (SSR clients + composed
-middleware) is in place and verified. What remains is the **user-facing flow**: auth screens,
-onboarding, public profile, settings, rankings teaser, i18n parity, DoD gate.
+Phase 1 (Identity & Accounts) is **~55% built and the data + auth flows are LIVE**. The
+Supabase schema + economy + 48-country seed are **applied and verified end-to-end**, and **T4
+(auth flows) is now SHIPPED + functionally verified**: magic-link + Google sign-in, a dual-mode
+callback, login/signup screens (ES+EN), and an auth-aware header. What remains is **onboarding
+(T5), the auth-gated app group (T6), public profile (T7), settings (T8), rankings teaser (T9),
+i18n/token sweep (T10) and the DoD gate (T11)**.
 
-All work is on branch **`feat/phase-1-identity`** (8 commits, **not pushed**, `main`
-untouched). Vision **D-034** is baked into a **generic economy** so markets/players/fantasy
-plug in later without reshaping Identity.
+All work is on branch **`feat/phase-1-identity`** (**not pushed**, `main` untouched). Vision
+**D-034** is baked into a **generic economy** so markets/players/fantasy plug in later without
+reshaping Identity; T4's auth/identity surface is provider-agnostic and carries no
+subsystem-specific coupling (D-035).
 
 ## Repository state
 
 - **Branch:** `feat/phase-1-identity` (off `main` = `b6bff60`, Phase 0.6)
-- **Last commit:** `fa83bde` — `fix(db): grant Data API privileges for Phase 1 tables (RLS-gated)`
-- **Working tree:** clean (plus this handoff commit)
+- **Last code commit:** `b902e8e` — `feat(auth): T4 — magic-link + Google sign-in, dual-mode callback, auth-aware header` (this docs commit lands on top)
+- **Working tree:** clean.
 - **Not pushed; `main` untouched.**
 - **Commits this session (oldest → newest):**
   - `4f68053` refactor(football): unify the openfootball source URL in util
@@ -32,6 +34,7 @@ plug in later without reshaping Identity.
   - `faa978b` feat(db): Phase 1 identity & economy schema (0001) (T2)
   - `901e796` feat(db): seed 48 WC2026 countries + coherence test (0002) (T3)
   - `fa83bde` fix(db): grant Data API privileges (RLS-gated)
+  - `b902e8e` feat(auth): T4 — magic-link + Google, dual-mode callback, auth-aware header
 
 ## Supabase state
 
@@ -60,10 +63,14 @@ Verified live: 5 tables (all RLS on), 3 functions, `global_rankings` view, 48 co
 
 - **Infrastructure DONE + verified (T1):** `lib/supabase/{client,server,middleware}.ts` and
   `proxy.ts` composing next-intl + `updateSession`. Locale routing intact (`/`=ES, `/en`=EN,
-  both 200; 0 console/server errors). `getCurrentUser()` helper ready for header/protected routes.
-- **`handle_new_user` trigger VERIFIED:** a real signup creates profile + wallet (1000) +
-  `signup_bonus` ledger row.
-- **NOT BUILT:** auth UI/flows (Server Actions `signIn`/`signUp`/`signOut`, `(auth)/` routes) = **T4**.
+  both 200; 0 console/server errors). `getCurrentUser()` helper consumed by the header.
+- **`handle_new_user` trigger VERIFIED THROUGH THE REAL FLOW:** a magic-link request from the UI
+  created `fan_e1632271` with profile + wallet (1000) + `signup_bonus` ledger row (then cleaned up).
+- **T4 BUILT + verified:** `features/auth/{validation,actions,auth-panel,magic-link-form,google-button}.ts(x)`,
+  routes `app/[locale]/(auth)/{login,signup}/page.tsx` + `(auth)/callback/route.ts`, `(auth)/layout.tsx`,
+  and the auth-aware header (`components/layout/{header,user-menu}.tsx`). Server Actions
+  `signInWithMagicLink` / `signInWithGoogle` / `signOut`; the callback handles `code` **and**
+  `token_hash`; redirect resolution is pure + unit-tested (12 tests). See D-035.
 
 ## Identity state
 
@@ -85,19 +92,25 @@ Verified live: 5 tables (all RLS on), 3 functions, `global_rankings` view, 48 co
 
 ## OAuth Google state
 
-- **Configured:** Google Cloud (project F90+, consent screen External, test user added, Web OAuth
-  client with redirect `https://upelxcxnpmmbhivrazle.supabase.co/auth/v1/callback`) + Supabase
-  Google provider (client id/secret). **READY to wire in T4. Not E2E-tested yet.**
+- **Configured + WIRED (T4):** Google Cloud (project F90+, consent screen External, test user added,
+  Web OAuth client with redirect `https://upelxcxnpmmbhivrazle.supabase.co/auth/v1/callback`) +
+  Supabase Google provider (client id/secret). **Initiation verified**: the button issues a 303 to the
+  provider authorize URL. Full consent completion needs a real Google login (founder).
 
 ## Magic Link state
 
-- **Email provider ON** in Supabase. **READY to wire in T4.** Dev uses Supabase's built-in SMTP
-  (rate-limited); production needs its own SMTP (Resend) — **open debt**.
+- **Email provider ON + WIRED (T4).** Verified: a valid email returns the "check your inbox" success
+  state (Supabase accepted `signInWithOtp`). Clicking the link to finish needs a real inbox (founder).
+  Dev uses Supabase's built-in SMTP (rate-limited); production needs its own SMTP (Resend) — **open debt**.
+- **Redirect allow-list:** added `http://localhost:3300/**` this session (dev). Still has
+  `https://www.f90.xyz/**` but **not** apex `https://f90.xyz/**`, and `site_url` is still
+  `http://localhost:3000` — founder/dashboard items before production auth (D-035).
 
 ## i18n state
 
 - **ES (default) + EN in place** (foundation + Phase 0.6), full parity, no hardcoded copy.
-- **NOT ADDED yet:** namespaces `auth` (T4), `onboarding` (T5), `profile` (T7), `rankings` (T9).
+- **`auth` namespace ADDED (T4)** in `locales/{es,en}.json` with full key parity, no hardcoded copy.
+- **NOT ADDED yet:** namespaces `onboarding` (T5), `profile` (T7), `rankings` (T9).
 
 ## Documentation state
 
@@ -135,20 +148,29 @@ Verified live: 5 tables (all RLS on), 3 functions, `global_rankings` view, 48 co
 - **Carryover:** Vercel manual deploy + Vercel team shared with Chiribito (D-033); WC opener 11 Jun
   vs the playable loop (Strategy B accepted: quality over the group-stage capture window).
 
-## Next step (exact) — T4: Auth flows
+## T4 — Auth flows ✅ DONE (verified 2026-06-04)
 
-Build:
-- `features/auth/actions.ts` (Server Actions): `signInWithMagicLink(email)`,
-  `signInWithGoogle()` (OAuth), `signOut()`. Zod-validated server-side.
-- Routes `app/[locale]/(auth)/{login,signup,callback}` — the `callback` exchanges the OAuth
-  code for a session and **preserves the locale**.
-- i18n namespace **`auth`** in `locales/{es,en}.json` (parity).
-- A **basic auth-aware header** (avatar/menu when signed in; "Sign in" when not) using
-  `getCurrentUser()`.
+Shipped + functionally verified on localhost:3300 (server on the allow-listed port):
+- `features/auth/`: `validation.ts` (pure, 12 unit tests — email/zod, open-redirect guard,
+  locale-prefix), `actions.ts` (`signInWithMagicLink` / `signInWithGoogle` / `signOut`),
+  `auth-panel.tsx`, `magic-link-form.tsx`, `google-button.tsx`.
+- Routes: `app/[locale]/(auth)/{login,signup}/page.tsx` + `(auth)/layout.tsx`;
+  `(auth)/callback/route.ts` completes **both** `code` (exchangeCodeForSession) and `token_hash`
+  (verifyOtp), preserving locale + a sanitised `next`.
+- i18n `auth` namespace (ES/EN parity); auth-aware header + `user-menu.tsx`.
+- **Gates:** `pnpm typecheck` ✅ · `pnpm test` ✅ 63 · `pnpm build` ✅ (no `ignore*Errors`).
+- **Verified:** ES+EN render (0 console errors), invalid email → localized error, valid email →
+  "check your inbox", Google → 303 to authorize URL, signed-out header shows "Sign in" (mobile too).
 
-**Verify:** pages render in ES + EN (preview); a real signup provisions profile + wallet (already
-proven at the DB level); Google + magic-link reach the callback. **Reuse the existing
-`lib/supabase` clients — do NOT rebuild the SSR/middleware (done in T1).**
+## Next step (exact) — T5: Onboarding (username + favourite country)
+
+Build `features/profile/`: pick `username` (live uniqueness check against `profiles.username`,
+citext-unique) + favourite country (the 48 from `countries`); `updateProfile` Server Action writing
+through the RLS self-update policy; new i18n namespace `onboarding`. After auth, route a brand-new
+user here (set `next=/onboarding` once the route exists; the auth redirect already preserves it).
+**Reuse** the existing `lib/supabase` clients + `features/auth/validation.ts` patterns. **Done when:**
+a new user sets a valid unique username + country; invalid/taken usernames are rejected with
+localized errors.
 
 ## PHASE 1 STATUS
 
@@ -158,8 +180,8 @@ proven at the DB level); Google + magic-link reach the callback. **Reuse the exi
 | T1 — Supabase SSR + composed middleware | ✅ completado |
 | T2 — Migration 0001 (schema/RLS/functions/view) | ✅ completado (applied + verified) |
 | T3 — Seed countries (48) | ✅ completado (applied + verified) |
-| T4 — Auth flows (magic-link + Google, routes, i18n) | ⏳ pendiente (NEXT) |
-| T5 — Onboarding (username + country) | ⏳ pendiente |
+| T4 — Auth flows (magic-link + Google, routes, i18n) | ✅ completado (verificado funcionalmente) |
+| T5 — Onboarding (username + country) | ⏳ pendiente (NEXT) |
 | T6 — Protected routes + auth-aware header | ⏳ pendiente |
 | T7 — Public profile `/u/[username]` + OG | ⏳ pendiente |
 | T8 — Settings + 30-day cooldown | ⏳ pendiente |

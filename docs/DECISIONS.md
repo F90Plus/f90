@@ -467,3 +467,28 @@ feeds the **same points** — one character, one economy.
 server-authoritative and tamper-proof by construction. A dedicated market-design doc + ADR will
 precede that build. The 1X2/score/bracket predictions (D-027) and the market layer **coexist** as two
 prediction surfaces over one economy.
+
+### D-035 — Auth flows (T4): one dual-mode callback, locale-safe redirects, passwordless login = signup ✅ (2026-06-04)
+**Context:** T4 builds the user-facing auth on the T1 SSR clients + T2 trigger. Two real-world
+ambiguities had to be resolved: (a) `@supabase/ssr` magic links can return to the app as either
+`?code=` (default template / OAuth) **or** `?token_hash=&type=` (token-hash template), and (b) the
+flow must preserve the active locale and never become an open redirect. Google OAuth always returns
+`?code=`.
+**Decision:** (1) **One callback** at `/[locale]/(auth)/callback/route.ts` handles **both** forms —
+`exchangeCodeForSession(code)` for OAuth + PKCE magic links, `verifyOtp({token_hash,type})` for the
+token-hash template — so magic-link ships **without** requiring a Supabase email-template edit.
+(2) Redirect resolution is **pure + unit-tested** (`features/auth/validation.ts`): `resolveSafeNext`
+collapses any non-internal `next` (external/`//`/backslash/control-char) to `/`; `localePathname`
+re-applies next-intl's `as-needed` prefix in a Route Handler that only sees raw URLs. (3) Magic-link
+uses `shouldCreateUser: true`, so **login and signup are the same frictionless passwordless path**
+(implements D-030; a new email auto-provisions profile + wallet + 1,000-coin bonus via the T2
+trigger — verified end-to-end: a real request created `fan_e1632271` with `coins_balance=1000`).
+Email validation is server-side **zod** (`z.email()`), returning stable i18n keys, never raw messages.
+**Consequences:** Verified functionally on localhost:3300 — pages render ES+EN (0 console errors),
+invalid email → localized error, valid email → "check your inbox" (Supabase accepted), Google → 303 to
+the provider authorize URL. **Open config items (founder/dashboard, not code):** Supabase `site_url`
+is still `http://localhost:3000` (should become the production origin); the redirect allow-list has
+`https://www.f90.xyz/**` + (added this session) `http://localhost:3300/**`, but **not** the apex
+`https://f90.xyz/**` — add it before production OAuth/magic-link; production magic-link still needs its
+own SMTP (Resend) — dev SMTP is rate-limited. Full Google-consent + email-click completion needs a
+real account/inbox (founder), and is the only hop not machine-verifiable headless.

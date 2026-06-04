@@ -1,12 +1,12 @@
 # F90+ — Project State (Checkpoint)
 
 > **Resume entry point.** Snapshot date: **2026-06-04**. Phase: **FOUNDATION + PHASE 0.5/0.6 LIVE
-> at https://f90.xyz · PHASE 1 (Identity & Accounts) IN PROGRESS — T1/T2/T3 done, data foundation
-> live & verified.**
+> at https://f90.xyz · PHASE 1 (Identity & Accounts) IN PROGRESS — T1–T4 done (auth flows shipped +
+> functionally verified), data foundation live & verified.**
 >
 > **▶ To resume Phase 1, read [PHASE_1_HANDOFF.md](PHASE_1_HANDOFF.md) FIRST** (branch
-> `feat/phase-1-identity`, not pushed; Supabase schema + 48-country seed applied & verified;
-> **next = T4 auth flows**). Then [OPERATING_MODEL.md](OPERATING_MODEL.md) + [DECISIONS.md](DECISIONS.md).
+> `feat/phase-1-identity`, not pushed; Supabase schema + 48-country seed applied & verified; auth
+> flows shipped; **next = T5 onboarding**). Then [OPERATING_MODEL.md](OPERATING_MODEL.md) + [DECISIONS.md](DECISIONS.md).
 > Contracts: [PHASE_1_IDENTITY.md](PHASE_1_IDENTITY.md) · [SCHEMA_V1.md](SCHEMA_V1.md) ·
 > [PHASE_1_IMPLEMENTATION_PLAN.md](PHASE_1_IMPLEMENTATION_PLAN.md).
 
@@ -20,7 +20,9 @@ manual deploy — D-033)* → `www.f90.xyz` + SSL): bilingual i18n, premium bran
 WC2026 fixtures**, **cinematic imagery**, and the flagship **3D World Cup globe hero** (gold
 hosts / green qualified, from real data). **Phase 1 (Identity & Accounts) is now IN PROGRESS** on
 branch `feat/phase-1-identity`: the Supabase backend (schema, economy, 48-country seed, RLS, grants)
-is **applied & verified**; auth UI/flows (T4+) remain. See [PHASE_1_HANDOFF.md](PHASE_1_HANDOFF.md).
+is **applied & verified**, and **auth flows (T4) are shipped + functionally verified** (magic-link +
+Google, dual-mode callback, login/signup ES+EN, auth-aware header); onboarding (T5) → DoD (T11)
+remain. See [PHASE_1_HANDOFF.md](PHASE_1_HANDOFF.md).
 
 ## Deploy state ✅ LIVE — incl. Phase 0.6 (updated 2026-06-04, D-033)
 - **GitHub:** `F90Plus/f90` — **own isolated org** (NOT PMS/PT/Chiribito/XPrediction),
