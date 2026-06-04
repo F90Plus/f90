@@ -19,6 +19,7 @@ export default async function SignupPage({ params, searchParams }: Props) {
   const sp = await searchParams;
   setRequestLocale(locale);
 
-  const next = resolveSafeNext(typeof sp.next === 'string' ? sp.next : undefined);
+  // New accounts land on onboarding by default (unless a deep-link `next` says otherwise).
+  const next = resolveSafeNext(typeof sp.next === 'string' ? sp.next : '/onboarding');
   return <AuthPanel locale={locale} next={next} mode="signup" errorKey={parseAuthError(sp.error)} />;
 }

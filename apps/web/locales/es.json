@@ -65,6 +65,33 @@
       "signOut": "Cerrar sesión"
     }
   },
+  "onboarding": {
+    "metaTitle": "Crea tu perfil",
+    "title": "Casi listo",
+    "subtitle": "Elige tu nombre y la selección con la que vas. Podrás cambiarlos más adelante.",
+    "username": {
+      "label": "Tu nombre de jugador",
+      "placeholder": "tu_nombre",
+      "hint": "3–20 caracteres. Letras minúsculas, números y guion bajo.",
+      "checking": "Comprobando…",
+      "available": "Disponible",
+      "taken": "Ya está cogido"
+    },
+    "country": {
+      "label": "Tu selección",
+      "search": "Busca una selección",
+      "hostBadge": "Anfitrión"
+    },
+    "submit": "Entrar a F90+",
+    "submitting": "Creando tu perfil…",
+    "errors": {
+      "usernameFormat": "3–20 caracteres: minúsculas, números o guion bajo.",
+      "usernameReserved": "Ese nombre está reservado.",
+      "usernameTaken": "Ese nombre ya está cogido.",
+      "countryInvalid": "Elige una selección de la lista.",
+      "failed": "No se pudo guardar. Inténtalo de nuevo."
+    }
+  },
   "markets": {
     "label": "Mercados",
     "tag": "Pronto",

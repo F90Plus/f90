@@ -65,6 +65,33 @@
       "signOut": "Sign out"
     }
   },
+  "onboarding": {
+    "metaTitle": "Create your profile",
+    "title": "Almost there",
+    "subtitle": "Pick your handle and the nation you're backing. You can change them later.",
+    "username": {
+      "label": "Your player handle",
+      "placeholder": "your_handle",
+      "hint": "3–20 characters. Lowercase letters, numbers and underscore.",
+      "checking": "Checking…",
+      "available": "Available",
+      "taken": "Taken"
+    },
+    "country": {
+      "label": "Your nation",
+      "search": "Search a nation",
+      "hostBadge": "Host"
+    },
+    "submit": "Enter F90+",
+    "submitting": "Creating your profile…",
+    "errors": {
+      "usernameFormat": "3–20 chars: lowercase, numbers or underscore.",
+      "usernameReserved": "That handle is reserved.",
+      "usernameTaken": "That handle is already taken.",
+      "countryInvalid": "Pick a nation from the list.",
+      "failed": "Couldn't save. Please try again."
+    }
+  },
   "markets": {
     "label": "Markets",
     "tag": "Soon",
