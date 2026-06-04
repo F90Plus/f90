@@ -1,13 +1,37 @@
 # F90+ — Phase 1 Handoff (Identity & Accounts)
 
-> **🟢 FORMAL CHECKPOINT — Phase 1 PAUSED at T8 of 11 (clean resume point). Snapshot 2026-06-04.**
-> T1–T8 **done + verified**; T9–T11 **pending**. Working tree **clean**; branch
-> `feat/phase-1-identity` **NOT pushed**; `main` untouched. **Resume point = T9 (rankings teaser)** —
-> see "Next step (exact)" below. Nothing is mid-flight; no uncommitted work.
+> **🟢 OFFICIAL CHECKPOINT — 2026-06-04 (Analyst Center Market Feel). Phase 1 ACTIVE; resume at T9.**
+> T1–T8 **done + verified**, and the **Analyst Center "live-market" refinement (D-041) is done,
+> committed AND PUSHED**; T9–T11 **pending**. Working tree **clean**. Branch `feat/phase-1-identity`
+> is **ON GitHub** (`F90Plus/f90`), tip **`a71dc44`** (31 commits ahead of `main`); **`main` untouched
+> at `b6bff60`**; production **www.f90.xyz unchanged** (still Phase 0.6). A preview deploy exists but is
+> **deprioritised** — do not spend more time on preview/auth/Vercel; the priority is to **close Phase 1**.
+>
+> **▶ RESUME = T9** (rankings teaser over the `global_rankings` view — replace the `data/leaderboard.ts`
+> mock; new `rankings` i18n namespace; empty-state framed "the board opens when predictions start"). See
+> "Next step (exact)" below. **Then T10** (i18n parity + design-token sweep) **→ T11** (Phase DoD gate)
+> **→ close Phase 1 cleanly.** **DO NOT open new fronts** — no advanced Fantasy, no complex player
+> market, no Polymarket dashboard (those are **D-042 future, documented-not-built**).
+>
+> **Analyst Center — APPROVED philosophy (carry forward, D-041):** the section **"Los partidos que
+> importan" (`#analyst`) IS the market**, transformed **IN PLACE** — never a new section/nav/grid/
+> surface. It must feel like **mercado vivo · convicción · oportunidad · participación**, NEVER a data
+> dashboard / sportsbook / casa de apuestas. **Vocabulary law (D-037):** probabilidad · posición ·
+> convicción · exposición · asignar F90 · participantes — **never** odds/bet/stake/cuota/ganancias.
+> **APPROVED action = Treatment A:** outcome markets → **`+10 / +50 / +100 F90`** chips · 1X2 fixtures →
+> **"Tomar posición"** CTA. The Analyst is on **every** card (own-IP `AnalystMark` + "+X% sobre el
+> consenso"). Actions are an **honest preview** (route to sign-up; engine = Phase 2/3). **Fantasy stays
+> independent and untouched.** Keep this criterion.
+>
+> **D-042 (FUTURE — documented, DO NOT build now):** two surfaces over **one F90 economy** — **public** =
+> Home / Analyst Center (discover opportunities · markets · trends · AI · conviction) · **private** = a
+> Polymarket-inspired **dashboard** (wallet · positions · F90 exposure · entry history · performance ·
+> conviction · position tracking). One economy, one Analyst, one wallet — **never a second app**.
+>
 > Read order to resume: this file → [PHASE_1_IDENTITY.md](PHASE_1_IDENTITY.md) (spec) →
 > [SCHEMA_V1.md](SCHEMA_V1.md) (DB) → [PHASE_1_IMPLEMENTATION_PLAN.md](PHASE_1_IMPLEMENTATION_PLAN.md)
-> (tasks) → [DECISIONS.md](DECISIONS.md) → [ECOSYSTEM_VISION.md](ECOSYSTEM_VISION.md) (future phases).
-> Strategy B (premium, no shortcuts).
+> (tasks) → [DECISIONS.md](DECISIONS.md) (D-041/D-042 + ledger) →
+> [ECOSYSTEM_VISION.md](ECOSYSTEM_VISION.md) (future phases). Strategy B (premium, no shortcuts).
 
 ## Executive summary
 
@@ -77,11 +101,12 @@ Entity Layer & Fantasy"**) · **D-040** Founding Squad / "Pack Fundación F90". 
 
 ## Repository state
 
-- **Branch:** `feat/phase-1-identity` (off `main` = `b6bff60`, Phase 0.6)
-- **Last code commit:** `5872c27` — `feat(profile): T8 — settings (edit profile) + 30-day cooldown` (this docs commit lands on top). Since T7: Fantasy discovery section + nav (`20b0587`), T8 (`5872c27`).
+- **Branch:** `feat/phase-1-identity` (off `main` = `b6bff60`, Phase 0.6) — **PUSHED to `origin` (`F90Plus/f90`)**; local == remote.
+- **Tip:** `a71dc44` (`fix(supabase): render public pages without auth env (preview-safe)`).
+- **Analyst Center Market Feel block (newest, on GitHub):** `d7d2575` **D-041** (Analyst Center as a live market in place + XI Ideal pitch) → `1b3f4e9` **D-042** (two surfaces, documented) → `a71dc44` (Supabase preview-safe guards).
 - **Working tree:** clean.
-- **Not pushed; `main` untouched.**
-- **Ahead of `main`:** 27 commits (`git rev-list --count main..HEAD`).
+- **PUSHED; `main` untouched at `b6bff60`** (production `www.f90.xyz` still Phase 0.6).
+- **Ahead of `main`:** 31 commits (`git rev-list --count main..HEAD`).
 - **Key commits (Phase 1 arc — each `feat` is paired with its `docs(...)`):**
   - `30ae5df` T1 SSR + middleware · `faa978b` T2 schema (`0001`) · `901e796` T3 seed (`0002`) · `fa83bde` grants
   - `b902e8e` **T4** auth flows · `16c84c6` landing (ticker + drop Nations, D-036) · `11f86a5` **T5** onboarding
@@ -292,6 +317,7 @@ now), no `data/leaderboard.ts` import remains, ES/EN.
 | T6 — Protected routes + auth-aware header | ✅ completado (verificado E2E) |
 | T7 — Public profile `/u/[username]` + OG | ✅ completado (verificado: render · 404 · OG png) |
 | T8 — Settings + 30-day cooldown | ✅ completado (verificado E2E + DB) |
+| Analyst Center Market Feel (D-041) — live-market in place + XI Ideal pitch | ✅ completado (typecheck + 99 tests + build green; ES/EN + mobile; pushed `d7d2575`) |
 | T9 — Rankings teaser (replace mock) | ⏳ pendiente (NEXT) |
 | T10 — i18n parity + tokens sweep | ⏳ pendiente |
 | T11 — Phase DoD gate | ⏳ pendiente |

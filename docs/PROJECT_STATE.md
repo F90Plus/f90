@@ -1,10 +1,15 @@
 # F90+ — Project State (Checkpoint)
 
-> **🟢 FORMAL CHECKPOINT (2026-06-04) — Resume entry point.** Phase: **FOUNDATION + PHASE 0.5/0.6 LIVE
-> at https://f90.xyz · PHASE 1 (Identity & Accounts) PAUSED at T8 of 11** (T1–T8 done + verified;
-> T9–T11 pending). Shipped & verified: auth + onboarding + protected `(app)` gate + public profile +
-> settings/30-day cooldown; welcome bonus = **20,026 Tokens F90**; sticky market ticker + Fantasy
-> discovery section. **Working tree clean; branch NOT pushed; `main` untouched; nothing mid-flight.**
+> **🟢 OFFICIAL CHECKPOINT (2026-06-04 — Analyst Center Market Feel). Resume entry point.** Phase:
+> **FOUNDATION + PHASE 0.5/0.6 LIVE at https://f90.xyz · PHASE 1 (Identity & Accounts) ACTIVE — T1–T8
+> + the Analyst Center "live-market" refinement (D-041) done & verified; T9–T11 pending; resume at T9.**
+> Shipped & verified: auth + onboarding + protected `(app)` gate + public profile + settings/30-day
+> cooldown; welcome bonus = **20,026 Tokens F90**; and **"Los partidos que importan" (`#analyst`)
+> transformed IN PLACE into a live market** (Analyst-led, conviction + `+10/+50/+100 F90` chips /
+> "Tomar posición" CTA, D-037 vocab law) + XI Ideal pitch. **Working tree clean; branch
+> `feat/phase-1-identity` PUSHED to origin (tip `a71dc44`, 31 ahead); `main` untouched at `b6bff60`;
+> production www.f90.xyz unchanged (Phase 0.6); a preview deploy exists (deprioritised).** DO NOT open
+> new fronts (D-042 dashboard/Fantasy/player-market are future, documented-not-built).
 >
 > **▶ To resume Phase 1, read [PHASE_1_HANDOFF.md](PHASE_1_HANDOFF.md) FIRST** (the full checkpoint:
 > what's done/verified/applied-in-Supabase/documented/pending + the decision ledger). Branch
