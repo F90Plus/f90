@@ -7,6 +7,7 @@
  * never hand-authored. We only map a few team names to geojson polygon names, and add
  * point fallbacks for qualified nations that have no polygon at 110m resolution.
  */
+import { isRealTeam } from './util';
 
 const OPENFOOTBALL_URL =
   'https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json';
@@ -29,11 +30,6 @@ const NO_POLYGON: Record<string, { lat: number; lng: number }> = {
   'Cape Verde': { lat: 16.0, lng: -24.0 },
   'Curaçao': { lat: 12.2, lng: -69.0 },
 };
-
-const PLACEHOLDER = /winner|runner|loser|place|tbd|play-?off|tba/i;
-function isRealTeam(s: string | undefined): s is string {
-  return typeof s === 'string' && s.length > 1 && !PLACEHOLDER.test(s) && !/\d/.test(s);
-}
 
 export interface WorldCupNationPoint {
   lat: number;
