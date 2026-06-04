@@ -49,10 +49,12 @@ export async function MarketTicker() {
   const t = await getTranslations('markets');
   const labels: Labels = { q: (m) => t(`q.${m.q}`, { group: m.param ?? '' }) };
 
+  // Persistent market bar: pinned directly under the sticky header (h-16, top-16),
+  // above the Hero — "this is a live market" before a word is read. z-40 < header z-50.
   return (
     <section
       aria-label={t('a11y')}
-      className="relative border-y border-mist-500/10 bg-night-900/60 backdrop-blur-sm"
+      className="sticky top-16 z-40 border-b border-mist-500/10 bg-night-950/80 backdrop-blur-xl"
     >
       <Container className="!max-w-none !px-0">
         <div className="flex h-12 items-stretch sm:h-[3.25rem]">

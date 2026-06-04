@@ -17,8 +17,9 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
 
   return (
     <>
-      <Hero wcStatus={wcStatus} />
+      {/* The live-market bar leads the page — pinned under the header, above the Hero. */}
       <MarketTicker />
+      <Hero wcStatus={wcStatus} />
       <TournamentCenter />
       <HowItWorks />
       <LeaderboardTeaser />
