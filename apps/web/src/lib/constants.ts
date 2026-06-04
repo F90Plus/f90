@@ -18,7 +18,7 @@ export const WORLD_CUP_KICKOFF_ISO = '2026-06-11T19:00:00Z';
  * foundation phase — they become real routes as features land.
  */
 export const NAV_LINKS = [
-  { key: 'matches', href: '#matches' },
+  { key: 'matches', href: '#tournament' },
   { key: 'analyst', href: '#analyst' },
   { key: 'how', href: '#how-it-works' },
   { key: 'rankings', href: '#leaderboard' },
