@@ -104,6 +104,9 @@ catalog — routing, middleware and the language switcher pick it up automatical
 | ------------------------------------------------ | --------------------------------------- |
 | [AGENTS.md](AGENTS.md)                           | Onboarding for any AI/dev — **start here** |
 | [PROJECT_STATE.md](docs/PROJECT_STATE.md)        | **Checkpoint** — current state, resume point |
+| [PHASE_1_IDENTITY.md](docs/PHASE_1_IDENTITY.md)  | **Phase 1 spec** — Identity & Accounts (the build contract) |
+| [SCHEMA_V1.md](docs/SCHEMA_V1.md)                | Supabase / Postgres schema contract (RLS + ledgers) |
+| [PHASE_1_IMPLEMENTATION_PLAN.md](docs/PHASE_1_IMPLEMENTATION_PLAN.md) | Phase 1 ordered task plan + pre-flight |
 | [VISUAL_DIRECTION.md](docs/VISUAL_DIRECTION.md)  | Art-direction north star + rules |
 | [ASSETS_STATE.md](docs/ASSETS_STATE.md)          | Imagery inventory + treatment |
 | [GLOBE_PHASE_PLAN.md](docs/GLOBE_PHASE_PLAN.md)  | The 3D World Cup Globe — phase plan |

@@ -328,3 +328,64 @@ changes). **No frustrating or punitive mechanic removes anyone before the final.
 a gate on the user.)
 **Consequences:** The World Cup stays alive for **everyone** to the end; engagement is not
 cut by real-world results. Country identity adds emotional stakes without lock-out.
+
+### D-027 — Economy: three currencies; earning never costs you rank ✅ (founder-ratified 2026-06-04)
+**Context:** The product evolves into predictions + fantasy + ideal XI. The founder's loop
+is "predict → get it right → earn points → buy players." A naive single-currency design
+(spend the same points you rank on) creates a dark pattern: competing and spending fight
+each other. [EXPERIENCE_SYSTEM.md](EXPERIENCE_SYSTEM.md) §8 already names three concepts.
+**Decision:** Formalize **three currencies**: **points** (skill, permanent, feed rankings &
+reputation, never spent), **coins** (spendable on players/fantasy moves), **reputation**
+(derived, cross-pillar, Phase 4+). A correct prediction credits **both** points (raise
+rank) **and** coins (enter wallet). Users spend **coins**, never their rank — so "points
+become the economy" without penalizing competition. Both are **append-only ledgers**
+(`score_ledger`, `coin_ledger`) with cached projections (`profiles.total_points`,
+`wallets.coins_balance`), mutated only by `SECURITY DEFINER` functions.
+**Consequences:** Competing and spending are independent axes; the economy is
+server-authoritative and tamper-proof by construction. Full spec:
+[PHASE_1_IDENTITY.md](PHASE_1_IDENTITY.md), [SCHEMA_V1.md](SCHEMA_V1.md).
+
+### D-028 — Phase 1 = Identity & Accounts on an isolated Supabase; economy foundations latent from day one ✅
+**Context:** Identity is layer 2 of the living-World-Cup model and the prerequisite for the
+social product. Economic integrity (no negative balances, no client-mutated money) cannot
+be retrofitted credibly.
+**Decision:** Phase 1 builds auth (F90+'s **own** isolated Supabase, `@supabase/ssr`),
+public profiles, favourite-country identity, and the **wallet + append-only ledgers +
+`award_*` functions** — even though spending arrives in Phase 3. The points/ranking
+skeleton ships as a real (empty) teaser replacing the mock. Forward tables (`fixtures`,
+`predictions`, `players`, `squads`, `lineups`, `leagues`) are **designed now, built later**
+(see [SCHEMA_V1.md](SCHEMA_V1.md)) so no later phase reshapes Identity.
+**Consequences:** A correct, isolated, anti-cheat foundation; adding Predictions/Fantasy/XI
+becomes a pure add. Plan: [PHASE_1_IMPLEMENTATION_PLAN.md](PHASE_1_IMPLEMENTATION_PLAN.md).
+
+### D-029 — Roadmap reordered around the loop: Predictions generates the economy, Fantasy spends it ✅ (founder-ratified 2026-06-04)
+**Context:** The expanded vision is predictions + fantasy + ideal XI as one daily loop.
+The previous roadmap ordered features somewhat independently.
+**Decision:** Reorder by loop dependency — **Phase 2 = Predictions Core & Scoring**
+(generates points + coins, creates the daily habit), **Phase 3 = Economy: Market + Fantasy
+XI** (spends coins), **Phase 4 = Rankings, Leagues & Reputation** (competition + viral
+loop), then Narrative (5), Momentum/Heat (6), live/PWA (7). Predictions must precede the
+market because the market needs the economy Predictions produces.
+**Consequences:** Each phase is fueled by the prior one; no feature ships without its
+input. [ROADMAP.md](ROADMAP.md) updated.
+
+### D-030 — Auth methods: magic-link + Google + Apple (studio default, reversible) ✅
+**Context:** Choose sign-in methods that minimize friction and fit a global, mobile-first,
+future-PWA audience, with no password management.
+**Decision:** Email **magic-link** + **Google OAuth** + **Apple OAuth** (Apple needed for
+iOS/PWA later), all via `@supabase/ssr` (cookie sessions). GitHub excluded (wrong
+audience). Default-and-proceed per [OPERATING_MODEL.md](OPERATING_MODEL.md); reversible.
+**Consequences:** Low-friction onboarding; Apple/Google provider config is a small founder
+gate after `f90.xyz` connects.
+
+### D-031 — Identity defaults: welcome bonus, mutability, shareable profile, own-IP avatars (studio defaults, reversible) ✅
+**Context:** Several reversible Identity parameters needed sensible defaults to unblock the
+build without escalating each one.
+**Decision:** (a) **1,000-coin welcome bonus** at signup (seeds the economy; spendable once
+the market exists). (b) `username` + favourite **country** are changeable with a **30-day
+cooldown** (anti link-rot / impersonation / tribe-hopping). (c) The **public profile is
+first-class and OG-shareable** (`/u/[username]`) to power the growth loop. (d) **Avatars
+are own-IP composite tokens** (initials + country accent + pattern), never photos —
+extends D-025. Default-and-proceed; reversible on founder call.
+**Consequences:** Onboarding and the profile are fully specified for implementation; all
+four are tunable later without schema changes.

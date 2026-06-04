@@ -86,7 +86,10 @@ docs/                    # full project documentation (read these)
 4. [docs/DECISIONS.md](docs/DECISIONS.md) — the decision log (the *why*)
 5. [docs/PROJECT_VISION.md](docs/PROJECT_VISION.md) · [docs/DESIGN_DIRECTION.md](docs/DESIGN_DIRECTION.md) · [docs/BRAND_GUIDELINES.md](docs/BRAND_GUIDELINES.md)
 6. Copilot: [docs/AI_COPILOT_ARCHITECTURE_V1.md](docs/AI_COPILOT_ARCHITECTURE_V1.md) · [docs/PREDICTION_ENGINE_V1.md](docs/PREDICTION_ENGINE_V1.md) · [docs/DATA_SOURCES_RESEARCH.md](docs/DATA_SOURCES_RESEARCH.md)
-7. [docs/ROADMAP.md](docs/ROADMAP.md) — what's next
+7. [docs/ROADMAP.md](docs/ROADMAP.md) — what's next (reordered around the loop)
+8. **Building Phase 1?** [docs/PHASE_1_IDENTITY.md](docs/PHASE_1_IDENTITY.md) (spec) ·
+   [docs/SCHEMA_V1.md](docs/SCHEMA_V1.md) (DB contract) ·
+   [docs/PHASE_1_IMPLEMENTATION_PLAN.md](docs/PHASE_1_IMPLEMENTATION_PLAN.md) (task map)
 
 > If you're an AI or developer opening this fresh: this file + the docs above are
 > everything you need. The project is standard and self-explanatory by design.

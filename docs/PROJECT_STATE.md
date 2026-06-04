@@ -1,20 +1,22 @@
 # F90+ — Project State (Checkpoint)
 
 > **Resume entry point.** Read this first, then [OPERATING_MODEL.md](OPERATING_MODEL.md)
-> + [DECISIONS.md](DECISIONS.md). Snapshot date: **2026-06-03**. Phase: **FOUNDATION
-> CLOSED — production-ready.** Globe hero shipped-local + verified; vision canonized.
-> Next: public deploy ([DEPLOY_RUNBOOK.md](DEPLOY_RUNBOOK.md)) → Phase 1. No backend yet.
+> + [DECISIONS.md](DECISIONS.md). Snapshot date: **2026-06-04**. Phase: **FOUNDATION
+> CLOSED — production-ready.** Next: **public launch** ([DEPLOY_RUNBOOK.md](DEPLOY_RUNBOOK.md),
+> founder, imminent) → **Phase 1 — Identity & Accounts**, which is now **fully designed and
+> ready to implement** ([PHASE_1_IDENTITY.md](PHASE_1_IDENTITY.md) ·
+> [SCHEMA_V1.md](SCHEMA_V1.md) · [PHASE_1_IMPLEMENTATION_PLAN.md](PHASE_1_IMPLEMENTATION_PLAN.md)).
 
 ## TL;DR
-F90+ is the **living experience of the 2026 World Cup** — predictions, fantasy, player
-portfolio, markets, rankings and narrative fused into one world (vision:
-[PROJECT_VISION.md](PROJECT_VISION.md) · [EXPERIENCE_SYSTEM.md](EXPERIENCE_SYSTEM.md)).
-Foundation, bilingual i18n, premium branding, a deterministic AI Copilot ("The Analyst"),
-**real WC2026 fixtures**, **cinematic imagery**, and the flagship **3D World Cup globe
-hero** (a living official map — gold hosts / green qualified, from real data) are built and
-**verified locally**. **The foundation is CLOSED / production-ready.** No accounts/backend
-or public deploy yet — next is the public launch ([DEPLOY_RUNBOOK.md](DEPLOY_RUNBOOK.md)),
-then **Phase 1**.
+F90+ is the **living experience of the 2026 World Cup** — predictions, fantasy, ideal XI,
+player portfolio, rankings and narrative fused into one world (vision:
+[PROJECT_VISION.md](PROJECT_VISION.md) · [EXPERIENCE_SYSTEM.md](EXPERIENCE_SYSTEM.md);
+economy ratified in [DECISIONS.md](DECISIONS.md) D-027). Foundation, bilingual i18n, premium
+branding, a deterministic AI Copilot ("The Analyst"), **real WC2026 fixtures**, **cinematic
+imagery**, and the flagship **3D World Cup globe hero** (gold hosts / green qualified, from
+real data) are built and **verified locally**. **The foundation is CLOSED / production-ready.**
+No accounts/backend or public deploy yet — next is the public launch, then **Phase 1**
+(designed, documented, ready to build).
 
 ## How to run
 ```bash
@@ -30,77 +32,71 @@ pnpm dev                   # → http://localhost:3000  (/ = ES, /en = EN)
 - **Stack:** Next.js 16.2.7 (App Router, RSC) · React 19 · TypeScript strict
   (`noUncheckedIndexedAccess`) · Tailwind v4 (CSS-first tokens) · Framer Motion ·
   next-intl · pnpm workspaces.
-- **Build:** `next build` **green**; `/[locale]` is **ISR (revalidate 6h)** because
+- **Build:** `next build` **green**; `/[locale]` revalidates on a 6h fetch window because
   the homepage fetches real fixtures. `tsc --noEmit` clean. **0 console errors.**
 - **i18n:** ES (default, `/`) + EN (`/en`), `localePrefix: as-needed`, `timeZone:
-  'UTC'`, catalogs in `apps/web/locales/{es,en}.json`. **No hardcoded copy.**
+  'UTC'`, catalogs in `apps/web/locales/{es,en}.json`. **No hardcoded copy** (1 stray `vs`
+  noted in the audit, queued in pre-flight).
 - **Routing:** `app/[locale]/` (layout, page, not-found, `[...rest]` catch-all),
   `proxy.ts` (locale negotiation). Static params for both locales.
 
 ## Visual / branding / atmosphere state ✅
 - **Logo:** official gold-trophy render (`public/brand/f90plus-logo.png`) is primary
-  — header, hero, footer, 404. Favicon/app-icon/maskable derived from it
-  (`scripts/brand/generate-icons.py`).
-- **Design system:** dark night-stadium / broadcast; tokens in `styles/globals.css`
-  (`@theme`): night/mist/led(primary)/volt/pitch/gold/flare/**lime** (the logo "+").
-  Geist + Space Grotesk. Motion = one ease-out curve, reduced-motion safe.
-- **Real cinematic imagery** (founder-provided, optimized to WebP): **hero** =
-  night stadium (treated, legible), **CTA** = wide stadium, **leaderboard** = globe
-  of nations, **OG** = globe crop. Via `components/atmosphere/CinematicImageLayer`.
-  All procedural/"fake" atmosphere was **removed** (see DECISIONS D-018/D-019).
-- **Soul/broadcast accents:** eyebrow ticks, host identity ("EE. UU. · CANADÁ ·
-  MÉXICO · 2026"), "Mundial 2026" broadcast corner, subtle ambient.
+  (D-012) — header, hero, footer, 404. Favicon/app-icon/maskable derived from it.
+- **Design system:** dark night-stadium / broadcast; tokens in `styles/globals.css`.
+- **Real cinematic imagery** (founder-provided, WebP) via `CinematicImageLayer`. All
+  procedural "fake" atmosphere removed (D-018/D-019).
 
-## Hero state ✅
-Photo-first: real night-stadium base + left/bottom legibility scrims + brand grade +
-vignette → the official logo, eyebrow, headline (gradient sheen), CTAs, feature
-chips, the **real featured opener card** (Mexico vs South Africa, Group A, Jun 11),
-the live **countdown** to kickoff, and the host line. Legible + cinematic.
+## Hero + globe state ✅ (the 3D globe IS built — shipped-local + verified)
+Photo-first night scene + the **real interactive 3D globe** (`features/globe/`,
+react-globe.gl / three): vendored assets (no CDN), gold hosts + green qualified from real
+openfootball data (D-023), DPR cap ≤1.6, off-screen pause, lazy `ssr:false` + error
+boundary + image fallback, reduced-motion safe. Countdown pedestal to the real opener
+(`2026-06-11`). The featured-card hero was replaced by the globe (D-022).
 
 ## Real-data state ✅ (free, cache-first, graceful)
-- **openfootball** (`lib/football/openfootball.ts`): real WC2026 fixtures (teams,
-  groups, dates, venues), zero API key, cache-first (revalidate 6h), **mock
-  fallback** if unreachable. `getHomeMatches()` → opener + 4 marquee.
-- **Model probabilities** from team-strength Elo (`lib/football/model.ts`) — honest
-  "the model's view", not odds.
-- **football-data.org** (`lib/football/football-data.ts`): real standings/form
-  enrichment, **built but env-gated** (`COPILOT_SOURCE=live` + `FOOTBALL_DATA_API_KEY`).
-  No key → graceful no-op.
-- Homepage shows real teams (MEX, RSA, BRA, MAR, ENG, CRO, NED, JPN, ARG, ALG…).
+- **openfootball** (`lib/football/openfootball.ts` + `nations.ts`): real WC2026 fixtures +
+  globe country states, zero key, cache-first (6h), **mock fallback** if unreachable.
+- **Model probabilities** from team-strength Elo (`lib/football/model.ts`) — honest "the
+  model's view", `modeled: true`, not odds.
+- **football-data.org** (`lib/football/football-data.ts`): real standings adapter, **built
+  but env-gated** (`COPILOT_SOURCE=live` + `FOOTBALL_DATA_API_KEY`) and currently a no-op
+  enrich (queued for Phase 2). No key → graceful no-op.
+- Coverage note: `teams.ts` maps 37 of 48 nations — the other 11 fall back to a gray token
+  (queued in Phase 1 pre-flight P1).
 
 ## Copilot ("The Analyst") state ✅ (V1, no paid LLM)
-- Deterministic engine (`lib/copilot/engine`): signals (Elo, form, xG-proxy/Poisson,
-  H2H, market de-vig, community, **home/host**) → weighted log-linear blend →
-  P(H/D/A) + confidence + drivers. Pure, testable.
-- Templated i18n insights (`lib/copilot/insights.ts`); `AnalystCard` on the homepage
-  analyzes the **real opener** via `insightFromStrengths` (elo + host → honest
-  "moderate confidence", real drivers, no fabricated odds/community).
-- Sources adapter layer (`lib/copilot/sources`): mock (active) · football-data
-  (gated) · api-football (prepared stub).
+- Deterministic engine (`lib/copilot/engine`): 8 signals → weighted log-linear blend →
+  P(H/D/A) + confidence + drivers. Pure, testable (tests queued in pre-flight P3).
+- `AnalystCard` analyzes the **real opener** via `insightFromStrengths`; templated i18n
+  insights. Runtime signals are mock-fed until the live adapters are wired (Phase 2).
 
 ## What's NOT built yet ⏳
-Backend / accounts / persistence (Supabase, auth, profiles, real wallet & scoring,
-real leaderboard — currently **mock**), the **3D Globe**, social/leagues/friends,
-live match experience, shareable cards, notifications, tests, deploy. Analyst odds
-are **modeled** until a football-data key is added. See [NEXT_PHASES.md](NEXT_PHASES.md).
+Backend / accounts / persistence (Supabase, auth, profiles, wallet & scoring, real
+leaderboard — currently **mock**), **predictions**, **player market & fantasy XI**,
+social / leagues / friends, live match experience, shareable cards, notifications, tests,
+public deploy. The Analyst's runtime signals are mock until football-data is wired. See
+[ROADMAP.md](ROADMAP.md) (reordered around the loop, D-029).
+
+## Phase 1 design — DONE, ready to implement ✅
+Identity & Accounts is fully specified: [PHASE_1_IDENTITY.md](PHASE_1_IDENTITY.md) (spec),
+[SCHEMA_V1.md](SCHEMA_V1.md) (Supabase contract — RLS, append-only ledgers, `award_*`
+functions), [PHASE_1_IMPLEMENTATION_PLAN.md](PHASE_1_IMPLEMENTATION_PLAN.md) (ordered tasks
++ pre-flight to close audit debt). Economy model (points/coins/reputation) ratified
+(D-027); roadmap reordered so Predictions generates the economy that Fantasy spends (D-029).
 
 ## Known caveats
 - pnpm via Corepack (PATH note above).
-- Headless preview can't reliably screenshot (backgrounded tab / WebGL) — verify
-  visuals in a real browser.
-- A **logo variant** ("PREDICT. PLAY. WIN.", white F90+ + lime trophy) exists but
-  was **not** adopted; gold-trophy remains primary pending founder decision.
-- No automated tests yet; no LICENSE yet.
+- Headless preview can't reliably screenshot (backgrounded tab / WebGL) — verify in a real browser.
+- A **logo variant** ("PREDICT. PLAY. WIN.") exists but was **not** adopted; gold-trophy remains primary.
+- No automated tests yet (Vitest queued in Phase 1 pre-flight); no LICENSE yet.
 
 ## Where to resume
-**Product vision is CANONICAL** — read [PROJECT_VISION.md](PROJECT_VISION.md) +
-[EXPERIENCE_SYSTEM.md](EXPERIENCE_SYSTEM.md): the "living World Cup" model (one **world**
-· **identity** · **economy** · **time**, with Momentum/Heat, Discovery, Narrative-AI,
-Country hubs) — decisions **D-024** (model), **D-025** (own-IP players), **D-026**
-(non-punitive elimination).
-**Active build: the World Cup Globe hero** — direction **LOCKED + validated** (desktop +
-mobile); build to **[GLOBE_HERO_SPEC.md](GLOBE_HERO_SPEC.md)** (D-022/D-023) with
-`react-globe.gl` + **vendored** assets (no runtime CDN). **Pre-Phase-1 order:** hero
-production-ready → connect domain → metadata/social/loading/perf → Phase 1 definition.
-Visual north star: [VISUAL_DIRECTION.md](VISUAL_DIRECTION.md). Assets:
-[ASSETS_STATE.md](ASSETS_STATE.md).
+1. **Public launch (founder, imminent):** GitHub repo + Vercel + `f90.xyz` + first deploy —
+   [DEPLOY_RUNBOOK.md](DEPLOY_RUNBOOK.md).
+2. **Phase 1 — Identity & Accounts:** start with the **pre-flight** (complete `teams.ts` to
+   48, unify the openfootball source, add Vitest, fix `.env.example`), then **T0** (isolated
+   Supabase) → **T1** (compose `@supabase/ssr` with the next-intl middleware) → schema →
+   auth → profile. Full map: [PHASE_1_IMPLEMENTATION_PLAN.md](PHASE_1_IMPLEMENTATION_PLAN.md).
+**After Identity → Phase 2 (Predictions Core & Scoring):** the engine that generates the
+economy (correct call → points + coins), the daily-use driver.

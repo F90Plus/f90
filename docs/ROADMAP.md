@@ -1,118 +1,122 @@
 # F90+ — Roadmap
 
-A phased path from foundation to a live World Cup product. Each phase is a
-shippable slice. Dates are intentionally omitted; the World Cup opener
-(11 Jun 2026) is the natural pull date for the core loop.
+A phased path from foundation to a live World Cup product, **ordered by the loop**: each
+phase produces the input the next one needs. The World Cup opener (11 Jun 2026) is the
+natural pull date for the core loop. Dates are intentionally omitted.
 
 > Legend: ✅ done · 🔜 next · ⏳ planned
+> The expanded product (predictions + fantasy + ideal XI as one daily loop) and its
+> ordering are ratified in [DECISIONS.md](DECISIONS.md) D-027/D-028/D-029. Vision:
+> [PROJECT_VISION.md](PROJECT_VISION.md) · [EXPERIENCE_SYSTEM.md](EXPERIENCE_SYSTEM.md).
 
 ---
 
-## ✅ Phase 0 — Foundation *(this repo)*
+## ✅ Phase 0 — Foundation *(closed)*
 
-Visual identity, design system, i18n and a cinematic homepage.
+Visual identity, design system, i18n, real data, and a cinematic homepage — production-ready.
 
-- [x] pnpm monorepo, TypeScript strict, Tailwind v4, Framer Motion
-- [x] Design tokens + component helpers (the F90+ look)
-- [x] Bilingual ES/EN via next-intl (routing, middleware, switcher)
-- [x] UI primitives (Button, Badge, Card, …) + layout shell
-- [x] Homepage: hero, live countdown, match cards, leaderboard teaser, CTA
-- [x] Project documentation
+- [x] pnpm monorepo, TypeScript strict, Tailwind v4, Framer Motion, next-intl
+- [x] Design tokens + component system (the F90+ night-stadium look)
+- [x] Bilingual ES/EN (routing, middleware, switcher), zero hardcoded copy
+- [x] **Real WC2026 fixtures** via openfootball (zero-key, cache-first, graceful fallback)
+- [x] **Deterministic Copilot ("The Analyst")** — pure, no LLM
+- [x] **Real 3D World Cup globe hero** (react-globe.gl / three) — gold hosts / green
+      qualified from real data (D-022/D-023), perf-hardened + reduced-motion safe
+- [x] Real cinematic imagery, branding (gold-trophy logo + derived icons), SEO/metadata
+- [x] Documentation + decision log
 
-**Exit:** `pnpm dev` renders a premium, responsive, bilingual homepage.
+**Exit:** `pnpm dev` renders a premium, responsive, bilingual homepage with a living globe.
 
 ---
 
-## 🔜 Phase 1 — Identity & accounts
+## 🔜 Phase 0.5 — Public launch *(founder)*
 
-Let people *be someone* on F90+.
+Ship the foundation. Steps in [DEPLOY_RUNBOOK.md](DEPLOY_RUNBOOK.md).
 
-- [ ] Supabase project + `@supabase/ssr` integration (see `.env.example`)
-- [ ] Sign up / sign in (email + OAuth), session handling
-- [ ] Public **profile** (alias, avatar, country, joined date)
-- [ ] Protected routes + auth-aware header
-- [ ] DB schema v1: `profiles`
+- [ ] Official GitHub repo (isolated) + push
+- [ ] Vercel project (isolated) — root `apps/web`
+- [ ] Connect `f90.xyz` (DNS + SSL) + `NEXT_PUBLIC_APP_URL`
+- [ ] First production deploy + preview pipeline
 
-## ⏳ Phase 2 — Predictions core
+---
 
-The heart: make a call before kickoff.
+## 🔜 Phase 1 — Identity & Accounts
 
-- [ ] Fixtures + `predictions` schema
-- [ ] Predict flow (winner / scoreline) with optimistic UI
-- [ ] Lock predictions at kickoff
-- [ ] "My predictions" view and history
+Let people *be someone* on F90+ — and lay the **server-authoritative economy** the whole
+loop runs on. **Fully designed & ready to implement:**
+[PHASE_1_IDENTITY.md](PHASE_1_IDENTITY.md) · [SCHEMA_V1.md](SCHEMA_V1.md) ·
+[PHASE_1_IMPLEMENTATION_PLAN.md](PHASE_1_IMPLEMENTATION_PLAN.md).
 
-## ⏳ Phase 3 — Virtual wallet & scoring
+- [ ] Isolated Supabase + `@supabase/ssr`; middleware composed with next-intl
+- [ ] Auth: magic-link + Google + Apple (D-030)
+- [ ] Public **profile** (`/u/[username]`, OG-shareable), favourite **country**, own-IP avatar
+- [ ] **Wallet + append-only ledgers** (coins + points) via `SECURITY DEFINER` functions — latent
+- [ ] Rankings teaser (replaces the mock); protected routes + auth-aware header
+- [ ] DB schema v1: `profiles`, `wallets`, `coin_ledger`, `score_ledger`, `countries`
 
-Stakes, without money.
+## ⏳ Phase 2 — Predictions Core & Scoring  *(generates the economy)*
 
-- [ ] Virtual coin wallet (server-authoritative, transaction ledger)
-- [ ] Scoring rules engine (points for correct calls, bonuses)
-- [ ] Settlement on match resolution
-- [ ] Anti-cheat / integrity checks
+The heart and the daily habit: make a call before kickoff; correct calls **earn points +
+coins**.
 
-## ⏳ Phase 4 — Leaderboards
+- [ ] `fixtures` (synced from openfootball, stable IDs) + `predictions` schema
+- [ ] Predict flow (winner / scoreline / brackets / moments), optimistic UI, **lock at kickoff**
+- [ ] **Difficulty-honest scoring** via `model.ts` (underdog correct = more points)
+- [ ] Server-side settlement → `award_points` + `award_coins`; "my predictions" view
+
+## ⏳ Phase 3 — Economy: Market + Fantasy XI  *(spends the economy)*
+
+Turn earned coins into a team.
+
+- [ ] `players` (own-IP cards, D-025) + dynamic **market** (Comunio-style prices)
+- [ ] Buy/sell with coins (`coin_ledger`); `squads` + `squad_players`
+- [ ] **Ideal XI** per matchday (`lineups`, captain) with server-side formation rules
+- [ ] **Real-performance points** (`player_match_scores`, FPL-style) feed profile points
+- [ ] Player data adapter (football-data / api-football; `names+stats=facts`)
+
+## ⏳ Phase 4 — Rankings, Leagues & Reputation  *(the viral loop)*
 
 Turn scoring into competition.
 
-- [ ] Global leaderboard (replaces the mock teaser) with real-time updates
-- [ ] Time-boxed boards (matchday, group stage, knockouts)
-- [ ] Profile rank + streaks
+- [ ] Real global + by-country + time-boxed rankings (snapshots at scale)
+- [ ] **Private leagues** + invites (the core growth loop), friend feeds, light trash-talk
+- [ ] Reputation (cross-pillar) + streaks on the profile
 
-## ⏳ Phase 5 — AI pundit (rules/stats based)
+## ⏳ Phase 5 — Narrative / The Analyst (live)
 
-A football-smart voice, no LLM hype required.
+The editorial soul over everything — built on the existing deterministic engine.
 
-- [ ] Rule/statistics engine producing pre-match probabilities & takes
-- [ ] "Pundit pick" + short rationale on each match
-- [ ] Challenge mode: predict against the pundit
-- [ ] Pluggable so a richer model can slot in later
+- [ ] Per-match takes + "predict against the pundit"
+- [ ] Live tournament narrative ("Croatia is surviving") from real signals (no LLM, D-005)
 
-## 🔜 Phase 6 — Live football data *(started)*
+## ⏳ Phase 6 — Momentum / Heat on the globe
 
-Make it real and live.
+The planet's living pulse (World × Time).
 
-- [x] **Real fixtures via openfootball** (zero-key, cache-first, graceful fallback) —
-      homepage shows the real WC2026 opener + marquee fixtures with model probabilities
-- [x] Clean adapter architecture (`lib/football/`) + football-data.org adapter built &
-      env-gated for standings/form
-- [ ] Activate football-data.org (add `FOOTBALL_DATA_API_KEY`) → real standings/form
-- [ ] Live match state + score updates (needs a live source / paid tier)
-- [ ] Full group tables view
+- [ ] Hottest nations / trending players / global leans, from real activity, on the globe
 
-## ⏳ Phase 7 — Social & leagues
+## ⏳ Phase 7 — Live tracking · shareable cards · notifications · PWA
 
-Where the fun compounds.
-
-- [ ] Private leagues + invites (the core growth loop)
-- [ ] Friend feeds, reactions, light trash-talk
-- [ ] Shareable prediction cards (deep-linked)
-
-## ⏳ Phase 8 — Polish & launch readiness
-
-- [ ] Performance budget + Core Web Vitals pass
-- [ ] Analytics + responsible-play messaging
-- [ ] SEO + dynamic OG images per match/profile
-- [ ] Deploy pipeline (own Vercel project), domains, monitoring
+- [ ] Live scores/state + live "make your call" windows
+- [ ] Deep-linked shareable cards (prediction/result/rank) + dynamic per-entity OG
+- [ ] Notifications (web push → mobile) with responsible-play framing
+- [ ] Performance budget + Core Web Vitals + PWA/install polish
 
 ---
 
 ## Cross-cutting backlog
 
-Tracked here so foundation shortcuts don't get forgotten:
-
-- [ ] **Localized country names** — team `name` is English today; localize via
-      a country-name map (codes already i18n-neutral).
-- [ ] **Dynamic OG image** (`opengraph-image.tsx`) — deferred to keep the first
-      build minimal.
-- [ ] **Typed i18n messages** — add the next-intl global augmentation for
-      autocompletion/safety on translation keys.
-- [ ] **Testing** — add Vitest + Testing Library and Playwright as features land.
-- [ ] **LICENSE** — choose and add before any public release.
-- [ ] **More languages** — architecture supports it; add when there's demand.
+- [ ] Localized country names (codes already i18n-neutral; `countries` carries name_en/name_es)
+- [ ] Typed i18n messages (next-intl augmentation)
+- [ ] Testing — Vitest from pre-flight; Playwright as features land
+- [ ] LICENSE — choose and add before any public, open release
+- [ ] Accessibility pass (focus rings, skip link — flagged in the audit)
+- [ ] More languages — architecture supports it; add on demand
 
 ## Non-goals (kept off the roadmap on purpose)
 
-- Real-money betting, payouts, or any gambling mechanic.
-- Pay-to-win mechanics or predictive advantages tied to spending.
+- Real-money betting, payouts, or any gambling mechanic. Probabilities are signal, never a wager.
+- Pay-to-win — monetization never buys predictive edge.
+- Arcade FUT/Panini/EA clones — player representation is original F90+ IP (D-025).
 - A heavyweight microservice/Turborepo setup before the product needs it.
+- Any AI/editor lock-in — standard, portable tooling only (D-016).
