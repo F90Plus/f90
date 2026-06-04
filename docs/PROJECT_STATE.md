@@ -1,12 +1,13 @@
 # F90+ — Project State (Checkpoint)
 
 > **Resume entry point.** Snapshot date: **2026-06-04**. Phase: **FOUNDATION + PHASE 0.5/0.6 LIVE
-> at https://f90.xyz · PHASE 1 (Identity & Accounts) IN PROGRESS — T1–T5 done (auth + onboarding
-> shipped & verified E2E), data foundation live & verified.**
+> at https://f90.xyz · PHASE 1 (Identity & Accounts) IN PROGRESS — T1–T6 done (auth + onboarding +
+> protected app gate shipped & verified E2E; welcome bonus = 20,026 Tokens F90), data foundation
+> live & verified.**
 >
 > **▶ To resume Phase 1, read [PHASE_1_HANDOFF.md](PHASE_1_HANDOFF.md) FIRST** (branch
 > `feat/phase-1-identity`, not pushed; Supabase schema + 48-country seed applied & verified; auth +
-> onboarding shipped; **next = T6 protected app group**). Then [OPERATING_MODEL.md](OPERATING_MODEL.md) + [DECISIONS.md](DECISIONS.md).
+> onboarding + `(app)` gate shipped; **next = T7 public profile**). Then [OPERATING_MODEL.md](OPERATING_MODEL.md) + [DECISIONS.md](DECISIONS.md).
 > Contracts: [PHASE_1_IDENTITY.md](PHASE_1_IDENTITY.md) · [SCHEMA_V1.md](SCHEMA_V1.md) ·
 > [PHASE_1_IMPLEMENTATION_PLAN.md](PHASE_1_IMPLEMENTATION_PLAN.md).
 
@@ -20,10 +21,11 @@ manual deploy — D-033)* → `www.f90.xyz` + SSL): bilingual i18n, premium bran
 WC2026 fixtures**, **cinematic imagery**, and the flagship **3D World Cup globe hero** (gold
 hosts / green qualified, from real data). **Phase 1 (Identity & Accounts) is now IN PROGRESS** on
 branch `feat/phase-1-identity`: the Supabase backend (schema, economy, 48-country seed, RLS, grants)
-is **applied & verified**, and **auth flows (T4) + onboarding (T5) are shipped + verified E2E**
-(magic-link + Google, dual-mode callback, login/signup ES+EN, auth-aware header; username +
-favourite-country onboarding through RLS self-update); the protected app group (T6) → DoD (T11)
-remain. See [PHASE_1_HANDOFF.md](PHASE_1_HANDOFF.md).
+is **applied & verified**, and **auth (T4) + onboarding (T5) + the protected `(app)` group (T6) are
+shipped + verified E2E** (magic-link + Google, dual-mode callback, login/signup ES+EN, auth-aware
+header; username + favourite-country onboarding through RLS self-update; a session-gated `/home`
+showing the **20,026 Tokens F90** welcome bonus, D-039); public profile (T7) → DoD (T11) remain.
+See [PHASE_1_HANDOFF.md](PHASE_1_HANDOFF.md).
 
 ## Deploy state ✅ LIVE — incl. Phase 0.6 (updated 2026-06-04, D-033)
 - **GitHub:** `F90Plus/f90` — **own isolated org** (NOT PMS/PT/Chiribito/XPrediction),

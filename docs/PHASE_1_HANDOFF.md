@@ -7,13 +7,14 @@
 
 ## Executive summary
 
-Phase 1 (Identity & Accounts) is **~65% built and the data + auth + onboarding flows are LIVE**.
-The Supabase schema + economy + 48-country seed are **applied and verified end-to-end**; **T4
-(auth flows)** and **T5 (onboarding)** are **SHIPPED + functionally verified end-to-end** (a real
-session via the token-hash callback set a unique username + favourite country through RLS
-self-update, with the 30-day cooldown stamps — verified at the DB level, then cleaned up). What
-remains is **the auth-gated app group (T6), public profile (T7), settings (T8), rankings teaser
-(T9), i18n/token sweep (T10) and the DoD gate (T11)**.
+Phase 1 (Identity & Accounts) is **~75% built and the data + auth + onboarding + app gate are LIVE**.
+The Supabase schema + economy + 48-country seed are **applied and verified end-to-end**; **T4 (auth
+flows)**, **T5 (onboarding)** and **T6 (protected `(app)` group + the `/home` authed surface)** are
+**SHIPPED + verified end-to-end** (a real token-hash session was forced through onboarding, set a
+unique username + nation via RLS self-update, and landed on `/home` showing its **20,026 Tokens F90**
+balance — all at the DB level, then cleaned up). The welcome bonus is now **20,026 Tokens F90** (D-039).
+What remains is **public profile (T7), settings (T8), rankings teaser (T9), i18n/token sweep (T10) and
+the DoD gate (T11)**.
 
 All work is on branch **`feat/phase-1-identity`** (**not pushed**, `main` untouched). Vision
 **D-034** is baked into a **generic economy** so markets/players/fantasy plug in later without
@@ -23,7 +24,7 @@ subsystem-specific coupling (D-035).
 ## Repository state
 
 - **Branch:** `feat/phase-1-identity` (off `main` = `b6bff60`, Phase 0.6)
-- **Last code commit:** `11f86a5` — `feat(profile): T5 — onboarding (username + favourite country)` (this docs commit lands on top; landing pass `16c84c6` + D-036 sit between T4 and T5)
+- **Last code commit:** `441cd33` — `feat(app): T6 — protected (app) group + the /home authed surface` (this docs commit lands on top). Since T5: vision docs (D-037/D-038, `101ec1d`), Tokens F90 bonus (`c727644`, D-039), T6 (`441cd33`).
 - **Working tree:** clean.
 - **Not pushed; `main` untouched.**
 - **Commits this session (oldest → newest):**
@@ -184,15 +185,26 @@ Shipped + functionally verified on localhost:3300 (server on the allow-listed po
   availability ("Disponible"), and submit wrote `username=cuco_t5_test` + `country_code=ESP` (Spain)
   + both `*_changed_at` stamps via RLS self-update, then redirected home. Test users cleaned up.
 
-## Next step (exact) — T6: Protected routes + auth-aware header polish
+## T6 — Protected app group ✅ DONE (verified E2E 2026-06-04)
 
-Create the `app/[locale]/(app)/` route group whose layout checks the session (RSC) and redirects
-signed-out users to `/login?next=…`; move `onboarding` (and future app pages) under it. Add the
-"force onboarding when the profile is incomplete" redirect (username still the `fan_*` default OR
-`country_code` null → send to `/onboarding`). The auth-aware header already reflects state (T4) — T6
-generalises the gate. 🔒 founder: confirm Google/Apple redirect URLs once `f90.xyz` is the canonical
-origin (see the redirect-allow-list note above). **Done when:** signed-out access to an `(app)/`
-route redirects; an onboarded user reaches the app; the header reflects auth state in ES/EN/mobile.
+`features/auth/guards.ts` (`requireOnboardedUser`), `app/[locale]/(app)/layout.tsx` (the gate) +
+`app/[locale]/(app)/home/page.tsx` (the first authed surface: greeting + **Tokens F90 balance** +
+points + backed nation). `isProfileComplete` is pure + unit-tested (`country_code` +
+`username_changed_at` both set). Onboarding success now lands on `/home`; onboarding stays OUTSIDE the
+group (no redirect loop).
+- **Gates:** `pnpm typecheck` ✅ · `pnpm test` ✅ 78 · `pnpm build` ✅.
+- **Verified E2E:** (1) signed-out `/home` → `/login?next=/home`; (2) signed-in but not onboarded →
+  forced to `/onboarding`; (3) after onboarding → `/home` renders "Hola, @t6_user" · **20.026 Tokens
+  F90** · "Vas con Argentina". Test users cleaned up.
+
+## Next step (exact) — T7: Public profile `/u/[username]` + dynamic OG
+
+`app/[locale]/u/[username]/page.tsx`: a **public** RSC reading `profiles` (+ `global_rankings` for the
+rank teaser) by username (citext) — avatar (own-IP token), country badge, join date, points (0), rank;
+`generateMetadata` → per-user OG card; 404 for unknown handles. New i18n namespace `profile`. Reuse
+`getCountries` for the country badge and the `NationFlag`/flag pattern. **Done when:** `/u/<handle>`
+renders the public card, the OG previews, and unknown handles 404. (This is a *public* page — not under
+`(app)` — so don't gate it.)
 
 ## PHASE 1 STATUS
 
@@ -204,8 +216,8 @@ route redirects; an onboarded user reaches the app; the header reflects auth sta
 | T3 — Seed countries (48) | ✅ completado (applied + verified) |
 | T4 — Auth flows (magic-link + Google, routes, i18n) | ✅ completado (verificado funcionalmente) |
 | T5 — Onboarding (username + country) | ✅ completado (verificado E2E + DB) |
-| T6 — Protected routes + auth-aware header | ⏳ pendiente (NEXT) |
-| T7 — Public profile `/u/[username]` + OG | ⏳ pendiente |
+| T6 — Protected routes + auth-aware header | ✅ completado (verificado E2E) |
+| T7 — Public profile `/u/[username]` + OG | ⏳ pendiente (NEXT) |
 | T8 — Settings + 30-day cooldown | ⏳ pendiente |
 | T9 — Rankings teaser (replace mock) | ⏳ pendiente |
 | T10 — i18n parity + tokens sweep | ⏳ pendiente |
