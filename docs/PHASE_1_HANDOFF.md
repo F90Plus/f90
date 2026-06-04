@@ -7,12 +7,13 @@
 
 ## Executive summary
 
-Phase 1 (Identity & Accounts) is **~55% built and the data + auth flows are LIVE**. The
-Supabase schema + economy + 48-country seed are **applied and verified end-to-end**, and **T4
-(auth flows) is now SHIPPED + functionally verified**: magic-link + Google sign-in, a dual-mode
-callback, login/signup screens (ES+EN), and an auth-aware header. What remains is **onboarding
-(T5), the auth-gated app group (T6), public profile (T7), settings (T8), rankings teaser (T9),
-i18n/token sweep (T10) and the DoD gate (T11)**.
+Phase 1 (Identity & Accounts) is **~65% built and the data + auth + onboarding flows are LIVE**.
+The Supabase schema + economy + 48-country seed are **applied and verified end-to-end**; **T4
+(auth flows)** and **T5 (onboarding)** are **SHIPPED + functionally verified end-to-end** (a real
+session via the token-hash callback set a unique username + favourite country through RLS
+self-update, with the 30-day cooldown stamps — verified at the DB level, then cleaned up). What
+remains is **the auth-gated app group (T6), public profile (T7), settings (T8), rankings teaser
+(T9), i18n/token sweep (T10) and the DoD gate (T11)**.
 
 All work is on branch **`feat/phase-1-identity`** (**not pushed**, `main` untouched). Vision
 **D-034** is baked into a **generic economy** so markets/players/fantasy plug in later without
@@ -22,7 +23,7 @@ subsystem-specific coupling (D-035).
 ## Repository state
 
 - **Branch:** `feat/phase-1-identity` (off `main` = `b6bff60`, Phase 0.6)
-- **Last code commit:** `b902e8e` — `feat(auth): T4 — magic-link + Google sign-in, dual-mode callback, auth-aware header` (this docs commit lands on top)
+- **Last code commit:** `11f86a5` — `feat(profile): T5 — onboarding (username + favourite country)` (this docs commit lands on top; landing pass `16c84c6` + D-036 sit between T4 and T5)
 - **Working tree:** clean.
 - **Not pushed; `main` untouched.**
 - **Commits this session (oldest → newest):**
@@ -75,8 +76,13 @@ Verified live: 5 tables (all RLS on), 3 functions, `global_rankings` view, 48 co
 ## Identity state
 
 - **`profiles` table + trigger DONE + verified.** Schema carries no subsystem-specific fields (D-034).
-- **NOT BUILT:** onboarding (username + country) = T5; public profile `/u/[username]` = T7;
-  settings + 30-day cooldown = T8.
+- **T5 onboarding BUILT + verified:** `features/profile/{validation,actions,countries,onboarding-form}.ts(x)`
+  + `app/[locale]/onboarding/page.tsx` (session-gated). `parseUsername` (format `^[a-z0-9_]{3,20}$`
+  + reserved list, 9 unit tests) · `checkUsername` (live availability) · `updateProfile` (RLS
+  self-update, sets the `*_changed_at` cooldown stamps; maps unique/FK violations). Country picker
+  reads the 48 `countries` with correct flags (`flagAssetFor(name_en)`, NOT the 3-letter code).
+  Signup routes new users here (`next=/onboarding`). **Verified E2E** (see Auth state).
+- **NOT BUILT:** public profile `/u/[username]` = T7; settings (full edit) + 30-day cooldown UI = T8.
 
 ## Wallets / Ledgers state
 
@@ -109,8 +115,9 @@ Verified live: 5 tables (all RLS on), 3 functions, `global_rankings` view, 48 co
 ## i18n state
 
 - **ES (default) + EN in place** (foundation + Phase 0.6), full parity, no hardcoded copy.
-- **`auth` namespace ADDED (T4)** in `locales/{es,en}.json` with full key parity, no hardcoded copy.
-- **NOT ADDED yet:** namespaces `onboarding` (T5), `profile` (T7), `rankings` (T9).
+- **`auth` (T4) + `onboarding` (T5) namespaces ADDED** in `locales/{es,en}.json` with full key
+  parity, no hardcoded copy. (`markets` was also added by the landing pass — D-036.)
+- **NOT ADDED yet:** namespaces `profile` (T7), `rankings` (T9).
 
 ## Documentation state
 
@@ -162,15 +169,26 @@ Shipped + functionally verified on localhost:3300 (server on the allow-listed po
 - **Verified:** ES+EN render (0 console errors), invalid email → localized error, valid email →
   "check your inbox", Google → 303 to authorize URL, signed-out header shows "Sign in" (mobile too).
 
-## Next step (exact) — T5: Onboarding (username + favourite country)
+## T5 — Onboarding ✅ DONE (verified E2E 2026-06-04)
 
-Build `features/profile/`: pick `username` (live uniqueness check against `profiles.username`,
-citext-unique) + favourite country (the 48 from `countries`); `updateProfile` Server Action writing
-through the RLS self-update policy; new i18n namespace `onboarding`. After auth, route a brand-new
-user here (set `next=/onboarding` once the route exists; the auth redirect already preserves it).
-**Reuse** the existing `lib/supabase` clients + `features/auth/validation.ts` patterns. **Done when:**
-a new user sets a valid unique username + country; invalid/taken usernames are rejected with
-localized errors.
+`features/profile/` (validation [9 unit tests], actions, countries, onboarding-form) +
+`app/[locale]/onboarding/page.tsx` (session-gated; signup defaults `next=/onboarding`).
+- **Gates:** `pnpm typecheck` ✅ · `pnpm test` ✅ 72 · `pnpm build` ✅.
+- **Verified E2E through the real UI + a real session** (minted via admin `generate_link` →
+  completed through our own `/callback` token-hash path, which also re-proved T4's `verifyOtp`
+  branch): the 48-country picker renders with correct flags, the username field live-checks
+  availability ("Disponible"), and submit wrote `username=cuco_t5_test` + `country_code=ESP` (Spain)
+  + both `*_changed_at` stamps via RLS self-update, then redirected home. Test users cleaned up.
+
+## Next step (exact) — T6: Protected routes + auth-aware header polish
+
+Create the `app/[locale]/(app)/` route group whose layout checks the session (RSC) and redirects
+signed-out users to `/login?next=…`; move `onboarding` (and future app pages) under it. Add the
+"force onboarding when the profile is incomplete" redirect (username still the `fan_*` default OR
+`country_code` null → send to `/onboarding`). The auth-aware header already reflects state (T4) — T6
+generalises the gate. 🔒 founder: confirm Google/Apple redirect URLs once `f90.xyz` is the canonical
+origin (see the redirect-allow-list note above). **Done when:** signed-out access to an `(app)/`
+route redirects; an onboarded user reaches the app; the header reflects auth state in ES/EN/mobile.
 
 ## PHASE 1 STATUS
 
@@ -181,8 +199,8 @@ localized errors.
 | T2 — Migration 0001 (schema/RLS/functions/view) | ✅ completado (applied + verified) |
 | T3 — Seed countries (48) | ✅ completado (applied + verified) |
 | T4 — Auth flows (magic-link + Google, routes, i18n) | ✅ completado (verificado funcionalmente) |
-| T5 — Onboarding (username + country) | ⏳ pendiente (NEXT) |
-| T6 — Protected routes + auth-aware header | ⏳ pendiente |
+| T5 — Onboarding (username + country) | ✅ completado (verificado E2E + DB) |
+| T6 — Protected routes + auth-aware header | ⏳ pendiente (NEXT) |
 | T7 — Public profile `/u/[username]` + OG | ⏳ pendiente |
 | T8 — Settings + 30-day cooldown | ⏳ pendiente |
 | T9 — Rankings teaser (replace mock) | ⏳ pendiente |
