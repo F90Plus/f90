@@ -1,11 +1,14 @@
 # F90+ — Project State (Checkpoint)
 
-> **Resume entry point.** Read this first, then [OPERATING_MODEL.md](OPERATING_MODEL.md)
-> + [DECISIONS.md](DECISIONS.md). Snapshot date: **2026-06-04**. Phase: **FOUNDATION + PHASE 0.5
-> LAUNCHED LIVE · PHASE 0.6 TOURNAMENT CENTER CLOSED (merged to `main`, deployed).** Live at
-> **https://f90.xyz**. Next: **Phase 1 — Identity & Accounts**, fully designed and ready to build
-> ([PHASE_1_IDENTITY.md](PHASE_1_IDENTITY.md) · [SCHEMA_V1.md](SCHEMA_V1.md) ·
-> [PHASE_1_IMPLEMENTATION_PLAN.md](PHASE_1_IMPLEMENTATION_PLAN.md)).
+> **Resume entry point.** Snapshot date: **2026-06-04**. Phase: **FOUNDATION + PHASE 0.5/0.6 LIVE
+> at https://f90.xyz · PHASE 1 (Identity & Accounts) IN PROGRESS — T1/T2/T3 done, data foundation
+> live & verified.**
+>
+> **▶ To resume Phase 1, read [PHASE_1_HANDOFF.md](PHASE_1_HANDOFF.md) FIRST** (branch
+> `feat/phase-1-identity`, not pushed; Supabase schema + 48-country seed applied & verified;
+> **next = T4 auth flows**). Then [OPERATING_MODEL.md](OPERATING_MODEL.md) + [DECISIONS.md](DECISIONS.md).
+> Contracts: [PHASE_1_IDENTITY.md](PHASE_1_IDENTITY.md) · [SCHEMA_V1.md](SCHEMA_V1.md) ·
+> [PHASE_1_IMPLEMENTATION_PLAN.md](PHASE_1_IMPLEMENTATION_PLAN.md).
 
 ## TL;DR
 F90+ is the **living experience of the 2026 World Cup** — predictions, fantasy, ideal XI,
@@ -15,8 +18,9 @@ economy ratified in [DECISIONS.md](DECISIONS.md) D-027). The **foundation is CLO
 LIVE in production at https://www.f90.xyz** (GitHub `F90Plus/f90` → Vercel `f90` *(shared team,
 manual deploy — D-033)* → `www.f90.xyz` + SSL): bilingual i18n, premium branding, a deterministic AI Copilot ("The Analyst"), **real
 WC2026 fixtures**, **cinematic imagery**, and the flagship **3D World Cup globe hero** (gold
-hosts / green qualified, from real data). No accounts/backend yet — next is **Phase 1**
-(designed, documented, ready to build).
+hosts / green qualified, from real data). **Phase 1 (Identity & Accounts) is now IN PROGRESS** on
+branch `feat/phase-1-identity`: the Supabase backend (schema, economy, 48-country seed, RLS, grants)
+is **applied & verified**; auth UI/flows (T4+) remain. See [PHASE_1_HANDOFF.md](PHASE_1_HANDOFF.md).
 
 ## Deploy state ✅ LIVE — incl. Phase 0.6 (updated 2026-06-04, D-033)
 - **GitHub:** `F90Plus/f90` — **own isolated org** (NOT PMS/PT/Chiribito/XPrediction),
