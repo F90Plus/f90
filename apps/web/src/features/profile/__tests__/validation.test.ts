@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import {
+  canChangeAfterCooldown,
   isProfileComplete,
   parseCountryCode,
   parseUsername,
@@ -56,6 +57,28 @@ describe('isProfileComplete', () => {
 
   it('treats a missing profile as incomplete', () => {
     expect(isProfileComplete(null)).toBe(false);
+  });
+});
+
+describe('canChangeAfterCooldown', () => {
+  const now = new Date('2026-06-04T12:00:00Z');
+
+  it('allows the change when the field was never set', () => {
+    expect(canChangeAfterCooldown(null, now)).toEqual({ allowed: true, nextAt: null });
+  });
+
+  it('blocks within the 30-day window and reports when it reopens', () => {
+    const r = canChangeAfterCooldown('2026-06-01T12:00:00Z', now); // 3 days ago
+    expect(r.allowed).toBe(false);
+    expect(r.nextAt?.toISOString()).toBe('2026-07-01T12:00:00.000Z'); // +30 days
+  });
+
+  it('allows once the window has fully passed', () => {
+    expect(canChangeAfterCooldown('2026-04-01T12:00:00Z', now).allowed).toBe(true);
+  });
+
+  it('allows exactly at the 30-day boundary', () => {
+    expect(canChangeAfterCooldown('2026-05-05T12:00:00Z', now).allowed).toBe(true);
   });
 });
 

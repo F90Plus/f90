@@ -117,6 +117,31 @@
     "pointsValue": "{points, number}",
     "rankTeaser": "El ranking arranca cuando empiezan las predicciones."
   },
+  "settings": {
+    "metaTitle": "Ajustes",
+    "title": "Ajustes",
+    "subtitle": "Tu identidad en F90+.",
+    "displayNameLabel": "Nombre visible",
+    "displayNamePlaceholder": "Tu nombre",
+    "bioLabel": "Bio",
+    "bioPlaceholder": "Cuéntate en pocas palabras",
+    "usernameLabel": "Nombre de jugador",
+    "countryLabel": "Tu selección",
+    "cooldownHint": "Podrás cambiarlo el {date}.",
+    "save": "Guardar cambios",
+    "saving": "Guardando…",
+    "saved": "Cambios guardados.",
+    "errors": {
+      "usernameFormat": "3–20 caracteres: minúsculas, números o guion bajo.",
+      "usernameReserved": "Ese nombre está reservado.",
+      "usernameTaken": "Ese nombre ya está cogido.",
+      "usernameCooldown": "Aún no puedes cambiar tu nombre (espera de 30 días).",
+      "countryInvalid": "Selección no válida.",
+      "countryCooldown": "Aún no puedes cambiar tu selección (espera de 30 días).",
+      "bioTooLong": "La bio no puede superar los 280 caracteres.",
+      "failed": "No se pudo guardar. Inténtalo de nuevo."
+    }
+  },
   "markets": {
     "label": "Mercados",
     "tag": "Pronto",

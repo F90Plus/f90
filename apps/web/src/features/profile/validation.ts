@@ -59,6 +59,21 @@ export function isProfileComplete(
   return Boolean(profile && profile.country_code && profile.username_changed_at);
 }
 
+/**
+ * 30-day change cooldown (D-031) for username/country. Pure: `now` is injected so
+ * it is testable. Returns whether a change is allowed and, if not, when it reopens.
+ * A never-set field (null stamp) is always changeable.
+ */
+export function canChangeAfterCooldown(
+  stampedAt: string | null | undefined,
+  now: Date,
+  days = 30,
+): { allowed: boolean; nextAt: Date | null } {
+  if (!stampedAt) return { allowed: true, nextAt: null };
+  const nextAt = new Date(new Date(stampedAt).getTime() + days * 24 * 60 * 60 * 1000);
+  return { allowed: now.getTime() >= nextAt.getTime(), nextAt };
+}
+
 /** Onboarding form state for `useActionState`. Error keys map to `onboarding.errors.*`. */
 export type OnboardingState =
   | { status: 'idle' }
@@ -68,3 +83,22 @@ export type OnboardingState =
     };
 
 export const ONBOARDING_IDLE: OnboardingState = { status: 'idle' };
+
+/** Settings form state for `useActionState`. Error keys map to `settings.errors.*`. */
+export type SettingsState =
+  | { status: 'idle' }
+  | { status: 'saved' }
+  | {
+      status: 'error';
+      error:
+        | 'usernameFormat'
+        | 'usernameReserved'
+        | 'usernameTaken'
+        | 'usernameCooldown'
+        | 'countryInvalid'
+        | 'countryCooldown'
+        | 'bioTooLong'
+        | 'failed';
+    };
+
+export const SETTINGS_IDLE: SettingsState = { status: 'idle' };

@@ -117,6 +117,31 @@
     "pointsValue": "{points, number}",
     "rankTeaser": "The ranking begins when predictions open."
   },
+  "settings": {
+    "metaTitle": "Settings",
+    "title": "Settings",
+    "subtitle": "Your F90+ identity.",
+    "displayNameLabel": "Display name",
+    "displayNamePlaceholder": "Your name",
+    "bioLabel": "Bio",
+    "bioPlaceholder": "A few words about you",
+    "usernameLabel": "Player handle",
+    "countryLabel": "Your nation",
+    "cooldownHint": "You can change this again on {date}.",
+    "save": "Save changes",
+    "saving": "Saving…",
+    "saved": "Changes saved.",
+    "errors": {
+      "usernameFormat": "3–20 chars: lowercase, numbers or underscore.",
+      "usernameReserved": "That handle is reserved.",
+      "usernameTaken": "That handle is taken.",
+      "usernameCooldown": "You can't change your handle yet (30-day wait).",
+      "countryInvalid": "Invalid nation.",
+      "countryCooldown": "You can't change your nation yet (30-day wait).",
+      "bioTooLong": "Bio can't exceed 280 characters.",
+      "failed": "Couldn't save. Try again."
+    }
+  },
   "markets": {
     "label": "Markets",
     "tag": "Soon",
