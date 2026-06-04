@@ -107,6 +107,15 @@
       "exploreCta": "Explorar el Mundial"
     }
   },
+  "profile": {
+    "metaTitle": "{handle} en F90+",
+    "metaDescription": "El perfil de {handle} en F90+ — predice el Mundial 2026.",
+    "backing": "Va con {country}",
+    "joined": "Se unió en {date}",
+    "pointsLabel": "Puntos",
+    "pointsValue": "{points, number}",
+    "rankTeaser": "El ranking arranca cuando empiezan las predicciones."
+  },
   "markets": {
     "label": "Mercados",
     "tag": "Pronto",

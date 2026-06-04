@@ -107,6 +107,15 @@
       "exploreCta": "Explore the World Cup"
     }
   },
+  "profile": {
+    "metaTitle": "{handle} on F90+",
+    "metaDescription": "{handle}'s F90+ profile — predict the 2026 World Cup.",
+    "backing": "Backing {country}",
+    "joined": "Joined {date}",
+    "pointsLabel": "Points",
+    "pointsValue": "{points, number}",
+    "rankTeaser": "The ranking begins when predictions open."
+  },
   "markets": {
     "label": "Markets",
     "tag": "Soon",
