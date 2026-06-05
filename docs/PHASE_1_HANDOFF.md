@@ -38,20 +38,20 @@
 
 ## Executive summary
 
-Phase 1 (Identity & Accounts) is **~95% built** (T1–T9 shipped): data + auth + onboarding + app gate +
-public profile + settings + rankings teaser are LIVE. The Supabase schema + economy + 48-country seed are **applied and verified**; **T4
-(auth)**, **T5 (onboarding)**, **T6 (`(app)` group + `/home`)**, **T7 (public profile + dynamic OG)**
-and **T8 (settings + 30-day cooldown)** are **SHIPPED + verified**. The welcome bonus is **20,026
-Tokens F90** (D-039); the live-market ticker is a **sticky bar**, and the landing carries a **Fantasy
-discovery section** + nav item. **T9 (rankings teaser) is shipped + verified (D-043)** — the homepage
-reads the real `global_rankings` view (honest empty-state) and the mock is deleted. What remains is
-**the i18n/token sweep (T10) and the DoD gate (T11)**.
+Phase 1 (Identity & Accounts) is **100% complete (T1–T11), MERGED to `main`, DEPLOYED to production, and
+ENV-ACTIVATED** — founder-approved & officially closed 2026-06-05 (official record D-048). Data + auth +
+onboarding + the protected `(app)` gate + `/home` + public profile (dynamic OG) + settings (30-day cooldown)
++ the real rankings teaser are LIVE. The Supabase schema + economy + 48-country seed are applied and
+verified; the welcome bonus is **20,026 Tokens F90** (D-039); the live-market ticker is a sticky bar; the
+landing carries the Analyst Center live-market (D-041) + a Fantasy discovery section. **T9–T11 done**
+(D-043 rankings teaser · D-044 i18n/token sweep · D-045 DoD gate) — the homepage reads the real
+`global_rankings` view (honest empty-state) and the leaderboard mock is deleted.
 
-All work is on branch **`feat/phase-1-identity`** (pushed through `1fc2c6c`; the **T9 commits are
-local-only**, `main` untouched). Vision
-**D-034** is baked into a **generic economy** so markets/players/fantasy plug in later without
-reshaping Identity; T4's auth/identity surface is provider-agnostic and carries no
-subsystem-specific coupling (D-035).
+The merged branch **`feat/phase-1-identity`** is **deleted**; `main` (close docs at `4959c6f`) carries
+everything. **Only remaining for real end-user sign-in: the D-035 Supabase dashboard items** (`site_url`,
+allow-list apex, Resend SMTP). Vision **D-034** is baked into a **generic economy** so markets/players/
+fantasy plug in later without reshaping Identity; the auth/identity surface is provider-agnostic and carries
+no subsystem-specific coupling (D-035). **Next milestone = Phase 2 (Predictions Core & Scoring).**
 
 ## Checkpoint — at a glance (2026-06-04)
 
@@ -108,19 +108,18 @@ Entity Layer & Fantasy"**) · **D-040** Founding Squad / "Pack Fundación F90". 
 
 ## Repository state
 
-- **Branch:** `feat/phase-1-identity` (off `main` = `b6bff60`, Phase 0.6) — **PUSHED to `origin` (`F90Plus/f90`)**; local == remote.
-- **Tip:** `a71dc44` (`fix(supabase): render public pages without auth env (preview-safe)`).
-- **Analyst Center Market Feel block (newest, on GitHub):** `d7d2575` **D-041** (Analyst Center as a live market in place + XI Ideal pitch) → `1b3f4e9` **D-042** (two surfaces, documented) → `a71dc44` (Supabase preview-safe guards).
+- **Phase 1 MERGED:** PR [#2](https://github.com/F90Plus/f90/pull/2) → `main` (merge `7584f65`); the `feat/phase-1-identity` branch is **deleted** (local + remote).
+- **`main` tip:** `4959c6f` (`docs(phase-1): official close — D-048`) == `origin/main`.
+- **Current branch:** `chore/phase-2-preflight` (off `main`) — Phase 2 pre-flight (D-049 middleware fix + this doc reconciliation); not yet pushed/PR'd (founder-gated).
 - **Working tree:** clean.
-- **PUSHED; `main` untouched at `b6bff60`** (production `www.f90.xyz` still Phase 0.6).
-- **Ahead of `main`:** 31 commits (`git rev-list --count main..HEAD`).
-- **Key commits (Phase 1 arc — each `feat` is paired with its `docs(...)`):**
+- **Production:** `www.f90.xyz` LIVE on Phase 1 (env-activated; D-046/D-048).
+- **Key commits (Phase 1 arc — each `feat` paired with its `docs(...)`):**
   - `30ae5df` T1 SSR + middleware · `faa978b` T2 schema (`0001`) · `901e796` T3 seed (`0002`) · `fa83bde` grants
   - `b902e8e` **T4** auth flows · `16c84c6` landing (ticker + drop Nations, D-036) · `11f86a5` **T5** onboarding
   - `101ec1d` D-037 + D-038 vision · `c727644` **D-039** Tokens F90 (`0003`) · `441cd33` **T6** `(app)` + `/home`
   - `cb3c2b3` sticky ticker · `66139b2` **D-040** Founding Squad · `972a240` **T7** profile + OG
-  - `20b0587` Fantasy discovery section · `5872c27` **T8** settings + cooldown · `52976ea` docs(T8)
-  - Full graph: `git log --oneline main..HEAD`.
+  - `20b0587` Fantasy discovery section · `5872c27` **T8** settings + cooldown · `7779795` **T9** rankings teaser
+  - `c677e3d` **T10** sweep · `307eed8` **T11** DoD · `7584f65` **merge #2** · close docs `c9f47ed`→`0bc9019`→`eaffd61`→`4959c6f`
 
 ## Supabase state
 
@@ -169,7 +168,7 @@ welcome bonus = 20,026. **No pending migrations** (T9–T11 need none).
   self-update, sets the `*_changed_at` cooldown stamps; maps unique/FK violations). Country picker
   reads the 48 `countries` with correct flags (`flagAssetFor(name_en)`, NOT the 3-letter code).
   Signup routes new users here (`next=/onboarding`). **Verified E2E** (see Auth state).
-- **NOT BUILT:** public profile `/u/[username]` = T7; settings (full edit) + 30-day cooldown UI = T8.
+- **T7 + T8 SHIPPED + verified** (per-task sections below): public profile `/u/[username]` + dynamic OG; settings (full edit) + the 30-day cooldown UI.
 
 ## Wallets / Ledgers state
 
