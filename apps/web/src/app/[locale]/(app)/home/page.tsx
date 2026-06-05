@@ -65,22 +65,26 @@ export default async function AppHomePage({ params }: Props) {
             {t('home.greeting', { handle })}
           </h1>
 
-          <Stat label={t('home.tokensLabel')} value={t('home.tokensValue', { amount: balance })} tone="lime" />
+          {/* Hierarchy: Puntos is the hero (it feeds the ranking & ladder); Ranking is
+              the social hook (clickable → /ranking, with a hover affordance); Tokens —
+              the spendable economy — sits last so the score, not the currency, leads. */}
           <Stat label={t('home.pointsLabel')} value={t('home.pointsValue', { points })} tone="white" />
           <Link
             href="/ranking"
-            className="flex flex-col gap-1 rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-led-400"
             aria-label={tRanking('seeRanking')}
+            className="group flex flex-col gap-1 rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-led-400"
           >
             <Stat
               label={t('home.rankLabel')}
               value={rank == null ? t('home.rankUnranked') : t('home.rankValue', { rank })}
-              tone="led"
+              tone={rank == null ? 'dim' : 'led'}
+              trailing
             />
           </Link>
+          <Stat label={t('home.tokensLabel')} value={t('home.tokensValue', { amount: balance })} tone="lime" />
 
           {country ? (
-            <span className="inline-flex items-center gap-2 text-[0.8rem] text-mist-300">
+            <span className="inline-flex items-center gap-2 border-l border-mist-500/15 pl-6 text-[0.8rem] text-mist-300">
               <CountryFlag flag={country.flag} accent={country.accent} />
               {t('home.backing', { country: country.name })}
             </span>
@@ -88,22 +92,14 @@ export default async function AppHomePage({ params }: Props) {
         </Card>
 
         {/* ── HAZ TU PREDICCIÓN — featured fixture as the hero card ───────── */}
-        <section className="mt-10">
-          <div className="mb-3.5 flex items-end justify-between gap-3">
-            <div>
-              <span className="eyebrow">{t('home.predict.eyebrow')}</span>
-              <h2 className="mt-2 font-display text-2xl font-extrabold text-mist-50 sm:text-[1.7rem]">
-                {t('home.predict.title')}
-              </h2>
-            </div>
-            {fixtures.length > 0 ? (
-              <Link
-                href="/#tournament"
-                className="shrink-0 rounded text-[0.8rem] font-semibold text-led-300 transition-colors hover:text-led-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-led-400"
-              >
-                {t('home.predict.seeAll')} →
-              </Link>
-            ) : null}
+        {/* id="predict" is the in-page anchor the "Mis predicciones" empty-state CTA
+            scrolls to; scroll-mt clears the sticky header. */}
+        <section id="predict" className="mt-10 scroll-mt-24">
+          <div className="mb-3.5">
+            <span className="eyebrow">{t('home.predict.eyebrow')}</span>
+            <h2 className="mt-2 font-display text-2xl font-extrabold text-mist-50 sm:text-[1.7rem]">
+              {t('home.predict.title')}
+            </h2>
           </div>
 
           {featured ? (
@@ -121,14 +117,8 @@ export default async function AppHomePage({ params }: Props) {
         {/* ── PRÓXIMOS PARTIDOS — the remaining fixtures ─────────────────── */}
         {rest.length > 0 ? (
           <section className="mt-10">
-            <div className="mb-3.5 flex items-end justify-between gap-3">
+            <div className="mb-3.5">
               <h2 className="font-display text-2xl font-extrabold text-mist-50">{t('home.upcoming.title')}</h2>
-              <Link
-                href="/#tournament"
-                className="shrink-0 rounded text-[0.8rem] font-semibold text-led-300 transition-colors hover:text-led-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-led-400"
-              >
-                {t('home.upcoming.seeAll')} →
-              </Link>
             </div>
             <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
               {rest.map((fixture) => (
@@ -183,13 +173,47 @@ function CountryFlag({ flag, accent }: { flag: string | null; accent: string }) 
   );
 }
 
-/** A labelled standing-strip stat (tabular value, toned accent). */
-function Stat({ label, value, tone }: { label: string; value: string; tone: 'lime' | 'white' | 'led' }) {
-  const toneClass = tone === 'lime' ? 'text-lime-300' : tone === 'led' ? 'text-led-300' : 'text-mist-50';
+/**
+ * A labelled standing-strip stat (tabular value, toned accent). `dim` is the honest
+ * pre-scoring tone for an unranked position; `trailing` renders a hover-animated
+ * arrow after the value to signal the ranking stat is a link (its parent `<Link>`
+ * carries the `group`).
+ */
+function Stat({
+  label,
+  value,
+  tone,
+  trailing = false,
+}: {
+  label: string;
+  value: string;
+  tone: 'lime' | 'white' | 'led' | 'dim';
+  trailing?: boolean;
+}) {
+  const toneClass =
+    tone === 'lime'
+      ? 'text-lime-300'
+      : tone === 'led'
+        ? 'text-led-300'
+        : tone === 'dim'
+          ? 'text-mist-500'
+          : 'text-mist-50';
   return (
     <div className="flex flex-col gap-1">
-      <span className="text-[0.6rem] uppercase tracking-[0.16em] text-mist-500">{label}</span>
-      <span className={`nums font-display text-[1.25rem] font-extrabold leading-none ${toneClass}`}>{value}</span>
+      <span className="text-[0.62rem] uppercase tracking-[0.16em] text-mist-400">{label}</span>
+      <span
+        className={`nums inline-flex items-baseline font-display text-[1.25rem] font-extrabold leading-none ${toneClass}`}
+      >
+        {value}
+        {trailing ? (
+          <span
+            aria-hidden
+            className="ml-1 text-[0.85rem] text-led-300/70 transition-transform group-hover:translate-x-0.5"
+          >
+            →
+          </span>
+        ) : null}
+      </span>
     </div>
   );
 }

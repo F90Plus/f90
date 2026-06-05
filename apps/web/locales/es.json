@@ -114,13 +114,11 @@
       "rankUnranked": "—",
       "backing": "Vas con {country}",
       "predict": {
-        "eyebrow": "La jornada inaugural",
-        "title": "Haz tu predicción",
-        "seeAll": "Ver todos los partidos"
+        "eyebrow": "Partido destacado",
+        "title": "Haz tu predicción"
       },
       "upcoming": {
-        "title": "Próximos partidos",
-        "seeAll": "Mundial"
+        "title": "Próximos partidos"
       },
       "myPredictions": {
         "title": "Mis predicciones",
@@ -130,7 +128,8 @@
         "statusWon": "Acertaste · +{points, number} pts",
         "statusLost": "Sin acierto",
         "emptyTitle": "Aún no has tomado tu primera posición.",
-        "emptyBody": "Elige un partido arriba — los aciertos suman puntos y Tokens, y construyen tu efectividad como Analista."
+        "emptyBody": "Elige un partido arriba — los aciertos suman puntos y Tokens, y construyen tu efectividad como Analista.",
+        "emptyCta": "Ver partidos arriba"
       },
       "fixturesPreparing": {
         "title": "Las fixtures del Mundial se están preparando.",

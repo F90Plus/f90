@@ -114,13 +114,11 @@
       "rankUnranked": "—",
       "backing": "Backing {country}",
       "predict": {
-        "eyebrow": "The opening matchday",
-        "title": "Make your prediction",
-        "seeAll": "See all matches"
+        "eyebrow": "Featured fixture",
+        "title": "Make your prediction"
       },
       "upcoming": {
-        "title": "Upcoming matches",
-        "seeAll": "World Cup"
+        "title": "Upcoming matches"
       },
       "myPredictions": {
         "title": "My predictions",
@@ -130,7 +128,8 @@
         "statusWon": "Correct · +{points, number} pts",
         "statusLost": "No hit",
         "emptyTitle": "You haven't taken your first position yet.",
-        "emptyBody": "Pick a match above — correct calls earn points and Tokens, and build your accuracy as an Analyst."
+        "emptyBody": "Pick a match above — correct calls earn points and Tokens, and build your accuracy as an Analyst.",
+        "emptyCta": "See matches above"
       },
       "fixturesPreparing": {
         "title": "The World Cup fixtures are being prepared.",
