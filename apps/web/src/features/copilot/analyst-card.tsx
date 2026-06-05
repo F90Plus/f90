@@ -1,10 +1,14 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { useTranslations } from 'next-intl';
+import { useFormatter, useTranslations } from 'next-intl';
 import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
+import { AnalystMark } from './analyst-mark';
 import { fadeUp, viewportOnce } from '@/lib/motion';
+import { cn } from '@/lib/utils';
+import { buttonVariants } from '@/components/ui/button';
+import { PLAY_HREF } from '@/lib/constants';
 import {
   confidenceLine,
   driverLines,
@@ -24,6 +28,8 @@ const BUCKET_TONE = {
 export function AnalystCard({ insight }: { insight: MatchInsight }) {
   const t = useTranslations('copilot');
   const tm = useTranslations('matches');
+  const tk = useTranslations('markets');
+  const f = useFormatter();
 
   const p = insight.probabilities;
   const pct = (x: number) => Math.round(x * 100);
@@ -32,15 +38,23 @@ export function AnalystCard({ insight }: { insight: MatchInsight }) {
   const drivers = driverLines(insight);
   const value = valueLine(insight);
 
+  // Illustrative live participation — the marquee market carries the biggest crowd.
+  const topPct = pct(Math.max(p.home, p.draw, p.away));
+  const participants = Math.round(4200 + topPct * 55);
+  const today = Math.round(participants * 0.07);
+
   return (
     <motion.div variants={fadeUp} initial="hidden" whileInView="show" viewport={viewportOnce}>
       <Card className="glow-led flex flex-col gap-5 p-6">
-        {/* header */}
+        {/* header — the Analyst's identity, woven in */}
         <div className="flex items-center justify-between gap-3">
-          <Badge tone="led" className="gap-2">
-            <span className="animate-live-pulse h-1.5 w-1.5 rounded-full bg-led-400" />
-            {t('name')}
-          </Badge>
+          <div className="flex items-center gap-3">
+            <AnalystMark size="sm" />
+            <div className="flex flex-col leading-tight">
+              <span className="font-display text-sm font-bold text-mist-50">{t('name')}</span>
+              <span className="text-[0.7rem] font-medium text-led-300/90">{t('status')}</span>
+            </div>
+          </div>
           <span className="font-display text-sm font-bold text-mist-100">
             {insight.home.code} <span className="text-mist-500">vs</span> {insight.away.code}
           </span>
@@ -96,6 +110,32 @@ export function AnalystCard({ insight }: { insight: MatchInsight }) {
         </div>
 
         {value ? <p className="text-xs text-gold-300">{t(value.key, value.params)}</p> : null}
+
+        {/* live participation + the direct action (this marquee tie is a 1X2 market) */}
+        <div className="flex items-center gap-2 border-t border-mist-500/10 pt-4 text-xs text-mist-500">
+          <span className="flex items-center" aria-hidden>
+            {['var(--color-led-400)', 'var(--color-volt-400)', 'var(--color-lime-400)'].map((c, i) => (
+              <span
+                key={i}
+                className={cn('h-3 w-3 rounded-full ring-1 ring-night-900', i > 0 && '-ml-1.5')}
+                style={{ background: c }}
+              />
+            ))}
+          </span>
+          <span>
+            <span className="nums font-semibold text-mist-300">{f.number(participants)}</span>{' '}
+            {tk('participants')} ·{' '}
+            <span className="nums text-pitch-300">
+              +{f.number(today)} {tk('today')}
+            </span>
+          </span>
+        </div>
+        <div className="flex items-center gap-3">
+          <a href={PLAY_HREF} className={cn(buttonVariants({ size: 'md' }), 'flex-1')}>
+            {tk('position.cta')}
+          </a>
+          <span className="shrink-0 text-[0.7rem] text-mist-500">{tk('position.from')}</span>
+        </div>
 
         <p className="text-[0.7rem] leading-relaxed text-mist-500">{t('disclaimer')}</p>
       </Card>

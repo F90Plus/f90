@@ -148,7 +148,7 @@ begin
   insert into public.profiles (id, username, display_name)
     values (new.id, uname, new.raw_user_meta_data->>'display_name');
   insert into public.wallets (user_id, coins_balance) values (new.id, 0);
-  perform public.award_coins(new.id, 1000, 'signup_bonus', null, null);  -- D-031: 1,000 welcome coins
+  perform public.award_coins(new.id, 20026, 'signup_bonus', null, null);  -- D-039: 20,026 Tokens F90 (was 1,000, D-031; migration 0003)
   return new;
 end;
 $$;

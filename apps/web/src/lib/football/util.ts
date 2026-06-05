@@ -4,6 +4,14 @@
  * and how to read openfootball's date/time strings (e.g. "13:00 UTC-6").
  */
 
+/**
+ * openfootball/worldcup.json (2026) — public domain, no API key. The single
+ * canonical source URL, shared by the fixtures reader, the globe nations layer,
+ * and the tournament reader. Cache-first (revalidate 6h); callers never throw.
+ */
+export const OPENFOOTBALL_URL =
+  'https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json';
+
 // Knockout slots are placeholders ("Winner Group A", "1A", "3A/B/C/D/F"); group-stage
 // entries are real country names (no digits, no placeholder words).
 const PLACEHOLDER = /winner|runner|loser|place|tbd|play-?off|tba/i;

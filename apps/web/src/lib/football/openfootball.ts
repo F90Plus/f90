@@ -1,15 +1,16 @@
 import type { HomeMatch } from './types';
 import { teamMeta } from './teams';
 import { homeAdvantageFor, modelProbability } from './model';
-import { isRealTeam, parseKickoffISO, timeLabelFrom } from './util';
+import { isRealTeam, OPENFOOTBALL_URL, parseKickoffISO, timeLabelFrom } from './util';
 
 /**
  * openfootball/worldcup.json — public domain, NO API key. The first real source:
  * the full WC2026 schedule (teams, groups, dates, venues). Cache-first
  * (revalidate 6h). NEVER throws — returns [] on any failure so callers fall back.
+ * The source URL lives in ./util (single source of truth); re-exported here so
+ * existing importers (e.g. tournament.ts) keep importing it from this module.
  */
-export const OPENFOOTBALL_URL =
-  'https://raw.githubusercontent.com/openfootball/worldcup.json/master/2026/worldcup.json';
+export { OPENFOOTBALL_URL };
 
 export interface OFMatch {
   round?: string;

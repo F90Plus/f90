@@ -1,11 +1,22 @@
 # F90+ — Project State (Checkpoint)
 
-> **Resume entry point.** Read this first, then [OPERATING_MODEL.md](OPERATING_MODEL.md)
-> + [DECISIONS.md](DECISIONS.md). Snapshot date: **2026-06-04**. Phase: **FOUNDATION + PHASE 0.5
-> LAUNCHED LIVE · PHASE 0.6 TOURNAMENT CENTER CLOSED (merged to `main`, deployed).** Live at
-> **https://f90.xyz**. Next: **Phase 1 — Identity & Accounts**, fully designed and ready to build
-> ([PHASE_1_IDENTITY.md](PHASE_1_IDENTITY.md) · [SCHEMA_V1.md](SCHEMA_V1.md) ·
-> [PHASE_1_IMPLEMENTATION_PLAN.md](PHASE_1_IMPLEMENTATION_PLAN.md)).
+> **✅ CHECKPOINT 2026-06-05 — PHASE 1 (Identity & Accounts) COMPLETE / CLOSED (DoD passed, D-045).**
+> FOUNDATION + PHASE 0.5/0.6 **LIVE at https://www.f90.xyz**; **Phase 1 is code-complete + verified on
+> branch `feat/phase-1-identity`** (pushed, tip `4462657`; **`main` untouched at `b6bff60`**; production
+> **still Phase 0.6**). Phase 1 delivered: Supabase-backed auth (magic-link + Google) · onboarding ·
+> protected `(app)` gate + `/home` · public profile + dynamic **localized** OG · settings/30-day cooldown ·
+> the server-authoritative economy (wallet + append-only ledgers + `award_*`, welcome bonus **20,026
+> Tokens F90**) · a **real (empty, honest) rankings teaser** · the Analyst-Center live-market landing
+> (D-041) · and an i18n/token/visual/debt sweep (D-044). Gates green · i18n parity **263/263** · browser
+> E2E **ES/EN/mobile, 0 console errors** · 11 invariants confirmed.
+>
+> **▶ Production promotion is FOUNDER-GATED:** PR `feat/phase-1-identity` → `main` + merge → `vercel
+> --prod` (D-033) + pre-prod Supabase items (D-035). **▶ NEXT MILESTONE = Phase 2 (Predictions Core &
+> Scoring).** Read [PHASE_1_HANDOFF.md](PHASE_1_HANDOFF.md) (full close record + ledger) +
+> [ROADMAP.md](ROADMAP.md) + [DECISIONS.md](DECISIONS.md). **DO NOT open new fronts** (D-042
+> dashboard/Fantasy/player-market are future, documented-not-built).
+> Contracts: [PHASE_1_IDENTITY.md](PHASE_1_IDENTITY.md) · [SCHEMA_V1.md](SCHEMA_V1.md) ·
+> [PHASE_1_IMPLEMENTATION_PLAN.md](PHASE_1_IMPLEMENTATION_PLAN.md).
 
 ## TL;DR
 F90+ is the **living experience of the 2026 World Cup** — predictions, fantasy, ideal XI,
@@ -15,8 +26,15 @@ economy ratified in [DECISIONS.md](DECISIONS.md) D-027). The **foundation is CLO
 LIVE in production at https://www.f90.xyz** (GitHub `F90Plus/f90` → Vercel `f90` *(shared team,
 manual deploy — D-033)* → `www.f90.xyz` + SSL): bilingual i18n, premium branding, a deterministic AI Copilot ("The Analyst"), **real
 WC2026 fixtures**, **cinematic imagery**, and the flagship **3D World Cup globe hero** (gold
-hosts / green qualified, from real data). No accounts/backend yet — next is **Phase 1**
-(designed, documented, ready to build).
+hosts / green qualified, from real data). **Phase 1 (Identity & Accounts) is now IN PROGRESS** on
+branch `feat/phase-1-identity`: the Supabase backend (schema, economy, 48-country seed, RLS, grants)
+is **applied & verified**, and **auth (T4) + onboarding (T5) + the `(app)` group (T6) + the public
+profile (T7) + settings/30-day cooldown (T8) are shipped + verified** (magic-link + Google, dual-mode
+callback, login/signup ES+EN, auth-aware header; onboarding via RLS self-update; a session-gated
+`/home` showing the **20,026 Tokens F90** welcome bonus, D-039; a public `/u/[username]` with a dynamic
+**localized** OG card; a gated `/settings` with the cooldown); plus **T9 real rankings teaser** (D-043),
+**T10 i18n/token/visual/debt sweep** (D-044), and **T11 DoD gate → Phase 1 CLOSED** (D-045). Production
+promotion is founder-gated. See [PHASE_1_HANDOFF.md](PHASE_1_HANDOFF.md).
 
 ## Deploy state ✅ LIVE — incl. Phase 0.6 (updated 2026-06-04, D-033)
 - **GitHub:** `F90Plus/f90` — **own isolated org** (NOT PMS/PT/Chiribito/XPrediction),
@@ -95,11 +113,12 @@ Featured-card hero replaced by the globe (D-022).
   analyzes the **real opener**; runtime signals mock-fed until live adapters wired (Phase 2).
 
 ## What's NOT built yet ⏳
-Backend / accounts / persistence (Supabase, auth, profiles, wallet & scoring, real
-leaderboard — currently **mock**), **predictions**, **player market & fantasy XI**, social /
-leagues / friends, live match experience, shareable cards, notifications, automated tests.
-The Analyst's runtime signals are mock until football-data is wired. See
-[ROADMAP.md](ROADMAP.md) (reordered around the loop, D-029).
+**Built in Phase 1 (CLOSED):** Supabase backend, auth, profiles, wallet + append-only ledgers +
+`award_*` economy functions, and the **real (empty) rankings teaser** (replaced the mock). **Still
+ahead:** **predictions + scoring** (Phase 2 — generates the economy + fills the leaderboard),
+**player market & fantasy XI** (Phase 3), social / leagues / friends, live match experience, shareable
+cards, notifications, broader automated tests. The Analyst's runtime signals stay mock until
+football-data is wired (Phase 2). See [ROADMAP.md](ROADMAP.md) (reordered around the loop, D-029).
 
 ## Phase 1 design — DONE, ready to implement ✅
 Identity & Accounts fully specified: [PHASE_1_IDENTITY.md](PHASE_1_IDENTITY.md) (spec),
@@ -120,11 +139,11 @@ Predictions generates the economy that Fantasy spends (D-029).
 ## Where to resume
 1. ✅ **Public launch — DONE** (GitHub + Vercel + `f90.xyz` + SSL, live & validated).
 2. ✅ **Phase 0.6 — Tournament Center — DONE** (merged to `main`, deployed; D-032).
-3. **Phase 1 — Identity & Accounts (next session):** pre-flight is **partly done by Phase 0.6**
-   — ✅ `teams.ts` completed to 48, ✅ Vitest added. **Remaining pre-flight:** unify the
-   openfootball source + fix `.env.example`. Then **T0** (create the isolated Supabase project —
-   **founder gate**) → **T1** (compose `@supabase/ssr` with the next-intl middleware in
-   `proxy.ts`) → schema → auth → profile. Full map:
-   [PHASE_1_IMPLEMENTATION_PLAN.md](PHASE_1_IMPLEMENTATION_PLAN.md).
-**After Identity → Phase 2 (Predictions Core & Scoring):** the engine that generates the
-economy (correct call → points + coins), the daily-use driver.
+3. ✅ **Phase 1 — Identity & Accounts — CLOSED** (DoD passed, **D-045**) on branch
+   `feat/phase-1-identity` (pushed; `main` untouched; production still Phase 0.6). **Founder-gated to
+   ship:** PR → `main` + merge → `vercel --prod` (D-033) + pre-prod Supabase items (D-035). Full close
+   record: [PHASE_1_HANDOFF.md](PHASE_1_HANDOFF.md).
+4. **▶ NEXT = Phase 2 — Predictions Core & Scoring:** `fixtures` + `predictions` schema · the predict
+   flow (winner/scoreline/brackets) locking at kickoff · difficulty-honest scoring (`lib/football/model.ts`)
+   · server-side settlement → `award_points`/`award_coins`. **Generates the economy + fills the rankings
+   teaser with real data.** Map: [ROADMAP.md](ROADMAP.md) · contracts: [SCHEMA_V1.md](SCHEMA_V1.md).

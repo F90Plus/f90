@@ -51,7 +51,7 @@ Legend: ☐ todo · 🔒 founder gate · ⚙️ studio.
   `award_coins`, `award_points`, `global_rankings` view, RLS policies, indexes.
 - Live in `supabase/migrations/`; applied via the Supabase CLI; reviewed like code.
 - **Done when:** a test signup creates profile + wallet + a `signup_bonus` ledger row of
-  1,000; RLS blocks anon reads of `wallets`/ledgers; no client can write a balance.
+  20,026 (Tokens F90, D-039); RLS blocks anon reads of `wallets`/ledgers; no client can write a balance.
 
 ## T3 ⚙️ — Seed `countries` from `lib/football`
 

@@ -58,19 +58,20 @@ read fans out into the canonical tournament spine later phases attach to. Decisi
 
 ---
 
-## 🔜 Phase 1 — Identity & Accounts
+## ✅ Phase 1 — Identity & Accounts  *(CLOSED — DoD gate passed 2026-06-05; T1–T11)*
 
-Let people *be someone* on F90+ — and lay the **server-authoritative economy** the whole
-loop runs on. **Fully designed & ready to implement:**
+Let people *be someone* on F90+ — and lay the **server-authoritative economy** the whole loop runs on.
+**Live state + the full checkpoint:** [PHASE_1_HANDOFF.md](PHASE_1_HANDOFF.md) (contracts:
 [PHASE_1_IDENTITY.md](PHASE_1_IDENTITY.md) · [SCHEMA_V1.md](SCHEMA_V1.md) ·
-[PHASE_1_IMPLEMENTATION_PLAN.md](PHASE_1_IMPLEMENTATION_PLAN.md).
+[PHASE_1_IMPLEMENTATION_PLAN.md](PHASE_1_IMPLEMENTATION_PLAN.md)).
 
-- [ ] Isolated Supabase + `@supabase/ssr`; middleware composed with next-intl
-- [ ] Auth: magic-link + Google + Apple (D-030)
-- [ ] Public **profile** (`/u/[username]`, OG-shareable), favourite **country**, own-IP avatar
-- [ ] **Wallet + append-only ledgers** (coins + points) via `SECURITY DEFINER` functions — latent
-- [ ] Rankings teaser (replaces the mock); protected routes + auth-aware header
-- [ ] DB schema v1: `profiles`, `wallets`, `coin_ledger`, `score_ledger`, `countries`
+- [x] Isolated Supabase + `@supabase/ssr`; middleware composed with next-intl *(T1)*
+- [x] Auth: magic-link + Google *(T4; Apple deferred)* + **onboarding** *(T5)*
+- [x] Public **profile** (`/u/[username]`, dynamic OG, own-IP avatar) *(T7)* + **settings/30-day cooldown** *(T8)*
+- [x] **Wallet + append-only ledgers** + economy functions — latent; welcome bonus **20,026 Tokens F90** *(T2; D-039)*
+- [x] Protected `(app)` group + auth-aware header + `/home` *(T6)*  ·  [x] **Rankings teaser** (real `global_rankings`, honest empty-state) *(T9; D-043)*
+- [x] DB schema v1: `profiles`, `wallets`, `coin_ledger`, `score_ledger`, `countries`, `global_rankings` *(T2/T3)*
+- **✅ CLOSED (D-045):** T1–T11 done + DoD-passed (gates green · i18n parity 263/263 · E2E ES/EN/mobile, 0 console · 11 invariants). Production promotion (PR `feat/phase-1-identity`→`main` + `vercel --prod` + pre-prod Supabase items) is **founder-gated**. *(T9 D-043 · T10 D-044 · T11 D-045.)*
 
 ## ⏳ Phase 2 — Predictions Core & Scoring  *(generates the economy)*
 
@@ -91,6 +92,19 @@ Turn earned coins into a team.
 - [ ] **Ideal XI** per matchday (`lineups`, captain) with server-side formation rules
 - [ ] **Real-performance points** (`player_match_scores`, FPL-style) feed profile points
 - [ ] Player data adapter (football-data / api-football; `names+stats=facts`)
+
+## ⏳ Phase 3.5 — Entity Layer & Fantasy  *(reserved — D-038)*
+
+The presentation/IA layer that makes D-034's economy explorable. **Full design + the 8-point
+analysis: [ECOSYSTEM_VISION.md](ECOSYSTEM_VISION.md).** Sequenced *after* the Phase 2/3 engine
+(entity pages are read-models over that data). Routes reserved now; build *toward* it from T6.
+
+- [ ] **Nation hubs** `/nations/[code]` (Overview/Players/Stats/Matches/Markets/Predictions) —
+      read-only tabs can land early over openfootball; economic tabs light up with Phase 2/3
+- [ ] **Player profiles** `/players/[slug]` — the shared primitive (price · portfolio · Fantasy · XI)
+- [ ] **Fantasy** promoted to a named top-level vertical (squad · budget · XI + bench · live value)
+- [ ] **"What is F90+?"** landing discovery section (early win — explains the loop, pre-engine)
+- [ ] Top-nav evolves to **World Cup · Markets · Fantasy · Rankings** + ⌘K entity search
 
 ## ⏳ Phase 4 — Rankings, Leagues & Reputation  *(the viral loop)*
 

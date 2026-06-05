@@ -1,13 +1,14 @@
 {
   "meta": {
     "title": "F90+ — Predict the 2026 World Cup with friends",
-    "description": "The free, social way to predict every match of the 2026 World Cup. Virtual coins, global leaderboards, and a football-smart AI. No real money — just glory."
+    "description": "The free, social way to predict every match of the 2026 World Cup. Tokens F90, global leaderboards, and a football-smart AI. No real money — just glory."
   },
   "nav": {
     "how": "How it works",
     "matches": "Matches",
     "analyst": "Analyst",
     "rankings": "Leaderboard",
+    "fantasy": "Fantasy",
     "play": "Play free"
   },
   "common": {
@@ -21,15 +22,161 @@
     "label": "Language",
     "aria": "Change language"
   },
+  "auth": {
+    "login": {
+      "title": "Welcome back",
+      "subtitle": "Sign in and keep calling the World Cup.",
+      "metaTitle": "Sign in"
+    },
+    "signup": {
+      "title": "Join F90+",
+      "subtitle": "Create your free profile. Tokens F90, zero risk.",
+      "metaTitle": "Create account"
+    },
+    "emailLabel": "Email",
+    "emailPlaceholder": "you@email.com",
+    "divider": "or",
+    "magic": {
+      "submit": "Send magic link",
+      "sending": "Sending…",
+      "sentTitle": "Check your inbox",
+      "sentBody": "We sent a sign-in link to {email}. Open it to continue."
+    },
+    "google": {
+      "label": "Continue with Google",
+      "connecting": "Connecting…"
+    },
+    "switch": {
+      "toSignupLead": "New to F90+?",
+      "toSignup": "Join free",
+      "toLoginLead": "Already have an account?",
+      "toLogin": "Sign in"
+    },
+    "disclaimer": "No real money, no gambling. Just predictions and pride.",
+    "errors": {
+      "invalidEmail": "Enter a valid email.",
+      "sendFailed": "We couldn't send the link. Try again.",
+      "auth": "We couldn't complete sign-in. Try again.",
+      "oauth": "We couldn't connect to Google. Try again."
+    },
+    "account": {
+      "signIn": "Sign in",
+      "menu": "Account menu",
+      "signedInAs": "Signed in as",
+      "signOut": "Sign out"
+    }
+  },
+  "onboarding": {
+    "metaTitle": "Create your profile",
+    "title": "Almost there",
+    "subtitle": "Pick your handle and the nation you're backing. You can change them later.",
+    "username": {
+      "label": "Your player handle",
+      "placeholder": "your_handle",
+      "hint": "3–20 characters. Lowercase letters, numbers and underscore.",
+      "checking": "Checking…",
+      "available": "Available",
+      "taken": "Taken"
+    },
+    "country": {
+      "label": "Your nation",
+      "search": "Search a nation",
+      "hostBadge": "Host"
+    },
+    "submit": "Enter F90+",
+    "submitting": "Creating your profile…",
+    "errors": {
+      "usernameFormat": "3–20 chars: lowercase, numbers or underscore.",
+      "usernameReserved": "That handle is reserved.",
+      "usernameTaken": "That handle is already taken.",
+      "countryInvalid": "Pick a nation from the list.",
+      "failed": "Couldn't save. Please try again."
+    }
+  },
+  "app": {
+    "home": {
+      "metaTitle": "Your F90+",
+      "eyebrow": "Your dressing room",
+      "greeting": "Hey, @{handle}",
+      "subtitle": "Your World Cup starts here.",
+      "balanceLabel": "Your wallet",
+      "balanceValue": "{amount, number} Tokens F90",
+      "pointsLabel": "Points",
+      "pointsValue": "{points, number}",
+      "backing": "Backing {country}",
+      "soon": "Predictions and markets are coming very soon. Meanwhile, explore the World Cup.",
+      "exploreCta": "Explore the World Cup"
+    }
+  },
+  "profile": {
+    "metaTitle": "{handle} on F90+",
+    "metaDescription": "{handle}'s F90+ profile — predict the 2026 World Cup.",
+    "backing": "Backing {country}",
+    "joined": "Joined {date}",
+    "pointsLabel": "Points",
+    "pointsValue": "{points, number}",
+    "rankTeaser": "The ranking begins when predictions open.",
+    "ogTagline": "Predict the World Cup · f90.xyz"
+  },
+  "settings": {
+    "metaTitle": "Settings",
+    "title": "Settings",
+    "subtitle": "Your F90+ identity.",
+    "displayNameLabel": "Display name",
+    "displayNamePlaceholder": "Your name",
+    "bioLabel": "Bio",
+    "bioPlaceholder": "A few words about you",
+    "usernameLabel": "Player handle",
+    "countryLabel": "Your nation",
+    "cooldownHint": "You can change this again on {date}.",
+    "save": "Save changes",
+    "saving": "Saving…",
+    "saved": "Changes saved.",
+    "errors": {
+      "usernameFormat": "3–20 chars: lowercase, numbers or underscore.",
+      "usernameReserved": "That handle is reserved.",
+      "usernameTaken": "That handle is taken.",
+      "usernameCooldown": "You can't change your handle yet (30-day wait).",
+      "countryInvalid": "Invalid nation.",
+      "countryCooldown": "You can't change your nation yet (30-day wait).",
+      "bioTooLong": "Bio can't exceed 280 characters.",
+      "failed": "Couldn't save. Try again."
+    }
+  },
+  "markets": {
+    "label": "Markets",
+    "tag": "Soon",
+    "a11y": "F90+ prediction markets (preview)",
+    "participants": "participants",
+    "today": "today",
+    "consensus": "+{edge}% above the consensus",
+    "lean": "The Analyst leans {pick}",
+    "opportunity": "Opportunity",
+    "position": {
+      "label": "Your position",
+      "cta": "Take a position",
+      "from": "from 10 F90"
+    },
+    "q": {
+      "winner": "to win the World Cup",
+      "topScorer": "top scorer",
+      "semifinalist": "to reach the semis",
+      "groupWinner": "to win Group {group}",
+      "reachFinal": "to reach the final",
+      "last16": "to reach the last 16",
+      "goldenBall": "Golden Ball",
+      "debutChampion": "A first-time champion?"
+    }
+  },
   "hero": {
     "eyebrow": "World Cup 2026 · Social predictions",
     "titleLead": "Predict the World Cup.",
     "titleHighlight": "Live every minute.",
-    "subtitle": "Make your calls, earn virtual coins, and climb a global leaderboard with friends and rivals worldwide. Free forever — bragging rights are the only currency that's real.",
+    "subtitle": "Make your calls, earn Tokens F90, and climb a global leaderboard with friends and rivals worldwide. Free forever — bragging rights are the only currency that's real.",
     "ctaPrimary": "Start predicting — free",
     "ctaSecondary": "How it works",
     "chipFree": "100% free to play",
-    "chipCoins": "Virtual coins, zero risk",
+    "chipCoins": "{amount, number} Tokens F90 free",
     "chipRanking": "Global leaderboard"
   },
   "countdown": {
@@ -69,16 +216,45 @@
     "title": "Three taps to glory",
     "subtitle": "No wallet, no risk, no nonsense. Just football and bragging rights.",
     "step1Title": "Call the matches",
-    "step1Body": "Predict winners, scorelines and big moments before kickoff. Every call costs virtual coins — spend them wisely.",
+    "step1Body": "Predict winners, scorelines and big moments before kickoff. Every call costs Tokens F90 — spend them wisely.",
     "step2Title": "Climb the table",
     "step2Body": "Nail your predictions to bank points and rise through a global leaderboard that moves with the World Cup.",
     "step3Title": "Out-predict your friends",
     "step3Body": "Build private leagues, talk some trash, and let our football-smart AI pundit challenge your gut with the stats."
   },
+  "fantasy": {
+    "eyebrow": "Your World Cup squad",
+    "title": "Build your dream squad",
+    "subtitle": "More than predicting: earn Tokens F90, enter the markets, sign players and field your XI. The World Cup like you've never played it.",
+    "tag": "Soon",
+    "xiTitle": "Your dream XI",
+    "teamValue": "Squad value",
+    "road": {
+      "title": "Your road to the final",
+      "groups": "Groups",
+      "r16": "Last 16",
+      "qf": "Quarters",
+      "sf": "Semis",
+      "final": "Final",
+      "venue": "MetLife · Jul 19"
+    },
+    "bench": "Bench",
+    "steps": {
+      "earn": "Earn Tokens F90",
+      "markets": "Enter the markets",
+      "trade": "Buy and sell players",
+      "squad": "Build your squad",
+      "xi": "Pick your starting XI",
+      "bench": "Manage your bench",
+      "compete": "Compete on the leaderboards"
+    },
+    "cta": "Start free"
+  },
   "leaderboard": {
     "eyebrow": "Global table",
-    "title": "The world is already predicting",
-    "subtitle": "A taste of the global leaderboard. Your name could be here in June.",
+    "title": "The global leaderboard",
+    "subtitle": "The World Cup's sharpest analysts, live.",
+    "subtitleEmpty": "It opens when predictions start — the top spot is up for grabs.",
     "colRank": "#",
     "colPlayer": "Player",
     "colPoints": "Points",
@@ -94,12 +270,13 @@
   },
   "footer": {
     "tagline": "The social World Cup pick'em.",
-    "disclaimer": "F90+ is a free-to-play prediction game. It uses virtual coins only and involves no real money or gambling.",
+    "disclaimer": "F90+ is a free-to-play prediction game. It uses virtual Tokens F90 only and involves no real money or gambling.",
     "rights": "Built for the love of the game.",
     "copyright": "© {year} F90+"
   },
   "copilot": {
     "name": "The Analyst",
+    "status": "Analyzing the World Cup",
     "sectionEyebrow": "Meet your copilot",
     "sectionTitle": "Your personal football Analyst",
     "sectionSubtitle": "Before every match, the Analyst reads the data — form, quality, head-to-head and the market — and gives you an honest, probabilistic call. No paid AI, no black box.",
@@ -143,14 +320,6 @@
       "matches": "Matches",
       "venues": "Host cities"
     },
-    "nations": {
-      "eyebrow": "Qualified nations",
-      "title": "The 48 are in",
-      "subtitle": "Every nation that earned its place at the 2026 World Cup — filter by confederation.",
-      "all": "All",
-      "host": "Host",
-      "count": "{count} nations"
-    },
     "groups": {
       "eyebrow": "The draw",
       "title": "Twelve groups, one road",
@@ -183,7 +352,7 @@
     "key": {
       "eyebrow": "Key matches",
       "title": "The fixtures that matter",
-      "subtitle": "The opener and the marquee ties — read by the Analyst before a ball is kicked.",
+      "subtitle": "The opener, the marquee ties and the World Cup markets — with the Analyst's conviction. Take your position with F90.",
       "predictSoon": "Predictions open soon"
     }
   }

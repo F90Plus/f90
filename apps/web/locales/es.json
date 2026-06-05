@@ -1,13 +1,14 @@
 {
   "meta": {
     "title": "F90+ — Predice el Mundial 2026 con tus amigos",
-    "description": "La forma gratuita y social de predecir cada partido del Mundial 2026. Monedas virtuales, rankings globales y una IA futbolera. Sin dinero real: solo gloria."
+    "description": "La forma gratuita y social de predecir cada partido del Mundial 2026. Tokens F90, rankings globales y una IA futbolera. Sin dinero real: solo gloria."
   },
   "nav": {
     "how": "Cómo funciona",
     "matches": "Partidos",
     "analyst": "Analista",
     "rankings": "Ranking",
+    "fantasy": "Fantasy",
     "play": "Jugar gratis"
   },
   "common": {
@@ -21,15 +22,161 @@
     "label": "Idioma",
     "aria": "Cambiar idioma"
   },
+  "auth": {
+    "login": {
+      "title": "Bienvenido de vuelta",
+      "subtitle": "Entra y sigue mojando en el Mundial.",
+      "metaTitle": "Iniciar sesión"
+    },
+    "signup": {
+      "title": "Únete a F90+",
+      "subtitle": "Crea tu perfil gratis. Tokens F90, cero riesgo.",
+      "metaTitle": "Crear cuenta"
+    },
+    "emailLabel": "Email",
+    "emailPlaceholder": "tu@email.com",
+    "divider": "o",
+    "magic": {
+      "submit": "Enviar enlace mágico",
+      "sending": "Enviando…",
+      "sentTitle": "Revisa tu correo",
+      "sentBody": "Te enviamos un enlace de acceso a {email}. Ábrelo para entrar."
+    },
+    "google": {
+      "label": "Continuar con Google",
+      "connecting": "Conectando…"
+    },
+    "switch": {
+      "toSignupLead": "¿Aún no tienes cuenta?",
+      "toSignup": "Únete gratis",
+      "toLoginLead": "¿Ya tienes cuenta?",
+      "toLogin": "Inicia sesión"
+    },
+    "disclaimer": "Sin dinero real, sin apuestas. Solo predicciones y orgullo.",
+    "errors": {
+      "invalidEmail": "Introduce un email válido.",
+      "sendFailed": "No pudimos enviar el enlace. Inténtalo de nuevo.",
+      "auth": "No pudimos completar el acceso. Inténtalo de nuevo.",
+      "oauth": "No pudimos conectar con Google. Inténtalo de nuevo."
+    },
+    "account": {
+      "signIn": "Iniciar sesión",
+      "menu": "Menú de cuenta",
+      "signedInAs": "Sesión iniciada como",
+      "signOut": "Cerrar sesión"
+    }
+  },
+  "onboarding": {
+    "metaTitle": "Crea tu perfil",
+    "title": "Casi listo",
+    "subtitle": "Elige tu nombre y la selección con la que vas. Podrás cambiarlos más adelante.",
+    "username": {
+      "label": "Tu nombre de jugador",
+      "placeholder": "tu_nombre",
+      "hint": "3–20 caracteres. Letras minúsculas, números y guion bajo.",
+      "checking": "Comprobando…",
+      "available": "Disponible",
+      "taken": "Ya está cogido"
+    },
+    "country": {
+      "label": "Tu selección",
+      "search": "Busca una selección",
+      "hostBadge": "Anfitrión"
+    },
+    "submit": "Entrar a F90+",
+    "submitting": "Creando tu perfil…",
+    "errors": {
+      "usernameFormat": "3–20 caracteres: minúsculas, números o guion bajo.",
+      "usernameReserved": "Ese nombre está reservado.",
+      "usernameTaken": "Ese nombre ya está cogido.",
+      "countryInvalid": "Elige una selección de la lista.",
+      "failed": "No se pudo guardar. Inténtalo de nuevo."
+    }
+  },
+  "app": {
+    "home": {
+      "metaTitle": "Tu F90+",
+      "eyebrow": "Tu vestuario",
+      "greeting": "Hola, @{handle}",
+      "subtitle": "Tu Mundial empieza aquí.",
+      "balanceLabel": "Tu cartera",
+      "balanceValue": "{amount, number} Tokens F90",
+      "pointsLabel": "Puntos",
+      "pointsValue": "{points, number}",
+      "backing": "Vas con {country}",
+      "soon": "Las predicciones y los mercados llegan muy pronto. Mientras, explora el Mundial.",
+      "exploreCta": "Explorar el Mundial"
+    }
+  },
+  "profile": {
+    "metaTitle": "{handle} en F90+",
+    "metaDescription": "El perfil de {handle} en F90+ — predice el Mundial 2026.",
+    "backing": "Va con {country}",
+    "joined": "Se unió en {date}",
+    "pointsLabel": "Puntos",
+    "pointsValue": "{points, number}",
+    "rankTeaser": "El ranking arranca cuando empiezan las predicciones.",
+    "ogTagline": "Predice el Mundial · f90.xyz"
+  },
+  "settings": {
+    "metaTitle": "Ajustes",
+    "title": "Ajustes",
+    "subtitle": "Tu identidad en F90+.",
+    "displayNameLabel": "Nombre visible",
+    "displayNamePlaceholder": "Tu nombre",
+    "bioLabel": "Bio",
+    "bioPlaceholder": "Cuéntate en pocas palabras",
+    "usernameLabel": "Nombre de jugador",
+    "countryLabel": "Tu selección",
+    "cooldownHint": "Podrás cambiarlo el {date}.",
+    "save": "Guardar cambios",
+    "saving": "Guardando…",
+    "saved": "Cambios guardados.",
+    "errors": {
+      "usernameFormat": "3–20 caracteres: minúsculas, números o guion bajo.",
+      "usernameReserved": "Ese nombre está reservado.",
+      "usernameTaken": "Ese nombre ya está cogido.",
+      "usernameCooldown": "Aún no puedes cambiar tu nombre (espera de 30 días).",
+      "countryInvalid": "Selección no válida.",
+      "countryCooldown": "Aún no puedes cambiar tu selección (espera de 30 días).",
+      "bioTooLong": "La bio no puede superar los 280 caracteres.",
+      "failed": "No se pudo guardar. Inténtalo de nuevo."
+    }
+  },
+  "markets": {
+    "label": "Mercados",
+    "tag": "Pronto",
+    "a11y": "Mercados de predicción de F90+ (vista previa)",
+    "participants": "participantes",
+    "today": "hoy",
+    "consensus": "+{edge}% sobre el consenso",
+    "lean": "El Analista se inclina por {pick}",
+    "opportunity": "Oportunidad",
+    "position": {
+      "label": "Tu posición",
+      "cta": "Tomar posición",
+      "from": "desde 10 F90"
+    },
+    "q": {
+      "winner": "Gana el Mundial",
+      "topScorer": "Máximo goleador",
+      "semifinalist": "Llega a semifinales",
+      "groupWinner": "Gana el Grupo {group}",
+      "reachFinal": "Llega a la final",
+      "last16": "Pasa a octavos",
+      "goldenBall": "Balón de Oro",
+      "debutChampion": "¿Campeón debutante?"
+    }
+  },
   "hero": {
     "eyebrow": "Mundial 2026 · Predicciones sociales",
     "titleLead": "Predice el Mundial.",
     "titleHighlight": "Vive cada minuto.",
-    "subtitle": "Moja, gana monedas virtuales y escala un ranking global con amigos y rivales de todo el mundo. Gratis para siempre: la única moneda real es presumir.",
+    "subtitle": "Moja, gana Tokens F90 y escala un ranking global con amigos y rivales de todo el mundo. Gratis para siempre: la única moneda real es presumir.",
     "ctaPrimary": "Empieza a predecir — gratis",
     "ctaSecondary": "Cómo funciona",
     "chipFree": "100% gratis",
-    "chipCoins": "Monedas virtuales, cero riesgo",
+    "chipCoins": "{amount, number} Tokens F90 gratis",
     "chipRanking": "Ranking global"
   },
   "countdown": {
@@ -69,16 +216,45 @@
     "title": "Tres toques hacia la gloria",
     "subtitle": "Sin cartera, sin riesgo, sin líos. Solo fútbol y orgullo.",
     "step1Title": "Moja en los partidos",
-    "step1Body": "Predice ganadores, marcadores y momentazos antes del pitido inicial. Cada predicción cuesta monedas virtuales: gástalas con cabeza.",
+    "step1Body": "Predice ganadores, marcadores y momentazos antes del pitido inicial. Cada predicción cuesta Tokens F90: gástalos con cabeza.",
     "step2Title": "Escala en la tabla",
     "step2Body": "Acierta tus predicciones para sumar puntos y subir en un ranking global que se mueve al ritmo del Mundial.",
     "step3Title": "Gana a tus amigos",
     "step3Body": "Crea ligas privadas, pícate y deja que nuestra IA futbolera rete a tu instinto con las estadísticas en la mano."
   },
+  "fantasy": {
+    "eyebrow": "Tu selección para el Mundial",
+    "title": "Construye tu selección ideal",
+    "subtitle": "Más que predecir: gana Tokens F90, entra en los mercados, ficha jugadores y arma tu XI. El Mundial como nunca lo jugaste.",
+    "tag": "Pronto",
+    "xiTitle": "Tu XI ideal",
+    "teamValue": "Valor del equipo",
+    "road": {
+      "title": "Tu camino a la final",
+      "groups": "Grupos",
+      "r16": "Octavos",
+      "qf": "Cuartos",
+      "sf": "Semis",
+      "final": "Final",
+      "venue": "MetLife · 19 jul"
+    },
+    "bench": "Suplentes",
+    "steps": {
+      "earn": "Gana Tokens F90",
+      "markets": "Entra en los mercados",
+      "trade": "Compra y vende jugadores",
+      "squad": "Construye tu plantilla",
+      "xi": "Elige tu XI titular",
+      "bench": "Gestiona los suplentes",
+      "compete": "Compite en los rankings"
+    },
+    "cta": "Empieza gratis"
+  },
   "leaderboard": {
     "eyebrow": "Tabla global",
-    "title": "El mundo ya está prediciendo",
-    "subtitle": "Un adelanto del ranking global. Tu nombre podría estar aquí en junio.",
+    "title": "La clasificación global",
+    "subtitle": "Los mejores analistas del Mundial, en directo.",
+    "subtitleEmpty": "Se abre cuando empiecen las predicciones. El primer puesto está libre.",
     "colRank": "#",
     "colPlayer": "Jugador",
     "colPoints": "Puntos",
@@ -94,12 +270,13 @@
   },
   "footer": {
     "tagline": "La porra social del Mundial.",
-    "disclaimer": "F90+ es un juego de predicciones gratuito. Usa solo monedas virtuales y no implica dinero real ni apuestas.",
+    "disclaimer": "F90+ es un juego de predicciones gratuito. Usa solo Tokens F90 virtuales y no implica dinero real ni apuestas.",
     "rights": "Hecho por amor al fútbol.",
     "copyright": "© {year} F90+"
   },
   "copilot": {
     "name": "El Analista",
+    "status": "Analizando el Mundial",
     "sectionEyebrow": "Conoce a tu copiloto",
     "sectionTitle": "Tu Analista futbolero personal",
     "sectionSubtitle": "Antes de cada partido, el Analista lee los datos —forma, calidad, head-to-head y mercado— y te da una valoración honesta y probabilística. Sin IA de pago, sin caja negra.",
@@ -143,14 +320,6 @@
       "matches": "Partidos",
       "venues": "Sedes"
     },
-    "nations": {
-      "eyebrow": "Selecciones clasificadas",
-      "title": "Las 48 ya están",
-      "subtitle": "Todas las selecciones que se ganaron su sitio en el Mundial 2026 — filtra por confederación.",
-      "all": "Todas",
-      "host": "Anfitrión",
-      "count": "{count} selecciones"
-    },
     "groups": {
       "eyebrow": "El sorteo",
       "title": "Doce grupos, un camino",
@@ -183,7 +352,7 @@
     "key": {
       "eyebrow": "Partidos clave",
       "title": "Los partidos que importan",
-      "subtitle": "El inaugural y los duelos estelares — con la lectura del Analista antes de que ruede el balón.",
+      "subtitle": "El inaugural, los duelos estelares y los mercados del Mundial — con la convicción del Analista. Toma posición con tus F90.",
       "predictSoon": "Predicciones muy pronto"
     }
   }

@@ -381,7 +381,7 @@ gate after `f90.xyz` connects.
 ### D-031 — Identity defaults: welcome bonus, mutability, shareable profile, own-IP avatars (studio defaults, reversible) ✅
 **Context:** Several reversible Identity parameters needed sensible defaults to unblock the
 build without escalating each one.
-**Decision:** (a) **1,000-coin welcome bonus** at signup (seeds the economy; spendable once
+**Decision:** (a) **1,000-coin welcome bonus** at signup *(superseded by **D-039** → 20,026 Tokens F90)* (seeds the economy; spendable once
 the market exists). (b) `username` + favourite **country** are changeable with a **30-day
 cooldown** (anti link-rot / impersonation / tribe-hopping). (c) The **public profile is
 first-class and OG-shareable** (`/u/[username]`) to power the growth loop. (d) **Avatars
@@ -442,3 +442,295 @@ Vercel team vs. accept the shared Chiribito team; and optionally connect GitHub 
 **Consequences:** Each phase must be manually `vercel --prod`-ed until auto-deploy is wired. The
 "isolated Vercel account" invariant is currently **violated at the team level** and needs a founder
 decision. Code isolation (separate repo `F90Plus/f90`) is intact.
+
+### D-034 — Expanded product vision: prediction markets + virtual economy + player trading (designed, not built) ✅ (founder, 2026-06-04)
+**Context:** The founder clarified the target vision goes **beyond sports predictions**. F90+ will
+also include: **Polymarket-style prediction markets** (no real money), a **persistent virtual
+wallet**, a **virtual economy** driven by correct calls + real performance, **player buy/sell** with
+**dynamic in-tournament prices**, full **squad building** (starting XI + bench + total team value),
+**social rankings + private leagues**, and a **player/asset portfolio**. This refines and extends the
+living-World-Cup model (D-024) and the three-currency economy (D-027); most of it is already in the
+[SCHEMA_V1.md](SCHEMA_V1.md) forward contract (`players`, `squads`, `lineups`, `leagues`,
+`predictions`). The **new** emphasis is a market layer (a price/position per outcome, Polymarket-style)
+**on top of** — not replacing — the difficulty-honest 1X2/score/bracket predictions.
+**Decision:** **Phase 1 scope is UNCHANGED** (Identity & Accounts only). But every
+Identity/auth/profile/wallet/onboarding decision stays **generic and extensible** so these systems
+plug in later **without reshaping Identity**. Already true by design and to be preserved: (a) the
+wallet + append-only `coin_ledger`/`score_ledger` with generic `(kind, ref_type, ref_id)` absorb
+**any** economic source — prediction settlement, market trades, player purchases, fantasy rewards;
+(b) `award_coins`/`award_points` (`SECURITY DEFINER`) are the **single, reusable** write path;
+(c) `profiles` carry no system-specific fields; (d) auth is provider-agnostic. The Polymarket-style
+**market is a NEW subsystem** to design in its own phase (an extension around Phase 2/3): it adds
+market/position/settlement tables (AMM vs simple order model — TBD), but reads the **same wallet** and
+feeds the **same points** — one character, one economy.
+**Consequences:** No Phase 1 rework when markets/portfolio/dynamic-pricing land; the economy stays
+server-authoritative and tamper-proof by construction. A dedicated market-design doc + ADR will
+precede that build. The 1X2/score/bracket predictions (D-027) and the market layer **coexist** as two
+prediction surfaces over one economy.
+
+### D-035 — Auth flows (T4): one dual-mode callback, locale-safe redirects, passwordless login = signup ✅ (2026-06-04)
+**Context:** T4 builds the user-facing auth on the T1 SSR clients + T2 trigger. Two real-world
+ambiguities had to be resolved: (a) `@supabase/ssr` magic links can return to the app as either
+`?code=` (default template / OAuth) **or** `?token_hash=&type=` (token-hash template), and (b) the
+flow must preserve the active locale and never become an open redirect. Google OAuth always returns
+`?code=`.
+**Decision:** (1) **One callback** at `/[locale]/(auth)/callback/route.ts` handles **both** forms —
+`exchangeCodeForSession(code)` for OAuth + PKCE magic links, `verifyOtp({token_hash,type})` for the
+token-hash template — so magic-link ships **without** requiring a Supabase email-template edit.
+(2) Redirect resolution is **pure + unit-tested** (`features/auth/validation.ts`): `resolveSafeNext`
+collapses any non-internal `next` (external/`//`/backslash/control-char) to `/`; `localePathname`
+re-applies next-intl's `as-needed` prefix in a Route Handler that only sees raw URLs. (3) Magic-link
+uses `shouldCreateUser: true`, so **login and signup are the same frictionless passwordless path**
+(implements D-030; a new email auto-provisions profile + wallet + 1,000-coin bonus via the T2
+trigger — verified end-to-end: a real request created `fan_e1632271` with `coins_balance=1000`).
+Email validation is server-side **zod** (`z.email()`), returning stable i18n keys, never raw messages.
+**Consequences:** Verified functionally on localhost:3300 — pages render ES+EN (0 console errors),
+invalid email → localized error, valid email → "check your inbox" (Supabase accepted), Google → 303 to
+the provider authorize URL. **Open config items (founder/dashboard, not code):** Supabase `site_url`
+is still `http://localhost:3000` (should become the production origin); the redirect allow-list has
+`https://www.f90.xyz/**` + (added this session) `http://localhost:3300/**`, but **not** the apex
+`https://f90.xyz/**` — add it before production OAuth/magic-link; production magic-link still needs its
+own SMTP (Resend) — dev SMTP is rate-limited. Full Google-consent + email-click completion needs a
+real account/inbox (founder), and is the only hop not machine-verifiable headless.
+
+### D-036 — Landing speaks "market" (D-034): live-market ticker in, "Qualified Nations" out ✅ (2026-06-04)
+**Context:** The landing communicated too much "World Cup information" and not enough "prediction
+market". Per the expanded vision (D-034 — Polymarket-style markets, wallet, player trading, fantasy),
+the homepage should start signalling that direction. Separately, the "Qualified Nations" grid ("Las 48
+ya están") duplicated the Groups section right below it (which already shows all 48 nations in
+context) and consumed a lot of vertical space for little added value.
+**Decision:** (1) **Removed** the `QualifiedNations` section and its dead code (`qualified-nations.tsx`,
+`nation-card.tsx`, the `tournament.nations` i18n) — keeping `NationFlag` and the `confederations` lib
+(still used by Groups + Bracket). The Tournament Center now flows Field-Is-Set → Groups → Bracket →
+Key Matches. (2) **Added a live-market ticker** (`features/markets/market-ticker.tsx` + illustrative
+`data/markets.ts`) directly under the Hero: a seamless, financial-terminal tape (subject · outcome ·
+probability% · green ▲ / red ▼ 24h move), premium not casino — pure-CSS marquee, hover-pause,
+reduced-motion-safe. (3) **Values are implied probabilities (Polymarket-style), NOT decimal odds.**
+Decimal odds are the language of sportsbooks (an explicit anti-goal), so this deviates from the
+founder's illustrative "4.50" examples while honouring the stated anti-betting principle — a trivial
+format swap if odds are preferred. (4) Data is **illustrative** (the markets engine is a later
+subsystem per D-034/D-035), framed honestly with a "Pronto/Soon" tag + an aria "preview" label,
+mirroring the existing leaderboard teaser pattern (`data/leaderboard.ts`).
+**Consequences:** The landing now reads as a prediction market within seconds, with a tighter vertical
+rhythm. When the real markets engine lands, the ticker swaps illustrative rows for live `markets`
+reads with no layout change. Verified: ES + EN + mobile render (0 console errors), `typecheck` + 63
+tests + `build` green. Subjects are real teams/players (facts, D-025).
+
+### D-037 — Prediction-market identity LOCKED: probability %, never bookmaker odds ✅ (founder-ratified 2026-06-04)
+**Context:** D-036 chose implied probability over decimal odds for the market ticker as an autonomous
+call, flagged for confirmation. The founder confirmed and elevated it to a brand invariant.
+**Decision:** F90+ markets ALWAYS express implied **probability (%)**, never decimal/fractional/
+American **odds**. Probability communicates a prediction market + collective intelligence; odds read
+as a traditional sportsbook, which F90+ explicitly is not (a non-goal — see ROADMAP "Non-goals":
+real-money betting/payouts/gambling). This governs the ticker, future market pages, player markets,
+and any price surface. Movement deltas (▲/▼ %) and "chance" framing are the house language.
+**Consequences:** No surface introduces odds, "bookmaker", "bet/wager/stake" framing, or fractional/
+decimal price formats. "Predict / chance / market / position" is the vocabulary. Reinforces the
+responsible, signal-not-wager positioning across the whole product.
+
+### D-038 — Ecosystem vision recorded + architecture reserved (Entity Layer & Fantasy) ✅ (founder, 2026-06-04)
+**Context:** The founder set the long-term direction: per-nation **hubs** (`/nations/<slug>` with
+Overview/Players/Stats/Matches/Markets/Predictions), first-class **player profiles**
+(`/players/<slug>`), **Fantasy as a visible top-level vertical** (nav → World Cup · Markets · Fantasy ·
+Rankings), and a landing **"What is F90+?"** discovery section. Asked for analysis + documentation
+only — **no implementation now**.
+**Decision:** Recorded in full in [ECOSYSTEM_VISION.md](ECOSYSTEM_VISION.md). It is a **faithful
+expansion of D-034** (adds the *navigable entity layer + Fantasy framing + discovery*, no new economic
+primitives). Adopt as a recognised milestone cluster **"Phase 3.5 — Entity Layer & Fantasy"**,
+**sequenced after** the engine (Phase 2 economy → Phase 3 players/market/XI), since entity pages are
+read-models over that data. **Reserve the route namespaces now** (`/nations/[code]/*`,
+`/players/[slug]`, `/markets/*`, `/fantasy/*`) so nothing collides. Routes/slugs stay **English**
+(D-003) — the ES UI localizes labels, not URLs. The player is the **shared primitive**: one market
+price viewed three ways (market value · trading P&L · fantasy value), one wallet, one points total.
+**Early wins allowed before the engine:** the discovery section and **read-only** nation hubs
+(over openfootball data). **Consequences:** T6+ build *toward* this (and must not reuse the reserved
+namespaces). Open questions O-1..O-4 (slug, market model, Fantasy v1 scope, player likeness) are
+parked in the vision doc for when the cluster starts. NOT on the critical path for Phase 1.
+
+### D-039 — Currency = "Tokens F90"; welcome bonus = 20,026 (supersedes the 1,000 of D-031) ✅ (founder, 2026-06-04)
+**Context:** The generic 1,000-coin welcome bonus (D-031, migration 0001) read as a placeholder. The
+founder rebranded the virtual currency to **"Tokens F90"** and set the welcome bonus to **20,026** —
+a number that ties to the **2026 World Cup**, carries more personality than 1,000/10,000, and scales
+better for future markets / Fantasy / player trading. Tokens F90 remain **virtual** (free-to-play,
+no real money, no gambling) — the legal/safety framing is unchanged.
+**Decision:** (1) Migration **0003** (`CREATE OR REPLACE handle_new_user`) credits **20,026** via
+`award_coins(..., 'signup_bonus', ...)` — applied to the live `f90-production` DB; the trigger
+`on_auth_user_created` is unchanged. The economy stays generic (D-034): same wallet, ledger and
+`award_coins` — only the amount moved. (2) **Single source** in code: `lib/economy.ts`
+(`WELCOME_BONUS_TOKENS = 20_026`, `CURRENCY_NAME = 'Tokens F90'`, 2 unit tests) — **must match the DB
+trigger**. (3) **Copy** rebranded "monedas virtuales / virtual coins" → **"Tokens F90"** across the
+landing/auth (meta, hero, how-it-works, footer, signup), keeping the virtual/free/no-gambling
+disclaimers; the hero chip features the bonus via the constant (`{amount} Tokens F90`, locale-
+formatted, no drift). "Tokens F90" is a proper noun — identical in ES + EN.
+**Consequences:** Verified E2E — a real admin-created signup fired the trigger → `coins_balance=20026`,
+`signup_bonus` ledger `amount=20026`, `balance_after=20026`; auth + onboarding unaffected; typecheck +
+74 tests + build green. Internal schema names (`coins_balance`, `coin_ledger`, `award_coins`) stay
+generic/unchanged (D-034) — "Tokens F90" is the user-facing brand, not a column rename. Future
+balance/wallet UIs read `WELCOME_BONUS_TOKENS` / `CURRENCY_NAME`.
+
+### D-040 — Founding Squad ("Pack Fundación F90") recorded for a future phase ✅ (founder, 2026-06-04)
+**Context:** The founder's forward vision: a new user shouldn't start with a full wallet and an empty
+team. On first entry they should already **own a starter squad** (XI + bench + a small portfolio)
+alongside the 20,026 Tokens F90 — something to *manage* from minute one — with **equal starting net
+worth for everyone, no random advantage, and no broken economy**. Asked for analysis + documentation
+only; **no implementation, no roadmap change now**.
+**Decision:** Full 7-point analysis in [ECOSYSTEM_VISION.md](ECOSYSTEM_VISION.md) §9. Recommend
+**"Pack Fundación F90" = value-equivalent squad (B) + light value-normalised favourite-nation flavour
+(C)** under a hard **equal-founding-net-worth** rule (20,026 Tokens F90 + an identical-value starter
+squad for all). **Equal start, divergent outcomes** is the invariant — flavour changes *who* you
+start with, never *how strong*. Fits D-034 with **no new primitives** (provisions `squad_players` +
+a default `lineup` server-side at onboarding, like the coin bonus); it is the **on-ramp to Fantasy**.
+Adopt as an official design pillar of the Fantasy/economy phase (**Phase 3 / reserved 3.5**),
+**built when `players` + the market exist** — designed *with* the engine, not bolted on. Open
+questions O-5 (flavour must not bias upside) + O-6 (net-worth split, reveal UX, grant ledger `kind`)
+parked in the vision doc. **Consequences:** none now — Phase 1 (T7→DoD) is unaffected; ROADMAP
+untouched per the founder's instruction. Reserves the design so Phase 3 can plan for it.
+
+### D-041 — Pre-T9 product/visual refinement: the Analyst Center IS a live market (in place) ✅ (founder, 2026-06-04)
+**Context:** Before resuming Phase 1 (T9), the founder asked for a refinement pass on the landing
+across four areas: markets, the AI Copilot, Fantasy and the XI Ideal. A first pass overreached by
+adding a **separate `#markets` section + nav item**; the founder corrected hard: **no new section,
+no new nav, no new grid, no new surface** — the existing section **"Los partidos que importan"**
+(`#analyst` / `KeyMatches`) **IS** the market and must be **transformed in place** (same architecture
+and layout). "Polymarket inspiration" = the *sensation* of a live market + positioning **inside these
+same cards**, never betting terminology. A throwaway HTML mock validated the card direction first; the
+founder then chose the action model (**quick F90 chips on single-outcome markets + one "Tomar
+posición" CTA on 1X2**).
+**Decision:** (1) **Reverted** the standalone `#markets` section + the `markets` nav entry
+(net-zero — the liked architecture is restored). (2) **Transformed `KeyMatches` in place** into a
+single live-market surface, same layout (hero + secondary grid): the **hero is the evolved
+`AnalystCard`** (the real deterministic engine read on the opener — kept server-side so the engine
+never enters the client bundle) now carrying market framing — live **participation** (participantes +
+"+N hoy") and a **"Tomar posición"** CTA (the opener is a 1X2 market); the **grid is ONE surface**
+mixing **outcome `MarketCard`s** (selecciones · jugadores · a narrativa) with quick-chip allocation
+(`+10/+50/+100 F90`) and the **fixtures as 1X2 `MatchCard`s** (priced outcomes, the Analyst's lean lit,
+single "Tomar posición" CTA). (3) **The Analyst is on every card** — an own-IP identity **mark**
+(`AnalystMark`, D-025) + a per-card **conviction** line (`+X% sobre el consenso`). (4) **Vocabulary is
+law (extends D-037):** probabilidad · posición · convicción · exposición · asignar F90 · participantes;
+**never** apuesta / cuota / stake / bet / ganancias / buy shares / odds. (5) **Honest preview:** the
+markets/economy engine is Phase 2/3 (D-034), so every chip/CTA is a preview that routes to **sign-up**
+("to take a position, create your profile") — no fabricated balances; the ticker keeps its "Pronto"
+tag. (6) **Same pass also** enriched the **Fantasy / XI Ideal** pitch (rich broadcast field, real
+markings, nation-accented 4-3-3, gold captain, squad value in F90, "road to the final" framing) — kept
+**independent and untouched** per the founder — and added the Analyst identity to the hero header.
+Illustrative market data lives in `data/markets.ts` (probability + spark + participants + edge); a pure
+`sparkPath` helper is unit-tested.
+**Consequences:** No new section/nav/surface — `Hero → TournamentCenter (… → KeyMatches) → HowItWorks
+→ FantasyTeaser → LeaderboardTeaser → CtaBand` unchanged. Gates green: `tsc` ✅, **99** unit tests ✅
+(incl. 11 new markets tests), `next build` ✅, i18n parity **261/261** (es+en). Verified in-browser:
+desktop + mobile, ES + EN, **0 console errors**. Branch `feat/phase-1-identity`, **NOT pushed**, `main`
+untouched. The throwaway validation mock (`public/__mock-*.html`) was deleted. **Next: resume Phase 1 at
+T9 (rankings).**
+
+### D-042 — Two surfaces: public discovery (Analyst Center) vs private portfolio dashboard (documented, not built) ✅ (founder, 2026-06-04)
+**Context:** With the Analyst Center now reading as a live market (D-041), the founder set the forward
+product direction — **documentation only, no implementation now** — clarifying that the live-market
+feel splits across **two distinct surfaces** with different jobs.
+**Decision (reserved, not built):** (1) **Home / Analyst Center = the PUBLIC DISCOVERY surface** —
+its job is to **discover opportunities** (World Cup markets + the Analyst's conviction), exactly as
+shipped in D-041; it stays public, broadcast, scannable. (2) **The private user DASHBOARD / profile
+evolves into a deeper, Polymarket-inspired experience** — *bigger markets, a wallet/cartera, open
+**positions**, **F90 exposure**, **entry history**, **conviction**, **performance / P&L**, and
+**position tracking***. (3) **Division of labour is the invariant:** **Home = discover opportunities ·
+personal dashboard = manage portfolio + reputation.** (4) It introduces **no new economic primitives**
+— it is a **read/management view over the same wallet + append-only ledgers + the market layer**
+(D-027 three-currency economy · D-034 generic economy absorbing markets/positions · **D-037
+probability-not-odds + the no-betting vocabulary law, still binding**). Sequenced **after the engine**
+(Phase 2 economy → Phase 3 market/Fantasy → reserved **Phase 3.5 Entity Layer**), so the dashboard is
+designed *with* the economy, not bolted on.
+**Consequences:** **None now** — pure documentation; Phase 1 (T9→DoD) and the ROADMAP are unaffected.
+Reserves the direction so the eventual dashboard phase plans for portfolio/positions/exposure/history
+as first-class. The public Analyst Center (D-041) and the private portfolio dashboard are **two views
+over one economy, one Analyst, one F90 wallet** — never a second app.
+
+### D-043 — T9: the rankings teaser reads the REAL global board; the mock is deleted ✅ (2026-06-05)
+**Context:** T9 (Phase 1) had to replace the fabricated `data/leaderboard.ts` mock (invented aliases
+like `laMáquina` + fake 12,480-point totals), consumed by the homepage `LeaderboardTeaser`, with a real
+read of the `global_rankings` view (T2). Pre-Phase-2 nobody has scored, so the board must read as an
+**honest empty-state**, never fake rows or a wall of 0-point users (the F90+ no-fabricated-data rule;
+D-028 "the points/ranking skeleton ships as a real (empty) teaser"). The landing is **public and must
+render on a preview deploy with no Supabase env** (D-035 / `a71dc44`).
+**Decision:** (1) New `lib/rankings.ts`: a **pure, unit-tested** `toTeaserEntries` (6 tests) that keeps
+only ranked players (`points > 0`) — so an all-zero / pre-scoring board projects to `[]` — plus a thin
+`getGlobalRankings` adapter. (2) New **cookie-less public Supabase client** (`lib/supabase/public.ts`):
+anonymous, **env-guarded** (no env → `null` → empty board, preview-safe), with its `fetch` wrapped in an
+ISR `revalidate` window so the homepage stays **cache-first** (D-007) and never forces per-request DB
+load; as `anon` it only sees world-readable rows. (3) `LeaderboardTeaser` becomes **presentational**
+(`entries` prop): real rows use the **own-IP avatar token** (`avatarColors`/`avatarInitial`, D-025) + the
+**nation flag**; the empty-state is a **premium "open seats" podium** (gold ranks, ghost avatar, shimmer,
+`—`) over the conversion CTA — honest and aspirational, never fabricated. (4) **Reused the existing
+`leaderboard` i18n namespace** (NOT a new `rankings` one — avoids duplication; supersedes the handoff's
+"new `rankings` namespace" wording): added `subtitleEmpty`, retuned `title`/`subtitle` to honest framing,
+**ES/EN parity**. (5) **Deleted `data/leaderboard.ts`** (sole consumer migrated; grep-confirmed). The
+markets ticker (`data/markets.ts`) is now the last illustrative surface.
+**Consequences:** No fabricated data on the landing. The board is real and empty today and fills
+automatically when Phase 2 scoring lands — **zero rework** (D-028, D-034 generic economy). Gates green:
+`pnpm typecheck` ✅, **105** unit tests ✅ (+6 rankings), `next build` ✅ (no `ignore*Errors`); verified
+in-browser **desktop + mobile, ES + EN, 0 console errors**, 0 server errors (the real `global_rankings`
+read returns the empty board cleanly). **Caveat:** the populated-row branch isn't browser-exercised yet
+(no scored users exist) — it is covered by the pure mapping tests + TypeScript, and renders the same
+tokens as the verified empty-state. Branch `feat/phase-1-identity`, **NOT pushed** (founder gate).
+**Next: T10 (i18n parity + design-token sweep) → T11 (Phase DoD gate) → close Phase 1.**
+
+### D-044 — T10: i18n parity + token/visual/debt sweep (4 parallel audits) ✅ (2026-06-05)
+**Context:** T10 (Phase 1) hardens coherence before the DoD gate. Ran four parallel audit subagents —
+hardcoded copy · hardcoded design values · visual inconsistencies · minor tech debt. The codebase
+audited **clean on DoD** (zero `any`/`@ts-ignore`/`eslint-disable`/`console.*`); findings were few and
+concentrated.
+**Decision (fixed — coherent with Phase 1, no new product fronts):** (1) **Localised the per-user OG
+card** (`u/[username]/opengraph-image.tsx`) — it ignored `locale` and always rendered English; now copy
+flows through `getTranslations({locale})` (`common.worldCup`, `profile.pointsLabel`, new
+`profile.ogTagline`) and points through `Intl.NumberFormat(locale)`. (2) **i18n ES/EN parity proven
+263/263** (added `ogTagline` to both). (3) **Visual consistency:** added `scroll-mt-24` to the four
+landing sections missing it (anchor jumps were hiding headings under the sticky header + ticker);
+converted `FieldIsSet` to the shared `SectionHeading` (its title was `md:text-5xl` vs every other
+section's `md:text-[2.75rem]` — now 44px = the rest); routed the in-card "Tomar posición" CTAs
+(`match-card` + `analyst-card`) through `buttonVariants` (restores the signature `glow-led` + system
+height/weight). (4) **Dead code:** deleted the retired `MatchesRail` + `AnalystSection` components
+(superseded by KeyMatches/TournamentCenter — D-032/D-041; both unreferenced). (5) Fixed a stale comment
+(1,000 → 20,026 Tokens F90, `auth/actions.ts`) and typed the `countries` `.select()` in `rankings.ts`
+(dropped the `as string` casts).
+**Deferred (flagged, NOT changed — with rationale):** (a) `brand.ts` `gold #F4BE54` drifts from the gold
+tokens → **brand colour = founder's call** (escalate, not an autonomous fix). (b) `GlobeSkeleton`
+gradient literal (`globe-fallback.tsx`) → a sub-second loading skeleton with non-exact-token stops in the
+fragile WebGL area; convert via a `.globe-skeleton` CSS class later. (c) the `football-data.ts`
+live-adapter cluster (`getHomeMatches`/`getOpenfootballFixtures`/`enrichWithFootballData`/
+`getWorldCupStandings`/`footballDataEnabled`) → **documented forward-compat scaffolding (D-010/D-014)**;
+remove or wire deliberately, not as a minor sweep. (d) copilot facade orphans (`getMatchInsight`/
+`getMatchInsightSync`) → seam reserved for the live/LLM path. (e) `avatar.ts` PALETTE → intentional
+own-IP avatar hues (incl. amber/sky with no token), non-CSS, acceptable.
+**Consequences:** tighter coherence — the OG card localises, anchors land correctly, section titles and
+primary CTAs are system-consistent, and two dead components are gone. Gates: `tsc` ✅, **105 tests** ✅,
+`next build` ✅ (no `ignore*Errors`), parity **263/263** ✅; verified in-browser via DOM/computed-style
+(FieldIsSet h2 44px = how-it-works 44px; Analyst CTA carries `glow-led` + `h-11`) + the OG route returns
+**200 `image/png` in ES and EN**. (Full-page screenshots are blocked by the known WebGL-globe capture
+hang — measured via DOM instead, which is conclusive for these properties.) Branch
+`feat/phase-1-identity`. **Next: T11 (Phase DoD gate) → close Phase 1.**
+
+### D-045 — Phase 1 (Identity & Accounts) CLOSED: DoD gate passed (T11) ✅ (2026-06-05)
+**Context:** T11 is the Definition-of-Done gate for Phase 1. All eleven tasks (T1–T11) are built +
+verified; this records the final gate result and the official close of the phase.
+**Decision:** **Phase 1 is CLOSED at the development level.** DoD verified end-to-end:
+- `pnpm typecheck` clean · **105** unit tests green · `next build` green (no `ignore*Errors`) ·
+  i18n **ES/EN parity 263/263**.
+- **Browser E2E pass — ES + EN + mobile, 0 console errors:** the landing (6 sections present,
+  `scroll-margin-top` uniform 96px, honest titles), auth (`/login` + `/signup` render the magic-link +
+  Google forms), the **protected-route gates** (unauth `/home` · `/settings` · `/onboarding` →
+  `/login?next=…`), **404s** (unknown profile + unknown route), and the **localized OG card** (200
+  `image/png` in ES and EN). Mobile 375px: **0 page overflow**.
+- **All 11 OPERATING_MODEL invariants confirmed:** isolation · dual-surface parity · premium-not-casino ·
+  WC2026 identity · social-first · free/no-betting (D-037) · clean/scalable · English-product +
+  no-hardcoded-copy · no-paid-LLM/data · tokens-over-hardcoding · tool-agnostic/portable.
+**What Phase 1 delivers:** Supabase-backed identity on an **isolated** project (auth magic-link + Google ·
+onboarding · public profile + dynamic **localized** OG · settings + 30-day cooldown) on a
+**server-authoritative, anti-cheat economy foundation** (wallet + append-only ledgers + `award_*`
+`SECURITY DEFINER` · welcome bonus **20,026 Tokens F90**) — **generic by design (D-034)** so
+Predictions/Market/Fantasy plug in with no Identity reshape — plus a **real (currently empty, honest)**
+rankings teaser and a coherence/i18n/token/debt sweep.
+**Consequences:** code-complete on branch `feat/phase-1-identity` (pushed; **`main` untouched at
+`b6bff60`**; production `www.f90.xyz` still Phase 0.6). **PRODUCTION PROMOTION IS FOUNDER-GATED:**
+(1) open a PR `feat/phase-1-identity` → `main` and merge; (2) manual `vercel --prod` (D-033); (3) before
+production auth, the Supabase founder/dashboard items — `site_url` → production origin, redirect
+allow-list add apex `https://f90.xyz/**`, Resend SMTP for magic-link (D-035). **Next milestone: Phase 2 —
+Predictions Core & Scoring** (generates the economy; fills the rankings teaser with real points).
+Non-blocking deferred items are in **D-044** + the handoff.

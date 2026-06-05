@@ -1,7 +1,6 @@
 import { getTournament } from '@/lib/football/tournament';
 import { favourites } from '@/lib/football/analysis';
 import { FieldIsSet } from './field-is-set';
-import { QualifiedNations } from './qualified-nations';
 import { GroupsGrid } from './groups-grid';
 import { BracketBand } from './bracket-band';
 import { KeyMatches } from './key-matches';
@@ -21,7 +20,6 @@ export async function TournamentCenter() {
   return (
     <>
       <FieldIsSet meta={tournament.meta} />
-      <QualifiedNations groups={tournament.groups} />
       <GroupsGrid groups={tournament.groups} />
       <BracketBand bracket={tournament.bracket} favourites={favs} />
       <KeyMatches matches={tournament.keyMatches} />

@@ -1,0 +1,25 @@
+import type { Metadata } from 'next';
+import { getTranslations, setRequestLocale } from 'next-intl/server';
+import { AuthPanel, parseAuthError } from '@/features/auth/auth-panel';
+import { resolveSafeNext } from '@/features/auth/validation';
+
+type Props = {
+  params: Promise<{ locale: string }>;
+  searchParams: Promise<Record<string, string | string[] | undefined>>;
+};
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: 'auth' });
+  return { title: t('signup.metaTitle'), robots: { index: false } };
+}
+
+export default async function SignupPage({ params, searchParams }: Props) {
+  const { locale } = await params;
+  const sp = await searchParams;
+  setRequestLocale(locale);
+
+  // New accounts land on onboarding by default (unless a deep-link `next` says otherwise).
+  const next = resolveSafeNext(typeof sp.next === 'string' ? sp.next : '/onboarding');
+  return <AuthPanel locale={locale} next={next} mode="signup" errorKey={parseAuthError(sp.error)} />;
+}
