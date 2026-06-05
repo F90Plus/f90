@@ -13,7 +13,7 @@ export function CtaBand() {
   const t = useTranslations('cta');
 
   return (
-    <section id="cta" className="relative py-16 sm:py-24">
+    <section id="cta" className="relative scroll-mt-24 py-16 sm:py-24">
       <Container>
         <motion.div
           variants={fadeUp}

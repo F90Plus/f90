@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion';
 import { useTranslations } from 'next-intl';
 import { Container } from '@/components/ui/container';
+import { SectionHeading } from '@/components/ui/section-heading';
 import { fadeUp, staggerParent, viewportOnce } from '@/lib/motion';
 import type { TournamentMeta } from '@/lib/football/tournament';
 import { StatCounter } from './stat-counter';
@@ -23,18 +24,13 @@ export function FieldIsSet({ meta }: { meta: TournamentMeta }) {
   return (
     <section id="tournament" className="relative scroll-mt-24 py-16 sm:py-24">
       <Container className="flex flex-col items-center gap-10 text-center">
-        <motion.div
-          variants={fadeUp}
-          initial="hidden"
-          whileInView="show"
-          viewport={viewportOnce}
-          className="flex flex-col items-center gap-4"
-        >
-          <span className="eyebrow">{t('eyebrow')}</span>
-          <h2 className="max-w-3xl text-balance font-display text-3xl font-bold sm:text-4xl md:text-5xl">
-            {t('title')}
-          </h2>
-          <p className="max-w-2xl text-pretty text-mist-300 sm:text-lg">{t('analyst')}</p>
+        <motion.div variants={fadeUp} initial="hidden" whileInView="show" viewport={viewportOnce}>
+          <SectionHeading
+            align="center"
+            eyebrow={t('eyebrow')}
+            title={t('title')}
+            subtitle={t('analyst')}
+          />
         </motion.div>
 
         <motion.div

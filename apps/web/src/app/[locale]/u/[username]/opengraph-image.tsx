@@ -1,4 +1,5 @@
 import { ImageResponse } from 'next/og';
+import { getTranslations } from 'next-intl/server';
 import { createClient } from '@/lib/supabase/server';
 import { avatarColors, avatarInitial } from '@/lib/avatar';
 
@@ -10,12 +11,17 @@ type Params = { params: Promise<{ locale: string; username: string }> };
 
 /**
  * Per-user shareable OG card (D-031): the own-IP avatar gradient + handle + points
- * over the F90+ night surface. Inline styles only (Satori). Falls back to a generic
- * F90+ card if the handle is unknown, so the route never errors.
+ * over the F90+ night surface. Localised (T10) — copy and number formatting follow
+ * the requested locale. Inline styles only (Satori). Falls back to a generic F90+
+ * card if the handle is unknown, so the route never errors.
  */
 export default async function OpengraphImage({ params }: Params) {
-  const { username } = await params;
-  const supabase = await createClient();
+  const { locale, username } = await params;
+  const [tCommon, tProfile, supabase] = await Promise.all([
+    getTranslations({ locale, namespace: 'common' }),
+    getTranslations({ locale, namespace: 'profile' }),
+    createClient(),
+  ]);
   const { data } = await supabase
     .from('profiles')
     .select('username, display_name, total_points')
@@ -46,7 +52,7 @@ export default async function OpengraphImage({ params }: Params) {
           <div style={{ display: 'flex', fontSize: 40, fontWeight: 800, letterSpacing: -1, color: '#aef23a' }}>
             F90+
           </div>
-          <div style={{ display: 'flex', fontSize: 24, color: '#828fb2' }}>World Cup 2026</div>
+          <div style={{ display: 'flex', fontSize: 24, color: '#828fb2' }}>{tCommon('worldCup')}</div>
         </div>
 
         <div style={{ display: 'flex', alignItems: 'center' }}>
@@ -79,7 +85,7 @@ export default async function OpengraphImage({ params }: Params) {
         <div style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between' }}>
           <div style={{ display: 'flex', flexDirection: 'column' }}>
             <div style={{ display: 'flex', fontSize: 56, fontWeight: 800, color: '#d2ff7a' }}>
-              {points.toLocaleString('en-US')}
+              {new Intl.NumberFormat(locale).format(points)}
             </div>
             <div
               style={{
@@ -90,11 +96,11 @@ export default async function OpengraphImage({ params }: Params) {
                 letterSpacing: 2,
               }}
             >
-              Points
+              {tProfile('pointsLabel')}
             </div>
           </div>
           <div style={{ display: 'flex', fontSize: 26, color: '#828fb2' }}>
-            Predict the World Cup · f90.xyz
+            {tProfile('ogTagline')}
           </div>
         </div>
       </div>

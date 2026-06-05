@@ -82,9 +82,12 @@ export async function getGlobalRankings(limit = 5): Promise<RankingEntry[]> {
   if (error || !rows || rows.length === 0) return [];
 
   // One extra public read for flags — only reached once players are on the board.
-  const { data: countries } = await supabase.from('countries').select('code, name_en');
+  const { data: countries } = await supabase
+    .from('countries')
+    .select('code, name_en')
+    .returns<{ code: string; name_en: string }[]>();
   const flagByCode = new Map<string, string | null>(
-    (countries ?? []).map((c) => [c.code as string, flagAssetFor(c.name_en as string)]),
+    (countries ?? []).map((c) => [c.code, flagAssetFor(c.name_en)]),
   );
 
   return toTeaserEntries(rows as RankingRow[], flagByCode, limit);

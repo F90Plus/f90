@@ -46,7 +46,7 @@ async function callbackUrl(locale: string, next: string): Promise<string> {
 /**
  * Send a passwordless magic link. `shouldCreateUser: true` so a brand-new email
  * gets an account (the handle_new_user trigger provisions profile + wallet +
- * 1,000-coin welcome bonus) — login and signup share this frictionless path.
+ * the 20,026 Tokens F90 welcome bonus) — login and signup share this frictionless path.
  * Bound with (locale, next); the form supplies (prevState, formData).
  */
 export async function signInWithMagicLink(

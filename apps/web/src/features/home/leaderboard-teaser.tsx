@@ -28,7 +28,7 @@ export function LeaderboardTeaser({ entries }: { entries: RankingEntry[] }) {
   const isEmpty = entries.length === 0;
 
   return (
-    <section id="leaderboard" className="relative overflow-hidden py-16 sm:py-24">
+    <section id="leaderboard" className="relative scroll-mt-24 overflow-hidden py-16 sm:py-24">
       {/* globe of nations — "the world is predicting", faint from the right */}
       <CinematicImageLayer
         src={ATMOSPHERE.globeFlags}

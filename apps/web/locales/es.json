@@ -115,7 +115,8 @@
     "joined": "Se unió en {date}",
     "pointsLabel": "Puntos",
     "pointsValue": "{points, number}",
-    "rankTeaser": "El ranking arranca cuando empiezan las predicciones."
+    "rankTeaser": "El ranking arranca cuando empiezan las predicciones.",
+    "ogTagline": "Predice el Mundial · f90.xyz"
   },
   "settings": {
     "metaTitle": "Ajustes",

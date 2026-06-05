@@ -15,7 +15,7 @@ export function HowItWorks() {
   const t = useTranslations('howItWorks');
 
   return (
-    <section id="how-it-works" className="relative py-16 sm:py-24">
+    <section id="how-it-works" className="relative scroll-mt-24 py-16 sm:py-24">
       <Container className="flex flex-col items-center gap-12">
         <SectionHeading
           align="center"

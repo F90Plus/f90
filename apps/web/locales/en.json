@@ -115,7 +115,8 @@
     "joined": "Joined {date}",
     "pointsLabel": "Points",
     "pointsValue": "{points, number}",
-    "rankTeaser": "The ranking begins when predictions open."
+    "rankTeaser": "The ranking begins when predictions open.",
+    "ogTagline": "Predict the World Cup · f90.xyz"
   },
   "settings": {
     "metaTitle": "Settings",
