@@ -81,7 +81,7 @@ export default async function RankingPage({ params }: Props) {
           <Card className="overflow-hidden">
             {/* Column headers */}
             <div
-              className="grid grid-cols-[2.5rem_1fr_auto] items-center gap-4 border-b border-mist-500/10 px-5 py-3 text-[0.68rem] uppercase tracking-widest text-mist-500 sm:px-6"
+              className="grid grid-cols-[2.5rem_1fr_auto] items-center gap-4 border-b border-mist-500/10 px-5 py-3 text-[0.68rem] uppercase tracking-widest text-mist-400 sm:px-6"
               role="row"
               aria-hidden="true"
             >
@@ -175,14 +175,15 @@ function RankingRow({
         </span>
 
         <div className="flex min-w-0 flex-col gap-0.5">
-          <span
+          <Link
+            href={`/u/${entry.username}`}
             className={cn(
-              'truncate text-sm font-semibold',
+              'truncate rounded text-sm font-semibold transition-colors hover:text-white hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-led-400',
               isTop3 ? 'text-white' : isMine ? 'text-led-200' : 'text-mist-100',
             )}
           >
             {name}
-          </span>
+          </Link>
           {isMine ? (
             <span className="text-[0.68rem] font-medium text-led-400">{yourLabel}</span>
           ) : null}

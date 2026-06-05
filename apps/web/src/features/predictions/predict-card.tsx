@@ -37,18 +37,32 @@ export function PredictCard({ fixture }: { fixture: PredictableFixture }) {
           <ClockIcon />
           <span className="nums">
             {t('closesAtKickoff')} ·{' '}
-            {f.relativeTime(new Date(fixture.kickoffISO), { now: new Date(), unit: 'hour' })}
+            {/* auto-unit: real minutes near kickoff (not a rounded "in 0 hours") */}
+            {f.relativeTime(new Date(fixture.kickoffISO), new Date())}
           </span>
         </span>
       </div>
 
       {/* team line: flag · name vs name · flag */}
-      <div className="mb-3.5 mt-1 flex items-center justify-center gap-3">
+      <div className="mb-2 mt-1 flex items-center justify-center gap-3">
         <Flag code={fixture.homeCode} size="md" />
         <span className="truncate font-display text-[1.02rem] font-bold text-mist-50">{homeName}</span>
         <span className="shrink-0 text-[0.78rem] text-mist-500">{t('vs')}</span>
         <span className="truncate font-display text-[1.02rem] font-bold text-mist-50">{awayName}</span>
         <Flag code={fixture.awayCode} size="md" />
+      </div>
+
+      {/* pre-pick context: group + kickoff, so the user is oriented before choosing */}
+      <div className="mb-3.5 text-center text-[0.72rem] text-mist-400">
+        {fixture.groupLabel ? <>{fixture.groupLabel} · </> : null}
+        <span className="nums">
+          {f.dateTime(new Date(fixture.kickoffISO), {
+            day: 'numeric',
+            month: 'short',
+            hour: '2-digit',
+            minute: '2-digit',
+          })}
+        </span>
       </div>
 
       {/* the interactive 1X2 island (selection → optimistic ticket) */}

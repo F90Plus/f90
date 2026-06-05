@@ -4,6 +4,8 @@
     "description": "The free, social way to predict every match of the 2026 World Cup. Tokens F90, global leaderboards, and a football-smart AI. No real money — just glory."
   },
   "nav": {
+    "home": "Home",
+    "predictions": "Predictions",
     "how": "How it works",
     "matches": "Matches",
     "analyst": "Analyst",
@@ -64,6 +66,9 @@
       "menu": "Account menu",
       "signedInAs": "Signed in as",
       "home": "Home",
+      "predictions": "My predictions",
+      "ranking": "Ranking",
+      "profile": "My profile",
       "settings": "Settings",
       "signOut": "Sign out"
     }
@@ -109,13 +114,11 @@
       "rankUnranked": "—",
       "backing": "Backing {country}",
       "predict": {
-        "eyebrow": "The opening matchday",
-        "title": "Make your prediction",
-        "seeAll": "See all matches"
+        "eyebrow": "Featured fixture",
+        "title": "Make your prediction"
       },
       "upcoming": {
-        "title": "Upcoming matches",
-        "seeAll": "World Cup"
+        "title": "Upcoming matches"
       },
       "myPredictions": {
         "title": "My predictions",
@@ -125,7 +128,8 @@
         "statusWon": "Correct · +{points, number} pts",
         "statusLost": "No hit",
         "emptyTitle": "You haven't taken your first position yet.",
-        "emptyBody": "Pick a match above — correct calls earn points and Tokens, and build your accuracy as an Analyst."
+        "emptyBody": "Pick a match above — correct calls earn points and Tokens, and build your accuracy as an Analyst.",
+        "emptyCta": "See matches above"
       },
       "fixturesPreparing": {
         "title": "The World Cup fixtures are being prepared.",
@@ -409,12 +413,21 @@
     "tagContrarian": "Contrarian",
     "pointsIfRight": "+{points, number} pts",
     "pointsIfRightLong": "+{points, number} pts if you're right",
+    "coinsIfRight": "+{coins, number} F90",
+    "rewardRule": "Less likely, more points and Tokens.",
     "analystLeans": "The Analyst leans {team}. Challenge it and it's worth more.",
     "analystLeansDraw": "The Analyst reads a draw. Challenge it and it's worth more.",
     "firstHint": "Be one of the first Analysts to read this match.",
     "closesAtKickoff": "Closes at kickoff",
+    "lockedClosed": "Positions closed at kickoff.",
     "ctaChoose": "Choose my position",
     "ctaTake": "Take a position",
+    "changing": {
+      "banner": "Your current position: {team}. Pick another to replace it.",
+      "cancel": "Cancel",
+      "current": "your current position",
+      "currentTag": "Current"
+    },
     "ticket": {
       "label": "Your position · The Analyst engaged",
       "stanceConsensus": "With The Analyst",
@@ -429,7 +442,9 @@
       "readSummary": "{home}% · X {draw}% · {away}%",
       "youMarker": "YOU",
       "locksAtKickoff": "Locks at kickoff",
-      "changePick": "Change my read"
+      "changePick": "Change my read",
+      "confirming": "Confirming…",
+      "countsToward": "Adds to your record and ranking."
     },
     "settled": {
       "wonLabel": "Settled · you were right",

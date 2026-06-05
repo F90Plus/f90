@@ -4,6 +4,8 @@
     "description": "La forma gratuita y social de predecir cada partido del Mundial 2026. Tokens F90, rankings globales y una IA futbolera. Sin dinero real: solo gloria."
   },
   "nav": {
+    "home": "Inicio",
+    "predictions": "Predicciones",
     "how": "Cómo funciona",
     "matches": "Partidos",
     "analyst": "Analista",
@@ -64,6 +66,9 @@
       "menu": "Menú de cuenta",
       "signedInAs": "Sesión iniciada como",
       "home": "Inicio",
+      "predictions": "Mis predicciones",
+      "ranking": "Ranking",
+      "profile": "Mi perfil",
       "settings": "Ajustes",
       "signOut": "Cerrar sesión"
     }
@@ -109,13 +114,11 @@
       "rankUnranked": "—",
       "backing": "Vas con {country}",
       "predict": {
-        "eyebrow": "La jornada inaugural",
-        "title": "Haz tu predicción",
-        "seeAll": "Ver todos los partidos"
+        "eyebrow": "Partido destacado",
+        "title": "Haz tu predicción"
       },
       "upcoming": {
-        "title": "Próximos partidos",
-        "seeAll": "Mundial"
+        "title": "Próximos partidos"
       },
       "myPredictions": {
         "title": "Mis predicciones",
@@ -125,7 +128,8 @@
         "statusWon": "Acertaste · +{points, number} pts",
         "statusLost": "Sin acierto",
         "emptyTitle": "Aún no has tomado tu primera posición.",
-        "emptyBody": "Elige un partido arriba — los aciertos suman puntos y Tokens, y construyen tu efectividad como Analista."
+        "emptyBody": "Elige un partido arriba — los aciertos suman puntos y Tokens, y construyen tu efectividad como Analista.",
+        "emptyCta": "Ver partidos arriba"
       },
       "fixturesPreparing": {
         "title": "Las fixtures del Mundial se están preparando.",
@@ -409,12 +413,21 @@
     "tagContrarian": "Contrario",
     "pointsIfRight": "+{points, number} pts",
     "pointsIfRightLong": "+{points, number} pts si aciertas",
+    "coinsIfRight": "+{coins, number} F90",
+    "rewardRule": "Menos probable, más puntos y Tokens.",
     "analystLeans": "El Analista se inclina por {team}. Desafíalo y vale más.",
     "analystLeansDraw": "El Analista ve el empate. Desafíalo y vale más.",
     "firstHint": "Sé de los primeros Analistas en leer este partido.",
     "closesAtKickoff": "Cierra al pitido",
+    "lockedClosed": "Las posiciones se cerraron al pitido inicial.",
     "ctaChoose": "Elegir mi posición",
     "ctaTake": "Tomar posición",
+    "changing": {
+      "banner": "Tu posición actual: {team}. Elige otra para reemplazarla.",
+      "cancel": "Cancelar",
+      "current": "tu posición actual",
+      "currentTag": "Actual"
+    },
     "ticket": {
       "label": "Tu posición · El Analista activado",
       "stanceConsensus": "Con El Analista",
@@ -429,7 +442,9 @@
       "readSummary": "{home}% · X {draw}% · {away}%",
       "youMarker": "TÚ",
       "locksAtKickoff": "Se bloquea al pitido",
-      "changePick": "Cambiar mi análisis"
+      "changePick": "Cambiar mi análisis",
+      "confirming": "Confirmando…",
+      "countsToward": "Suma a tu récord y a tu clasificación."
     },
     "settled": {
       "wonLabel": "Resuelto · acertaste",

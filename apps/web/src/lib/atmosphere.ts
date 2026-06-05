@@ -13,4 +13,6 @@ export const ATMOSPHERE = {
   stadiumStands: '/atmosphere/stadium-stands.webp',
   /** World Cup key art — globe of nations. */
   globeFlags: '/worldcup/globe-flags.webp',
+  /** The World Cup trophy (transparent cutout) — premium aspirational atmosphere. */
+  trophy: '/worldcup/trophy.webp',
 } as const;

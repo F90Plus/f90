@@ -10,7 +10,52 @@
 > **operator runbook** below is executed. Those steps require credentials/environments not available in the
 > build harness — `vercel --prod`, the Supabase SQL Editor / Management API, and the dashboard configuration.
 >
-> Read order: this file → [DECISIONS.md](DECISIONS.md) (D-050 server-authoritative predictions · D-051 Phase 2 close + craft direction) → [SCHEMA_V1.md](SCHEMA_V1.md) → [ROADMAP.md](ROADMAP.md).
+> Read order: this file → [DECISIONS.md](DECISIONS.md) (D-050 server-authoritative predictions · D-051 Phase 2 close + craft direction · **D-053 polish pass**) → [SCHEMA_V1.md](SCHEMA_V1.md) → [ROADMAP.md](ROADMAP.md).
+
+---
+
+## ▶ Phase 2 Polish & Production Cohesion Pass (D-053) — code-complete, GATED
+
+A focused "works → feels finished" pass on the shipped Phase-2 surfaces, on branch
+**`feat/phase-2-polish`** (4 atomic commits; **not pushed/merged/deployed**). Narrow scope —
+**no new surfaces/systems**, **D-037 vocab law intact**, **D-051 deferred craft NOT reopened**.
+
+**What changed (by the founder's 6 areas):**
+- **Navigation:** header/footer/account-menu are now auth-aware — signed-in users get real
+  route links (Inicio · Predicciones · Ranking · Mi perfil), the logo returns to `/home`, the
+  acquisition CTA is hidden, mobile reaches every route via the account menu, ranking rows +
+  the menu link to `/u/[username]`, and the two `/#tournament` "see-all" dead-ends were removed.
+  Footer is a slim utility footer when signed-in (disclaimer kept).
+- **Predict flow + feedback + kickoff lock:** in-flight "Confirmando…" state · **reactive lock**
+  (flips at kickoff with the tab open) · closed-market hero (no dead picker) · clearer change-pick
+  (prior position stays visible + "Current" + Cancel) · lock-vs-pending distinct · real minutes
+  near kickoff · pre-pick group/kickoff context.
+- **Dashboard /home + cohesion:** atmosphere de-dup (transparent accent over the shared ambient;
+  the old opaque layer occluded it) · score-first standing strip with a clickable-ranking
+  affordance · honest always-true featured eyebrow · loading skeleton · distinct "Mis predicciones"
+  empty-state (glyph + scroll-to-predict CTA) · resolved-row reveal (inline scoreline + won-row
+  elevation) · AA-contrast bumps on sub-12px labels.
+- **Commitment & value (D-054):** the reward is visible **before** choosing (dual points + Tokens
+  F90 on each outcome), Tokens render in the currency's lime in the flow, the difficulty↔reward
+  rule is explicit, and "what's at stake" is named (counts toward your record + ranking). The stake
+  is **reputational, not a wager** — **free staking is deferred to Phase 3 / Economy** (a brand
+  call; PHASE_3_CANDIDATES C3-7). Plus the **World Cup trophy** as a single premium aspirational
+  atmosphere on /home (towering, ~7% opacity + blur + fade + gold glow — atmosphere, never a logo).
+
+**Gates (re-verified on the branch):** `tsc` clean · **243 vitest** green · `next build` green
+(no `ignore*Errors`, 23/23 static pages) · i18n ES/EN parity **356/356** · vocab law upheld.
+
+**Close sequence — where we are:**
+1. ✅ Founder verified the polish authenticated on **local :3300** (auth allow-listed there; a Vercel
+   *preview* can't complete F90+ login — Supabase redirect allow-list is `www.f90.xyz` + `localhost:3300`).
+2. ✅ Branch **pushed**; **PR [#5](https://github.com/F90Plus/f90/pull/5)** open (`feat/phase-2-polish` → `main`).
+3. ▶ **Remaining (founder-gated):** **merge PR #5 → `main`**, then **`vercel --prod`** (D-033 — manual,
+   shared Chiribito team, root `apps/web`). The authenticated polish (the predict-flow surfaces) gets its
+   first **live-data visual confirmation** on `www.f90.xyz` after deploy (auth works there).
+
+Exact final commands are in the session handoff / executive summary. Phase-3 candidates surfaced during the
+pass (do not implement before Phase 3): [PHASE_3_CANDIDATES.md](PHASE_3_CANDIDATES.md).
+**Phase 2 is "officially closed" only after the merge + `vercel --prod` — then Phase 3 starts.**
 
 ## What was built — the full loop
 

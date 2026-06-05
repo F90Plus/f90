@@ -1,7 +1,6 @@
 import { useFormatter, useTranslations } from 'next-intl';
 import { Card } from '@/components/ui/card';
 import { Flag } from '@/components/ui/flag';
-import { AnalystMark } from '@/features/copilot/analyst-mark';
 import { cn } from '@/lib/utils';
 import { teamNameForCode } from '@/lib/football/teams';
 import type { UserPrediction } from './queries';
@@ -22,14 +21,23 @@ export function MyPredictionsStrip({ predictions }: { predictions: UserPredictio
   if (predictions.length === 0) {
     return (
       <Card className="px-5 py-6 text-center sm:py-7">
+        {/* A position-ticket glyph (your activity) — distinct from the AnalystMark
+            used by the "fixtures preparing" system state above, so the two empty
+            cards read as different things. */}
         <span
           aria-hidden
           className="mx-auto mb-3 flex h-11 w-11 items-center justify-center rounded-[13px] border border-led-400/22 bg-led-500/[0.12]"
         >
-          <AnalystMark size="xs" live={false} className="h-[22px] w-[22px] ring-0" />
+          <TicketGlyph />
         </span>
         <p className="text-[0.9rem] text-mist-200">{t('emptyTitle')}</p>
-        <p className="mx-auto mt-1 max-w-md text-[0.8rem] text-mist-500">{t('emptyBody')}</p>
+        <p className="mx-auto mt-1 max-w-md text-[0.8rem] text-mist-400">{t('emptyBody')}</p>
+        <a
+          href="#predict"
+          className="mt-4 inline-flex items-center rounded-pill border border-led-400/30 bg-led-500/16 px-4 py-2 font-display text-[0.8rem] font-bold text-led-300 transition-colors hover:bg-led-500/24 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-led-400"
+        >
+          {t('emptyCta')}
+        </a>
       </Card>
     );
   }
@@ -69,9 +77,19 @@ export function PredictionRow({ prediction }: { prediction: UserPrediction }) {
 
   const isSettled = status === 'settled';
   const isWon = correct === true;
+  // Final score lives inline in the meta line (no disconnected below-row pill).
+  const hasScore = isSettled && prediction.homeGoals != null && prediction.awayGoals != null;
+  const date = f.dateTime(new Date(prediction.kickoffISO), { day: 'numeric', month: 'short' });
 
   return (
-    <div className="flex items-center gap-3 px-4 py-3 sm:px-5">
+    <div
+      className={cn(
+        'flex items-center gap-3 px-4 py-3 sm:px-5',
+        // A correct settled call earns a quiet pitch-green elevation, so wins read
+        // at a glance down the list (the loop's payoff moment).
+        isSettled && isWon && 'border-l-2 border-pitch-500/40 bg-pitch-500/[0.05]',
+      )}
+    >
       {pickCode ? (
         <Flag code={pickCode} size="sm" />
       ) : (
@@ -83,11 +101,21 @@ export function PredictionRow({ prediction }: { prediction: UserPrediction }) {
       <div className="min-w-0 flex-1">
         <div className="truncate font-display text-[0.92rem] font-bold text-mist-50">{headline}</div>
         <div className="mt-0.5 truncate text-[0.72rem] text-mist-400">
-          {teamLabel(prediction.homeCode)} <span className="text-mist-500">·</span>{' '}
-          {teamLabel(prediction.awayCode)} <span className="text-mist-500">·</span>{' '}
-          <span className="nums">
-            {f.dateTime(new Date(prediction.kickoffISO), { day: 'numeric', month: 'short' })}
-          </span>
+          {hasScore ? (
+            <span className="nums">
+              {teamLabel(prediction.homeCode)} {prediction.homeGoals}{' '}
+              <span aria-hidden className="text-mist-500">
+                –
+              </span>{' '}
+              {prediction.awayGoals} {teamLabel(prediction.awayCode)}
+            </span>
+          ) : (
+            <>
+              {teamLabel(prediction.homeCode)} <span className="text-mist-500">·</span>{' '}
+              {teamLabel(prediction.awayCode)}
+            </>
+          )}{' '}
+          <span className="text-mist-500">·</span> <span className="nums">{date}</span>
         </div>
       </div>
 
@@ -132,5 +160,20 @@ function StatusChip({
     >
       {pending ? t('statusPending') : t('statusLocked')}
     </span>
+  );
+}
+
+/** A position-ticket glyph for the "no predictions yet" empty state. */
+function TicketGlyph() {
+  return (
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden>
+      <path
+        d="M4 8.5a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2 1.6 1.6 0 0 0 0 3.2v1.6a1.6 1.6 0 0 0 0 3.2 2 2 0 0 1-2 2H6a2 2 0 0 1-2-2 1.6 1.6 0 0 0 0-3.2v-1.6a1.6 1.6 0 0 0 0-3.2Z"
+        stroke="var(--color-led-300)"
+        strokeWidth="1.5"
+        strokeLinejoin="round"
+      />
+      <path d="M12 8.5v1.6M12 13.9v1.6" stroke="var(--color-led-300)" strokeWidth="1.5" strokeLinecap="round" />
+    </svg>
   );
 }

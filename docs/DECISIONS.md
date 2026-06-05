@@ -927,3 +927,95 @@ new `ADMIN_SYNC_SECRET` (Prod + Preview) · complete the **D-035** Supabase dash
 shared Chiribito team, root `apps/web`) · `POST /api/admin/sync-fixtures` (~72 fixtures, pre-opener) ·
 `POST /api/admin/settle` (post-match — idempotent). Full runbook: [PHASE_2_HANDOFF.md](PHASE_2_HANDOFF.md).
 **Phase 2 = TECHNICALLY CLOSED. Next milestone = Phase 3 (Economy: Market + Fantasy XI).**
+
+### D-053 — Phase 2 Polish & Production Cohesion Pass: implemented + gated (deploy founder-gated) ✅ (founder-approved scope, 2026-06-05)
+**Context:** before opening Phase 3 the founder asked for a serious, professional close of Phase 2 —
+turning it from "it works" to "it feels like a finished product". A focused audit of the real deployed
+product (3 parallel static-audit subagents over the 6 founder-named areas — dashboard/home · navigation ·
+predict flow · save/edit feedback · kickoff-lock states · visual cohesion/branding — cross-checked by
+reading the live `www.f90.xyz` HTML and the source) surfaced ~36 actionable findings + 6 Phase-3 candidates.
+The founder approved scope = **narrow (shipped surfaces only)**, set hard guardrails (no new product
+surfaces · no new systems · don't reopen D-051's deferred craft trajectory · anything needing new
+functionality → **Phase-3 candidate, not implemented**), and chose the **Recommended** fix set + a
+**static-now → preview-deploy-at-the-end** access path for runtime verification.
+**Decision (built on branch `feat/phase-2-polish`, 4 atomic commits):**
+- **Navigation (auth-aware shell).** The authenticated UI reused the landing's anchor nav (`#tournament`…),
+  so signed-in users had broken/dead-end nav and, on mobile, no way to reach Predictions/Ranking. Fixed:
+  header renders real route links when signed-in (locale-aware `Link`), logo → `/home`, acquisition CTA
+  hidden; the account menu now carries the full authenticated nav (Inicio · Predicciones · Ranking · Mi
+  perfil · Ajustes) so every surface is reachable in the mobile thumb zone; ranking rows + the account menu
+  link to the public profile `/u/[username]`; the two `/#tournament` "see-all" links (which ejected the user
+  to the marketing landing, redundant since every fixture is already on `/home`) were removed; the footer is
+  a slim route-linked utility footer when signed-in (the not-gambling disclaimer kept).
+- **Predict flow (commitment & feedback).** In-flight "Confirmando…" state on the optimistic ticket;
+  **reactive kickoff lock** (a single `setTimeout` flips the card to its locked state exactly at kickoff if
+  the tab is open across it, instead of a tap bouncing off a server rejection); a **closed-market hero**
+  when locked with no pick (no dead tappable picker); **clearer change-pick** (a banner names the
+  still-saved current position + a "Current" tag + Cancel, so it no longer reads as an erase); lock-vs-pending
+  are now distinct states by construction; real minutes near kickoff (dropped `unit:'hour'`); pre-pick
+  group/kickoff context on the predict card.
+- **/home premium + cohesion.** **Atmosphere de-dup** — `HomeAtmosphere` had an opaque `bg-night-950` that
+  fully **occluded** the shared page-wide `AmbientBackdrop` and re-implemented the same grid/glow recipe;
+  it is now a thin transparent ACCENT overlay (globe + scrims) over the single shared ambient. *(Note: the
+  audit's HOM-001 premise of "doubled grid / summed opacity" was empirically wrong — the opaque bg meant
+  occlusion, not doubling; the fix — one source of atmosphere, less code — still holds.)* Score-first
+  standing strip (Puntos leads, Ranking is a clear link with a hover affordance + honest dim unranked tone,
+  Tokens last); honest always-true featured eyebrow ("Partido destacado" — the hardcoded "La jornada
+  inaugural" was false for any non-opener); a route-level loading skeleton; distinct "Mis predicciones"
+  empty-state (ticket glyph + a CTA that scrolls to the predict hero); resolved-row reveal (inline scoreline
+  + a quiet pitch-green elevation on correct calls — replacing the below-row pill that broke <360px);
+  AA-contrast bumps on sub-12px labels.
+**Guardrails upheld:** zero new routes/tables/systems; D-051 deferred craft (sidebar app-shell · Analista
+Élite/XP · trophy-photo header component · per-outcome community sparklines) **not reopened**; **D-037 vocab
+law intact** (the only `odds/stake/bet/apuesta` strings are the anti-betting disclaimers + JSDoc that forbids
+the terms). **Gates:** `tsc` clean · **243 vitest** green · `next build` green (no `ignore*Errors`, 23/23
+static pages) · i18n ES/EN parity **353/353**. Diff: 15 files, +531/−217.
+**Consequences / status:** the polish is **code-complete + gated on `feat/phase-2-polish`, NOT yet
+pushed/merged/deployed.** Per the founder's chosen flow + the standing deploy caution (D-033 manual deploy,
+shared Chiribito team, push/prod founder-gated): next = **preview deploy → founder verifies authenticated
+ES/EN/mobile → push + PR + merge + `vercel --prod`**. Phase-2 visual confirmation with live data (flagged
+open in [PHASE_2_HANDOFF.md](PHASE_2_HANDOFF.md)) happens at that preview. The 6 Phase-3 candidates are
+captured in [PHASE_3_CANDIDATES.md](PHASE_3_CANDIDATES.md) (do not implement before Phase 3). **Phase 2 is
+not "officially closed" until the preview is founder-verified and prod is deployed; only then does Phase 3
+start.**
+
+### D-054 — Commitment & value of a prediction (without a wager) + the WC-trophy atmosphere; free staking deferred to Phase 3 ✅ (founder, 2026-06-05)
+**Context:** verifying the D-053 branch, the founder felt navigation/polish had improved but the predict
+experience "still doesn't transmit enough that I'm putting something on the line." Asked specifically about:
+Tokens visibility (Home + predict flow), clarity of the current position, the felt commitment of taking a
+position, the points/ranking/Tokens hierarchy, and what info on the cards makes a decision feel meaningful —
+**and to honestly judge whether free staking (choosing any amount of Tokens per prediction) is Phase-2 polish
+or Phase-3 Economy.** Plus: integrate the founder-provided **World Cup trophy** image as premium Mundial
+atmosphere (not a logo, not dominant).
+**Decision — the stake is REPUTATIONAL, surfaced; not a wager.** In F90+ what's on the line is your
+**points · ranking · record vs El Analista** — Tokens are *earned* on a correct call, never staked (D-051).
+So the commitment is raised by making that honest stake legible, not by adding risk (commits on
+`feat/phase-2-polish`):
+- **P-A** — the reward is visible **before** choosing: each outcome button shows the dual reward a correct
+  call earns — points (rank) **+ Tokens F90** (wallet) — so the value is concrete at the decision moment.
+- **P-D** — Tokens get their own presence in the flow, rendered in the currency's **lime** (distinct from
+  points' pitch) on the buttons + the ticket reward block. Points stay the hero in the *identity* strip
+  (D-053 H4); the reward leads in the *predict* surface — contextual hierarchy.
+- **P-C** — the **difficulty↔reward rule** is explicit ("less likely → more points and Tokens"), so each
+  pick is a stance, not an arbitrary number.
+- **P-B** — what's at stake is **named**: the position ticket states it counts toward your **record and
+  ranking**, alongside the existing lock-at-kickoff permanence.
+**Staking verdict (founder-confirmed): free staking = Phase 3 / Economy, NOT this PR — and a brand-invariant
+risk.** It is a new mechanic (variable amount → new columns/payout/balance-deduction/settlement/anti-cheat =
+Economy), it changes the free-to-predict model (D-051), and "choose how much to risk" is the core gesture of a
+sportsbook — directly against **D-037** (probability-not-odds) + the free/no-betting invariant + the casino-
+look the founder wants to avoid. Captured as a candidate in [PHASE_3_CANDIDATES.md](PHASE_3_CANDIDATES.md);
+**not implemented.** The desired feeling is delivered by P-A..P-D instead.
+**Trophy atmosphere.** The WC trophy is added as a **single aspirational atmosphere** on **/home only**:
+towering behind the content, ~7% opacity + blur + a soft radial fade, with a faint gold prestige glow tying to
+the F90+ gold; the legibility scrims keep the predict cards + stats the protagonists. It **replaces** the
+near-invisible globe-flags accent. **It is atmosphere, never a logo** (the F90+ mark stays the brand), never on
+the cards, not repeated across the app — no casino, no promo look. Asset = founder-provided transparent cutout,
+optimized to WebP (399×1020, 76KB, alpha) under `public/worldcup/`; the dark/low-opacity/blur/fade treatment is
+CSS, not baked in. **IP note (honest):** the real WC trophy is FIFA trade dress, which D-025 avoids for
+license-independence; as a **subtle, dark, non-logo atmosphere** the exposure is low, but prominence is a
+**founder brand call** — flagged, not blocked. Intensity/placement are single knobs if a tuning pass is wanted.
+**Consequences:** scope held — no wager, no multipliers, no new tables/routes/systems, no Economy logic;
+**D-037 intact.** Gates green (`tsc` · 243 vitest · `next build` · i18n parity **356/356**). Same gated close as
+D-053 (preview → founder-verify → PR → merge → `vercel --prod`). Free staking is the one item explicitly
+parked for Phase 3 brand+economy evaluation.

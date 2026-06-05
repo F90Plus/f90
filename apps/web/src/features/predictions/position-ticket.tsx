@@ -33,6 +33,7 @@ export function PositionTicket({
   fixture,
   pick,
   locked = false,
+  pending = false,
   settlement,
   changeControl,
   className,
@@ -41,6 +42,8 @@ export function PositionTicket({
   pick: Outcome;
   /** Kickoff has passed — the pick is locked (no change affordance). */
   locked?: boolean;
+  /** The optimistic pick is being confirmed by the server (in-flight feedback). */
+  pending?: boolean;
   /** When present, renders the settled (won/lost) variant. */
   settlement?: TicketSettlement;
   /** Interactive "change my read" control injected by the client island. */
@@ -70,9 +73,11 @@ export function PositionTicket({
 
   return (
     <Card
+      aria-busy={pending || undefined}
       className={cn(
-        'overflow-hidden',
+        'overflow-hidden transition-opacity',
         isSettled ? (isWon ? 'glow-pitch' : '') : 'glow-led',
+        pending && 'opacity-95',
         className,
       )}
     >
@@ -191,7 +196,9 @@ export function PositionTicket({
               <span className="text-[0.6rem] uppercase tracking-[0.13em] text-mist-400">
                 {t('ticket.rewardCoins')}
               </span>
-              <span className="nums font-display text-[1.4rem] font-extrabold text-pitch-300">
+              {/* Tokens in the currency's lime — distinct from points (pitch), so the
+                  wallet reward reads as its own thing within the flow (P-D). */}
+              <span className="nums font-display text-[1.4rem] font-extrabold text-lime-300">
                 {t('ticket.rewardCoinsValue', { coins: view.coins })}
               </span>
             </div>
@@ -201,6 +208,9 @@ export function PositionTicket({
                 : t('ticket.noteConsensus', { pct: pickPct })}
             </span>
           </div>
+
+          {/* what's at stake — this position is on your permanent record + ranking (P-B) */}
+          <p className="mt-2.5 text-[0.7rem] text-mist-400">{t('ticket.countsToward')}</p>
 
           {/* market read + "TÚ" marker */}
           <div className="mt-3.5">
@@ -230,13 +240,23 @@ export function PositionTicket({
             </div>
           </div>
 
-          {/* foot — lock state + change affordance */}
+          {/* foot — lock state + (confirming | change affordance) */}
           <div className="mt-3.5 flex items-center gap-2.5 text-[0.74rem] text-mist-300">
             <span className="inline-flex items-center gap-1.5 text-gold-300">
               <LockIcon />
               {t('ticket.locksAtKickoff')}
             </span>
-            {!locked ? <span className="ml-auto">{changeControl}</span> : null}
+            {pending ? (
+              <span className="ml-auto inline-flex items-center gap-1.5 text-led-300" aria-live="polite">
+                <span
+                  aria-hidden
+                  className="h-1.5 w-1.5 rounded-full bg-led-400 motion-safe:animate-pulse"
+                />
+                {t('ticket.confirming')}
+              </span>
+            ) : !locked ? (
+              <span className="ml-auto">{changeControl}</span>
+            ) : null}
           </div>
         </div>
       ) : null}
