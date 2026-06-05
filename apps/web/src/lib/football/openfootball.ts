@@ -12,6 +12,17 @@ import { isRealTeam, OPENFOOTBALL_URL, parseKickoffISO, timeLabelFrom } from './
  */
 export { OPENFOOTBALL_URL };
 
+/**
+ * A played match's score block, as openfootball encodes it (verified against
+ * worldcup.json/2022): `ft` = full-time [homeGoals, awayGoals]; `ht` = half-time.
+ * Absent entirely until the match is played. `ft` is the authoritative result —
+ * `goals1`/`goals2` (event lists) are deliberately not modelled here.
+ */
+export interface OFScore {
+  ft?: [number, number] | number[];
+  ht?: [number, number] | number[];
+}
+
 export interface OFMatch {
   round?: string;
   num?: number;
@@ -21,6 +32,8 @@ export interface OFMatch {
   team2?: string;
   group?: string;
   ground?: string;
+  /** Present only once the match has been played; see OFScore. */
+  score?: OFScore;
 }
 export interface OFData {
   name?: string;
