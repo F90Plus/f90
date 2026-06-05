@@ -98,7 +98,7 @@ export default async function AppHomePage({ params }: Props) {
             </div>
             {fixtures.length > 0 ? (
               <Link
-                href="/"
+                href="/#tournament"
                 className="shrink-0 rounded text-[0.8rem] font-semibold text-led-300 transition-colors hover:text-led-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-led-400"
               >
                 {t('home.predict.seeAll')} →
@@ -124,7 +124,7 @@ export default async function AppHomePage({ params }: Props) {
             <div className="mb-3.5 flex items-end justify-between gap-3">
               <h2 className="font-display text-2xl font-extrabold text-mist-50">{t('home.upcoming.title')}</h2>
               <Link
-                href="/"
+                href="/#tournament"
                 className="shrink-0 rounded text-[0.8rem] font-semibold text-led-300 transition-colors hover:text-led-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-led-400"
               >
                 {t('home.upcoming.seeAll')} →

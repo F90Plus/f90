@@ -149,7 +149,10 @@ Predictions generates the economy that Fantasy spends (D-029).
    PR [#2](https://github.com/F90Plus/f90/pull/2) merged → `main`=`7584f65` (close docs `4959c6f`);
    `vercel --prod` → `www.f90.xyz`. Only the **D-035 sign-in items** remain (founder). Full close record:
    [PHASE_1_HANDOFF.md](PHASE_1_HANDOFF.md).
-4. **▶ NEXT = Phase 2 — Predictions Core & Scoring:** `fixtures` + `predictions` schema · the predict
-   flow (winner/scoreline/brackets) locking at kickoff · difficulty-honest scoring (`lib/football/model.ts`)
-   · server-side settlement → `award_points`/`award_coins`. **Generates the economy + fills the rankings
-   teaser with real data.** Map: [ROADMAP.md](ROADMAP.md) · contracts: [SCHEMA_V1.md](SCHEMA_V1.md).
+4. **▶ Phase 2 — Predictions Core & Scoring — BUILT** (code-complete · DoD-passed · reviewed) on
+   `feat/phase-2-predictions`, **deploy operator-gated** (D-051). Full **predict → settle → points/Tokens →
+   ranking** loop (migrations `0004`/`0005`, `make_prediction`/`settle_fixture`, predict card + `/home` +
+   `/predictions` + `/ranking`); gates green (243 vitest · build · i18n 343/343). **NEXT = run the deploy
+   runbook** ([PHASE_2_HANDOFF.md](PHASE_2_HANDOFF.md): apply 0004/0005 · env · D-035 · merge + `vercel
+   --prod` · sync pre-opener · settle post-match) → verify the loop in prod → **Phase 3 (Market + Fantasy XI)**.
+   Map: [ROADMAP.md](ROADMAP.md) · contracts: [SCHEMA_V1.md](SCHEMA_V1.md).
