@@ -1,17 +1,17 @@
 # F90+ — Phase 1 Handoff (Identity & Accounts)
 
-> **🟢 OFFICIAL CHECKPOINT — 2026-06-04 (Analyst Center Market Feel). Phase 1 ACTIVE; resume at T9.**
-> T1–T8 **done + verified**, and the **Analyst Center "live-market" refinement (D-041) is done,
-> committed AND PUSHED**; T9–T11 **pending**. Working tree **clean**. Branch `feat/phase-1-identity`
-> is **ON GitHub** (`F90Plus/f90`), tip **`a71dc44`** (31 commits ahead of `main`); **`main` untouched
-> at `b6bff60`**; production **www.f90.xyz unchanged** (still Phase 0.6). A preview deploy exists but is
-> **deprioritised** — do not spend more time on preview/auth/Vercel; the priority is to **close Phase 1**.
+> **🟢 OFFICIAL CHECKPOINT — 2026-06-05 (T9 Rankings teaser). Phase 1 ACTIVE; resume at T10.**
+> T1–T8 **done + verified**, the **Analyst Center refinement (D-041)** done + pushed, and **T9 (rankings
+> teaser) done + verified (D-043)**; T10–T11 **pending**. Working tree **clean**. Branch
+> `feat/phase-1-identity`: history through D-041 is **ON GitHub** (`F90Plus/f90`) up to the pushed tip
+> `1fc2c6c`, and the **T9 commits are LOCAL-ONLY — not yet pushed** (founder push-gate). **`main`
+> untouched at `b6bff60`**; production **www.f90.xyz unchanged** (still Phase 0.6). The preview deploy
+> stays **deprioritised** — the priority is to **close Phase 1**.
 >
-> **▶ RESUME = T9** (rankings teaser over the `global_rankings` view — replace the `data/leaderboard.ts`
-> mock; new `rankings` i18n namespace; empty-state framed "the board opens when predictions start"). See
-> "Next step (exact)" below. **Then T10** (i18n parity + design-token sweep) **→ T11** (Phase DoD gate)
-> **→ close Phase 1 cleanly.** **DO NOT open new fronts** — no advanced Fantasy, no complex player
-> market, no Polymarket dashboard (those are **D-042 future, documented-not-built**).
+> **▶ RESUME = T10** (i18n ES/EN parity + design-token sweep across the app). See "Next step (exact)"
+> below. **Then T11** (Phase DoD gate) **→ close Phase 1 cleanly.** **DO NOT open new fronts** — no
+> advanced Fantasy, no complex player market, no Polymarket dashboard (those are **D-042 future,
+> documented-not-built**).
 >
 > **Analyst Center — APPROVED philosophy (carry forward, D-041):** the section **"Los partidos que
 > importan" (`#analyst`) IS the market**, transformed **IN PLACE** — never a new section/nav/grid/
@@ -35,15 +35,17 @@
 
 ## Executive summary
 
-Phase 1 (Identity & Accounts) is **~90% built**: data + auth + onboarding + app gate + public profile +
-settings are LIVE. The Supabase schema + economy + 48-country seed are **applied and verified**; **T4
+Phase 1 (Identity & Accounts) is **~95% built** (T1–T9 shipped): data + auth + onboarding + app gate +
+public profile + settings + rankings teaser are LIVE. The Supabase schema + economy + 48-country seed are **applied and verified**; **T4
 (auth)**, **T5 (onboarding)**, **T6 (`(app)` group + `/home`)**, **T7 (public profile + dynamic OG)**
 and **T8 (settings + 30-day cooldown)** are **SHIPPED + verified**. The welcome bonus is **20,026
 Tokens F90** (D-039); the live-market ticker is a **sticky bar**, and the landing carries a **Fantasy
-discovery section** + nav item. What remains is **the rankings teaser (T9), i18n/token sweep (T10) and
-the DoD gate (T11)**.
+discovery section** + nav item. **T9 (rankings teaser) is shipped + verified (D-043)** — the homepage
+reads the real `global_rankings` view (honest empty-state) and the mock is deleted. What remains is
+**the i18n/token sweep (T10) and the DoD gate (T11)**.
 
-All work is on branch **`feat/phase-1-identity`** (**not pushed**, `main` untouched). Vision
+All work is on branch **`feat/phase-1-identity`** (pushed through `1fc2c6c`; the **T9 commits are
+local-only**, `main` untouched). Vision
 **D-034** is baked into a **generic economy** so markets/players/fantasy plug in later without
 reshaping Identity; T4's auth/identity surface is provider-agnostic and carries no
 subsystem-specific coupling (D-035).
@@ -79,9 +81,11 @@ remains for T9–T11** (they consume existing tables/views).
 Entity Layer & Fantasy"**) · **D-040** Founding Squad / "Pack Fundación F90". Routes reserved; English
 (D-003).
 
-**⏳ Pending (resume here):** **T9** rankings teaser over `global_rankings` (replace the
-`data/leaderboard.ts` mock) · **T10** i18n parity + design-token sweep · **T11** Phase DoD gate.
-**→ Resume = T9.**
+**✅ T9 done (D-043):** the homepage teaser now reads the real `global_rankings` view (honest empty-state
+until Phase 2 scoring); the `data/leaderboard.ts` mock is deleted. Verified ES/EN + mobile, gates green.
+
+**⏳ Pending (resume here):** **T10** i18n ES/EN parity + design-token sweep · **T11** Phase DoD gate.
+**→ Resume = T10.**
 
 ## Product decisions registered (ledger)
 
@@ -178,7 +182,11 @@ welcome bonus = 20,026. **No pending migrations** (T9–T11 need none).
 ## Rankings state
 
 - **`global_rankings` view DONE + verified** (`security_invoker`, public grant).
-- **NOT BUILT:** rankings teaser UI replacing `data/leaderboard.ts` mock = T9.
+- **T9 DONE + verified (D-043):** the homepage teaser reads the real `global_rankings` view via a
+  cookie-less, env-guarded public client (`lib/supabase/public.ts`) + a pure, unit-tested projection
+  (`lib/rankings.ts` → `toTeaserEntries`, 6 tests). Pre-scoring → an honest empty-state ("open seats"
+  podium); real rows (Phase 2+) use the own-IP avatar token + nation flag. `data/leaderboard.ts` mock
+  **deleted** (sole consumer migrated). Verified in-browser ES/EN + mobile, 0 console errors.
 
 ## OAuth Google state
 
@@ -199,9 +207,10 @@ welcome bonus = 20,026. **No pending migrations** (T9–T11 need none).
 ## i18n state
 
 - **ES (default) + EN in place** (foundation + Phase 0.6), full parity, no hardcoded copy.
-- **`auth` (T4) + `onboarding` (T5) namespaces ADDED** in `locales/{es,en}.json` with full key
-  parity, no hardcoded copy. (`markets` was also added by the landing pass — D-036.)
-- **NOT ADDED yet:** namespaces `profile` (T7), `rankings` (T9).
+- **`auth` (T4) + `onboarding` (T5) + `profile` (T7) namespaces ADDED** in `locales/{es,en}.json` with
+  full key parity, no hardcoded copy. (`markets` was also added by the landing pass — D-036.)
+- **T9 (D-043): reused the existing `leaderboard` namespace** (added `subtitleEmpty`, retuned
+  `title`/`subtitle` to honest framing) instead of a new `rankings` one — ES/EN parity kept.
 
 ## Documentation state
 
@@ -295,14 +304,15 @@ freely; `username`/`country` are gated by the 30-day cooldown (D-031) from the `
   "Podrás cambiarlo el 4 de julio" (change + 30 days); editing `display_name` + `bio` persisted to the
   DB via RLS, cooldown fields untouched.
 
-## Next step (exact) — T9: Rankings teaser (replace the mock)
+## Next step (exact) — T10: i18n parity + design-token sweep
 
-Replace the `data/leaderboard.ts` mock consumption (in `features/home/leaderboard-teaser.tsx`) with a
-real query over the **`global_rankings`** view (already built + public, T2): top-N by `total_points`,
-rendered with an **empty-state teaser** (everyone is at 0 until Phase 2 scoring — so frame it as "the
-board opens when predictions start", reusing the avatar token + country flag). New `rankings` i18n
-namespace; **remove the mock import**. **Done when:** the leaderboard surface reads real data (empty
-now), no `data/leaderboard.ts` import remains, ES/EN.
+T9 is shipped + verified (D-043). Next is **T10** — a parity + tokens audit across the app:
+(a) verify **ES/EN key parity** in `locales/{es,en}.json` (no orphan/missing keys on either side —
+e.g. the new `leaderboard.subtitleEmpty`, `markets.q.*`, `profile`, `settings`);
+(b) confirm **no hardcoded user-facing copy** anywhere in `src/` (everything via `locales/`);
+(c) confirm **no hardcoded design values** (color/spacing/motion use the Tailwind v4 tokens / design
+system, not literals). Fix any drift in place. **Done when:** ES/EN parity is proven, no hardcoded copy
+or off-token values remain, and the gates are green. Then **T11** (Phase DoD gate) → close Phase 1.
 
 ## PHASE 1 STATUS
 
@@ -318,6 +328,6 @@ now), no `data/leaderboard.ts` import remains, ES/EN.
 | T7 — Public profile `/u/[username]` + OG | ✅ completado (verificado: render · 404 · OG png) |
 | T8 — Settings + 30-day cooldown | ✅ completado (verificado E2E + DB) |
 | Analyst Center Market Feel (D-041) — live-market in place + XI Ideal pitch | ✅ completado (typecheck + 99 tests + build green; ES/EN + mobile; pushed `d7d2575`) |
-| T9 — Rankings teaser (replace mock) | ⏳ pendiente (NEXT) |
-| T10 — i18n parity + tokens sweep | ⏳ pendiente |
+| T9 — Rankings teaser (replace mock) | ✅ completado (real `global_rankings` + honest empty-state; D-043; verificado ES/EN + móvil) |
+| T10 — i18n parity + tokens sweep | ⏳ pendiente (NEXT) |
 | T11 — Phase DoD gate | ⏳ pendiente |

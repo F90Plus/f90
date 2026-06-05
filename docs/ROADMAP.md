@@ -58,7 +58,7 @@ read fans out into the canonical tournament spine later phases attach to. Decisi
 
 ---
 
-## 🟢 Phase 1 — Identity & Accounts  *(IN PROGRESS — T8 of 11; checkpoint 2026-06-04)*
+## 🟢 Phase 1 — Identity & Accounts  *(IN PROGRESS — T9 of 11; checkpoint 2026-06-05)*
 
 Let people *be someone* on F90+ — and lay the **server-authoritative economy** the whole loop runs on.
 **Live state + the full checkpoint:** [PHASE_1_HANDOFF.md](PHASE_1_HANDOFF.md) (contracts:
@@ -69,9 +69,9 @@ Let people *be someone* on F90+ — and lay the **server-authoritative economy**
 - [x] Auth: magic-link + Google *(T4; Apple deferred)* + **onboarding** *(T5)*
 - [x] Public **profile** (`/u/[username]`, dynamic OG, own-IP avatar) *(T7)* + **settings/30-day cooldown** *(T8)*
 - [x] **Wallet + append-only ledgers** + economy functions — latent; welcome bonus **20,026 Tokens F90** *(T2; D-039)*
-- [x] Protected `(app)` group + auth-aware header + `/home` *(T6)*  ·  [ ] **Rankings teaser** *(T9, next)*
+- [x] Protected `(app)` group + auth-aware header + `/home` *(T6)*  ·  [x] **Rankings teaser** (real `global_rankings`, honest empty-state) *(T9; D-043)*
 - [x] DB schema v1: `profiles`, `wallets`, `coin_ledger`, `score_ledger`, `countries`, `global_rankings` *(T2/T3)*
-- **Pending:** **T9** rankings teaser · **T10** i18n parity + token sweep · **T11** Phase DoD gate.
+- **Pending:** **T10** i18n parity + token sweep · **T11** Phase DoD gate.
 
 ## ⏳ Phase 2 — Predictions Core & Scoring  *(generates the economy)*
 

@@ -642,3 +642,32 @@ designed *with* the economy, not bolted on.
 Reserves the direction so the eventual dashboard phase plans for portfolio/positions/exposure/history
 as first-class. The public Analyst Center (D-041) and the private portfolio dashboard are **two views
 over one economy, one Analyst, one F90 wallet** — never a second app.
+
+### D-043 — T9: the rankings teaser reads the REAL global board; the mock is deleted ✅ (2026-06-05)
+**Context:** T9 (Phase 1) had to replace the fabricated `data/leaderboard.ts` mock (invented aliases
+like `laMáquina` + fake 12,480-point totals), consumed by the homepage `LeaderboardTeaser`, with a real
+read of the `global_rankings` view (T2). Pre-Phase-2 nobody has scored, so the board must read as an
+**honest empty-state**, never fake rows or a wall of 0-point users (the F90+ no-fabricated-data rule;
+D-028 "the points/ranking skeleton ships as a real (empty) teaser"). The landing is **public and must
+render on a preview deploy with no Supabase env** (D-035 / `a71dc44`).
+**Decision:** (1) New `lib/rankings.ts`: a **pure, unit-tested** `toTeaserEntries` (6 tests) that keeps
+only ranked players (`points > 0`) — so an all-zero / pre-scoring board projects to `[]` — plus a thin
+`getGlobalRankings` adapter. (2) New **cookie-less public Supabase client** (`lib/supabase/public.ts`):
+anonymous, **env-guarded** (no env → `null` → empty board, preview-safe), with its `fetch` wrapped in an
+ISR `revalidate` window so the homepage stays **cache-first** (D-007) and never forces per-request DB
+load; as `anon` it only sees world-readable rows. (3) `LeaderboardTeaser` becomes **presentational**
+(`entries` prop): real rows use the **own-IP avatar token** (`avatarColors`/`avatarInitial`, D-025) + the
+**nation flag**; the empty-state is a **premium "open seats" podium** (gold ranks, ghost avatar, shimmer,
+`—`) over the conversion CTA — honest and aspirational, never fabricated. (4) **Reused the existing
+`leaderboard` i18n namespace** (NOT a new `rankings` one — avoids duplication; supersedes the handoff's
+"new `rankings` namespace" wording): added `subtitleEmpty`, retuned `title`/`subtitle` to honest framing,
+**ES/EN parity**. (5) **Deleted `data/leaderboard.ts`** (sole consumer migrated; grep-confirmed). The
+markets ticker (`data/markets.ts`) is now the last illustrative surface.
+**Consequences:** No fabricated data on the landing. The board is real and empty today and fills
+automatically when Phase 2 scoring lands — **zero rework** (D-028, D-034 generic economy). Gates green:
+`pnpm typecheck` ✅, **105** unit tests ✅ (+6 rankings), `next build` ✅ (no `ignore*Errors`); verified
+in-browser **desktop + mobile, ES + EN, 0 console errors**, 0 server errors (the real `global_rankings`
+read returns the empty board cleanly). **Caveat:** the populated-row branch isn't browser-exercised yet
+(no scored users exist) — it is covered by the pure mapping tests + TypeScript, and renders the same
+tokens as the verified empty-state. Branch `feat/phase-1-identity`, **NOT pushed** (founder gate).
+**Next: T10 (i18n parity + design-token sweep) → T11 (Phase DoD gate) → close Phase 1.**
