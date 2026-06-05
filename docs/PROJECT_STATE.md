@@ -21,10 +21,21 @@
 > i18n 343/343 · vocab D-037 · adversarially reviewed** (D-050/D-051). **Deploy = operator runbook:** apply
 > `0004`+`0005` to Supabase · Vercel env (`SUPABASE_SECRET_KEY` + new `ADMIN_SYNC_SECRET`) · D-035 sign-in
 > dashboard items · `vercel --prod` · `POST /api/admin/sync-fixtures` → ~72 fixtures · `POST /api/admin/settle`
-> post-match. See [PHASE_2_HANDOFF.md](PHASE_2_HANDOFF.md). Read [PHASE_1_HANDOFF.md](PHASE_1_HANDOFF.md) +
+> post-match. See [PHASE_2_HANDOFF.md](PHASE_2_HANDOFF.md).
+> **▶ PHASE 2 POLISH PASS (D-053) — code-complete on `feat/phase-2-polish`, GATED (not pushed/merged/deployed).**
+> Turns Phase 2 from "works" to "finished": auth-aware navigation (header/footer/account-menu + profile links;
+> the old landing-anchor dead-ends fixed), predict-flow feedback (in-flight "Confirmando…" · **reactive kickoff
+> lock** · clearer change-pick · closed-market hero · real minutes), /home premium cohesion (atmosphere de-dup ·
+> score-first standing strip · honest always-true eyebrow · loading skeleton · distinct empty-state), and a
+> resolved-row reveal (inline scoreline + won-row elevation) + AA-contrast bumps. **Narrow scope — no new
+> surfaces/systems, D-037 vocab law intact, D-051 deferred craft NOT reopened.** Gates: **243 vitest · tsc ·
+> next build · i18n ES/EN 353/353**. Next = **preview deploy → founder verifies authenticated ES/EN/mobile →
+> push + PR + merge + `vercel --prod`** (D-033 manual, founder-gated). Phase-3 candidates captured in
+> [PHASE_3_CANDIDATES.md](PHASE_3_CANDIDATES.md).
+> Read [PHASE_1_HANDOFF.md](PHASE_1_HANDOFF.md) +
 > [ROADMAP.md](ROADMAP.md) + [DECISIONS.md](DECISIONS.md). **NEXT MILESTONE = Phase 3 (Economy: Market +
-> Fantasy XI).** **DO NOT open new fronts** until the loop is live + verified (D-042 dashboard/Fantasy/
-> player-market are future, documented-not-built).
+> Fantasy XI)** — starts only after this polish pass is founder-verified + deployed. **DO NOT open new fronts**
+> until the loop is live + verified (D-042 dashboard/Fantasy/player-market are future, documented-not-built).
 > Contracts: [PHASE_1_IDENTITY.md](PHASE_1_IDENTITY.md) · [SCHEMA_V1.md](SCHEMA_V1.md) ·
 > [PHASE_1_IMPLEMENTATION_PLAN.md](PHASE_1_IMPLEMENTATION_PLAN.md).
 

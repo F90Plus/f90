@@ -10,7 +10,45 @@
 > **operator runbook** below is executed. Those steps require credentials/environments not available in the
 > build harness — `vercel --prod`, the Supabase SQL Editor / Management API, and the dashboard configuration.
 >
-> Read order: this file → [DECISIONS.md](DECISIONS.md) (D-050 server-authoritative predictions · D-051 Phase 2 close + craft direction) → [SCHEMA_V1.md](SCHEMA_V1.md) → [ROADMAP.md](ROADMAP.md).
+> Read order: this file → [DECISIONS.md](DECISIONS.md) (D-050 server-authoritative predictions · D-051 Phase 2 close + craft direction · **D-053 polish pass**) → [SCHEMA_V1.md](SCHEMA_V1.md) → [ROADMAP.md](ROADMAP.md).
+
+---
+
+## ▶ Phase 2 Polish & Production Cohesion Pass (D-053) — code-complete, GATED
+
+A focused "works → feels finished" pass on the shipped Phase-2 surfaces, on branch
+**`feat/phase-2-polish`** (4 atomic commits; **not pushed/merged/deployed**). Narrow scope —
+**no new surfaces/systems**, **D-037 vocab law intact**, **D-051 deferred craft NOT reopened**.
+
+**What changed (by the founder's 6 areas):**
+- **Navigation:** header/footer/account-menu are now auth-aware — signed-in users get real
+  route links (Inicio · Predicciones · Ranking · Mi perfil), the logo returns to `/home`, the
+  acquisition CTA is hidden, mobile reaches every route via the account menu, ranking rows +
+  the menu link to `/u/[username]`, and the two `/#tournament` "see-all" dead-ends were removed.
+  Footer is a slim utility footer when signed-in (disclaimer kept).
+- **Predict flow + feedback + kickoff lock:** in-flight "Confirmando…" state · **reactive lock**
+  (flips at kickoff with the tab open) · closed-market hero (no dead picker) · clearer change-pick
+  (prior position stays visible + "Current" + Cancel) · lock-vs-pending distinct · real minutes
+  near kickoff · pre-pick group/kickoff context.
+- **Dashboard /home + cohesion:** atmosphere de-dup (transparent accent over the shared ambient;
+  the old opaque layer occluded it) · score-first standing strip with a clickable-ranking
+  affordance · honest always-true featured eyebrow · loading skeleton · distinct "Mis predicciones"
+  empty-state (glyph + scroll-to-predict CTA) · resolved-row reveal (inline scoreline + won-row
+  elevation) · AA-contrast bumps on sub-12px labels.
+
+**Gates (re-verified on the branch):** `tsc` clean · **243 vitest** green · `next build` green
+(no `ignore*Errors`, 23/23 static pages) · i18n ES/EN parity **353/353** · vocab law upheld.
+Diff: 15 files, +531/−217.
+
+**Open (founder-gated) — the close sequence:**
+1. **Preview deploy** (`vercel`, not `--prod`) → founder verifies authenticated **ES/EN/mobile**
+   (this is also the first **live-data visual confirmation** flagged below).
+2. On approval: **push** `feat/phase-2-polish` → **PR** → **merge** to `main`.
+3. **`vercel --prod`** (D-033 — manual, shared Chiribito team, root `apps/web`).
+
+Phase-3 candidates surfaced during the pass (do not implement before Phase 3):
+[PHASE_3_CANDIDATES.md](PHASE_3_CANDIDATES.md).
+**Phase 2 is "officially closed" only after step 3 — then Phase 3 starts.**
 
 ## What was built — the full loop
 

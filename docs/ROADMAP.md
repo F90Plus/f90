@@ -73,7 +73,7 @@ Let people *be someone* on F90+ — and lay the **server-authoritative economy**
 - [x] DB schema v1: `profiles`, `wallets`, `coin_ledger`, `score_ledger`, `countries`, `global_rankings` *(T2/T3)*
 - **✅ CLOSED + MERGED + DEPLOYED + ENV-ACTIVATED (D-045/D-046):** T1–T11 DoD-passed · PR #2 merged → `main`=`7584f65` · `vercel --prod` → `www.f90.xyz` · env vars set + redeployed (`dpl_3PDv…`) → **500s resolved** (gates/404/OG/public all correct in prod). Only the **D-035 sign-in items** remain (founder). *(T9 D-043 · T10 D-044 · T11 D-045 · ship D-046.)*
 
-## ✅ Phase 2 — Predictions Core & Scoring  *(merged · deploy operator-gated, D-051)*
+## ✅ Phase 2 — Predictions Core & Scoring  *(merged · polish pass D-053 · deploy operator-gated)*
 
 The heart and the daily habit: make a call before kickoff; correct calls **earn points +
 coins**. **PR [#4](https://github.com/F90Plus/f90/pull/4) MERGED → `main` = `2d3dc37`** (2026-06-05);
@@ -84,6 +84,7 @@ runbook: [PHASE_2_HANDOFF.md](PHASE_2_HANDOFF.md).
 - [x] Predict flow (1X2), optimistic UI, **lock at kickoff** — server-authoritative `make_prediction` RPC (D-050); scoreline/brackets/moments deferred post-opener
 - [x] **Difficulty-honest scoring** (`lib/scoring.ts` ↔ the SQL: underdog correct = more points)
 - [x] Server-side settlement → `award_points` + `award_coins` (idempotent `settle_fixture`, migration `0005`) · **`/predictions`** + **`/ranking`** + premium **`/home`** hub (real flags, subtle atmosphere, honest no-fake-community)
+- [x] **Polish & production cohesion pass (D-053):** auth-aware navigation · predict-flow feedback (in-flight · reactive lock · clearer change-pick) · /home premium cohesion · resolved-row reveal · AA contrast — narrow scope, no new surfaces, D-051 craft deferred. On `feat/phase-2-polish`, gated (preview → founder → prod). Phase-3 candidates: [PHASE_3_CANDIDATES.md](PHASE_3_CANDIDATES.md)
 - **▶ Deploy (founder-gated):** apply 0004/0005 · env · D-035 · merge + `vercel --prod` · sync pre-opener · settle post-match — runbook in [PHASE_2_HANDOFF.md](PHASE_2_HANDOFF.md)
 
 ## ⏳ Phase 3 — Economy: Market + Fantasy XI  *(spends the economy)*

@@ -927,3 +927,54 @@ new `ADMIN_SYNC_SECRET` (Prod + Preview) · complete the **D-035** Supabase dash
 shared Chiribito team, root `apps/web`) · `POST /api/admin/sync-fixtures` (~72 fixtures, pre-opener) ·
 `POST /api/admin/settle` (post-match — idempotent). Full runbook: [PHASE_2_HANDOFF.md](PHASE_2_HANDOFF.md).
 **Phase 2 = TECHNICALLY CLOSED. Next milestone = Phase 3 (Economy: Market + Fantasy XI).**
+
+### D-053 — Phase 2 Polish & Production Cohesion Pass: implemented + gated (deploy founder-gated) ✅ (founder-approved scope, 2026-06-05)
+**Context:** before opening Phase 3 the founder asked for a serious, professional close of Phase 2 —
+turning it from "it works" to "it feels like a finished product". A focused audit of the real deployed
+product (3 parallel static-audit subagents over the 6 founder-named areas — dashboard/home · navigation ·
+predict flow · save/edit feedback · kickoff-lock states · visual cohesion/branding — cross-checked by
+reading the live `www.f90.xyz` HTML and the source) surfaced ~36 actionable findings + 6 Phase-3 candidates.
+The founder approved scope = **narrow (shipped surfaces only)**, set hard guardrails (no new product
+surfaces · no new systems · don't reopen D-051's deferred craft trajectory · anything needing new
+functionality → **Phase-3 candidate, not implemented**), and chose the **Recommended** fix set + a
+**static-now → preview-deploy-at-the-end** access path for runtime verification.
+**Decision (built on branch `feat/phase-2-polish`, 4 atomic commits):**
+- **Navigation (auth-aware shell).** The authenticated UI reused the landing's anchor nav (`#tournament`…),
+  so signed-in users had broken/dead-end nav and, on mobile, no way to reach Predictions/Ranking. Fixed:
+  header renders real route links when signed-in (locale-aware `Link`), logo → `/home`, acquisition CTA
+  hidden; the account menu now carries the full authenticated nav (Inicio · Predicciones · Ranking · Mi
+  perfil · Ajustes) so every surface is reachable in the mobile thumb zone; ranking rows + the account menu
+  link to the public profile `/u/[username]`; the two `/#tournament` "see-all" links (which ejected the user
+  to the marketing landing, redundant since every fixture is already on `/home`) were removed; the footer is
+  a slim route-linked utility footer when signed-in (the not-gambling disclaimer kept).
+- **Predict flow (commitment & feedback).** In-flight "Confirmando…" state on the optimistic ticket;
+  **reactive kickoff lock** (a single `setTimeout` flips the card to its locked state exactly at kickoff if
+  the tab is open across it, instead of a tap bouncing off a server rejection); a **closed-market hero**
+  when locked with no pick (no dead tappable picker); **clearer change-pick** (a banner names the
+  still-saved current position + a "Current" tag + Cancel, so it no longer reads as an erase); lock-vs-pending
+  are now distinct states by construction; real minutes near kickoff (dropped `unit:'hour'`); pre-pick
+  group/kickoff context on the predict card.
+- **/home premium + cohesion.** **Atmosphere de-dup** — `HomeAtmosphere` had an opaque `bg-night-950` that
+  fully **occluded** the shared page-wide `AmbientBackdrop` and re-implemented the same grid/glow recipe;
+  it is now a thin transparent ACCENT overlay (globe + scrims) over the single shared ambient. *(Note: the
+  audit's HOM-001 premise of "doubled grid / summed opacity" was empirically wrong — the opaque bg meant
+  occlusion, not doubling; the fix — one source of atmosphere, less code — still holds.)* Score-first
+  standing strip (Puntos leads, Ranking is a clear link with a hover affordance + honest dim unranked tone,
+  Tokens last); honest always-true featured eyebrow ("Partido destacado" — the hardcoded "La jornada
+  inaugural" was false for any non-opener); a route-level loading skeleton; distinct "Mis predicciones"
+  empty-state (ticket glyph + a CTA that scrolls to the predict hero); resolved-row reveal (inline scoreline
+  + a quiet pitch-green elevation on correct calls — replacing the below-row pill that broke <360px);
+  AA-contrast bumps on sub-12px labels.
+**Guardrails upheld:** zero new routes/tables/systems; D-051 deferred craft (sidebar app-shell · Analista
+Élite/XP · trophy-photo header component · per-outcome community sparklines) **not reopened**; **D-037 vocab
+law intact** (the only `odds/stake/bet/apuesta` strings are the anti-betting disclaimers + JSDoc that forbids
+the terms). **Gates:** `tsc` clean · **243 vitest** green · `next build` green (no `ignore*Errors`, 23/23
+static pages) · i18n ES/EN parity **353/353**. Diff: 15 files, +531/−217.
+**Consequences / status:** the polish is **code-complete + gated on `feat/phase-2-polish`, NOT yet
+pushed/merged/deployed.** Per the founder's chosen flow + the standing deploy caution (D-033 manual deploy,
+shared Chiribito team, push/prod founder-gated): next = **preview deploy → founder verifies authenticated
+ES/EN/mobile → push + PR + merge + `vercel --prod`**. Phase-2 visual confirmation with live data (flagged
+open in [PHASE_2_HANDOFF.md](PHASE_2_HANDOFF.md)) happens at that preview. The 6 Phase-3 candidates are
+captured in [PHASE_3_CANDIDATES.md](PHASE_3_CANDIDATES.md) (do not implement before Phase 3). **Phase 2 is
+not "officially closed" until the preview is founder-verified and prod is deployed; only then does Phase 3
+start.**
