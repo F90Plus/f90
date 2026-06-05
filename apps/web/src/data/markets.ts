@@ -1,7 +1,8 @@
 /**
  * Illustrative prediction-market tape + board for the homepage. F90+'s real
  * markets engine (D-034 vision) is not built yet, so these are a PREVIEW — the
- * UI signals "soon", the same way `data/leaderboard.ts` teases real standings.
+ * UI signals "soon". (The rankings board reads real standings via `lib/rankings.ts`,
+ * empty until Phase 2 scoring — the markets tape is the last illustrative surface.)
  *
  * Values are implied probabilities (Polymarket-style), NOT bookmaker odds —
  * F90+ is a prediction market, not a sportsbook (D-037, locked). `subject` names

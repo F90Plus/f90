@@ -251,8 +251,9 @@
   },
   "leaderboard": {
     "eyebrow": "Global table",
-    "title": "The world is already predicting",
-    "subtitle": "A taste of the global leaderboard. Your name could be here in June.",
+    "title": "The global leaderboard",
+    "subtitle": "The World Cup's sharpest analysts, live.",
+    "subtitleEmpty": "It opens when predictions start — the top spot is up for grabs.",
     "colRank": "#",
     "colPlayer": "Player",
     "colPoints": "Points",

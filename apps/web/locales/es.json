@@ -251,8 +251,9 @@
   },
   "leaderboard": {
     "eyebrow": "Tabla global",
-    "title": "El mundo ya está prediciendo",
-    "subtitle": "Un adelanto del ranking global. Tu nombre podría estar aquí en junio.",
+    "title": "La clasificación global",
+    "subtitle": "Los mejores analistas del Mundial, en directo.",
+    "subtitleEmpty": "Se abre cuando empiecen las predicciones. El primer puesto está libre.",
     "colRank": "#",
     "colPlayer": "Jugador",
     "colPoints": "Puntos",
