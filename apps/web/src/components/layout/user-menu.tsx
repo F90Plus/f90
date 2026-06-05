@@ -8,23 +8,32 @@ type UserMenuLabels = {
   menu: string;
   signedInAs: string;
   home: string;
+  predictions: string;
+  ranking: string;
+  profile: string;
   settings: string;
   signOut: string;
 };
 
 /**
  * Compact signed-in control: an avatar disc that opens a small menu with the
- * account email, quick links to the authenticated surfaces (home, settings) and a
- * sign-out form. `signOutAction` is a server action already bound to the active
- * locale by the (server) Header; the links are locale-aware next-intl `Link`s, so
- * this stays a thin client island — it only owns open/close + dismissal.
+ * account email, quick links to the authenticated surfaces (home · predictions ·
+ * ranking · public profile · settings) and a sign-out form. On mobile — where the
+ * header's route nav is hidden — this menu is the full authenticated nav graph, so
+ * every core surface stays reachable in the thumb zone. `signOutAction` is a server
+ * action already bound to the active locale by the (server) Header; the links are
+ * locale-aware next-intl `Link`s, so this stays a thin client island — it only owns
+ * open/close + dismissal.
  */
 export function UserMenu({
   email,
+  username,
   signOutAction,
   labels,
 }: {
   email: string;
+  /** Player handle for the public-profile link; empty hides that item. */
+  username: string;
   signOutAction: () => Promise<void>;
   labels: UserMenuLabels;
 }) {
@@ -85,6 +94,22 @@ export function UserMenu({
           <Link href="/home" role="menuitem" onClick={() => setOpen(false)} className={itemClass}>
             {labels.home}
           </Link>
+          <Link href="/predictions" role="menuitem" onClick={() => setOpen(false)} className={itemClass}>
+            {labels.predictions}
+          </Link>
+          <Link href="/ranking" role="menuitem" onClick={() => setOpen(false)} className={itemClass}>
+            {labels.ranking}
+          </Link>
+          {username ? (
+            <Link
+              href={`/u/${username}`}
+              role="menuitem"
+              onClick={() => setOpen(false)}
+              className={itemClass}
+            >
+              {labels.profile}
+            </Link>
+          ) : null}
           <Link href="/settings" role="menuitem" onClick={() => setOpen(false)} className={itemClass}>
             {labels.settings}
           </Link>

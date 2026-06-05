@@ -4,6 +4,8 @@
     "description": "The free, social way to predict every match of the 2026 World Cup. Tokens F90, global leaderboards, and a football-smart AI. No real money — just glory."
   },
   "nav": {
+    "home": "Home",
+    "predictions": "Predictions",
     "how": "How it works",
     "matches": "Matches",
     "analyst": "Analyst",
@@ -64,6 +66,9 @@
       "menu": "Account menu",
       "signedInAs": "Signed in as",
       "home": "Home",
+      "predictions": "My predictions",
+      "ranking": "Ranking",
+      "profile": "My profile",
       "settings": "Settings",
       "signOut": "Sign out"
     }

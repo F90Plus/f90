@@ -4,6 +4,8 @@
     "description": "La forma gratuita y social de predecir cada partido del Mundial 2026. Tokens F90, rankings globales y una IA futbolera. Sin dinero real: solo gloria."
   },
   "nav": {
+    "home": "Inicio",
+    "predictions": "Predicciones",
     "how": "Cómo funciona",
     "matches": "Partidos",
     "analyst": "Analista",
@@ -64,6 +66,9 @@
       "menu": "Menú de cuenta",
       "signedInAs": "Sesión iniciada como",
       "home": "Inicio",
+      "predictions": "Mis predicciones",
+      "ranking": "Ranking",
+      "profile": "Mi perfil",
       "settings": "Ajustes",
       "signOut": "Cerrar sesión"
     }
