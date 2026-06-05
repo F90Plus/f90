@@ -734,3 +734,28 @@ production auth, the Supabase founder/dashboard items — `site_url` → product
 allow-list add apex `https://f90.xyz/**`, Resend SMTP for magic-link (D-035). **Next milestone: Phase 2 —
 Predictions Core & Scoring** (generates the economy; fills the rankings teaser with real points).
 Non-blocking deferred items are in **D-044** + the handoff.
+
+### D-046 — Phase 1 MERGED to `main` + DEPLOYED to production; account features pending env activation ✅⚠️ (2026-06-05)
+**Context:** Founder authorized the full Option-A close (PR → merge → production deploy → verify).
+**Done:** (1) **PR [#2](https://github.com/F90Plus/f90/pull/2)** (`feat/phase-1-identity` → `main`) opened
+via the GitHub REST API (no `gh`/MCP; credential-manager token) and **MERGED** — merge commit
+**`7584f65`** on `main`. (2) Local `main` fast-forwarded to `7584f65`. (3) **`vercel --prod`** (D-033
+procedure; existing `.vercel` link, team `chiribito293-7173s-projects`, root `apps/web`) → deployment
+**`dpl_Dth9c2paTkJkBwi9WauResDUL7iQ`** (READY, target production), **Aliased `https://www.f90.xyz`**.
+**Production verification (HTTP):** public surfaces serve **200 with Phase 1 markers** — landing ES (`La
+clasificación global`, `Predice el Mundial`, `Tokens F90`) + EN (`The global leaderboard`) + `/login` +
+`/signup` (ES & EN). **⚠️ FINDING:** `/home`, `/settings`, `/onboarding`, `/u/[username]` and the OG
+image return **500** because **the Vercel `f90` project has NO environment variables** — the
+Supabase-touching server routes (cookie client, no env guard) throw without `NEXT_PUBLIC_SUPABASE_URL` /
+`NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY`. (Phase 0.6 was pre-auth, so prod never had them; Phase 1's env
+lived only in the gitignored `apps/web/.env.local`.) **The Phase 1 CODE is correct** (all gates green
+locally with `.env.local`); this is purely missing **production env config**.
+**PRODUCTION ACTIVATION — FOUNDER-OWNED (secrets boundary; `.env.local` reads are harness-denied):**
+1. Add the **two PUBLIC** env vars to the Vercel `f90` project (Production) — values from `apps/web/.env.local`:
+   `vercel env add NEXT_PUBLIC_SUPABASE_URL production` · `vercel env add NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY production`
+   (runtime uses only these two — both public; the secret key is NOT used at runtime). Then redeploy:
+   `vercel --prod --yes`. → fixes all 500s (gates redirect to `/login`, unknown profile → 404, OG renders).
+2. For real end-user sign-in (D-035): Supabase `site_url` → `https://www.f90.xyz` · redirect allow-list
+   add apex `https://f90.xyz/**` · Resend SMTP for magic-link.
+**Status:** Phase 1 = **CLOSED + MERGED + DEPLOYED (code)**; production **public surfaces live**, **account
+features pending the founder env activation above**. `main` = `7584f65`; production = Phase 1 code.

@@ -58,7 +58,7 @@ read fans out into the canonical tournament spine later phases attach to. Decisi
 
 ---
 
-## ✅ Phase 1 — Identity & Accounts  *(CLOSED — DoD gate passed 2026-06-05; T1–T11)*
+## ✅ Phase 1 — Identity & Accounts  *(CLOSED + MERGED + DEPLOYED — 2026-06-05; T1–T11)*
 
 Let people *be someone* on F90+ — and lay the **server-authoritative economy** the whole loop runs on.
 **Live state + the full checkpoint:** [PHASE_1_HANDOFF.md](PHASE_1_HANDOFF.md) (contracts:
@@ -71,7 +71,7 @@ Let people *be someone* on F90+ — and lay the **server-authoritative economy**
 - [x] **Wallet + append-only ledgers** + economy functions — latent; welcome bonus **20,026 Tokens F90** *(T2; D-039)*
 - [x] Protected `(app)` group + auth-aware header + `/home` *(T6)*  ·  [x] **Rankings teaser** (real `global_rankings`, honest empty-state) *(T9; D-043)*
 - [x] DB schema v1: `profiles`, `wallets`, `coin_ledger`, `score_ledger`, `countries`, `global_rankings` *(T2/T3)*
-- **✅ CLOSED (D-045):** T1–T11 done + DoD-passed (gates green · i18n parity 263/263 · E2E ES/EN/mobile, 0 console · 11 invariants). Production promotion (PR `feat/phase-1-identity`→`main` + `vercel --prod` + pre-prod Supabase items) is **founder-gated**. *(T9 D-043 · T10 D-044 · T11 D-045.)*
+- **✅ CLOSED + MERGED + DEPLOYED (D-045/D-046):** T1–T11 DoD-passed · PR #2 merged → `main`=`7584f65` · `vercel --prod` → `www.f90.xyz`. ⚠️ **Production account routes need the 2 public Supabase env vars added to Vercel + redeploy (founder, D-046)**; then D-035 items for sign-in. *(T9 D-043 · T10 D-044 · T11 D-045 · ship D-046.)*
 
 ## ⏳ Phase 2 — Predictions Core & Scoring  *(generates the economy)*
 

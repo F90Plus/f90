@@ -1,20 +1,23 @@
 # F90+ — Project State (Checkpoint)
 
-> **✅ CHECKPOINT 2026-06-05 — PHASE 1 (Identity & Accounts) COMPLETE / CLOSED (DoD passed, D-045).**
-> FOUNDATION + PHASE 0.5/0.6 **LIVE at https://www.f90.xyz**; **Phase 1 is code-complete + verified on
-> branch `feat/phase-1-identity`** (pushed, tip `4462657`; **`main` untouched at `b6bff60`**; production
-> **still Phase 0.6**). Phase 1 delivered: Supabase-backed auth (magic-link + Google) · onboarding ·
+> **✅ CHECKPOINT 2026-06-05 — PHASE 1 (Identity & Accounts) CLOSED + MERGED + DEPLOYED (D-045/D-046).**
+> **`main` = `7584f65`** (PR [#2](https://github.com/F90Plus/f90/pull/2) merged) and **deployed to
+> production** (`vercel --prod`, `dpl_Dth9c2paTkJkBwi9WauResDUL7iQ`, aliased **`https://www.f90.xyz`**).
+> Phase 1 delivered: Supabase-backed auth (magic-link + Google) · onboarding ·
 > protected `(app)` gate + `/home` · public profile + dynamic **localized** OG · settings/30-day cooldown ·
 > the server-authoritative economy (wallet + append-only ledgers + `award_*`, welcome bonus **20,026
 > Tokens F90**) · a **real (empty, honest) rankings teaser** · the Analyst-Center live-market landing
 > (D-041) · and an i18n/token/visual/debt sweep (D-044). Gates green · i18n parity **263/263** · browser
 > E2E **ES/EN/mobile, 0 console errors** · 11 invariants confirmed.
 >
-> **▶ Production promotion is FOUNDER-GATED:** PR `feat/phase-1-identity` → `main` + merge → `vercel
-> --prod` (D-033) + pre-prod Supabase items (D-035). **▶ NEXT MILESTONE = Phase 2 (Predictions Core &
-> Scoring).** Read [PHASE_1_HANDOFF.md](PHASE_1_HANDOFF.md) (full close record + ledger) +
-> [ROADMAP.md](ROADMAP.md) + [DECISIONS.md](DECISIONS.md). **DO NOT open new fronts** (D-042
-> dashboard/Fantasy/player-market are future, documented-not-built).
+> **⚠️ PRODUCTION ACTIVATION PENDING (founder, D-046):** the Vercel `f90` project has **no env vars**, so
+> account routes (`/home` · `/settings` · `/onboarding` · `/u/[username]` · OG) currently **500**; the
+> public landing + `/login` + `/signup` serve **200** with Phase 1 markers. Add the **2 public** Supabase
+> env vars (`NEXT_PUBLIC_SUPABASE_URL` + `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY`, from `apps/web/.env.local`)
+> to Vercel Production + redeploy → fixes the 500s; then the D-035 dashboard items for real sign-in.
+> **▶ NEXT MILESTONE = Phase 2 (Predictions Core & Scoring).** Read [PHASE_1_HANDOFF.md](PHASE_1_HANDOFF.md)
+> (full close + ship record) + [ROADMAP.md](ROADMAP.md) + [DECISIONS.md](DECISIONS.md). **DO NOT open new
+> fronts** (D-042 dashboard/Fantasy/player-market are future, documented-not-built).
 > Contracts: [PHASE_1_IDENTITY.md](PHASE_1_IDENTITY.md) · [SCHEMA_V1.md](SCHEMA_V1.md) ·
 > [PHASE_1_IMPLEMENTATION_PLAN.md](PHASE_1_IMPLEMENTATION_PLAN.md).
 

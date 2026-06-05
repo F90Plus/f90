@@ -1,15 +1,18 @@
 # F90+ — Phase 1 Handoff (Identity & Accounts)
 
-> **✅ PHASE 1 (Identity & Accounts) COMPLETE — DoD gate PASSED 2026-06-05 (T1–T11). CLOSED at the
-> development level (D-045).** All gates green: `tsc` · **105 tests** · `next build` (no `ignore*Errors`) ·
-> i18n parity **263/263** · browser E2E **ES + EN + mobile, 0 console errors** (landing · auth ·
-> protected-route gates · 404s · localized OG). All 11 OPERATING_MODEL invariants confirmed. Working tree
-> **clean**. Branch `feat/phase-1-identity` **pushed** (`F90Plus/f90`, tip `4462657`); **`main` untouched
-> at `b6bff60`**; production `www.f90.xyz` **still Phase 0.6**.
+> **✅ PHASE 1 (Identity & Accounts) — CLOSED + MERGED + DEPLOYED 2026-06-05 (T1–T11; D-045/D-046).**
+> DoD passed (gates green · **105 tests** · i18n parity **263/263** · browser E2E ES/EN/mobile, 0 console ·
+> 11 invariants). **PR [#2](https://github.com/F90Plus/f90/pull/2) MERGED → `main` = `7584f65`**;
+> **deployed** `vercel --prod` (`dpl_Dth9c2paTkJkBwi9WauResDUL7iQ`, aliased **`www.f90.xyz`**). The merged
+> branch `feat/phase-1-identity` is **deleted**; tree clean.
 >
-> **▶ PRODUCTION PROMOTION IS FOUNDER-GATED (the only remaining Phase-1 steps):** (1) PR
-> `feat/phase-1-identity` → `main` + merge; (2) manual `vercel --prod` (D-033); (3) pre-prod-auth Supabase
-> items — `site_url` → prod origin, allow-list apex `https://f90.xyz/**`, Resend SMTP (D-035).
+> **⚠️ PRODUCTION ACTIVATION PENDING (founder, D-046):** the Vercel `f90` project has **no env vars**, so
+> account routes (`/home` · `/settings` · `/onboarding` · `/u/[username]` · OG) currently **500**; the
+> **public landing + `/login` + `/signup` serve 200** with Phase 1 markers. To activate: add the **2
+> public** Supabase env vars (`NEXT_PUBLIC_SUPABASE_URL` + `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY`, values
+> in `apps/web/.env.local`) to Vercel Production + `vercel --prod --yes`; then the D-035 dashboard items
+> (`site_url` → `www.f90.xyz`, allow-list apex `https://f90.xyz/**`, Resend SMTP) for real sign-in.
+>
 > **▶ NEXT MILESTONE = Phase 2 (Predictions Core & Scoring).** **DO NOT open new fronts** — D-042
 > dashboard / advanced Fantasy / player-market stay future, documented-not-built.
 >
@@ -304,15 +307,18 @@ freely; `username`/`country` are gated by the 30-day cooldown (D-031) from the `
   "Podrás cambiarlo el 4 de julio" (change + 30 days); editing `display_name` + `bio` persisted to the
   DB via RLS, cooldown fields untouched.
 
-## Phase 1 — CLOSED ✅ (T11 DoD gate passed — D-045)
+## Phase 1 — CLOSED + MERGED + DEPLOYED ✅ (D-045 / D-046)
 
-All eleven tasks done + verified; the DoD checklist passed end-to-end (gates green · i18n parity 263/263 ·
-browser E2E ES+EN+mobile, 0 console errors · 11 invariants confirmed). **Remaining to put Phase 1 in
-production (all founder-gated):**
-1. Open a PR **`feat/phase-1-identity` → `main`** and merge (`main` is intact at `b6bff60`).
-2. Manual **`vercel --prod`** (D-033 — shared Chiribito team, Root `apps/web`).
-3. Before production auth: Supabase `site_url` → prod origin · redirect allow-list add apex
-   `https://f90.xyz/**` · Resend SMTP for magic-link (D-035).
+All eleven tasks done + verified (DoD passed). **PR [#2](https://github.com/F90Plus/f90/pull/2) MERGED** →
+`main` = `7584f65`; **deployed** `vercel --prod` → `dpl_Dth9c2paTkJkBwi9WauResDUL7iQ`, aliased
+**`www.f90.xyz`**. Merged branch deleted; tree clean.
+
+**⚠️ Remaining for full production activation (founder-owned — secrets boundary, D-046):**
+1. The Vercel `f90` project has **no env vars** → account routes 500. Add the **2 public** Supabase env
+   vars (`NEXT_PUBLIC_SUPABASE_URL` + `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY`, from `apps/web/.env.local`)
+   to Production + `vercel --prod --yes` → fixes the 500s. (Public landing/login/signup already 200.)
+2. For real sign-in: Supabase `site_url` → `https://www.f90.xyz` · allow-list apex `https://f90.xyz/**` ·
+   Resend SMTP (D-035).
 
 **Next milestone = Phase 2 (Predictions Core & Scoring)** — the engine that generates points + coins and
 **fills this rankings teaser with real data**. See [ROADMAP.md](ROADMAP.md).
