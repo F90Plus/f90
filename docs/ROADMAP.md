@@ -73,10 +73,11 @@ Let people *be someone* on F90+ — and lay the **server-authoritative economy**
 - [x] DB schema v1: `profiles`, `wallets`, `coin_ledger`, `score_ledger`, `countries`, `global_rankings` *(T2/T3)*
 - **✅ CLOSED + MERGED + DEPLOYED + ENV-ACTIVATED (D-045/D-046):** T1–T11 DoD-passed · PR #2 merged → `main`=`7584f65` · `vercel --prod` → `www.f90.xyz` · env vars set + redeployed (`dpl_3PDv…`) → **500s resolved** (gates/404/OG/public all correct in prod). Only the **D-035 sign-in items** remain (founder). *(T9 D-043 · T10 D-044 · T11 D-045 · ship D-046.)*
 
-## ✅ Phase 2 — Predictions Core & Scoring  *(built — code-complete + DoD-passed; deploy operator-gated, D-051)*
+## ✅ Phase 2 — Predictions Core & Scoring  *(merged · deploy operator-gated, D-051)*
 
 The heart and the daily habit: make a call before kickoff; correct calls **earn points +
-coins**. **Built on `feat/phase-2-predictions`** (not yet merged/deployed) — full record + the operator
+coins**. **PR [#4](https://github.com/F90Plus/f90/pull/4) MERGED → `main` = `2d3dc37`** (2026-06-05);
+**`vercel --prod` + Supabase migrations + admin jobs are operator-gated** — full record + the operator
 runbook: [PHASE_2_HANDOFF.md](PHASE_2_HANDOFF.md).
 
 - [x] `fixtures` + `predictions` schema (migration `0004`, stable openfootball IDs, RLS lock-at-kickoff)

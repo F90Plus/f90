@@ -14,13 +14,16 @@
 > was **redeployed** (`dpl_3PDvhVLQBcVe6ZWYpi8N8cQWLa7L`, `www.f90.xyz`); **all 500s resolved** (gates →
 > `/login`, `/u/[unknown]` → 404, OG → 200, public → 200 — verified in prod). **Only remaining for real
 > end-user sign-in: the D-035 Supabase dashboard items** (`site_url`, allow-list apex, Resend SMTP).
-> **▶ PHASE 2 (Predictions Core & Scoring) — CODE-COMPLETE · DoD-PASSED · REVIEWED** on `feat/phase-2-predictions`
-> (NOT yet merged/deployed): the full **predict → lock → settle → points/Tokens → ranking** loop (migrations
-> `0004`/`0005`, `make_prediction`/`settle_fixture` server-authoritative functions, predict card + position
-> ticket with real flags, premium `/home` hub, `/predictions`, `/ranking`). **243 vitest · build · i18n 343/343 ·
-> vocab D-037 · reviewed** (D-050/D-051). **Deploy = founder-gated production promotion + operator steps** —
-> see the runbook in [PHASE_2_HANDOFF.md](PHASE_2_HANDOFF.md). Read [PHASE_1_HANDOFF.md](PHASE_1_HANDOFF.md) +
-> [ROADMAP.md](ROADMAP.md) + [DECISIONS.md](DECISIONS.md). **DO NOT open new fronts** (D-042 dashboard/Fantasy/
+> **▶ PHASE 2 (Predictions Core & Scoring) — MERGED to `main`** (PR [#4](https://github.com/F90Plus/f90/pull/4),
+> merge commit `2d3dc37`, 2026-06-05). The full **predict → lock → settle → points/Tokens → ranking** loop
+> (migrations `0004`/`0005`, `make_prediction`/`settle_fixture` server-authoritative functions, predict card
+> + position ticket with real flags, premium `/home` hub, `/predictions`, `/ranking`). **243 vitest · build ·
+> i18n 343/343 · vocab D-037 · adversarially reviewed** (D-050/D-051). **Deploy = operator runbook:** apply
+> `0004`+`0005` to Supabase · Vercel env (`SUPABASE_SECRET_KEY` + new `ADMIN_SYNC_SECRET`) · D-035 sign-in
+> dashboard items · `vercel --prod` · `POST /api/admin/sync-fixtures` → ~72 fixtures · `POST /api/admin/settle`
+> post-match. See [PHASE_2_HANDOFF.md](PHASE_2_HANDOFF.md). Read [PHASE_1_HANDOFF.md](PHASE_1_HANDOFF.md) +
+> [ROADMAP.md](ROADMAP.md) + [DECISIONS.md](DECISIONS.md). **NEXT MILESTONE = Phase 3 (Economy: Market +
+> Fantasy XI).** **DO NOT open new fronts** until the loop is live + verified (D-042 dashboard/Fantasy/
 > player-market are future, documented-not-built).
 > Contracts: [PHASE_1_IDENTITY.md](PHASE_1_IDENTITY.md) · [SCHEMA_V1.md](SCHEMA_V1.md) ·
 > [PHASE_1_IMPLEMENTATION_PLAN.md](PHASE_1_IMPLEMENTATION_PLAN.md).
@@ -149,10 +152,12 @@ Predictions generates the economy that Fantasy spends (D-029).
    PR [#2](https://github.com/F90Plus/f90/pull/2) merged → `main`=`7584f65` (close docs `4959c6f`);
    `vercel --prod` → `www.f90.xyz`. Only the **D-035 sign-in items** remain (founder). Full close record:
    [PHASE_1_HANDOFF.md](PHASE_1_HANDOFF.md).
-4. **▶ Phase 2 — Predictions Core & Scoring — BUILT** (code-complete · DoD-passed · reviewed) on
-   `feat/phase-2-predictions`, **deploy operator-gated** (D-051). Full **predict → settle → points/Tokens →
-   ranking** loop (migrations `0004`/`0005`, `make_prediction`/`settle_fixture`, predict card + `/home` +
-   `/predictions` + `/ranking`); gates green (243 vitest · build · i18n 343/343). **NEXT = run the deploy
-   runbook** ([PHASE_2_HANDOFF.md](PHASE_2_HANDOFF.md): apply 0004/0005 · env · D-035 · merge + `vercel
-   --prod` · sync pre-opener · settle post-match) → verify the loop in prod → **Phase 3 (Market + Fantasy XI)**.
-   Map: [ROADMAP.md](ROADMAP.md) · contracts: [SCHEMA_V1.md](SCHEMA_V1.md).
+4. ✅ **Phase 2 — Predictions Core & Scoring — MERGED** (PR [#4](https://github.com/F90Plus/f90/pull/4), merge
+   `2d3dc37`; D-051). Full **predict → settle → points/Tokens → ranking** loop in `main` (migrations
+   `0004`/`0005`, `make_prediction`/`settle_fixture`, predict card + `/home` + `/predictions` + `/ranking`);
+   gates green (243 vitest · build · i18n 343/343). **DEPLOY = operator runbook** in
+   [PHASE_2_HANDOFF.md](PHASE_2_HANDOFF.md) (apply 0004/0005 · env · D-035 · `vercel --prod` · sync pre-opener
+   · settle post-match) — verify the loop in prod, then capture the first real visual.
+5. **▶ NEXT = Phase 3 — Economy: Market + Fantasy XI** (spends the Tokens the predict loop generates;
+   `players`/`squads`/`lineups` pre-designed in [SCHEMA_V1.md](SCHEMA_V1.md) "Forward contract"). Map:
+   [ROADMAP.md](ROADMAP.md).

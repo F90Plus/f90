@@ -1,11 +1,14 @@
 # F90+ — Phase 2 Handoff (Predictions Core & Scoring)
 
-> **✅ PHASE 2 (Predictions Core & Scoring) — CODE-COMPLETE · DoD-PASSED · REVIEWED — on branch `feat/phase-2-predictions`.**
-> Gates: **243 Vitest** · `tsc --noEmit` clean · `next build` green · **i18n ES/EN parity 343/343** · vocab law D-037 upheld · zero forbidden patterns (`any`/`@ts-ignore`/`console.*`/`ignore*Errors`). Every integrity-critical
-> unit was caught/hardened by adversarial review (see "Reviews caught").
+> **✅ PHASE 2 (Predictions Core & Scoring) — MERGED to `main`.** PR [#4](https://github.com/F90Plus/f90/pull/4)
+> merged 2026-06-05 (merge commit `2d3dc37`); the feature branch is deleted (local + remote); only `main` remains.
+> Gates re-verified on `main`: **243 Vitest** · `tsc --noEmit` clean · `next build` green · **i18n ES/EN parity 343/343** ·
+> vocab law D-037 upheld · zero forbidden patterns. Every integrity-critical unit was caught/hardened by adversarial
+> review (see "Reviews caught").
 >
-> **▶ NOT YET LIVE.** Going live is a **founder-gated production promotion + operator steps** — see the **Operator Runbook** below. The branch is reviewed + green but **not merged/deployed**, and the live DB/secret steps
-> are the operator's (the harness denies `.env.local`/secrets, so I could not apply migrations, run the admin jobs, or render the UI with live data).
+> **▶ NOT YET LIVE TO USERS.** `main` carries Phase 2 but production still runs the prior Phase-1 deploy until the
+> **operator runbook** below is executed. Those steps require credentials/environments not available in the
+> build harness — `vercel --prod`, the Supabase SQL Editor / Management API, and the dashboard configuration.
 >
 > Read order: this file → [DECISIONS.md](DECISIONS.md) (D-050 server-authoritative predictions · D-051 Phase 2 close + craft direction) → [SCHEMA_V1.md](SCHEMA_V1.md) → [ROADMAP.md](ROADMAP.md).
 
@@ -57,7 +60,7 @@ Apply via the Supabase SQL Editor (or the Management API + PAT, as Phase 1's 000
 - **A — Apply migrations** `0004` then `0005` to `f90-production` (SQL Editor). Run each migration's verify queries.
 - **B — Env:** set `ADMIN_SYNC_SECRET` (local + Vercel) + ensure `SUPABASE_SECRET_KEY` is available where you'll run the admin jobs (local `.env.local`, or Vercel if hitting prod).
 - **C — D-035 sign-in (so users can log in to predict):** Supabase `site_url` → `https://www.f90.xyz`; redirect allow-list add apex `https://f90.xyz/**`; Resend SMTP (you've configured Resend — confirm DKIM verified + SPF propagated). Google OAuth is also wired (Phase 1) and needs no SMTP.
-- **D — Promote to production:** merge `feat/phase-2-predictions` → `main` (PR), then `vercel --prod` (D-033: shared Chiribito team, root `apps/web`). *(Pre-migration the deploy is safe — `/home` graceful-degrades to the honest "fixtures preparing" state.)*
+- **D — ✅ Branch merged to `main`** (PR #4, merge `2d3dc37`). Remaining: **`vercel --prod`** (D-033: shared Chiribito team, root `apps/web`). *(Pre-migration the deploy is safe — `/home` graceful-degrades to the honest "fixtures preparing" state.)*
 - **E — Sync fixtures (before the opener):** `POST https://www.f90.xyz/api/admin/sync-fixtures` with header `x-admin-secret: <ADMIN_SYNC_SECRET>` → expect ~**72** group-stage fixtures with probabilities. **Predicting is now live.**
 - **F — Settle (after each match/matchday):** `POST …/api/admin/settle` with the same header → ingests final results from openfootball, finalizes fixtures, settles predictions → points + Tokens awarded → the ranking + standing populate. Idempotent; safe to re-run.
 - **G — Verify live:** login → `/home` → predict the opener (1X2) → see it on `/predictions` → (post-match) run settle → points/Tokens credited → `/ranking` shows you.

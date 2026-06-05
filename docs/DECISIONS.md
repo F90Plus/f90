@@ -905,3 +905,25 @@ reference render). Deferred deliberately for pace + the ruta crítica al opener.
 **Deploy = founder-gated production promotion + operator steps** (apply `0004`/`0005` · set
 `ADMIN_SYNC_SECRET` + `SUPABASE_SECRET_KEY` · D-035 sign-in items · merge + `vercel --prod` · sync pre-opener ·
 settle post-match). See the runbook in [PHASE_2_HANDOFF.md](PHASE_2_HANDOFF.md).
+
+### D-052 — Phase 2 MERGED to `main`; only operator deploy steps remain ✅ (founder, 2026-06-05)
+**Final technical close.** Founder reinforced the autonomy directive: execute everything within operational
+capacity by default (incl. merges of clean reviewed PRs); escalate only product-strategy/scope/economy/
+branding/visual direction or actions that **genuinely require credentials/environments not held** — and a
+credentials gap alone never blocks a technical phase close. Distinguish "not verified" as: (1) doesn't exist
+(real gap) · (2) lacks environment access (not a blocker) · (3) needs real production (operator step). The
+directive is persisted in [[feedback-f90plus-studio-ownership]].
+**Actions taken under this directive:** PR [#4](https://github.com/F90Plus/f90/pull/4) (`feat/phase-2-predictions` → `main`)
+**MERGED** via the GitHub REST API — merge commit `2d3dc37` (17 commits, 49 files, +5147/-80). Local + remote
+synchronized; the feature branch deleted (local + remote); **only `main` remains**; tree clean. Gates
+re-verified on `main`: **243 vitest passing · `tsc --noEmit` clean · `next build` green · i18n 343/343 · vocab
+D-037 upheld · zero forbidden patterns**. Docs swept post-merge (ROADMAP / PROJECT_STATE / PHASE_2_HANDOFF
+banners now reflect "merged to `main`, deploy operator-gated" — not "on branch"). Memory updated with the
+final close + the Phase 3 startup pointer.
+**What remains (all operator/production-gated — type 2 + 3 per the directive):** Apply migrations `0004`+`0005`
+to Supabase `f90-production` (SQL Editor or Management API + PAT) · set Vercel env `SUPABASE_SECRET_KEY` +
+new `ADMIN_SYNC_SECRET` (Prod + Preview) · complete the **D-035** Supabase dashboard items (`site_url` →
+`www.f90.xyz`, redirect allow-list apex `f90.xyz/**`, Resend SMTP) · `vercel --prod` (D-033 — manual deploy,
+shared Chiribito team, root `apps/web`) · `POST /api/admin/sync-fixtures` (~72 fixtures, pre-opener) ·
+`POST /api/admin/settle` (post-match — idempotent). Full runbook: [PHASE_2_HANDOFF.md](PHASE_2_HANDOFF.md).
+**Phase 2 = TECHNICALLY CLOSED. Next milestone = Phase 3 (Economy: Market + Fantasy XI).**
