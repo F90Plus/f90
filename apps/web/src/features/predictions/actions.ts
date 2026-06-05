@@ -74,38 +74,43 @@ export async function makePrediction(
   fixtureId: string,
   outcome: string,
 ): Promise<PredictionResult> {
-  // 1. Authenticate
-  const supabase = await createClient();
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
-
-  if (!user) {
-    return { ok: false, error: 'notAuthenticated' };
-  }
-
-  // 2. Validate the outcome string
-  let parsed: Outcome;
   try {
-    parsed = parseOutcome(outcome);
+    // 1. Authenticate
+    const supabase = await createClient();
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
+
+    if (!user) {
+      return { ok: false, error: 'notAuthenticated' };
+    }
+
+    // 2. Validate the outcome string
+    let parsed: Outcome;
+    try {
+      parsed = parseOutcome(outcome);
+    } catch {
+      return { ok: false, error: 'invalidOutcome' };
+    }
+
+    // 3. Call the SECURITY DEFINER RPC (the authoritative write path)
+    const { error } = await supabase.rpc('make_prediction', {
+      p_fixture_id: fixtureId,
+      p_outcome: parsed,
+    });
+
+    // 4. Map Postgres errors to stable keys
+    if (error) {
+      return { ok: false, error: mapErrorCode(error.code) };
+    }
+
+    // 5. Revalidate pages that render predictions data
+    revalidatePath('/home');
+    revalidatePath('/predictions');
+
+    return { ok: true, pick: parsed };
   } catch {
-    return { ok: false, error: 'invalidOutcome' };
+    // Any unexpected error (transport/env/etc.) — never throw out of a Server Action
+    return { ok: false, error: 'unknown' };
   }
-
-  // 3. Call the SECURITY DEFINER RPC (the authoritative write path)
-  const { error } = await supabase.rpc('make_prediction', {
-    p_fixture_id: fixtureId,
-    p_outcome: parsed,
-  });
-
-  // 4. Map Postgres errors to stable keys
-  if (error) {
-    return { ok: false, error: mapErrorCode(error.code) };
-  }
-
-  // 5. Revalidate pages that render predictions data
-  revalidatePath('/home');
-  revalidatePath('/predictions');
-
-  return { ok: true, pick: parsed };
 }

@@ -21,3 +21,13 @@ const outcomeSchema = z.enum(['home', 'draw', 'away']);
 export function parseOutcome(value: unknown): Outcome {
   return outcomeSchema.parse(value);
 }
+
+/**
+ * Safe variant of `parseOutcome` — returns `null` instead of throwing when
+ * the value is not a valid Outcome. Used in read-model mappers to guard
+ * against corrupt or legacy payload data stored in the DB.
+ */
+export function safeParseOutcome(value: unknown): Outcome | null {
+  const result = outcomeSchema.safeParse(value);
+  return result.success ? result.data : null;
+}

@@ -16,7 +16,7 @@
 
 import type { SupabaseClient } from '@supabase/supabase-js';
 import { pointsForProbability } from '@/lib/scoring';
-import type { Outcome } from './validation';
+import { safeParseOutcome, type Outcome } from './validation';
 
 // ---------------------------------------------------------------------------
 // Public types
@@ -153,13 +153,15 @@ export function toPredictableFixture(
 /**
  * Build a `UserPrediction` from a prediction row + its fixture row.
  *
- * @param now Injected for testability — defaults to `new Date()` in production calls.
- *            The DB functions pass `new Date()` explicitly; tests inject a fixed value.
+ * @param pick   Pre-validated Outcome (caller must safeParseOutcome and skip on null).
+ * @param now    Injected for testability — defaults to `new Date()` in production calls.
+ *               The DB functions pass `new Date()` explicitly; tests inject a fixed value.
  */
 export function toUserPrediction(
   pred: PredictionRow,
   fixture: FixtureRow,
   now: Date,
+  pick: Outcome,
 ): UserPrediction {
   const isSettled = pred.settled_at != null;
   const kickoffPassed = new Date(fixture.kickoff_at) <= now;
@@ -182,7 +184,7 @@ export function toUserPrediction(
     homeCode: fixture.home_code ?? '',
     awayCode: fixture.away_code ?? '',
     kickoffISO: fixture.kickoff_at,
-    pick: pred.payload.outcome as Outcome,
+    pick,
     pointsPossible: pred.points_possible,
     status,
     correct,
@@ -201,15 +203,23 @@ export function toUserPrediction(
  * Fetch all upcoming fixtures with the authenticated user's existing picks merged
  * in. Uses two selects + in-memory merge (see file doc for rationale).
  *
- * - Fixtures: `kickoff_at > now()`, ordered ascending.
- * - User predictions: RLS filters to the caller's auth.uid() rows automatically.
- * - If unauthenticated, the predictions select returns an empty array (RLS);
- *   all fixtures are returned with `userPick: null`.
+ * Call with the per-request RLS client from `lib/supabase/server.ts` (`createClient()`)
+ * — NEVER `createAdminClient()` (which bypasses RLS).
+ *
+ * - Fixtures: `kickoff_at > now()`, ordered ascending. Always returned, regardless
+ *   of auth — the landing page shows fixtures to logged-out visitors.
+ * - User predictions: fetched only when authenticated and filtered by `user_id`
+ *   (belt-and-suspenders on top of RLS). If unauthenticated, `userPick` is null.
  */
 export async function getPredictableFixtures(
   supabase: SupabaseClient,
 ): Promise<PredictableFixture[]> {
   const now = new Date().toISOString();
+
+  // Resolve caller (belt-and-suspenders user_id filter)
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
 
   // 1. Upcoming fixtures (public; world-readable via RLS)
   const { data: fixtures, error: fixturesErr } = await supabase
@@ -221,19 +231,25 @@ export async function getPredictableFixtures(
   if (fixturesErr) throw new Error(`getPredictableFixtures: ${fixturesErr.message}`);
   if (!fixtures || fixtures.length === 0) return [];
 
-  // 2. The user's existing picks for these fixtures (RLS: own rows only)
-  const fixtureIds = fixtures.map((f: FixtureRow) => f.id);
-  const { data: preds } = await supabase
-    .from('predictions')
-    .select('fixture_id,payload')
-    .in('fixture_id', fixtureIds)
-    .eq('kind', 'match_result');
-
-  // Build a fixtureId → Outcome map from the user's picks
+  // Build a fixtureId → Outcome map from the user's picks (only when authenticated)
   const pickMap = new Map<string, Outcome>();
-  if (preds) {
-    for (const p of preds as Array<{ fixture_id: string; payload: { outcome: string } }>) {
-      pickMap.set(p.fixture_id, p.payload.outcome as Outcome);
+  if (user) {
+    // 2. The user's existing picks for these fixtures (RLS + explicit user_id filter)
+    const fixtureIds = fixtures.map((f: FixtureRow) => f.id);
+    const { data: preds } = await supabase
+      .from('predictions')
+      .select('fixture_id,payload')
+      .in('fixture_id', fixtureIds)
+      .eq('kind', 'match_result')
+      .eq('user_id', user.id);
+
+    if (preds) {
+      for (const p of preds as Array<{ fixture_id: string; payload: { outcome: string } }>) {
+        const outcome = safeParseOutcome(p.payload.outcome);
+        if (outcome !== null) {
+          pickMap.set(p.fixture_id, outcome);
+        }
+      }
     }
   }
 
@@ -246,19 +262,33 @@ export async function getPredictableFixtures(
  * Fetch all of the authenticated user's predictions with fixture context merged
  * in. Uses two selects + in-memory join (see file doc for rationale).
  *
- * - Predictions: RLS filters to the caller's auth.uid() rows.
+ * Call with the per-request RLS client from `lib/supabase/server.ts` (`createClient()`)
+ * — NEVER `createAdminClient()` (which bypasses RLS).
+ *
+ * - Predictions: RLS filters to the caller's auth.uid() rows; also filtered by
+ *   `user_id` explicitly (belt-and-suspenders on top of RLS).
+ * - Returns `[]` immediately if the caller is not authenticated.
  * - Ordered by `created_at` descending (newest first).
+ * - Rows with corrupt `payload.outcome` are silently skipped (fail-safe against
+ *   legacy data; the RPC guarantees valid outcomes so this should never fire).
  */
 export async function getUserPredictions(
   supabase: SupabaseClient,
 ): Promise<UserPrediction[]> {
   const now = new Date();
 
-  // 1. User's predictions, newest first (RLS: own rows only)
+  // Resolve caller — unauthenticated callers get an empty list
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+  if (!user) return [];
+
+  // 1. User's predictions, newest first (RLS + explicit user_id filter)
   const { data: preds, error: predsErr } = await supabase
     .from('predictions')
     .select('id,user_id,fixture_id,kind,payload,points_possible,settled_at,awarded_points,awarded_coins,created_at,updated_at')
     .eq('kind', 'match_result')
+    .eq('user_id', user.id)
     .order('created_at', { ascending: false });
 
   if (predsErr) throw new Error(`getUserPredictions: ${predsErr.message}`);
@@ -282,7 +312,12 @@ export async function getUserPredictions(
   for (const pred of preds as PredictionRow[]) {
     const fixture = fixtureMap.get(pred.fixture_id);
     if (!fixture) continue; // orphaned prediction — skip
-    result.push(toUserPrediction(pred, fixture, now));
+
+    // Fail-safe against corrupt/legacy payload: skip the row rather than crash
+    const pick = safeParseOutcome(pred.payload.outcome);
+    if (pick === null) continue;
+
+    result.push(toUserPrediction(pred, fixture, now, pick));
   }
   return result;
 }
