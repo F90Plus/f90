@@ -45,15 +45,17 @@ A focused "works → feels finished" pass on the shipped Phase-2 surfaces, on br
 **Gates (re-verified on the branch):** `tsc` clean · **243 vitest** green · `next build` green
 (no `ignore*Errors`, 23/23 static pages) · i18n ES/EN parity **356/356** · vocab law upheld.
 
-**Open (founder-gated) — the close sequence:**
-1. **Preview deploy** (`vercel`, not `--prod`) → founder verifies authenticated **ES/EN/mobile**
-   (this is also the first **live-data visual confirmation** flagged below).
-2. On approval: **push** `feat/phase-2-polish` → **PR** → **merge** to `main`.
-3. **`vercel --prod`** (D-033 — manual, shared Chiribito team, root `apps/web`).
+**Close sequence — where we are:**
+1. ✅ Founder verified the polish authenticated on **local :3300** (auth allow-listed there; a Vercel
+   *preview* can't complete F90+ login — Supabase redirect allow-list is `www.f90.xyz` + `localhost:3300`).
+2. ✅ Branch **pushed**; **PR [#5](https://github.com/F90Plus/f90/pull/5)** open (`feat/phase-2-polish` → `main`).
+3. ▶ **Remaining (founder-gated):** **merge PR #5 → `main`**, then **`vercel --prod`** (D-033 — manual,
+   shared Chiribito team, root `apps/web`). The authenticated polish (the predict-flow surfaces) gets its
+   first **live-data visual confirmation** on `www.f90.xyz` after deploy (auth works there).
 
-Phase-3 candidates surfaced during the pass (do not implement before Phase 3):
-[PHASE_3_CANDIDATES.md](PHASE_3_CANDIDATES.md).
-**Phase 2 is "officially closed" only after step 3 — then Phase 3 starts.**
+Exact final commands are in the session handoff / executive summary. Phase-3 candidates surfaced during the
+pass (do not implement before Phase 3): [PHASE_3_CANDIDATES.md](PHASE_3_CANDIDATES.md).
+**Phase 2 is "officially closed" only after the merge + `vercel --prod` — then Phase 3 starts.**
 
 ## What was built — the full loop
 
