@@ -1,17 +1,15 @@
 # F90+ — Phase 1 Handoff (Identity & Accounts)
 
-> **🟢 OFFICIAL CHECKPOINT — 2026-06-05 (T9 Rankings teaser). Phase 1 ACTIVE; resume at T10.**
-> T1–T8 **done + verified**, the **Analyst Center refinement (D-041)** done + pushed, and **T9 (rankings
-> teaser) done + verified (D-043)**; T10–T11 **pending**. Working tree **clean**. Branch
-> `feat/phase-1-identity`: history through D-041 is **ON GitHub** (`F90Plus/f90`) up to the pushed tip
-> `1fc2c6c`, and the **T9 commits are LOCAL-ONLY — not yet pushed** (founder push-gate). **`main`
-> untouched at `b6bff60`**; production **www.f90.xyz unchanged** (still Phase 0.6). The preview deploy
-> stays **deprioritised** — the priority is to **close Phase 1**.
+> **🟢 OFFICIAL CHECKPOINT — 2026-06-05 (T10 sweep). Phase 1 ACTIVE; resume at T11 (DoD gate).**
+> T1–T9 **done + verified**, and **T10 (i18n parity + token/visual/debt sweep) done + verified (D-044)**;
+> only **T11 (Phase DoD gate)** remains. Working tree **clean**. Branch `feat/phase-1-identity` is **ON
+> GitHub** (`F90Plus/f90`) — **T9 + T10 pushed** (founder gave a push-go this session). **`main` untouched
+> at `b6bff60`**; production **www.f90.xyz unchanged** (still Phase 0.6; production is a manual `vercel
+> --prod` = a founder action, D-033). The preview deploy stays **deprioritised**.
 >
-> **▶ RESUME = T10** (i18n ES/EN parity + design-token sweep across the app). See "Next step (exact)"
-> below. **Then T11** (Phase DoD gate) **→ close Phase 1 cleanly.** **DO NOT open new fronts** — no
-> advanced Fantasy, no complex player market, no Polymarket dashboard (those are **D-042 future,
-> documented-not-built**).
+> **▶ RESUME = T11** (Phase DoD gate — final ES/EN + mobile verification, confirm no hardcoded copy/values
+> remain, finalise docs, then close Phase 1 cleanly). **DO NOT open new fronts** — no advanced Fantasy, no
+> complex player market, no Polymarket dashboard (those are **D-042 future, documented-not-built**).
 >
 > **Analyst Center — APPROVED philosophy (carry forward, D-041):** the section **"Los partidos que
 > importan" (`#analyst`) IS the market**, transformed **IN PLACE** — never a new section/nav/grid/
@@ -81,11 +79,11 @@ remains for T9–T11** (they consume existing tables/views).
 Entity Layer & Fantasy"**) · **D-040** Founding Squad / "Pack Fundación F90". Routes reserved; English
 (D-003).
 
-**✅ T9 done (D-043):** the homepage teaser now reads the real `global_rankings` view (honest empty-state
-until Phase 2 scoring); the `data/leaderboard.ts` mock is deleted. Verified ES/EN + mobile, gates green.
+**✅ T9 done (D-043):** the homepage teaser reads the real `global_rankings` view (honest empty-state);
+mock deleted. **✅ T10 done (D-044):** i18n parity **263/263**, OG card localised, `scroll-mt` fixed on 4
+sections, `FieldIsSet`→`SectionHeading`, in-card CTAs→`buttonVariants`, 2 retired components deleted.
 
-**⏳ Pending (resume here):** **T10** i18n ES/EN parity + design-token sweep · **T11** Phase DoD gate.
-**→ Resume = T10.**
+**⏳ Pending (resume here):** **T11** Phase DoD gate (then Phase 1 closes). **→ Resume = T11.**
 
 ## Product decisions registered (ledger)
 
@@ -304,15 +302,15 @@ freely; `username`/`country` are gated by the 30-day cooldown (D-031) from the `
   "Podrás cambiarlo el 4 de julio" (change + 30 days); editing `display_name` + `bio` persisted to the
   DB via RLS, cooldown fields untouched.
 
-## Next step (exact) — T10: i18n parity + design-token sweep
+## Next step (exact) — T11: Phase DoD gate (close Phase 1)
 
-T9 is shipped + verified (D-043). Next is **T10** — a parity + tokens audit across the app:
-(a) verify **ES/EN key parity** in `locales/{es,en}.json` (no orphan/missing keys on either side —
-e.g. the new `leaderboard.subtitleEmpty`, `markets.q.*`, `profile`, `settings`);
-(b) confirm **no hardcoded user-facing copy** anywhere in `src/` (everything via `locales/`);
-(c) confirm **no hardcoded design values** (color/spacing/motion use the Tailwind v4 tokens / design
-system, not literals). Fix any drift in place. **Done when:** ES/EN parity is proven, no hardcoded copy
-or off-token values remain, and the gates are green. Then **T11** (Phase DoD gate) → close Phase 1.
+T9 + T10 are shipped + verified (D-043, D-044). The final task is **T11** — the Definition-of-Done gate:
+(a) run the full suite one last time (`pnpm typecheck` · `pnpm test` · `pnpm build` — all currently green);
+(b) a final in-browser pass on the live surfaces — **ES + EN + mobile, 0 console errors** (auth →
+onboarding → `/home` → `/u/[username]` → settings → landing); (c) confirm the standing invariants hold
+(no hardcoded copy/values, mobile parity, reduced-motion); (d) finalise the docs and mark Phase 1
+**complete**. **Done when:** the DoD checklist passes end-to-end and Phase 1 is closed. The only
+code-external step is the production `vercel --prod` (D-033) — a **founder action**.
 
 ## PHASE 1 STATUS
 
@@ -329,5 +327,5 @@ or off-token values remain, and the gates are green. Then **T11** (Phase DoD gat
 | T8 — Settings + 30-day cooldown | ✅ completado (verificado E2E + DB) |
 | Analyst Center Market Feel (D-041) — live-market in place + XI Ideal pitch | ✅ completado (typecheck + 99 tests + build green; ES/EN + mobile; pushed `d7d2575`) |
 | T9 — Rankings teaser (replace mock) | ✅ completado (real `global_rankings` + honest empty-state; D-043; verificado ES/EN + móvil) |
-| T10 — i18n parity + tokens sweep | ⏳ pendiente (NEXT) |
-| T11 — Phase DoD gate | ⏳ pendiente |
+| T10 — i18n parity + tokens sweep | ✅ completado (D-044; parity 263/263 · OG localizado · consistency · dead-code) |
+| T11 — Phase DoD gate | ⏳ pendiente (NEXT) |

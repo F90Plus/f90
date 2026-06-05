@@ -671,3 +671,38 @@ read returns the empty board cleanly). **Caveat:** the populated-row branch isn'
 (no scored users exist) — it is covered by the pure mapping tests + TypeScript, and renders the same
 tokens as the verified empty-state. Branch `feat/phase-1-identity`, **NOT pushed** (founder gate).
 **Next: T10 (i18n parity + design-token sweep) → T11 (Phase DoD gate) → close Phase 1.**
+
+### D-044 — T10: i18n parity + token/visual/debt sweep (4 parallel audits) ✅ (2026-06-05)
+**Context:** T10 (Phase 1) hardens coherence before the DoD gate. Ran four parallel audit subagents —
+hardcoded copy · hardcoded design values · visual inconsistencies · minor tech debt. The codebase
+audited **clean on DoD** (zero `any`/`@ts-ignore`/`eslint-disable`/`console.*`); findings were few and
+concentrated.
+**Decision (fixed — coherent with Phase 1, no new product fronts):** (1) **Localised the per-user OG
+card** (`u/[username]/opengraph-image.tsx`) — it ignored `locale` and always rendered English; now copy
+flows through `getTranslations({locale})` (`common.worldCup`, `profile.pointsLabel`, new
+`profile.ogTagline`) and points through `Intl.NumberFormat(locale)`. (2) **i18n ES/EN parity proven
+263/263** (added `ogTagline` to both). (3) **Visual consistency:** added `scroll-mt-24` to the four
+landing sections missing it (anchor jumps were hiding headings under the sticky header + ticker);
+converted `FieldIsSet` to the shared `SectionHeading` (its title was `md:text-5xl` vs every other
+section's `md:text-[2.75rem]` — now 44px = the rest); routed the in-card "Tomar posición" CTAs
+(`match-card` + `analyst-card`) through `buttonVariants` (restores the signature `glow-led` + system
+height/weight). (4) **Dead code:** deleted the retired `MatchesRail` + `AnalystSection` components
+(superseded by KeyMatches/TournamentCenter — D-032/D-041; both unreferenced). (5) Fixed a stale comment
+(1,000 → 20,026 Tokens F90, `auth/actions.ts`) and typed the `countries` `.select()` in `rankings.ts`
+(dropped the `as string` casts).
+**Deferred (flagged, NOT changed — with rationale):** (a) `brand.ts` `gold #F4BE54` drifts from the gold
+tokens → **brand colour = founder's call** (escalate, not an autonomous fix). (b) `GlobeSkeleton`
+gradient literal (`globe-fallback.tsx`) → a sub-second loading skeleton with non-exact-token stops in the
+fragile WebGL area; convert via a `.globe-skeleton` CSS class later. (c) the `football-data.ts`
+live-adapter cluster (`getHomeMatches`/`getOpenfootballFixtures`/`enrichWithFootballData`/
+`getWorldCupStandings`/`footballDataEnabled`) → **documented forward-compat scaffolding (D-010/D-014)**;
+remove or wire deliberately, not as a minor sweep. (d) copilot facade orphans (`getMatchInsight`/
+`getMatchInsightSync`) → seam reserved for the live/LLM path. (e) `avatar.ts` PALETTE → intentional
+own-IP avatar hues (incl. amber/sky with no token), non-CSS, acceptable.
+**Consequences:** tighter coherence — the OG card localises, anchors land correctly, section titles and
+primary CTAs are system-consistent, and two dead components are gone. Gates: `tsc` ✅, **105 tests** ✅,
+`next build` ✅ (no `ignore*Errors`), parity **263/263** ✅; verified in-browser via DOM/computed-style
+(FieldIsSet h2 44px = how-it-works 44px; Analyst CTA carries `glow-led` + `h-11`) + the OG route returns
+**200 `image/png` in ES and EN**. (Full-page screenshots are blocked by the known WebGL-globe capture
+hang — measured via DOM instead, which is conclusive for these properties.) Branch
+`feat/phase-1-identity`. **Next: T11 (Phase DoD gate) → close Phase 1.**
