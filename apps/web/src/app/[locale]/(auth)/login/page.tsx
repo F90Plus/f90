@@ -19,6 +19,8 @@ export default async function LoginPage({ params, searchParams }: Props) {
   const sp = await searchParams;
   setRequestLocale(locale);
 
-  const next = resolveSafeNext(typeof sp.next === 'string' ? sp.next : undefined);
+  // After login, land on the authenticated home (the (app) gate sends not-yet-onboarded
+  // users to /onboarding). A gate-supplied ?next= (e.g. /settings) is preserved.
+  const next = resolveSafeNext(typeof sp.next === 'string' ? sp.next : '/home');
   return <AuthPanel locale={locale} next={next} mode="login" errorKey={parseAuthError(sp.error)} />;
 }

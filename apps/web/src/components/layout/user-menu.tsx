@@ -1,19 +1,23 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
+import { Link } from '@/i18n/navigation';
 import { cn } from '@/lib/utils';
 
 type UserMenuLabels = {
   menu: string;
   signedInAs: string;
+  home: string;
+  settings: string;
   signOut: string;
 };
 
 /**
  * Compact signed-in control: an avatar disc that opens a small menu with the
- * account email and a sign-out form. `signOutAction` is a server action already
- * bound to the active locale by the (server) Header, so this stays a thin client
- * island — it only owns open/close + outside-click/Escape dismissal.
+ * account email, quick links to the authenticated surfaces (home, settings) and a
+ * sign-out form. `signOutAction` is a server action already bound to the active
+ * locale by the (server) Header; the links are locale-aware next-intl `Link`s, so
+ * this stays a thin client island — it only owns open/close + dismissal.
  */
 export function UserMenu({
   email,
@@ -44,6 +48,9 @@ export function UserMenu({
     };
   }, [open]);
 
+  const itemClass =
+    'block rounded-pill px-4 py-2 text-sm font-medium text-mist-200 transition-colors hover:bg-night-800/70 hover:text-white';
+
   return (
     <div ref={ref} className="relative">
       <button
@@ -72,7 +79,19 @@ export function UserMenu({
           <p className="mt-0.5 truncate px-1 text-sm font-medium text-mist-100" title={email}>
             {email}
           </p>
-          <form action={signOutAction} className="mt-3">
+
+          <div aria-hidden className="my-2 h-px bg-mist-500/10" />
+
+          <Link href="/home" role="menuitem" onClick={() => setOpen(false)} className={itemClass}>
+            {labels.home}
+          </Link>
+          <Link href="/settings" role="menuitem" onClick={() => setOpen(false)} className={itemClass}>
+            {labels.settings}
+          </Link>
+
+          <div aria-hidden className="my-2 h-px bg-mist-500/10" />
+
+          <form action={signOutAction}>
             <button
               type="submit"
               role="menuitem"

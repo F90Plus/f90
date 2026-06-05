@@ -63,6 +63,8 @@
       "signIn": "Iniciar sesión",
       "menu": "Menú de cuenta",
       "signedInAs": "Sesión iniciada como",
+      "home": "Inicio",
+      "settings": "Ajustes",
       "signOut": "Cerrar sesión"
     }
   },

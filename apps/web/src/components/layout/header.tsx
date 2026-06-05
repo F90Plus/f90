@@ -47,6 +47,8 @@ export async function Header() {
               labels={{
                 menu: tAuth('account.menu'),
                 signedInAs: tAuth('account.signedInAs'),
+                home: tAuth('account.home'),
+                settings: tAuth('account.settings'),
                 signOut: tAuth('account.signOut'),
               }}
             />

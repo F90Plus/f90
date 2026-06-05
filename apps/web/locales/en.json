@@ -63,6 +63,8 @@
       "signIn": "Sign in",
       "menu": "Account menu",
       "signedInAs": "Signed in as",
+      "home": "Home",
+      "settings": "Settings",
       "signOut": "Sign out"
     }
   },
