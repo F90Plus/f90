@@ -10,11 +10,10 @@
 > (D-041) · and an i18n/token/visual/debt sweep (D-044). Gates green · i18n parity **263/263** · browser
 > E2E **ES/EN/mobile, 0 console errors** · 11 invariants confirmed.
 >
-> **⚠️ PRODUCTION ACTIVATION PENDING (founder, D-046):** the Vercel `f90` project has **no env vars**, so
-> account routes (`/home` · `/settings` · `/onboarding` · `/u/[username]` · OG) currently **500**; the
-> public landing + `/login` + `/signup` serve **200** with Phase 1 markers. Add the **2 public** Supabase
-> env vars (`NEXT_PUBLIC_SUPABASE_URL` + `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY`, from `apps/web/.env.local`)
-> to Vercel Production + redeploy → fixes the 500s; then the D-035 dashboard items for real sign-in.
+> **✅ PRODUCTION ENV ACTIVATED (2026-06-05):** the 2 public Supabase env vars are set in Vercel + the site
+> was **redeployed** (`dpl_3PDvhVLQBcVe6ZWYpi8N8cQWLa7L`, `www.f90.xyz`); **all 500s resolved** (gates →
+> `/login`, `/u/[unknown]` → 404, OG → 200, public → 200 — verified in prod). **Only remaining for real
+> end-user sign-in: the D-035 Supabase dashboard items** (`site_url`, allow-list apex, Resend SMTP).
 > **▶ NEXT MILESTONE = Phase 2 (Predictions Core & Scoring).** Read [PHASE_1_HANDOFF.md](PHASE_1_HANDOFF.md)
 > (full close + ship record) + [ROADMAP.md](ROADMAP.md) + [DECISIONS.md](DECISIONS.md). **DO NOT open new
 > fronts** (D-042 dashboard/Fantasy/player-market are future, documented-not-built).

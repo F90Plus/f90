@@ -759,3 +759,12 @@ locally with `.env.local`); this is purely missing **production env config**.
    add apex `https://f90.xyz/**` · Resend SMTP for magic-link.
 **Status:** Phase 1 = **CLOSED + MERGED + DEPLOYED (code)**; production **public surfaces live**, **account
 features pending the founder env activation above**. `main` = `7584f65`; production = Phase 1 code.
+
+**UPDATE 2026-06-05 (env ACTIVATED — 500s resolved):** the founder added `NEXT_PUBLIC_SUPABASE_URL` +
+`NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` to Vercel (Production + Preview); **redeployed** `vercel --prod` →
+**`dpl_3PDvhVLQBcVe6ZWYpi8N8cQWLa7L`** (READY, `www.f90.xyz`). **All 500s RESOLVED — verified in
+production:** `/home` · `/settings` · `/onboarding` → **307 → `/login`** (the `(app)` gate), `/u/[unknown]`
+→ **404**, OG → **200 `image/png`** (ES + EN), public landing + `/login` + `/signup` → **200**. Production
+now correctly reflects Phase 1 at the surface + architecture level. **Only remaining for real end-user
+sign-in: the D-035 Supabase dashboard items** — `site_url` → `https://www.f90.xyz`, redirect allow-list add
+apex `https://f90.xyz/**`, Resend SMTP for magic-link.

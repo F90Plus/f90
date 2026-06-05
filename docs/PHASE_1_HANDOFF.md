@@ -6,12 +6,12 @@
 > **deployed** `vercel --prod` (`dpl_Dth9c2paTkJkBwi9WauResDUL7iQ`, aliased **`www.f90.xyz`**). The merged
 > branch `feat/phase-1-identity` is **deleted**; tree clean.
 >
-> **⚠️ PRODUCTION ACTIVATION PENDING (founder, D-046):** the Vercel `f90` project has **no env vars**, so
-> account routes (`/home` · `/settings` · `/onboarding` · `/u/[username]` · OG) currently **500**; the
-> **public landing + `/login` + `/signup` serve 200** with Phase 1 markers. To activate: add the **2
-> public** Supabase env vars (`NEXT_PUBLIC_SUPABASE_URL` + `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY`, values
-> in `apps/web/.env.local`) to Vercel Production + `vercel --prod --yes`; then the D-035 dashboard items
-> (`site_url` → `www.f90.xyz`, allow-list apex `https://f90.xyz/**`, Resend SMTP) for real sign-in.
+> **✅ PRODUCTION ENV ACTIVATED (2026-06-05):** the 2 public Supabase env vars are set in Vercel
+> (Production + Preview) and the site was **redeployed** (`dpl_3PDvhVLQBcVe6ZWYpi8N8cQWLa7L`, `www.f90.xyz`).
+> **All 500s resolved — verified in prod:** `/home` · `/settings` · `/onboarding` → 307 → `/login` (gate),
+> `/u/[unknown]` → 404, OG → 200 (ES + EN), public landing + `/login` + `/signup` → 200. **Only remaining
+> for real end-user sign-in: the D-035 Supabase dashboard items** (`site_url` → `https://www.f90.xyz`,
+> redirect allow-list apex `https://f90.xyz/**`, Resend SMTP for magic-link).
 >
 > **▶ NEXT MILESTONE = Phase 2 (Predictions Core & Scoring).** **DO NOT open new fronts** — D-042
 > dashboard / advanced Fantasy / player-market stay future, documented-not-built.
@@ -313,12 +313,11 @@ All eleven tasks done + verified (DoD passed). **PR [#2](https://github.com/F90P
 `main` = `7584f65`; **deployed** `vercel --prod` → `dpl_Dth9c2paTkJkBwi9WauResDUL7iQ`, aliased
 **`www.f90.xyz`**. Merged branch deleted; tree clean.
 
-**⚠️ Remaining for full production activation (founder-owned — secrets boundary, D-046):**
-1. The Vercel `f90` project has **no env vars** → account routes 500. Add the **2 public** Supabase env
-   vars (`NEXT_PUBLIC_SUPABASE_URL` + `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY`, from `apps/web/.env.local`)
-   to Production + `vercel --prod --yes` → fixes the 500s. (Public landing/login/signup already 200.)
-2. For real sign-in: Supabase `site_url` → `https://www.f90.xyz` · allow-list apex `https://f90.xyz/**` ·
-   Resend SMTP (D-035).
+**✅ Production env activated (2026-06-05):** the 2 public Supabase env vars are set in Vercel + the site
+was **redeployed** (`dpl_3PDvhVLQBcVe6ZWYpi8N8cQWLa7L`); **all 500s resolved** (gates → `/login`,
+`/u/[unknown]` → 404, OG → 200, public → 200 — verified in prod).
+**Only remaining for real end-user sign-in (founder, D-035):** Supabase `site_url` → `https://www.f90.xyz` ·
+redirect allow-list apex `https://f90.xyz/**` · Resend SMTP for magic-link.
 
 **Next milestone = Phase 2 (Predictions Core & Scoring)** — the engine that generates points + coins and
 **fills this rankings teaser with real data**. See [ROADMAP.md](ROADMAP.md).
