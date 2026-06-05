@@ -6,6 +6,7 @@ import { Flag } from '@/components/ui/flag';
 import { AnalystMark } from '@/features/copilot/analyst-mark';
 import { cn } from '@/lib/utils';
 import { teamNameForCode } from '@/lib/football/teams';
+import { coinsForPoints } from '@/lib/scoring';
 import { makePrediction, type PredictionErrorKey } from './actions';
 import { stanceOf } from './card-model';
 import { PositionTicket } from './position-ticket';
@@ -160,6 +161,9 @@ export function PredictPositions({ fixture }: { fixture: PredictableFixture }) {
         ))}
       </div>
 
+      {/* the difficulty↔reward rule, made explicit — every pick is a stance, not a number */}
+      <p className="mt-2.5 text-[0.7rem] text-mist-400">{t('rewardRule')}</p>
+
       {/* error (rolled-back state) */}
       {error ? (
         <p role="alert" className="mt-3 text-[0.74rem] font-medium text-flare-400">
@@ -219,6 +223,7 @@ function OutcomeButton({
   const stance = stanceOf(outcome, fixture.lean);
   const pct = Math.round(fixture.prob[outcome] * 100);
   const points = fixture.points[outcome];
+  const coins = coinsForPoints(points);
 
   const code = outcome === 'home' ? fixture.homeCode : outcome === 'away' ? fixture.awayCode : null;
   const label =
@@ -230,7 +235,7 @@ function OutcomeButton({
             (outcome === 'home' ? fixture.homeCode : fixture.awayCode),
         });
 
-  const ariaLabel = `${label} — ${pct}% — ${t('pointsIfRightLong', { points })}${
+  const ariaLabel = `${label} — ${pct}% — ${t('pointsIfRightLong', { points })} — ${t('coinsIfRight', { coins })}${
     current ? ` — ${t('changing.current')}` : ''
   }`;
 
@@ -288,8 +293,15 @@ function OutcomeButton({
         </span>
       )}
 
-      <span className="nums relative shrink-0 font-display text-[0.78rem] font-bold text-pitch-300">
-        {t('pointsIfRight', { points })}
+      {/* dual reward — what you EARN on a correct call: points (rank) + Tokens (wallet).
+          Two currencies, shown before you commit, so the value of the call is concrete. */}
+      <span className="relative flex shrink-0 flex-col items-end leading-tight">
+        <span className="nums font-display text-[0.78rem] font-bold text-pitch-300">
+          {t('pointsIfRight', { points })}
+        </span>
+        <span className="nums font-display text-[0.62rem] font-bold text-lime-300">
+          {t('coinsIfRight', { coins })}
+        </span>
       </span>
 
       <span className="nums relative w-[46px] shrink-0 text-right font-display text-[1.04rem] font-extrabold text-mist-50">

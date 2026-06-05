@@ -413,6 +413,8 @@
     "tagContrarian": "Contrarian",
     "pointsIfRight": "+{points, number} pts",
     "pointsIfRightLong": "+{points, number} pts if you're right",
+    "coinsIfRight": "+{coins, number} F90",
+    "rewardRule": "Less likely, more points and Tokens.",
     "analystLeans": "The Analyst leans {team}. Challenge it and it's worth more.",
     "analystLeansDraw": "The Analyst reads a draw. Challenge it and it's worth more.",
     "firstHint": "Be one of the first Analysts to read this match.",
@@ -441,7 +443,8 @@
       "youMarker": "YOU",
       "locksAtKickoff": "Locks at kickoff",
       "changePick": "Change my read",
-      "confirming": "Confirming…"
+      "confirming": "Confirming…",
+      "countsToward": "Adds to your record and ranking."
     },
     "settled": {
       "wonLabel": "Settled · you were right",

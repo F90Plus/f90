@@ -413,6 +413,8 @@
     "tagContrarian": "Contrario",
     "pointsIfRight": "+{points, number} pts",
     "pointsIfRightLong": "+{points, number} pts si aciertas",
+    "coinsIfRight": "+{coins, number} F90",
+    "rewardRule": "Menos probable, más puntos y Tokens.",
     "analystLeans": "El Analista se inclina por {team}. Desafíalo y vale más.",
     "analystLeansDraw": "El Analista ve el empate. Desafíalo y vale más.",
     "firstHint": "Sé de los primeros Analistas en leer este partido.",
@@ -441,7 +443,8 @@
       "youMarker": "TÚ",
       "locksAtKickoff": "Se bloquea al pitido",
       "changePick": "Cambiar mi análisis",
-      "confirming": "Confirmando…"
+      "confirming": "Confirmando…",
+      "countsToward": "Suma a tu récord y a tu clasificación."
     },
     "settled": {
       "wonLabel": "Resuelto · acertaste",

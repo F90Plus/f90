@@ -196,7 +196,9 @@ export function PositionTicket({
               <span className="text-[0.6rem] uppercase tracking-[0.13em] text-mist-400">
                 {t('ticket.rewardCoins')}
               </span>
-              <span className="nums font-display text-[1.4rem] font-extrabold text-pitch-300">
+              {/* Tokens in the currency's lime — distinct from points (pitch), so the
+                  wallet reward reads as its own thing within the flow (P-D). */}
+              <span className="nums font-display text-[1.4rem] font-extrabold text-lime-300">
                 {t('ticket.rewardCoinsValue', { coins: view.coins })}
               </span>
             </div>
@@ -206,6 +208,9 @@ export function PositionTicket({
                 : t('ticket.noteConsensus', { pct: pickPct })}
             </span>
           </div>
+
+          {/* what's at stake — this position is on your permanent record + ranking (P-B) */}
+          <p className="mt-2.5 text-[0.7rem] text-mist-400">{t('ticket.countsToward')}</p>
 
           {/* market read + "TÚ" marker */}
           <div className="mt-3.5">
