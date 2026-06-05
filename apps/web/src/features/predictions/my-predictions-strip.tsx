@@ -47,8 +47,13 @@ export function MyPredictionsStrip({ predictions }: { predictions: UserPredictio
   );
 }
 
-/** One compact row: pick flag · headline · match + kickoff · stance + status. */
-function PredictionRow({ prediction }: { prediction: UserPrediction }) {
+/**
+ * One compact row: pick flag · headline · match + kickoff · stance + status.
+ *
+ * Exported so the /predictions full-history page can reuse the same row
+ * presentation (DRY — both the strip and the full page render identical rows).
+ */
+export function PredictionRow({ prediction }: { prediction: UserPrediction }) {
   const t = useTranslations('app.home.myPredictions');
   const tp = useTranslations('predictions');
   const f = useFormatter();

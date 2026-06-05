@@ -424,6 +424,17 @@
       "notFound": "We couldn't find this match. Refresh and try again.",
       "locked": "This match has closed: positions lock at kickoff.",
       "unknown": "Something went wrong. Try again in a moment."
+    },
+    "page": {
+      "metaTitle": "My predictions · F90+",
+      "eyebrow": "Your history",
+      "title": "My predictions",
+      "subtitle": "All your World Cup positions — active and resolved.",
+      "activeTitle": "Active",
+      "resolvedTitle": "Resolved",
+      "emptyTitle": "You haven't taken any position yet.",
+      "emptyBody": "Pick a match and call the result — correct predictions earn points and Tokens F90.",
+      "emptyCta": "See matches"
     }
   }
 }

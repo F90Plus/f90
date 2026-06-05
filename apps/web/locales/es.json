@@ -424,6 +424,17 @@
       "notFound": "No encontramos este partido. Recarga e inténtalo de nuevo.",
       "locked": "El partido ya cerró: las posiciones se bloquean al pitido inicial.",
       "unknown": "Algo salió mal. Inténtalo de nuevo en un momento."
+    },
+    "page": {
+      "metaTitle": "Mis predicciones · F90+",
+      "eyebrow": "Tu historial",
+      "title": "Mis predicciones",
+      "subtitle": "Todas tus posiciones en el Mundial — activas y resueltas.",
+      "activeTitle": "Activas",
+      "resolvedTitle": "Resueltas",
+      "emptyTitle": "Aún no has tomado ninguna posición.",
+      "emptyBody": "Elige un partido y predice el resultado del Mundial — los aciertos suman puntos y Tokens F90.",
+      "emptyCta": "Ver partidos"
     }
   }
 }
