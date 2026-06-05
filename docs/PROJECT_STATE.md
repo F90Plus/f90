@@ -14,9 +14,14 @@
 > was **redeployed** (`dpl_3PDvhVLQBcVe6ZWYpi8N8cQWLa7L`, `www.f90.xyz`); **all 500s resolved** (gates →
 > `/login`, `/u/[unknown]` → 404, OG → 200, public → 200 — verified in prod). **Only remaining for real
 > end-user sign-in: the D-035 Supabase dashboard items** (`site_url`, allow-list apex, Resend SMTP).
-> **▶ NEXT MILESTONE = Phase 2 (Predictions Core & Scoring).** Read [PHASE_1_HANDOFF.md](PHASE_1_HANDOFF.md)
-> (full close + ship record) + [ROADMAP.md](ROADMAP.md) + [DECISIONS.md](DECISIONS.md). **DO NOT open new
-> fronts** (D-042 dashboard/Fantasy/player-market are future, documented-not-built).
+> **▶ PHASE 2 (Predictions Core & Scoring) — CODE-COMPLETE · DoD-PASSED · REVIEWED** on `feat/phase-2-predictions`
+> (NOT yet merged/deployed): the full **predict → lock → settle → points/Tokens → ranking** loop (migrations
+> `0004`/`0005`, `make_prediction`/`settle_fixture` server-authoritative functions, predict card + position
+> ticket with real flags, premium `/home` hub, `/predictions`, `/ranking`). **243 vitest · build · i18n 343/343 ·
+> vocab D-037 · reviewed** (D-050/D-051). **Deploy = founder-gated production promotion + operator steps** —
+> see the runbook in [PHASE_2_HANDOFF.md](PHASE_2_HANDOFF.md). Read [PHASE_1_HANDOFF.md](PHASE_1_HANDOFF.md) +
+> [ROADMAP.md](ROADMAP.md) + [DECISIONS.md](DECISIONS.md). **DO NOT open new fronts** (D-042 dashboard/Fantasy/
+> player-market are future, documented-not-built).
 > Contracts: [PHASE_1_IDENTITY.md](PHASE_1_IDENTITY.md) · [SCHEMA_V1.md](SCHEMA_V1.md) ·
 > [PHASE_1_IMPLEMENTATION_PLAN.md](PHASE_1_IMPLEMENTATION_PLAN.md).
 

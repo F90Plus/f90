@@ -881,3 +881,27 @@ Commits `63c5561` + `f509042`.
 action (P2-4) **calls the RPC** (not a client upsert); `lib/scoring.ts` (P2-3) mirrors the canonical formula —
 keep SQL ↔ TS parity. A live-DB integration test of `make_prediction` (cross-user / post-kickoff /
 settled-repick) is recommended once the DB is operator-applied.
+
+### D-051 — Phase 2 (Predictions Core & Scoring) built: the full loop, code-complete + DoD-passed ✅ (2026-06-05)
+**What:** the **predict → lock-at-kickoff → settle → points/Tokens → ranking** loop is built on
+`feat/phase-2-predictions` (NOT yet merged/deployed). Predict card + position ticket (real flags, optimistic
+1X2), premium `/home` hub (subtle WC atmosphere + intentional branding), `/predictions` + `/ranking` pages,
+migrations `0004` (fixtures/predictions/`make_prediction`) + `0005` (`settle_fixture`), admin sync/settle
+routes. Gates: **243 vitest · tsc · next build · i18n parity 343/343 · vocab D-037 upheld · zero forbidden
+patterns**. Every integrity-critical unit adversarially reviewed (caught: the missing `prediction_kind` enum,
+the `points_possible` client-write hole → D-050, the re-sync `status`-clobber, settlement double-award
+checks). Full record + the **operator runbook**: [PHASE_2_HANDOFF.md](PHASE_2_HANDOFF.md).
+**Engagement/visual craft direction (founder-approved):** the predict surface should feel
+**credible-money-adjacent / market-alive** at the sophistication of the best prediction-market products
+(Polymarket / Kalshi / DraftKings) — **adapted, never copied**, never a sportsbook, **zero dark patterns**,
+vocab law intact. Pre-community, **El Analista (the real model) IS the market**, and consensus-vs-contrarian =
+**you vs the Analyst's lean** (challenging it pays more, by the honest scoring). Community-data mechanics
+(crowd split, live activity, probability movement, per-outcome sparklines) are **honest-deferred** until real
+predictors exist — no fabricated counts (the documented dark patterns are explicitly avoided). **Real flags**
+replace the initial-token boxes.
+**Post-loop craft trajectory (deferred — after the loop is live + has real use):** the sidebar app-shell,
+"Analista Élite / XP" levels, the trophy-photo header, and per-outcome community sparklines (the founder's
+reference render). Deferred deliberately for pace + the ruta crítica al opener.
+**Deploy = founder-gated production promotion + operator steps** (apply `0004`/`0005` · set
+`ADMIN_SYNC_SECRET` + `SUPABASE_SECRET_KEY` · D-035 sign-in items · merge + `vercel --prod` · sync pre-opener ·
+settle post-match). See the runbook in [PHASE_2_HANDOFF.md](PHASE_2_HANDOFF.md).
