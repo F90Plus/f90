@@ -792,3 +792,49 @@ deviation from the canonical `@supabase/ssr` pattern that can make server compon
 session after access-token expiry (~1h), i.e. a possible later "unexpected logout." Address deliberately
 if that symptom appears (needs an authed-session repro; the composed next-intl + Supabase middleware makes
 the change non-trivial, so it was not done blind).
+
+### D-048 — Phase 1 (Identity & Accounts) OFFICIALLY APPROVED & CLOSED ✅ (founder, 2026-06-05)
+**OFFICIAL STATUS: CLOSED · MERGED · DEPLOYED · ENV ACTIVATED · PRODUCTION VERIFIED.** Founder-approved.
+This is the authoritative close snapshot; a fresh session resumes Phase 2 from here.
+
+**Production state** — `www.f90.xyz` LIVE on Phase 1 (latest prod deployment `dpl f90-pef578soh`; `main`
+docs at `eaffd61`). Verified: public landing ES/EN (real-but-empty rankings teaser · market ticker ·
+Analyst Center live-market) · `/login` + `/signup` · protected-route gates (`/home`·`/settings`·
+`/onboarding` → `/login`) · `/u/[unknown]` → 404 · localized OG (200, ES/EN) · **auth-aware header + user
+menu (avatar + Inicio/Ajustes/Cerrar sesión) working** (D-047). Real end-user **sign-in completion pending
+D-035** (Supabase `site_url` → `www.f90.xyz`, redirect allow-list apex `https://f90.xyz/**`, Resend SMTP).
+
+**Supabase state** — project `f90-production` (ref `upelxcxnpmmbhivrazle`, eu-west-1, **isolated**,
+ACTIVE_HEALTHY). Migrations `0001`/`0002`/`0003` applied + verified: 5 tables (RLS on all),
+`award_coins`/`award_points` (SECURITY DEFINER), `handle_new_user` trigger, `global_rankings` view, 48
+countries, welcome bonus **20,026 Tokens F90**. Vercel env (Production + Preview): `NEXT_PUBLIC_SUPABASE_URL`
++ `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` set (runtime needs only these two **public** vars; the secret key
+is NOT used at runtime).
+
+**Git state** — `main` @ `eaffd61` == `origin/main`; **tree clean**; **only `main`** (feat/phase-1-identity
+deleted local+remote); PR [#2](https://github.com/F90Plus/f90/pull/2) merged (`7584f65`). No stashes, no
+temp branches, no running processes/tasks.
+
+**Inherited decisions (binding)** — D-027 three-currency economy · D-034 generic economy (markets/players/
+fantasy plug in with no Identity reshape) · **D-037 probability-NOT-odds LOCKED** + the no-betting
+vocabulary law · D-039 Tokens F90 (20,026) · D-035 auth (one dual-mode callback) · D-041 Analyst Center =
+live market in place · D-042 two-surfaces (future) · D-043 real rankings teaser · D-044 i18n/token sweep ·
+D-045 close · D-046 ship/env · D-047 post-login nav.
+
+**Known risks** — (1) **D-035 prod auth config pending** → end-users can't fully complete sign-in until set
+(founder). (2) **Latent (D-047):** `updateSession` writes refreshed cookies only to response, not request
+→ possible "unexpected logout" ~1h after token expiry; fix deliberately with an authed-session repro.
+(3) Vercel team **shared with Chiribito** (D-033). (4) ESLint flat-config gap (pre-existing; typecheck +
+tests + build are the gates). (5) WebGL globe screenshots flake in tooling (verify via DOM).
+
+**What NOT to touch in Phase 1** — the identity/auth/economy schema + RLS + `award_*` (server-authoritative,
+generic, anti-cheat) · the Analyst Center landing (D-041) + vocab law (D-037) · the rankings teaser
+contract · the design tokens + the 11 invariants · the deployed auth surfaces. Do NOT re-open **D-042
+dashboard / advanced Fantasy / player-market** (future, documented-not-built).
+
+**Phase 2 starts here** — milestone **Phase 2: Predictions Core & Scoring**, on a fresh branch
+`feat/phase-2-predictions` off `main`: migration `0004` (`fixtures` + `predictions`, designed in
+[SCHEMA_V1.md](SCHEMA_V1.md)) · predict flow (winner / scoreline / brackets) **locking at kickoff** ·
+**difficulty-honest scoring** (`lib/football/model.ts`, underdog-correct = more points) · **server-side
+settlement** → `award_points`/`award_coins` · a "my predictions" view. This **generates the economy and
+fills the rankings teaser with real data**. WC opener: **11 Jun 2026**.

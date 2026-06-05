@@ -58,7 +58,7 @@ read fans out into the canonical tournament spine later phases attach to. Decisi
 
 ---
 
-## ✅ Phase 1 — Identity & Accounts  *(CLOSED + MERGED + DEPLOYED — 2026-06-05; T1–T11)*
+## ✅ Phase 1 — Identity & Accounts  *(CLOSED · MERGED · DEPLOYED · ENV ACTIVATED · PRODUCTION VERIFIED — 2026-06-05; T1–T11; D-048)*
 
 Let people *be someone* on F90+ — and lay the **server-authoritative economy** the whole loop runs on.
 **Live state + the full checkpoint:** [PHASE_1_HANDOFF.md](PHASE_1_HANDOFF.md) (contracts:

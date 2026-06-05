@@ -1,6 +1,6 @@
 # F90+ — Phase 1 Handoff (Identity & Accounts)
 
-> **✅ PHASE 1 (Identity & Accounts) — CLOSED + MERGED + DEPLOYED 2026-06-05 (T1–T11; D-045/D-046).**
+> **✅ PHASE 1 (Identity & Accounts) — CLOSED · MERGED · DEPLOYED · ENV ACTIVATED · PRODUCTION VERIFIED — founder-approved 2026-06-05 (T1–T11; official close record D-048).**
 > DoD passed (gates green · **105 tests** · i18n parity **263/263** · browser E2E ES/EN/mobile, 0 console ·
 > 11 invariants). **PR [#2](https://github.com/F90Plus/f90/pull/2) MERGED → `main` = `7584f65`**;
 > **deployed** `vercel --prod` (`dpl_Dth9c2paTkJkBwi9WauResDUL7iQ`, aliased **`www.f90.xyz`**). The merged

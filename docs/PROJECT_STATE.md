@@ -1,6 +1,6 @@
 # F90+ — Project State (Checkpoint)
 
-> **✅ CHECKPOINT 2026-06-05 — PHASE 1 (Identity & Accounts) CLOSED + MERGED + DEPLOYED (D-045/D-046).**
+> **✅ CHECKPOINT 2026-06-05 — PHASE 1 (Identity & Accounts) CLOSED · MERGED · DEPLOYED · ENV ACTIVATED · PRODUCTION VERIFIED — founder-approved (official close record: DECISIONS D-048).**
 > **`main` = `7584f65`** (PR [#2](https://github.com/F90Plus/f90/pull/2) merged) and **deployed to
 > production** (`vercel --prod`, `dpl_Dth9c2paTkJkBwi9WauResDUL7iQ`, aliased **`https://www.f90.xyz`**).
 > Phase 1 delivered: Supabase-backed auth (magic-link + Google) · onboarding ·
