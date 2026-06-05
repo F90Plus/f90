@@ -287,6 +287,25 @@
     "you": "¿Tú?",
     "joinCta": "Reclama tu sitio"
   },
+  "ranking": {
+    "metaTitle": "Ranking global · F90+",
+    "eyebrow": "Ranking global",
+    "title": "La clasificación",
+    "subtitle": "Los analistas más afilados del Mundial, ordenados por puntos.",
+    "subtitleEmpty": "El tablero se abre cuando se resuelvan las primeras predicciones.",
+    "colRank": "#",
+    "colPlayer": "Jugador",
+    "colPoints": "Puntos",
+    "points": "{points, number} pts",
+    "yourRow": "Tú",
+    "unrankedTitle": "Aún no estás en el ranking.",
+    "unrankedBody": "Haz tu primera predicción para entrar en la clasificación.",
+    "unrankedCta": "Hacer una predicción",
+    "top3Medal1": "1.º",
+    "top3Medal2": "2.º",
+    "top3Medal3": "3.º",
+    "seeRanking": "Ranking"
+  },
   "cta": {
     "title": "El Mundial se vive distinto cuando te juegas algo.",
     "subtitle": "Algo virtual, claro. Únete a F90+ gratis y convierte cada partido en un momentazo.",

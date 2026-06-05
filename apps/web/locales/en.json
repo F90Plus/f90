@@ -287,6 +287,25 @@
     "you": "You?",
     "joinCta": "Claim your spot"
   },
+  "ranking": {
+    "metaTitle": "Global ranking · F90+",
+    "eyebrow": "Global ranking",
+    "title": "The leaderboard",
+    "subtitle": "The World Cup's sharpest analysts, ranked by points.",
+    "subtitleEmpty": "The board opens once predictions are settled.",
+    "colRank": "#",
+    "colPlayer": "Player",
+    "colPoints": "Points",
+    "points": "{points, number} pts",
+    "yourRow": "You",
+    "unrankedTitle": "You're not on the board yet.",
+    "unrankedBody": "Make your first prediction to enter the ranking.",
+    "unrankedCta": "Make a prediction",
+    "top3Medal1": "1st",
+    "top3Medal2": "2nd",
+    "top3Medal3": "3rd",
+    "seeRanking": "Ranking"
+  },
   "cta": {
     "title": "The World Cup hits different with skin in the game.",
     "subtitle": "Virtual skin, that is. Join F90+ free and turn every match into a moment.",

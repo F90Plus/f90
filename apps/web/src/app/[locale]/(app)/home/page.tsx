@@ -32,8 +32,9 @@ export default async function AppHomePage({ params }: Props) {
   } = await supabase.auth.getUser();
   if (!user) return null; // the (app) layout already guaranteed a session
 
-  const [t, profileRes, walletRes, countries, fixtures, predictions] = await Promise.all([
+  const [t, tRanking, profileRes, walletRes, countries, fixtures, predictions] = await Promise.all([
     getTranslations('app'),
+    getTranslations('ranking'),
     supabase.from('profiles').select('username, total_points, country_code').eq('id', user.id).single(),
     supabase.from('wallets').select('coins_balance').eq('user_id', user.id).single(),
     getCountries(locale),
@@ -66,11 +67,17 @@ export default async function AppHomePage({ params }: Props) {
 
           <Stat label={t('home.tokensLabel')} value={t('home.tokensValue', { amount: balance })} tone="lime" />
           <Stat label={t('home.pointsLabel')} value={t('home.pointsValue', { points })} tone="white" />
-          <Stat
-            label={t('home.rankLabel')}
-            value={rank == null ? t('home.rankUnranked') : t('home.rankValue', { rank })}
-            tone="led"
-          />
+          <Link
+            href="/ranking"
+            className="flex flex-col gap-1 rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-led-400"
+            aria-label={tRanking('seeRanking')}
+          >
+            <Stat
+              label={t('home.rankLabel')}
+              value={rank == null ? t('home.rankUnranked') : t('home.rankValue', { rank })}
+              tone="led"
+            />
+          </Link>
 
           {country ? (
             <span className="inline-flex items-center gap-2 text-[0.8rem] text-mist-300">
