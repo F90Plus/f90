@@ -77,9 +77,19 @@ export function PredictionRow({ prediction }: { prediction: UserPrediction }) {
 
   const isSettled = status === 'settled';
   const isWon = correct === true;
+  // Final score lives inline in the meta line (no disconnected below-row pill).
+  const hasScore = isSettled && prediction.homeGoals != null && prediction.awayGoals != null;
+  const date = f.dateTime(new Date(prediction.kickoffISO), { day: 'numeric', month: 'short' });
 
   return (
-    <div className="flex items-center gap-3 px-4 py-3 sm:px-5">
+    <div
+      className={cn(
+        'flex items-center gap-3 px-4 py-3 sm:px-5',
+        // A correct settled call earns a quiet pitch-green elevation, so wins read
+        // at a glance down the list (the loop's payoff moment).
+        isSettled && isWon && 'border-l-2 border-pitch-500/40 bg-pitch-500/[0.05]',
+      )}
+    >
       {pickCode ? (
         <Flag code={pickCode} size="sm" />
       ) : (
@@ -91,11 +101,21 @@ export function PredictionRow({ prediction }: { prediction: UserPrediction }) {
       <div className="min-w-0 flex-1">
         <div className="truncate font-display text-[0.92rem] font-bold text-mist-50">{headline}</div>
         <div className="mt-0.5 truncate text-[0.72rem] text-mist-400">
-          {teamLabel(prediction.homeCode)} <span className="text-mist-500">·</span>{' '}
-          {teamLabel(prediction.awayCode)} <span className="text-mist-500">·</span>{' '}
-          <span className="nums">
-            {f.dateTime(new Date(prediction.kickoffISO), { day: 'numeric', month: 'short' })}
-          </span>
+          {hasScore ? (
+            <span className="nums">
+              {teamLabel(prediction.homeCode)} {prediction.homeGoals}{' '}
+              <span aria-hidden className="text-mist-500">
+                –
+              </span>{' '}
+              {prediction.awayGoals} {teamLabel(prediction.awayCode)}
+            </span>
+          ) : (
+            <>
+              {teamLabel(prediction.homeCode)} <span className="text-mist-500">·</span>{' '}
+              {teamLabel(prediction.awayCode)}
+            </>
+          )}{' '}
+          <span className="text-mist-500">·</span> <span className="nums">{date}</span>
         </div>
       </div>
 

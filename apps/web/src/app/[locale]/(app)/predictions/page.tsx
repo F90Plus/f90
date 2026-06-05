@@ -4,7 +4,7 @@ import { createClient } from '@/lib/supabase/server';
 import { Container } from '@/components/ui/container';
 import { Card } from '@/components/ui/card';
 import { Link } from '@/i18n/navigation';
-import { getUserPredictions, type UserPrediction } from '@/features/predictions/queries';
+import { getUserPredictions } from '@/features/predictions/queries';
 import { groupPredictions } from '@/features/predictions/predictions-model';
 import { PredictionRow } from '@/features/predictions/my-predictions-strip';
 import { AnalystMark } from '@/features/copilot/analyst-mark';
@@ -116,7 +116,7 @@ export default async function PredictionsPage({ params }: Props) {
                 <ul>
                   {resolved.map((p) => (
                     <li key={p.fixtureId}>
-                      <ResolvedPredictionRow prediction={p} />
+                      <PredictionRow prediction={p} />
                     </li>
                   ))}
                 </ul>
@@ -126,63 +126,5 @@ export default async function PredictionsPage({ params }: Props) {
         </>
       )}
     </Container>
-  );
-}
-
-/**
- * Extended settled row: reuses PredictionRow and augments it with the final
- * scoreline when goals are known. Falls back gracefully to PredictionRow when
- * the scoreline is not yet populated.
- */
-function ResolvedPredictionRow({ prediction }: { prediction: UserPrediction }) {
-  const { homeGoals, awayGoals } = prediction;
-
-  if (homeGoals == null || awayGoals == null) {
-    return <PredictionRow prediction={prediction} />;
-  }
-
-  return (
-    <div className="relative">
-      <PredictionRow prediction={prediction} />
-      <ScorelinePill
-        homeGoals={homeGoals}
-        awayGoals={awayGoals}
-        homeCode={prediction.homeCode}
-        awayCode={prediction.awayCode}
-        correct={prediction.correct}
-      />
-    </div>
-  );
-}
-
-/** Final result pill shown beneath a settled row when goals are known. */
-function ScorelinePill({
-  homeGoals,
-  awayGoals,
-  homeCode,
-  awayCode,
-  correct,
-}: {
-  homeGoals: number;
-  awayGoals: number;
-  homeCode: string;
-  awayCode: string;
-  correct: boolean | null;
-}) {
-  const isWon = correct === true;
-  return (
-    <div className="flex items-center gap-2 pb-2.5 pl-[3.75rem] pr-4">
-      <span
-        className={`nums inline-flex items-center gap-1.5 rounded-pill border px-2.5 py-0.5 font-display text-[0.7rem] font-bold ${
-          isWon
-            ? 'border-pitch-500/30 bg-pitch-500/10 text-pitch-300'
-            : 'border-mist-500/20 bg-night-800/50 text-mist-400'
-        }`}
-        aria-label={`Final: ${homeCode} ${homeGoals} – ${awayGoals} ${awayCode}`}
-      >
-        {homeCode} {homeGoals} <span aria-hidden className="text-mist-500">–</span> {awayGoals}{' '}
-        {awayCode}
-      </span>
-    </div>
   );
 }
