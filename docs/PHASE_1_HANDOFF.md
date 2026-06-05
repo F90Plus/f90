@@ -1,15 +1,17 @@
 # F90+ — Phase 1 Handoff (Identity & Accounts)
 
-> **🟢 OFFICIAL CHECKPOINT — 2026-06-05 (T10 sweep). Phase 1 ACTIVE; resume at T11 (DoD gate).**
-> T1–T9 **done + verified**, and **T10 (i18n parity + token/visual/debt sweep) done + verified (D-044)**;
-> only **T11 (Phase DoD gate)** remains. Working tree **clean**. Branch `feat/phase-1-identity` is **ON
-> GitHub** (`F90Plus/f90`) — **T9 + T10 pushed** (founder gave a push-go this session). **`main` untouched
-> at `b6bff60`**; production **www.f90.xyz unchanged** (still Phase 0.6; production is a manual `vercel
-> --prod` = a founder action, D-033). The preview deploy stays **deprioritised**.
+> **✅ PHASE 1 (Identity & Accounts) COMPLETE — DoD gate PASSED 2026-06-05 (T1–T11). CLOSED at the
+> development level (D-045).** All gates green: `tsc` · **105 tests** · `next build` (no `ignore*Errors`) ·
+> i18n parity **263/263** · browser E2E **ES + EN + mobile, 0 console errors** (landing · auth ·
+> protected-route gates · 404s · localized OG). All 11 OPERATING_MODEL invariants confirmed. Working tree
+> **clean**. Branch `feat/phase-1-identity` **pushed** (`F90Plus/f90`, tip `4462657`); **`main` untouched
+> at `b6bff60`**; production `www.f90.xyz` **still Phase 0.6**.
 >
-> **▶ RESUME = T11** (Phase DoD gate — final ES/EN + mobile verification, confirm no hardcoded copy/values
-> remain, finalise docs, then close Phase 1 cleanly). **DO NOT open new fronts** — no advanced Fantasy, no
-> complex player market, no Polymarket dashboard (those are **D-042 future, documented-not-built**).
+> **▶ PRODUCTION PROMOTION IS FOUNDER-GATED (the only remaining Phase-1 steps):** (1) PR
+> `feat/phase-1-identity` → `main` + merge; (2) manual `vercel --prod` (D-033); (3) pre-prod-auth Supabase
+> items — `site_url` → prod origin, allow-list apex `https://f90.xyz/**`, Resend SMTP (D-035).
+> **▶ NEXT MILESTONE = Phase 2 (Predictions Core & Scoring).** **DO NOT open new fronts** — D-042
+> dashboard / advanced Fantasy / player-market stay future, documented-not-built.
 >
 > **Analyst Center — APPROVED philosophy (carry forward, D-041):** the section **"Los partidos que
 > importan" (`#analyst`) IS the market**, transformed **IN PLACE** — never a new section/nav/grid/
@@ -79,11 +81,11 @@ remains for T9–T11** (they consume existing tables/views).
 Entity Layer & Fantasy"**) · **D-040** Founding Squad / "Pack Fundación F90". Routes reserved; English
 (D-003).
 
-**✅ T9 done (D-043):** the homepage teaser reads the real `global_rankings` view (honest empty-state);
-mock deleted. **✅ T10 done (D-044):** i18n parity **263/263**, OG card localised, `scroll-mt` fixed on 4
-sections, `FieldIsSet`→`SectionHeading`, in-card CTAs→`buttonVariants`, 2 retired components deleted.
+**✅ T9 done (D-043)** · **✅ T10 done (D-044)** · **✅ T11 DoD gate PASSED (D-045) — Phase 1 CLOSED.**
 
-**⏳ Pending (resume here):** **T11** Phase DoD gate (then Phase 1 closes). **→ Resume = T11.**
+**▶ Phase 1 is complete (development level).** Remaining = **founder-gated production promotion**: PR
+`feat/phase-1-identity` → `main` + merge → manual `vercel --prod` (D-033) + the pre-prod Supabase items
+(D-035). **Next milestone = Phase 2 (Predictions Core & Scoring).**
 
 ## Product decisions registered (ledger)
 
@@ -302,15 +304,18 @@ freely; `username`/`country` are gated by the 30-day cooldown (D-031) from the `
   "Podrás cambiarlo el 4 de julio" (change + 30 days); editing `display_name` + `bio` persisted to the
   DB via RLS, cooldown fields untouched.
 
-## Next step (exact) — T11: Phase DoD gate (close Phase 1)
+## Phase 1 — CLOSED ✅ (T11 DoD gate passed — D-045)
 
-T9 + T10 are shipped + verified (D-043, D-044). The final task is **T11** — the Definition-of-Done gate:
-(a) run the full suite one last time (`pnpm typecheck` · `pnpm test` · `pnpm build` — all currently green);
-(b) a final in-browser pass on the live surfaces — **ES + EN + mobile, 0 console errors** (auth →
-onboarding → `/home` → `/u/[username]` → settings → landing); (c) confirm the standing invariants hold
-(no hardcoded copy/values, mobile parity, reduced-motion); (d) finalise the docs and mark Phase 1
-**complete**. **Done when:** the DoD checklist passes end-to-end and Phase 1 is closed. The only
-code-external step is the production `vercel --prod` (D-033) — a **founder action**.
+All eleven tasks done + verified; the DoD checklist passed end-to-end (gates green · i18n parity 263/263 ·
+browser E2E ES+EN+mobile, 0 console errors · 11 invariants confirmed). **Remaining to put Phase 1 in
+production (all founder-gated):**
+1. Open a PR **`feat/phase-1-identity` → `main`** and merge (`main` is intact at `b6bff60`).
+2. Manual **`vercel --prod`** (D-033 — shared Chiribito team, Root `apps/web`).
+3. Before production auth: Supabase `site_url` → prod origin · redirect allow-list add apex
+   `https://f90.xyz/**` · Resend SMTP for magic-link (D-035).
+
+**Next milestone = Phase 2 (Predictions Core & Scoring)** — the engine that generates points + coins and
+**fills this rankings teaser with real data**. See [ROADMAP.md](ROADMAP.md).
 
 ## PHASE 1 STATUS
 
@@ -328,4 +333,4 @@ code-external step is the production `vercel --prod` (D-033) — a **founder act
 | Analyst Center Market Feel (D-041) — live-market in place + XI Ideal pitch | ✅ completado (typecheck + 99 tests + build green; ES/EN + mobile; pushed `d7d2575`) |
 | T9 — Rankings teaser (replace mock) | ✅ completado (real `global_rankings` + honest empty-state; D-043; verificado ES/EN + móvil) |
 | T10 — i18n parity + tokens sweep | ✅ completado (D-044; parity 263/263 · OG localizado · consistency · dead-code) |
-| T11 — Phase DoD gate | ⏳ pendiente (NEXT) |
+| T11 — Phase DoD gate | ✅ completado (D-045; gates verdes + E2E ES/EN/móvil + 11 invariantes + 0 consola) — **Phase 1 CERRADA** |

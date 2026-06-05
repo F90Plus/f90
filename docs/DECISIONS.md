@@ -706,3 +706,31 @@ primary CTAs are system-consistent, and two dead components are gone. Gates: `ts
 **200 `image/png` in ES and EN**. (Full-page screenshots are blocked by the known WebGL-globe capture
 hang — measured via DOM instead, which is conclusive for these properties.) Branch
 `feat/phase-1-identity`. **Next: T11 (Phase DoD gate) → close Phase 1.**
+
+### D-045 — Phase 1 (Identity & Accounts) CLOSED: DoD gate passed (T11) ✅ (2026-06-05)
+**Context:** T11 is the Definition-of-Done gate for Phase 1. All eleven tasks (T1–T11) are built +
+verified; this records the final gate result and the official close of the phase.
+**Decision:** **Phase 1 is CLOSED at the development level.** DoD verified end-to-end:
+- `pnpm typecheck` clean · **105** unit tests green · `next build` green (no `ignore*Errors`) ·
+  i18n **ES/EN parity 263/263**.
+- **Browser E2E pass — ES + EN + mobile, 0 console errors:** the landing (6 sections present,
+  `scroll-margin-top` uniform 96px, honest titles), auth (`/login` + `/signup` render the magic-link +
+  Google forms), the **protected-route gates** (unauth `/home` · `/settings` · `/onboarding` →
+  `/login?next=…`), **404s** (unknown profile + unknown route), and the **localized OG card** (200
+  `image/png` in ES and EN). Mobile 375px: **0 page overflow**.
+- **All 11 OPERATING_MODEL invariants confirmed:** isolation · dual-surface parity · premium-not-casino ·
+  WC2026 identity · social-first · free/no-betting (D-037) · clean/scalable · English-product +
+  no-hardcoded-copy · no-paid-LLM/data · tokens-over-hardcoding · tool-agnostic/portable.
+**What Phase 1 delivers:** Supabase-backed identity on an **isolated** project (auth magic-link + Google ·
+onboarding · public profile + dynamic **localized** OG · settings + 30-day cooldown) on a
+**server-authoritative, anti-cheat economy foundation** (wallet + append-only ledgers + `award_*`
+`SECURITY DEFINER` · welcome bonus **20,026 Tokens F90**) — **generic by design (D-034)** so
+Predictions/Market/Fantasy plug in with no Identity reshape — plus a **real (currently empty, honest)**
+rankings teaser and a coherence/i18n/token/debt sweep.
+**Consequences:** code-complete on branch `feat/phase-1-identity` (pushed; **`main` untouched at
+`b6bff60`**; production `www.f90.xyz` still Phase 0.6). **PRODUCTION PROMOTION IS FOUNDER-GATED:**
+(1) open a PR `feat/phase-1-identity` → `main` and merge; (2) manual `vercel --prod` (D-033); (3) before
+production auth, the Supabase founder/dashboard items — `site_url` → production origin, redirect
+allow-list add apex `https://f90.xyz/**`, Resend SMTP for magic-link (D-035). **Next milestone: Phase 2 —
+Predictions Core & Scoring** (generates the economy; fills the rankings teaser with real points).
+Non-blocking deferred items are in **D-044** + the handoff.
