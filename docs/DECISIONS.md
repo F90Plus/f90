@@ -768,3 +768,27 @@ production:** `/home` · `/settings` · `/onboarding` → **307 → `/login`** (
 now correctly reflects Phase 1 at the surface + architecture level. **Only remaining for real end-user
 sign-in: the D-035 Supabase dashboard items** — `site_url` → `https://www.f90.xyz`, redirect allow-list add
 apex `https://f90.xyz/**`, Resend SMTP for magic-link.
+
+### D-047 — Post-login navigation fix; auth-state header confirmed working ✅ (2026-06-05)
+**Context:** After Google login in production the founder reported "no visual indication of an
+authenticated user." Systematic investigation: prod cache headers proved the landing is **fully dynamic**
+(`Cache-Control: no-store`, `X-Vercel-Cache: MISS`, `Age: 0`) — **not** cached; `git log` confirmed **no
+regression** from T9–T11 (the auth flow is untouched since T4–T8); the header (`getCurrentUser`) and the
+`(app)` gate (`requireOnboardedUser`) make the **identical** `createClient().auth.getUser()` call. Founder
+screenshots then **CONFIRMED the header DOES reflect the session** (avatar "P" + "Sesión iniciada como
+…@… / Cerrar sesión", on both the landing and `/settings`).
+**Root cause:** NOT a session / cookie / caching bug — a **missing navigation affordance**. The user menu
+only offered email + sign-out, so the authenticated areas (`/home`, `/settings`) were **unreachable from
+the UI** (the user had to type the URL).
+**Fix (no new features — the pages already existed):** (1) `components/layout/user-menu.tsx` — added
+locale-aware links **Inicio (`/home`)** + **Ajustes (`/settings`)** above sign-out (i18n
+`auth.account.home`/`settings`, ES/EN; parity **265/265**). (2) `app/[locale]/(auth)/login/page.tsx` — the
+post-login destination now defaults to **`/home`** (the `(app)` gate still routes not-yet-onboarded users
+to `/onboarding`; a gate-supplied `?next=` is preserved). **Gates:** typecheck · 105 tests · build green.
+**Deployed:** `dpl f90-pef578soh`, `www.f90.xyz`, commit `201fe66`.
+**Flagged latent (NOT the cause here; NOT fixed — no evidence it's biting):** `lib/supabase/middleware.ts`
+`updateSession` writes refreshed cookies only to the **response**, not back onto the **request** — a
+deviation from the canonical `@supabase/ssr` pattern that can make server components miss a *refreshed*
+session after access-token expiry (~1h), i.e. a possible later "unexpected logout." Address deliberately
+if that symptom appears (needs an authed-session repro; the composed next-intl + Supabase middleware makes
+the change non-trivial, so it was not done blind).
