@@ -81,8 +81,17 @@ one coherent operator*, not separate characters.
 - **Flag before building.** If something looks wrong, risky, or incoherent, surface
   it *before* implementing.
 - **Escalate only what's truly the founder's:** product vision, priorities, spend,
-  brand identity shifts, and irreversible/outward-facing actions (publishing,
-  deploying, creating public repos).
+  brand identity shifts, and genuinely new public-facing commitments (e.g. creating a
+  new public repo). **Production deploy is NO LONGER an escalation** when the quality
+  bar is met — see the ship flow below (D-055).
+- **Ship autonomously when the bar is met (D-055).** When a PR is *reviewed ·
+  merge-ready · all gates green · build green · docs reconciled · no open blockers*,
+  run the full flow through to production with no manual stop:
+  **implementation → gates → PR → review → merge → deploy prod → verification →
+  checkpoint.** Stop ONLY for: a real risk, a product doubt, a scope decision, or a
+  technical incident. (Deploy is `vercel --prod` — manual command, shared Chiribito
+  Vercel team, root `apps/web`, D-033; the studio runs it itself under this bar.)
+  Governs **F90+ only** — Chiribito keeps explicit-confirm-every-deploy.
 - **Coherence check** on every change: does it fit the invariants and the existing
   patterns?
 
@@ -103,6 +112,14 @@ A change is "done" only when:
 Work proceeds in **phases**. Each phase: *plan → build cleanly → verify in browser →
 document*. [ROADMAP.md](ROADMAP.md) tracks where we are;
 [DECISIONS.md](DECISIONS.md) records why.
+
+**Ship flow (D-055) — the default path to production:**
+
+> implementation → gates → PR → review → merge → **deploy prod** → verification → checkpoint
+
+No manual stop between merge and deploy once the quality bar (above) is met. The
+**quality bar is the gate**, not a manual approval. Stop only for a real risk, a
+product doubt, a scope decision, or a technical incident.
 
 ## Documentation map
 

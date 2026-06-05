@@ -1019,3 +1019,42 @@ license-independence; as a **subtle, dark, non-logo atmosphere** the exposure is
 **D-037 intact.** Gates green (`tsc` · 243 vitest · `next build` · i18n parity **356/356**). Same gated close as
 D-053 (preview → founder-verify → PR → merge → `vercel --prod`). Free staking is the one item explicitly
 parked for Phase 3 brand+economy evaluation.
+
+### D-055 — Autonomous merge→deploy when a PR meets the quality bar (supersedes the D-033 manual gate) ✅ (founder standing directive, 2026-06-05)
+**Context:** the founder set a standing operational preference: **no manual stop between merge and production
+deploy** once a change clears the quality bar. Extends the studio-ownership/autonomy posture
+([[feedback_f90plus_studio_ownership]], D-052) to the deploy step.
+**Decision:** when a PR is **(1) reviewed · (2) merge-ready · (3) all gates green · (4) build green ·
+(5) docs reconciled · (6) no open blockers**, the studio executes the **full flow autonomously, including the
+production deploy** — no per-deploy approval. **Preferred flow:** implementation → gates → PR → review → merge →
+**deploy prod** → verification → checkpoint. **Stop ONLY for:** a real risk, a product doubt, a scope decision,
+or a technical incident. This **supersedes the manual-approval gate of D-033** for the deploy step. **D-033's
+technical reality is unchanged** (production is published by `vercel --prod` — manual command, **shared Chiribito
+Vercel team** `chiribito293-7173`, root `apps/web`, not git-connected); what changes is that the studio now
+**runs that command autonomously** under the bar above instead of waiting for a click. The cross-ecosystem
+isolation invariant still holds — `f90` + `www.f90.xyz` are isolated from Chiribito at the project/domain level;
+deploying F90+ never touches Chiribito.
+**Consequences:** faster cadence; the **quality bar is the gate**, not a manual approval. Recorded in
+[OPERATING_MODEL.md](OPERATING_MODEL.md) (deploy posture + Cadence) + the studio-ownership memory. Secrets rule
+unchanged (never store/print the PAT or keys). Governs **F90+ only** — Chiribito keeps its own
+explicit-confirm-every-deploy rule; the ecosystems are independent.
+
+### D-056 — Phase 2 (incl. the polish pass) MERGED + DEPLOYED; Phase 2 operatively CLOSED ✅ (2026-06-05)
+**What:** under D-055, the Phase 2 Polish pass was merged and shipped autonomously after clearing the bar.
+- **PR [#5](https://github.com/F90Plus/f90/pull/5) MERGED** → `main` (merge commit `372072c`); feature branch
+  deleted (local + remote); **only `main`** remains; `main` == `origin/main` == `372072c`; tree clean.
+- **`vercel --prod`** → deployment **`dpl_DNiLgBUgPKNAUcy5MXpyBQbor4rS`** (READY, target production), **aliased
+  `https://www.f90.xyz`**.
+- **Production verified (HTTP):** `worldcup/trophy.webp` → **200 image/webp 76,106 B** (proof the polish is live —
+  the asset exists only in this deploy) · landing ES + EN → **200** · `/home` · `/predictions` · `/ranking` →
+  **307 → `/login?next=…`** (auth gates, no 500) · `/u/[unknown]` → **404**. The authenticated polish (trophy on
+  /home, auth-aware nav, predict commitment UI) is in this deploy; first founder visual on `www.f90.xyz`.
+**Status:** **Phase 2 (core PR #4 + polish PR #5) is OPERATIVELY CLOSED.**
+**Remaining (operator/data — NOT blocking the close):** the predict→settle→ranking **loop goes live with real
+data** only after the operator runbook — apply migrations `0004`/`0005` to `f90-production`, set `ADMIN_SYNC_SECRET`
+(+ `SUPABASE_SECRET_KEY` where the admin jobs run), the **D-035** sign-in items (`site_url` → `www.f90.xyz`,
+redirect allow-list apex `f90.xyz/**`, Resend SMTP), then `POST /api/admin/sync-fixtures` (pre-opener) +
+`POST /api/admin/settle` (post-match). Until then the predict surfaces show the honest empty-state. Full runbook:
+[PHASE_2_HANDOFF.md](PHASE_2_HANDOFF.md).
+**Next milestone = Phase 3 (Economy: Market + Fantasy XI).** Free staking is its first brand/economy evaluation
+(PHASE_3_CANDIDATES C3-7).

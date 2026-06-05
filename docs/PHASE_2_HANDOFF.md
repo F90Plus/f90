@@ -45,17 +45,19 @@ A focused "works → feels finished" pass on the shipped Phase-2 surfaces, on br
 **Gates (re-verified on the branch):** `tsc` clean · **243 vitest** green · `next build` green
 (no `ignore*Errors`, 23/23 static pages) · i18n ES/EN parity **356/356** · vocab law upheld.
 
-**Close sequence — where we are:**
-1. ✅ Founder verified the polish authenticated on **local :3300** (auth allow-listed there; a Vercel
-   *preview* can't complete F90+ login — Supabase redirect allow-list is `www.f90.xyz` + `localhost:3300`).
-2. ✅ Branch **pushed**; **PR [#5](https://github.com/F90Plus/f90/pull/5)** open (`feat/phase-2-polish` → `main`).
-3. ▶ **Remaining (founder-gated):** **merge PR #5 → `main`**, then **`vercel --prod`** (D-033 — manual,
-   shared Chiribito team, root `apps/web`). The authenticated polish (the predict-flow surfaces) gets its
-   first **live-data visual confirmation** on `www.f90.xyz` after deploy (auth works there).
+**Close sequence — DONE (D-056):**
+1. ✅ Founder verified the polish authenticated on **local :3300**.
+2. ✅ **PR [#5](https://github.com/F90Plus/f90/pull/5) MERGED** → `main` = `372072c` (feature branch deleted; only `main`; tree clean).
+3. ✅ **`vercel --prod`** → `dpl_DNiLgBUgPKNAUcy5MXpyBQbor4rS` (READY) aliased **`https://www.f90.xyz`** — deployed
+   **autonomously per D-055** (merge→deploy when the quality bar is met).
+4. ✅ **Prod-verified (HTTP):** `worldcup/trophy.webp` → 200 (proof the polish is live) · landing ES/EN → 200 ·
+   `/home`·`/predictions`·`/ranking` → 307 → `/login` · `/u/[unknown]` → 404. The authenticated polish lands on
+   `www.f90.xyz` (auth works there) — first founder visual when logged in.
 
-Exact final commands are in the session handoff / executive summary. Phase-3 candidates surfaced during the
-pass (do not implement before Phase 3): [PHASE_3_CANDIDATES.md](PHASE_3_CANDIDATES.md).
-**Phase 2 is "officially closed" only after the merge + `vercel --prod` — then Phase 3 starts.**
+**Phase 2 (core PR #4 + polish PR #5) = OPERATIVELY CLOSED.** The one remaining item is **operator/data, NOT a
+code blocker**: the predict→settle→ranking loop goes live with real data after the operator runbook below
+(migrations + env + D-035 + sync/settle). Phase-3 candidates (do not implement before Phase 3):
+[PHASE_3_CANDIDATES.md](PHASE_3_CANDIDATES.md). **Next = Phase 3 (Economy: Market + Fantasy XI).**
 
 ## What was built — the full loop
 
