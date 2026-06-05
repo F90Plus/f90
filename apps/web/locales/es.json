@@ -357,5 +357,50 @@
       "subtitle": "El inaugural, los duelos estelares y los mercados del Mundial — con la convicción del Analista. Toma posición con tus F90.",
       "predictSoon": "Predicciones muy pronto"
     }
+  },
+  "predictions": {
+    "marketEyebrow": "Lectura de El Analista",
+    "vs": "vs",
+    "draw": "Empate",
+    "outcomeWin": "{team} gana",
+    "tagLean": "El Analista",
+    "tagContrarian": "Contrario",
+    "pointsIfRight": "+{points, number} pts",
+    "pointsIfRightLong": "+{points, number} pts si aciertas",
+    "analystLeans": "El Analista se inclina por {team}. Desafíalo y vale más.",
+    "analystLeansDraw": "El Analista ve el empate. Desafíalo y vale más.",
+    "firstHint": "Sé de los primeros Analistas en leer este partido.",
+    "closesAtKickoff": "Cierra al pitido",
+    "ctaChoose": "Elegir mi posición",
+    "ctaTake": "Tomar posición",
+    "ticket": {
+      "label": "Tu posición · El Analista activado",
+      "stanceConsensus": "Con El Analista",
+      "stanceContrarian": "Análisis contrario",
+      "rewardIfRight": "Si aciertas",
+      "rewardCoins": "Tokens F90",
+      "rewardPoints": "+{points, number} pts",
+      "rewardCoinsValue": "+{coins, number}",
+      "noteConsensus": "Vas con El Analista ({pct}%). El acierto más probable.",
+      "noteContrarian": "Desafías a El Analista ({pct}%). Acertar vale más.",
+      "marketRead": "Lectura del mercado",
+      "readSummary": "{home}% · X {draw}% · {away}%",
+      "youMarker": "TÚ",
+      "locksAtKickoff": "Se bloquea al pitido",
+      "changePick": "Cambiar mi análisis"
+    },
+    "settled": {
+      "wonLabel": "Resuelto · acertaste",
+      "lostLabel": "Resuelto · fallaste",
+      "wonBadge": "+{points, number} ganados",
+      "lostBadge": "Sin acierto"
+    },
+    "error": {
+      "notAuthenticated": "Inicia sesión para tomar tu posición.",
+      "invalidOutcome": "Esa opción no es válida. Elige local, empate o visitante.",
+      "notFound": "No encontramos este partido. Recarga e inténtalo de nuevo.",
+      "locked": "El partido ya cerró: las posiciones se bloquean al pitido inicial.",
+      "unknown": "Algo salió mal. Inténtalo de nuevo en un momento."
+    }
   }
 }

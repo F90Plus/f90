@@ -357,5 +357,50 @@
       "subtitle": "The opener, the marquee ties and the World Cup markets — with the Analyst's conviction. Take your position with F90.",
       "predictSoon": "Predictions open soon"
     }
+  },
+  "predictions": {
+    "marketEyebrow": "The Analyst's read",
+    "vs": "vs",
+    "draw": "Draw",
+    "outcomeWin": "{team} win",
+    "tagLean": "The Analyst",
+    "tagContrarian": "Contrarian",
+    "pointsIfRight": "+{points, number} pts",
+    "pointsIfRightLong": "+{points, number} pts if you're right",
+    "analystLeans": "The Analyst leans {team}. Challenge it and it's worth more.",
+    "analystLeansDraw": "The Analyst reads a draw. Challenge it and it's worth more.",
+    "firstHint": "Be one of the first Analysts to read this match.",
+    "closesAtKickoff": "Closes at kickoff",
+    "ctaChoose": "Choose my position",
+    "ctaTake": "Take a position",
+    "ticket": {
+      "label": "Your position · The Analyst engaged",
+      "stanceConsensus": "With The Analyst",
+      "stanceContrarian": "Contrarian read",
+      "rewardIfRight": "If you're right",
+      "rewardCoins": "Tokens F90",
+      "rewardPoints": "+{points, number} pts",
+      "rewardCoinsValue": "+{coins, number}",
+      "noteConsensus": "You're with The Analyst ({pct}%). The likelier call.",
+      "noteContrarian": "You're challenging The Analyst ({pct}%). Being right is worth more.",
+      "marketRead": "Market read",
+      "readSummary": "{home}% · X {draw}% · {away}%",
+      "youMarker": "YOU",
+      "locksAtKickoff": "Locks at kickoff",
+      "changePick": "Change my read"
+    },
+    "settled": {
+      "wonLabel": "Settled · you were right",
+      "lostLabel": "Settled · you missed",
+      "wonBadge": "+{points, number} earned",
+      "lostBadge": "No hit"
+    },
+    "error": {
+      "notAuthenticated": "Sign in to take your position.",
+      "invalidOutcome": "That option isn't valid. Pick home, draw or away.",
+      "notFound": "We couldn't find this match. Refresh and try again.",
+      "locked": "This match has closed: positions lock at kickoff.",
+      "unknown": "Something went wrong. Try again in a moment."
+    }
   }
 }

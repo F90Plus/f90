@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { teamMeta } from '../teams';
+import { teamMeta, teamNameForCode } from '../teams';
 
 /**
  * The real 2026 World Cup field (48 nations) — spelled exactly as openfootball
@@ -53,6 +53,30 @@ describe('teamMeta — 2026 World Cup field', () => {
   it('gives every nation a real brand accent (never the generic fallback)', () => {
     for (const nation of WC2026_NATIONS) {
       expect(teamMeta(nation).accent).not.toBe(GENERIC_ACCENT);
+    }
+  });
+});
+
+describe('teamNameForCode — code → name bridge', () => {
+  it('resolves known broadcast codes back to their canonical name', () => {
+    expect(teamNameForCode('MEX')).toBe('Mexico');
+    expect(teamNameForCode('RSA')).toBe('South Africa');
+    expect(teamNameForCode('ARG')).toBe('Argentina');
+    expect(teamNameForCode('ESP')).toBe('Spain');
+  });
+
+  it('is case-insensitive on the input code', () => {
+    expect(teamNameForCode('mex')).toBe('Mexico');
+  });
+
+  it('returns null for an unknown code', () => {
+    expect(teamNameForCode('ZZZ')).toBeNull();
+  });
+
+  it('round-trips with teamMeta for every nation in the field', () => {
+    for (const name of WC2026_NATIONS) {
+      const code = teamMeta(name).code;
+      expect(teamNameForCode(code), name).toBe(name);
     }
   });
 });
