@@ -100,14 +100,37 @@
       "metaTitle": "Your F90+",
       "eyebrow": "Your dressing room",
       "greeting": "Hey, @{handle}",
-      "subtitle": "Your World Cup starts here.",
-      "balanceLabel": "Your wallet",
-      "balanceValue": "{amount, number} Tokens F90",
+      "tokensLabel": "Tokens F90",
+      "tokensValue": "{amount, number}",
       "pointsLabel": "Points",
       "pointsValue": "{points, number}",
+      "rankLabel": "Ranking",
+      "rankValue": "#{rank, number}",
+      "rankUnranked": "—",
       "backing": "Backing {country}",
-      "soon": "Predictions and markets are coming very soon. Meanwhile, explore the World Cup.",
-      "exploreCta": "Explore the World Cup"
+      "predict": {
+        "eyebrow": "The opening matchday",
+        "title": "Make your prediction",
+        "seeAll": "See all matches"
+      },
+      "upcoming": {
+        "title": "Upcoming matches",
+        "seeAll": "World Cup"
+      },
+      "myPredictions": {
+        "title": "My predictions",
+        "seeAll": "See all",
+        "statusPending": "Open · closes at kickoff",
+        "statusLocked": "Locked · in play",
+        "statusWon": "Correct · +{points, number} pts",
+        "statusLost": "No hit",
+        "emptyTitle": "You haven't taken your first position yet.",
+        "emptyBody": "Pick a match above — correct calls earn points and Tokens, and build your accuracy as an Analyst."
+      },
+      "fixturesPreparing": {
+        "title": "The World Cup fixtures are being prepared.",
+        "body": "We're tuning the matches and El Analista's read. Check back soon — your first position is waiting."
+      }
     }
   },
   "profile": {

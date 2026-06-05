@@ -210,52 +210,61 @@ export function toUserPrediction(
  *   of auth — the landing page shows fixtures to logged-out visitors.
  * - User predictions: fetched only when authenticated and filtered by `user_id`
  *   (belt-and-suspenders on top of RLS). If unauthenticated, `userPick` is null.
+ *
+ * GRACEFUL DEGRADATION: returns `[]` on ANY failure — a missing `fixtures` table
+ * (before migration 0004 is applied), an absent Supabase env, an RLS/query error,
+ * or a network fault. The /home + landing pages must render an honest empty-state,
+ * NEVER a 500. This is what lets us deploy before the DB is live.
  */
 export async function getPredictableFixtures(
   supabase: SupabaseClient,
 ): Promise<PredictableFixture[]> {
-  const now = new Date().toISOString();
+  try {
+    const now = new Date().toISOString();
 
-  // Resolve caller (belt-and-suspenders user_id filter)
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
+    // Resolve caller (belt-and-suspenders user_id filter)
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
 
-  // 1. Upcoming fixtures (public; world-readable via RLS)
-  const { data: fixtures, error: fixturesErr } = await supabase
-    .from('fixtures')
-    .select('id,group_label,round,kickoff_at,home_code,away_code,home_goals,away_goals,prob_home,prob_draw,prob_away,status')
-    .gt('kickoff_at', now)
-    .order('kickoff_at', { ascending: true });
+    // 1. Upcoming fixtures (public; world-readable via RLS)
+    const { data: fixtures, error: fixturesErr } = await supabase
+      .from('fixtures')
+      .select('id,group_label,round,kickoff_at,home_code,away_code,home_goals,away_goals,prob_home,prob_draw,prob_away,status')
+      .gt('kickoff_at', now)
+      .order('kickoff_at', { ascending: true });
 
-  if (fixturesErr) throw new Error(`getPredictableFixtures: ${fixturesErr.message}`);
-  if (!fixtures || fixtures.length === 0) return [];
+    if (fixturesErr || !fixtures || fixtures.length === 0) return [];
 
-  // Build a fixtureId → Outcome map from the user's picks (only when authenticated)
-  const pickMap = new Map<string, Outcome>();
-  if (user) {
-    // 2. The user's existing picks for these fixtures (RLS + explicit user_id filter)
-    const fixtureIds = fixtures.map((f: FixtureRow) => f.id);
-    const { data: preds } = await supabase
-      .from('predictions')
-      .select('fixture_id,payload')
-      .in('fixture_id', fixtureIds)
-      .eq('kind', 'match_result')
-      .eq('user_id', user.id);
+    // Build a fixtureId → Outcome map from the user's picks (only when authenticated)
+    const pickMap = new Map<string, Outcome>();
+    if (user) {
+      // 2. The user's existing picks for these fixtures (RLS + explicit user_id filter)
+      const fixtureIds = fixtures.map((f: FixtureRow) => f.id);
+      const { data: preds } = await supabase
+        .from('predictions')
+        .select('fixture_id,payload')
+        .in('fixture_id', fixtureIds)
+        .eq('kind', 'match_result')
+        .eq('user_id', user.id);
 
-    if (preds) {
-      for (const p of preds as Array<{ fixture_id: string; payload: { outcome: string } }>) {
-        const outcome = safeParseOutcome(p.payload.outcome);
-        if (outcome !== null) {
-          pickMap.set(p.fixture_id, outcome);
+      if (preds) {
+        for (const p of preds as Array<{ fixture_id: string; payload: { outcome: string } }>) {
+          const outcome = safeParseOutcome(p.payload.outcome);
+          if (outcome !== null) {
+            pickMap.set(p.fixture_id, outcome);
+          }
         }
       }
     }
-  }
 
-  return (fixtures as FixtureRow[]).map((f) =>
-    toPredictableFixture(f, pickMap.get(f.id) ?? null),
-  );
+    return (fixtures as FixtureRow[]).map((f) =>
+      toPredictableFixture(f, pickMap.get(f.id) ?? null),
+    );
+  } catch {
+    // Missing table / absent env / network fault → honest empty list, never a throw.
+    return [];
+  }
 }
 
 /**
@@ -271,53 +280,62 @@ export async function getPredictableFixtures(
  * - Ordered by `created_at` descending (newest first).
  * - Rows with corrupt `payload.outcome` are silently skipped (fail-safe against
  *   legacy data; the RPC guarantees valid outcomes so this should never fire).
+ *
+ * GRACEFUL DEGRADATION: returns `[]` on ANY failure — a missing `predictions`/
+ * `fixtures` table (before migration 0004 is applied), an absent Supabase env, an
+ * RLS/query error, or a network fault. The /home page must render its honest
+ * empty-state, NEVER a 500. This is what lets us deploy before the DB is live.
  */
 export async function getUserPredictions(
   supabase: SupabaseClient,
 ): Promise<UserPrediction[]> {
-  const now = new Date();
+  try {
+    const now = new Date();
 
-  // Resolve caller — unauthenticated callers get an empty list
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
-  if (!user) return [];
+    // Resolve caller — unauthenticated callers get an empty list
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
+    if (!user) return [];
 
-  // 1. User's predictions, newest first (RLS + explicit user_id filter)
-  const { data: preds, error: predsErr } = await supabase
-    .from('predictions')
-    .select('id,user_id,fixture_id,kind,payload,points_possible,settled_at,awarded_points,awarded_coins,created_at,updated_at')
-    .eq('kind', 'match_result')
-    .eq('user_id', user.id)
-    .order('created_at', { ascending: false });
+    // 1. User's predictions, newest first (RLS + explicit user_id filter)
+    const { data: preds, error: predsErr } = await supabase
+      .from('predictions')
+      .select('id,user_id,fixture_id,kind,payload,points_possible,settled_at,awarded_points,awarded_coins,created_at,updated_at')
+      .eq('kind', 'match_result')
+      .eq('user_id', user.id)
+      .order('created_at', { ascending: false });
 
-  if (predsErr) throw new Error(`getUserPredictions: ${predsErr.message}`);
-  if (!preds || preds.length === 0) return [];
+    if (predsErr || !preds || preds.length === 0) return [];
 
-  // 2. Fetch the referenced fixtures in a single round-trip
-  const fixtureIds = [...new Set((preds as PredictionRow[]).map((p) => p.fixture_id))];
-  const { data: fixtures, error: fixturesErr } = await supabase
-    .from('fixtures')
-    .select('id,group_label,round,kickoff_at,home_code,away_code,home_goals,away_goals,prob_home,prob_draw,prob_away,status')
-    .in('id', fixtureIds);
+    // 2. Fetch the referenced fixtures in a single round-trip
+    const fixtureIds = [...new Set((preds as PredictionRow[]).map((p) => p.fixture_id))];
+    const { data: fixtures, error: fixturesErr } = await supabase
+      .from('fixtures')
+      .select('id,group_label,round,kickoff_at,home_code,away_code,home_goals,away_goals,prob_home,prob_draw,prob_away,status')
+      .in('id', fixtureIds);
 
-  if (fixturesErr) throw new Error(`getUserPredictions (fixtures): ${fixturesErr.message}`);
+    if (fixturesErr) return [];
 
-  const fixtureMap = new Map<string, FixtureRow>();
-  for (const f of (fixtures ?? []) as FixtureRow[]) {
-    fixtureMap.set(f.id, f);
+    const fixtureMap = new Map<string, FixtureRow>();
+    for (const f of (fixtures ?? []) as FixtureRow[]) {
+      fixtureMap.set(f.id, f);
+    }
+
+    const result: UserPrediction[] = [];
+    for (const pred of preds as PredictionRow[]) {
+      const fixture = fixtureMap.get(pred.fixture_id);
+      if (!fixture) continue; // orphaned prediction — skip
+
+      // Fail-safe against corrupt/legacy payload: skip the row rather than crash
+      const pick = safeParseOutcome(pred.payload.outcome);
+      if (pick === null) continue;
+
+      result.push(toUserPrediction(pred, fixture, now, pick));
+    }
+    return result;
+  } catch {
+    // Missing table / absent env / network fault → honest empty list, never a throw.
+    return [];
   }
-
-  const result: UserPrediction[] = [];
-  for (const pred of preds as PredictionRow[]) {
-    const fixture = fixtureMap.get(pred.fixture_id);
-    if (!fixture) continue; // orphaned prediction — skip
-
-    // Fail-safe against corrupt/legacy payload: skip the row rather than crash
-    const pick = safeParseOutcome(pred.payload.outcome);
-    if (pick === null) continue;
-
-    result.push(toUserPrediction(pred, fixture, now, pick));
-  }
-  return result;
 }

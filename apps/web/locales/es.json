@@ -100,14 +100,37 @@
       "metaTitle": "Tu F90+",
       "eyebrow": "Tu vestuario",
       "greeting": "Hola, @{handle}",
-      "subtitle": "Tu Mundial empieza aquí.",
-      "balanceLabel": "Tu cartera",
-      "balanceValue": "{amount, number} Tokens F90",
+      "tokensLabel": "Tokens F90",
+      "tokensValue": "{amount, number}",
       "pointsLabel": "Puntos",
       "pointsValue": "{points, number}",
+      "rankLabel": "Ranking",
+      "rankValue": "#{rank, number}",
+      "rankUnranked": "—",
       "backing": "Vas con {country}",
-      "soon": "Las predicciones y los mercados llegan muy pronto. Mientras, explora el Mundial.",
-      "exploreCta": "Explorar el Mundial"
+      "predict": {
+        "eyebrow": "La jornada inaugural",
+        "title": "Haz tu predicción",
+        "seeAll": "Ver todos los partidos"
+      },
+      "upcoming": {
+        "title": "Próximos partidos",
+        "seeAll": "Mundial"
+      },
+      "myPredictions": {
+        "title": "Mis predicciones",
+        "seeAll": "Ver todas",
+        "statusPending": "Abierta · cierra al pitido",
+        "statusLocked": "Bloqueada · en juego",
+        "statusWon": "Acertaste · +{points, number} pts",
+        "statusLost": "Sin acierto",
+        "emptyTitle": "Aún no has tomado tu primera posición.",
+        "emptyBody": "Elige un partido arriba — los aciertos suman puntos y Tokens, y construyen tu efectividad como Analista."
+      },
+      "fixturesPreparing": {
+        "title": "Las fixtures del Mundial se están preparando.",
+        "body": "Estamos afinando los partidos y la lectura de El Analista. Vuelve pronto: tu primera posición te espera."
+      }
     }
   },
   "profile": {
