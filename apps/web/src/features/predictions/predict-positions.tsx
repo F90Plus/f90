@@ -65,7 +65,7 @@ export function PredictPositions({ fixture }: { fixture: PredictableFixture }) {
               setPick(null);
             }}
             disabled={isPending}
-            className="font-display text-mist-400 transition-colors hover:text-mist-100 disabled:opacity-50"
+            className="rounded font-display text-mist-400 transition-colors hover:text-mist-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-led-400 disabled:opacity-50"
           >
             {t('ticket.changePick')} ›
           </button>
@@ -153,7 +153,6 @@ function OutcomeButton({
       type="button"
       onClick={onSelect}
       disabled={disabled}
-      aria-pressed={false}
       aria-label={ariaLabel}
       className={cn(
         'relative flex min-h-11 items-center gap-3 overflow-hidden rounded-[14px] border px-3.5 py-3 text-left transition-all duration-200',
