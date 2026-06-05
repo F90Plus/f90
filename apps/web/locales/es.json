@@ -417,8 +417,15 @@
     "analystLeansDraw": "El Analista ve el empate. Desafíalo y vale más.",
     "firstHint": "Sé de los primeros Analistas en leer este partido.",
     "closesAtKickoff": "Cierra al pitido",
+    "lockedClosed": "Las posiciones se cerraron al pitido inicial.",
     "ctaChoose": "Elegir mi posición",
     "ctaTake": "Tomar posición",
+    "changing": {
+      "banner": "Tu posición actual: {team}. Elige otra para reemplazarla.",
+      "cancel": "Cancelar",
+      "current": "tu posición actual",
+      "currentTag": "Actual"
+    },
     "ticket": {
       "label": "Tu posición · El Analista activado",
       "stanceConsensus": "Con El Analista",
@@ -433,7 +440,8 @@
       "readSummary": "{home}% · X {draw}% · {away}%",
       "youMarker": "TÚ",
       "locksAtKickoff": "Se bloquea al pitido",
-      "changePick": "Cambiar mi análisis"
+      "changePick": "Cambiar mi análisis",
+      "confirming": "Confirmando…"
     },
     "settled": {
       "wonLabel": "Resuelto · acertaste",

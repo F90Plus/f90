@@ -417,8 +417,15 @@
     "analystLeansDraw": "The Analyst reads a draw. Challenge it and it's worth more.",
     "firstHint": "Be one of the first Analysts to read this match.",
     "closesAtKickoff": "Closes at kickoff",
+    "lockedClosed": "Positions closed at kickoff.",
     "ctaChoose": "Choose my position",
     "ctaTake": "Take a position",
+    "changing": {
+      "banner": "Your current position: {team}. Pick another to replace it.",
+      "cancel": "Cancel",
+      "current": "your current position",
+      "currentTag": "Current"
+    },
     "ticket": {
       "label": "Your position · The Analyst engaged",
       "stanceConsensus": "With The Analyst",
@@ -433,7 +440,8 @@
       "readSummary": "{home}% · X {draw}% · {away}%",
       "youMarker": "YOU",
       "locksAtKickoff": "Locks at kickoff",
-      "changePick": "Change my read"
+      "changePick": "Change my read",
+      "confirming": "Confirming…"
     },
     "settled": {
       "wonLabel": "Settled · you were right",

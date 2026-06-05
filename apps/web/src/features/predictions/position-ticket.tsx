@@ -33,6 +33,7 @@ export function PositionTicket({
   fixture,
   pick,
   locked = false,
+  pending = false,
   settlement,
   changeControl,
   className,
@@ -41,6 +42,8 @@ export function PositionTicket({
   pick: Outcome;
   /** Kickoff has passed — the pick is locked (no change affordance). */
   locked?: boolean;
+  /** The optimistic pick is being confirmed by the server (in-flight feedback). */
+  pending?: boolean;
   /** When present, renders the settled (won/lost) variant. */
   settlement?: TicketSettlement;
   /** Interactive "change my read" control injected by the client island. */
@@ -70,9 +73,11 @@ export function PositionTicket({
 
   return (
     <Card
+      aria-busy={pending || undefined}
       className={cn(
-        'overflow-hidden',
+        'overflow-hidden transition-opacity',
         isSettled ? (isWon ? 'glow-pitch' : '') : 'glow-led',
+        pending && 'opacity-95',
         className,
       )}
     >
@@ -230,13 +235,23 @@ export function PositionTicket({
             </div>
           </div>
 
-          {/* foot — lock state + change affordance */}
+          {/* foot — lock state + (confirming | change affordance) */}
           <div className="mt-3.5 flex items-center gap-2.5 text-[0.74rem] text-mist-300">
             <span className="inline-flex items-center gap-1.5 text-gold-300">
               <LockIcon />
               {t('ticket.locksAtKickoff')}
             </span>
-            {!locked ? <span className="ml-auto">{changeControl}</span> : null}
+            {pending ? (
+              <span className="ml-auto inline-flex items-center gap-1.5 text-led-300" aria-live="polite">
+                <span
+                  aria-hidden
+                  className="h-1.5 w-1.5 rounded-full bg-led-400 motion-safe:animate-pulse"
+                />
+                {t('ticket.confirming')}
+              </span>
+            ) : !locked ? (
+              <span className="ml-auto">{changeControl}</span>
+            ) : null}
           </div>
         </div>
       ) : null}
