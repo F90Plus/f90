@@ -1,0 +1,24 @@
+-- =============================================================================
+-- F90+ — Service-role table privileges for Phase 2 fixtures — migration 0006
+--
+-- Patch on top of 0004. The admin client (lib/supabase/admin.ts), authenticated
+-- as service_role via SUPABASE_SECRET_KEY, writes directly to public.fixtures
+-- from two server routes:
+--   * /api/admin/sync-fixtures — upserts the openfootball schedule.
+--   * /api/admin/settle       — updates final scores before settle_fixture().
+--
+-- service_role has bypassrls = true, which bypasses RLS POLICIES, but Postgres
+-- table-level GRANTs are a SEPARATE gate. Supabase does not auto-grant new,
+-- user-created tables to service_role unless ALTER DEFAULT PRIVILEGES was set
+-- up beforehand (it was not, for the public schema in this project). Without
+-- this grant, both admin routes fail with Postgres errcode 42501 — observed in
+-- production as "permission denied for table fixtures" after deploying Phase 2.
+--
+-- public.predictions is written ONLY through the make_prediction() and
+-- settle_fixture() SECURITY DEFINER functions (0004 / 0005), which run as the
+-- function owner — so predictions does NOT need a direct service_role grant.
+--
+-- Idempotent: GRANT is additive; re-running this migration is a no-op.
+-- =============================================================================
+
+grant select, insert, update on public.fixtures to service_role;
