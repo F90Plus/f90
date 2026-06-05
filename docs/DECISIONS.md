@@ -859,3 +859,25 @@ preview-safe case.
 **Honest limit:** the unit test proves the canonical contract; the definitive E2E ("the current request's
 Server Components see the fresh session at the token-expiry minute") needs a live authed session and is
 validated in prod once D-035 sign-in is active. The fix is strictly correct vs. the prior state.
+
+### D-050 — Predictions are server-authoritative via the `make_prediction` SECURITY DEFINER RPC ✅ (2026-06-05, Phase 2 / P2-1)
+**Context:** the planned Phase 2 had the predict action upsert predictions via the user's RLS client, with
+`points_possible` set by the action. An adversarial security review of migration `0004` found this left
+`points_possible` (and `settled_at`/`awarded_*`) **client-writable on INSERT** — a user could bank inflated
+points on a correct call (a leaderboard-integrity hole, though never a direct wallet credit since `award_*`
+are definer-only). The same review caught that **`prediction_kind` was never created in Phase 1** (0001 made
+only `ledger_kind`), so `0004` could not apply.
+**Decision:** make predictions **server-authoritative**, mirroring the economy's `award_*` definer pattern.
+Clients get **SELECT only** on `predictions`; the **sole write path** is `make_prediction(p_fixture_id,
+p_outcome)` — `SECURITY DEFINER`, `set search_path = public`, EXECUTE to `authenticated` only. It validates
+the caller (`auth.uid()`), enforces the kickoff lock, reads the fixture's stored model probability
+(`fixtures.prob_home/draw/away`), computes `points_possible = clamp(round(20 / prob), 10, 500)` server-side,
+and upserts the caller's single pick. `prediction_kind` is created in `0004` (idempotent). **No runtime
+service key needed** (the RPC is definer; the user's session calls it). The economy mechanic is **unchanged**
+(free predict → earn on a correct call). Migration `0004` re-reviewed **APPROVED** (no cross-user write,
+kickoff fail-closed, no client-settable settlement columns, `anon`/`public` execute revoked, no dynamic SQL).
+Commits `63c5561` + `f509042`.
+**Consequences (carry-forward):** the fixtures sync (P2-2) must **compute + store `prob_*`**; the predict
+action (P2-4) **calls the RPC** (not a client upsert); `lib/scoring.ts` (P2-3) mirrors the canonical formula —
+keep SQL ↔ TS parity. A live-DB integration test of `make_prediction` (cross-user / post-kickoff /
+settled-repick) is recommended once the DB is operator-applied.
