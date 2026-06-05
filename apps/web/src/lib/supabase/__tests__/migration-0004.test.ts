@@ -22,4 +22,21 @@ describe('migration 0004 — predictions', () => {
   it('keeps one prediction per user/fixture/kind', () => {
     expect(sql).toMatch(/unique\s*\(user_id,\s*fixture_id,\s*kind\)/);
   });
+  it('creates the prediction_kind enum (not assumed to pre-exist)', () => {
+    expect(sql).toMatch(/create type prediction_kind as enum/);
+  });
+  it('exposes make_prediction as a SECURITY DEFINER rpc', () => {
+    expect(sql).toContain('create or replace function public.make_prediction');
+    expect(sql).toContain('security definer');
+  });
+  it('grants execute on make_prediction so it is callable', () => {
+    expect(sql).toContain('grant execute on function public.make_prediction');
+  });
+  it('does NOT let clients write predictions directly (no insert/update grant)', () => {
+    expect(sql).not.toMatch(/grant\s+insert\s+on\s+public\.predictions\s+to\s+authenticated/);
+    expect(sql).not.toMatch(/grant\s+update\s+on\s+public\.predictions\s+to\s+authenticated/);
+  });
+  it('carries model probabilities on fixtures', () => {
+    expect(sql).toContain('prob_home');
+  });
 });
