@@ -56,6 +56,20 @@
   markets engine. D-037 vocab law still applies to identifiers, so capture it here.
 - **Shape:** rename + a chip restyle when the Markets phase lands.
 
+### C3-7 · Free staking (choose any amount of Tokens per prediction) — needs brand ratification
+- **What:** let a user put a variable amount of Tokens F90 on a prediction (vs the
+  current free-to-predict, earn-on-correct model).
+- **Why Phase-3 (and a brand call, not just a phase):** it's a **new economic mechanic**
+  — variable amount → new columns/payout calc/balance deduction/settlement/anti-cheat =
+  the Economy engine. It also changes the free-to-predict model (D-051), and "choose how
+  much to risk" is the **core gesture of a sportsbook**, directly against **D-037**
+  (probability-not-odds), the free/no-betting invariant, and the casino look F90+ avoids.
+- **Status:** evaluated during the D-054 commitment pass and **deferred** — the desired
+  "skin in the game" feeling was delivered instead via reputational levers (reward
+  visible pre-pick, what's-at-stake = record/ranking, difficulty↔reward rule). If ever
+  pursued, it requires **explicit founder ratification of a brand shift** + a dedicated
+  Economy + responsible-play design. **Do not implement as polish.**
+
 ---
 
 ## Optional polish backlog (in-scope, deferred this pass)

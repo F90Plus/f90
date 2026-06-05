@@ -978,3 +978,44 @@ open in [PHASE_2_HANDOFF.md](PHASE_2_HANDOFF.md)) happens at that preview. The 6
 captured in [PHASE_3_CANDIDATES.md](PHASE_3_CANDIDATES.md) (do not implement before Phase 3). **Phase 2 is
 not "officially closed" until the preview is founder-verified and prod is deployed; only then does Phase 3
 start.**
+
+### D-054 — Commitment & value of a prediction (without a wager) + the WC-trophy atmosphere; free staking deferred to Phase 3 ✅ (founder, 2026-06-05)
+**Context:** verifying the D-053 branch, the founder felt navigation/polish had improved but the predict
+experience "still doesn't transmit enough that I'm putting something on the line." Asked specifically about:
+Tokens visibility (Home + predict flow), clarity of the current position, the felt commitment of taking a
+position, the points/ranking/Tokens hierarchy, and what info on the cards makes a decision feel meaningful —
+**and to honestly judge whether free staking (choosing any amount of Tokens per prediction) is Phase-2 polish
+or Phase-3 Economy.** Plus: integrate the founder-provided **World Cup trophy** image as premium Mundial
+atmosphere (not a logo, not dominant).
+**Decision — the stake is REPUTATIONAL, surfaced; not a wager.** In F90+ what's on the line is your
+**points · ranking · record vs El Analista** — Tokens are *earned* on a correct call, never staked (D-051).
+So the commitment is raised by making that honest stake legible, not by adding risk (commits on
+`feat/phase-2-polish`):
+- **P-A** — the reward is visible **before** choosing: each outcome button shows the dual reward a correct
+  call earns — points (rank) **+ Tokens F90** (wallet) — so the value is concrete at the decision moment.
+- **P-D** — Tokens get their own presence in the flow, rendered in the currency's **lime** (distinct from
+  points' pitch) on the buttons + the ticket reward block. Points stay the hero in the *identity* strip
+  (D-053 H4); the reward leads in the *predict* surface — contextual hierarchy.
+- **P-C** — the **difficulty↔reward rule** is explicit ("less likely → more points and Tokens"), so each
+  pick is a stance, not an arbitrary number.
+- **P-B** — what's at stake is **named**: the position ticket states it counts toward your **record and
+  ranking**, alongside the existing lock-at-kickoff permanence.
+**Staking verdict (founder-confirmed): free staking = Phase 3 / Economy, NOT this PR — and a brand-invariant
+risk.** It is a new mechanic (variable amount → new columns/payout/balance-deduction/settlement/anti-cheat =
+Economy), it changes the free-to-predict model (D-051), and "choose how much to risk" is the core gesture of a
+sportsbook — directly against **D-037** (probability-not-odds) + the free/no-betting invariant + the casino-
+look the founder wants to avoid. Captured as a candidate in [PHASE_3_CANDIDATES.md](PHASE_3_CANDIDATES.md);
+**not implemented.** The desired feeling is delivered by P-A..P-D instead.
+**Trophy atmosphere.** The WC trophy is added as a **single aspirational atmosphere** on **/home only**:
+towering behind the content, ~7% opacity + blur + a soft radial fade, with a faint gold prestige glow tying to
+the F90+ gold; the legibility scrims keep the predict cards + stats the protagonists. It **replaces** the
+near-invisible globe-flags accent. **It is atmosphere, never a logo** (the F90+ mark stays the brand), never on
+the cards, not repeated across the app — no casino, no promo look. Asset = founder-provided transparent cutout,
+optimized to WebP (399×1020, 76KB, alpha) under `public/worldcup/`; the dark/low-opacity/blur/fade treatment is
+CSS, not baked in. **IP note (honest):** the real WC trophy is FIFA trade dress, which D-025 avoids for
+license-independence; as a **subtle, dark, non-logo atmosphere** the exposure is low, but prominence is a
+**founder brand call** — flagged, not blocked. Intensity/placement are single knobs if a tuning pass is wanted.
+**Consequences:** scope held — no wager, no multipliers, no new tables/routes/systems, no Economy logic;
+**D-037 intact.** Gates green (`tsc` · 243 vitest · `next build` · i18n parity **356/356**). Same gated close as
+D-053 (preview → founder-verify → PR → merge → `vercel --prod`). Free staking is the one item explicitly
+parked for Phase 3 brand+economy evaluation.

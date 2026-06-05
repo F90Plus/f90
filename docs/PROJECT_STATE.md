@@ -22,16 +22,21 @@
 > `0004`+`0005` to Supabase · Vercel env (`SUPABASE_SECRET_KEY` + new `ADMIN_SYNC_SECRET`) · D-035 sign-in
 > dashboard items · `vercel --prod` · `POST /api/admin/sync-fixtures` → ~72 fixtures · `POST /api/admin/settle`
 > post-match. See [PHASE_2_HANDOFF.md](PHASE_2_HANDOFF.md).
-> **▶ PHASE 2 POLISH PASS (D-053) — code-complete on `feat/phase-2-polish`, GATED (not pushed/merged/deployed).**
+> **▶ PHASE 2 POLISH PASS (D-053 + D-054) — code-complete on `feat/phase-2-polish`, GATED (not pushed/merged/deployed).**
 > Turns Phase 2 from "works" to "finished": auth-aware navigation (header/footer/account-menu + profile links;
 > the old landing-anchor dead-ends fixed), predict-flow feedback (in-flight "Confirmando…" · **reactive kickoff
 > lock** · clearer change-pick · closed-market hero · real minutes), /home premium cohesion (atmosphere de-dup ·
 > score-first standing strip · honest always-true eyebrow · loading skeleton · distinct empty-state), and a
-> resolved-row reveal (inline scoreline + won-row elevation) + AA-contrast bumps. **Narrow scope — no new
+> resolved-row reveal (inline scoreline + won-row elevation) + AA-contrast bumps.
+> **Commitment & value pass (D-054):** reward visible **before** choosing (dual points + Tokens F90), Tokens in
+> the currency's lime in the flow, the difficulty↔reward rule made explicit, and "what's at stake" named (counts
+> toward your record + ranking) — the stake is **reputational, not a wager** (free staking deferred to Phase 3 /
+> Economy, a brand call). Plus the **World Cup trophy** as a single premium aspirational atmosphere on /home
+> (towering, ~7% opacity, blur/fade, gold glow — atmosphere, never a logo). **Narrow scope — no new
 > surfaces/systems, D-037 vocab law intact, D-051 deferred craft NOT reopened.** Gates: **243 vitest · tsc ·
-> next build · i18n ES/EN 353/353**. Next = **preview deploy → founder verifies authenticated ES/EN/mobile →
-> push + PR + merge + `vercel --prod`** (D-033 manual, founder-gated). Phase-3 candidates captured in
-> [PHASE_3_CANDIDATES.md](PHASE_3_CANDIDATES.md).
+> next build · i18n ES/EN 356/356**. Next = **founder verifies authenticated ES/EN/mobile (local :3300) →
+> push + PR + merge + preview → `vercel --prod`** (D-033 manual, founder-gated). Phase-3 candidates (incl. free
+> staking) captured in [PHASE_3_CANDIDATES.md](PHASE_3_CANDIDATES.md).
 > Read [PHASE_1_HANDOFF.md](PHASE_1_HANDOFF.md) +
 > [ROADMAP.md](ROADMAP.md) + [DECISIONS.md](DECISIONS.md). **NEXT MILESTONE = Phase 3 (Economy: Market +
 > Fantasy XI)** — starts only after this polish pass is founder-verified + deployed. **DO NOT open new fronts**

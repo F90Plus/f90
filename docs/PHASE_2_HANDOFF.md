@@ -35,10 +35,15 @@ A focused "works → feels finished" pass on the shipped Phase-2 surfaces, on br
   affordance · honest always-true featured eyebrow · loading skeleton · distinct "Mis predicciones"
   empty-state (glyph + scroll-to-predict CTA) · resolved-row reveal (inline scoreline + won-row
   elevation) · AA-contrast bumps on sub-12px labels.
+- **Commitment & value (D-054):** the reward is visible **before** choosing (dual points + Tokens
+  F90 on each outcome), Tokens render in the currency's lime in the flow, the difficulty↔reward
+  rule is explicit, and "what's at stake" is named (counts toward your record + ranking). The stake
+  is **reputational, not a wager** — **free staking is deferred to Phase 3 / Economy** (a brand
+  call; PHASE_3_CANDIDATES C3-7). Plus the **World Cup trophy** as a single premium aspirational
+  atmosphere on /home (towering, ~7% opacity + blur + fade + gold glow — atmosphere, never a logo).
 
 **Gates (re-verified on the branch):** `tsc` clean · **243 vitest** green · `next build` green
-(no `ignore*Errors`, 23/23 static pages) · i18n ES/EN parity **353/353** · vocab law upheld.
-Diff: 15 files, +531/−217.
+(no `ignore*Errors`, 23/23 static pages) · i18n ES/EN parity **356/356** · vocab law upheld.
 
 **Open (founder-gated) — the close sequence:**
 1. **Preview deploy** (`vercel`, not `--prod`) → founder verifies authenticated **ES/EN/mobile**

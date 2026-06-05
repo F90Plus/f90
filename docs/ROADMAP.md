@@ -85,6 +85,7 @@ runbook: [PHASE_2_HANDOFF.md](PHASE_2_HANDOFF.md).
 - [x] **Difficulty-honest scoring** (`lib/scoring.ts` ↔ the SQL: underdog correct = more points)
 - [x] Server-side settlement → `award_points` + `award_coins` (idempotent `settle_fixture`, migration `0005`) · **`/predictions`** + **`/ranking`** + premium **`/home`** hub (real flags, subtle atmosphere, honest no-fake-community)
 - [x] **Polish & production cohesion pass (D-053):** auth-aware navigation · predict-flow feedback (in-flight · reactive lock · clearer change-pick) · /home premium cohesion · resolved-row reveal · AA contrast — narrow scope, no new surfaces, D-051 craft deferred. On `feat/phase-2-polish`, gated (preview → founder → prod). Phase-3 candidates: [PHASE_3_CANDIDATES.md](PHASE_3_CANDIDATES.md)
+- [x] **Commitment & value pass (D-054):** reward visible pre-pick (dual points + Tokens F90) · Tokens in lime in the flow · difficulty↔reward rule explicit · what's-at-stake named (record + ranking) · **WC trophy as premium /home atmosphere** (atmosphere, not a logo). Stake is reputational — **free staking deferred to Phase 3 / Economy** (brand call). D-037 intact.
 - **▶ Deploy (founder-gated):** apply 0004/0005 · env · D-035 · merge + `vercel --prod` · sync pre-opener · settle post-match — runbook in [PHASE_2_HANDOFF.md](PHASE_2_HANDOFF.md)
 
 ## ⏳ Phase 3 — Economy: Market + Fantasy XI  *(spends the economy)*
