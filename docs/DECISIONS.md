@@ -859,3 +859,49 @@ preview-safe case.
 **Honest limit:** the unit test proves the canonical contract; the definitive E2E ("the current request's
 Server Components see the fresh session at the token-expiry minute") needs a live authed session and is
 validated in prod once D-035 sign-in is active. The fix is strictly correct vs. the prior state.
+
+### D-050 — Predictions are server-authoritative via the `make_prediction` SECURITY DEFINER RPC ✅ (2026-06-05, Phase 2 / P2-1)
+**Context:** the planned Phase 2 had the predict action upsert predictions via the user's RLS client, with
+`points_possible` set by the action. An adversarial security review of migration `0004` found this left
+`points_possible` (and `settled_at`/`awarded_*`) **client-writable on INSERT** — a user could bank inflated
+points on a correct call (a leaderboard-integrity hole, though never a direct wallet credit since `award_*`
+are definer-only). The same review caught that **`prediction_kind` was never created in Phase 1** (0001 made
+only `ledger_kind`), so `0004` could not apply.
+**Decision:** make predictions **server-authoritative**, mirroring the economy's `award_*` definer pattern.
+Clients get **SELECT only** on `predictions`; the **sole write path** is `make_prediction(p_fixture_id,
+p_outcome)` — `SECURITY DEFINER`, `set search_path = public`, EXECUTE to `authenticated` only. It validates
+the caller (`auth.uid()`), enforces the kickoff lock, reads the fixture's stored model probability
+(`fixtures.prob_home/draw/away`), computes `points_possible = clamp(round(20 / prob), 10, 500)` server-side,
+and upserts the caller's single pick. `prediction_kind` is created in `0004` (idempotent). **No runtime
+service key needed** (the RPC is definer; the user's session calls it). The economy mechanic is **unchanged**
+(free predict → earn on a correct call). Migration `0004` re-reviewed **APPROVED** (no cross-user write,
+kickoff fail-closed, no client-settable settlement columns, `anon`/`public` execute revoked, no dynamic SQL).
+Commits `63c5561` + `f509042`.
+**Consequences (carry-forward):** the fixtures sync (P2-2) must **compute + store `prob_*`**; the predict
+action (P2-4) **calls the RPC** (not a client upsert); `lib/scoring.ts` (P2-3) mirrors the canonical formula —
+keep SQL ↔ TS parity. A live-DB integration test of `make_prediction` (cross-user / post-kickoff /
+settled-repick) is recommended once the DB is operator-applied.
+
+### D-051 — Phase 2 (Predictions Core & Scoring) built: the full loop, code-complete + DoD-passed ✅ (2026-06-05)
+**What:** the **predict → lock-at-kickoff → settle → points/Tokens → ranking** loop is built on
+`feat/phase-2-predictions` (NOT yet merged/deployed). Predict card + position ticket (real flags, optimistic
+1X2), premium `/home` hub (subtle WC atmosphere + intentional branding), `/predictions` + `/ranking` pages,
+migrations `0004` (fixtures/predictions/`make_prediction`) + `0005` (`settle_fixture`), admin sync/settle
+routes. Gates: **243 vitest · tsc · next build · i18n parity 343/343 · vocab D-037 upheld · zero forbidden
+patterns**. Every integrity-critical unit adversarially reviewed (caught: the missing `prediction_kind` enum,
+the `points_possible` client-write hole → D-050, the re-sync `status`-clobber, settlement double-award
+checks). Full record + the **operator runbook**: [PHASE_2_HANDOFF.md](PHASE_2_HANDOFF.md).
+**Engagement/visual craft direction (founder-approved):** the predict surface should feel
+**credible-money-adjacent / market-alive** at the sophistication of the best prediction-market products
+(Polymarket / Kalshi / DraftKings) — **adapted, never copied**, never a sportsbook, **zero dark patterns**,
+vocab law intact. Pre-community, **El Analista (the real model) IS the market**, and consensus-vs-contrarian =
+**you vs the Analyst's lean** (challenging it pays more, by the honest scoring). Community-data mechanics
+(crowd split, live activity, probability movement, per-outcome sparklines) are **honest-deferred** until real
+predictors exist — no fabricated counts (the documented dark patterns are explicitly avoided). **Real flags**
+replace the initial-token boxes.
+**Post-loop craft trajectory (deferred — after the loop is live + has real use):** the sidebar app-shell,
+"Analista Élite / XP" levels, the trophy-photo header, and per-outcome community sparklines (the founder's
+reference render). Deferred deliberately for pace + the ruta crítica al opener.
+**Deploy = founder-gated production promotion + operator steps** (apply `0004`/`0005` · set
+`ADMIN_SYNC_SECRET` + `SUPABASE_SECRET_KEY` · D-035 sign-in items · merge + `vercel --prod` · sync pre-opener ·
+settle post-match). See the runbook in [PHASE_2_HANDOFF.md](PHASE_2_HANDOFF.md).

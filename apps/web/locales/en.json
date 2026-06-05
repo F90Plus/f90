@@ -100,14 +100,37 @@
       "metaTitle": "Your F90+",
       "eyebrow": "Your dressing room",
       "greeting": "Hey, @{handle}",
-      "subtitle": "Your World Cup starts here.",
-      "balanceLabel": "Your wallet",
-      "balanceValue": "{amount, number} Tokens F90",
+      "tokensLabel": "Tokens F90",
+      "tokensValue": "{amount, number}",
       "pointsLabel": "Points",
       "pointsValue": "{points, number}",
+      "rankLabel": "Ranking",
+      "rankValue": "#{rank, number}",
+      "rankUnranked": "—",
       "backing": "Backing {country}",
-      "soon": "Predictions and markets are coming very soon. Meanwhile, explore the World Cup.",
-      "exploreCta": "Explore the World Cup"
+      "predict": {
+        "eyebrow": "The opening matchday",
+        "title": "Make your prediction",
+        "seeAll": "See all matches"
+      },
+      "upcoming": {
+        "title": "Upcoming matches",
+        "seeAll": "World Cup"
+      },
+      "myPredictions": {
+        "title": "My predictions",
+        "seeAll": "See all",
+        "statusPending": "Open · closes at kickoff",
+        "statusLocked": "Locked · in play",
+        "statusWon": "Correct · +{points, number} pts",
+        "statusLost": "No hit",
+        "emptyTitle": "You haven't taken your first position yet.",
+        "emptyBody": "Pick a match above — correct calls earn points and Tokens, and build your accuracy as an Analyst."
+      },
+      "fixturesPreparing": {
+        "title": "The World Cup fixtures are being prepared.",
+        "body": "We're tuning the matches and El Analista's read. Check back soon — your first position is waiting."
+      }
     }
   },
   "profile": {
@@ -264,6 +287,25 @@
     "you": "You?",
     "joinCta": "Claim your spot"
   },
+  "ranking": {
+    "metaTitle": "Global ranking · F90+",
+    "eyebrow": "Global ranking",
+    "title": "The leaderboard",
+    "subtitle": "The World Cup's sharpest analysts, ranked by points.",
+    "subtitleEmpty": "The board opens once predictions are settled.",
+    "colRank": "#",
+    "colPlayer": "Player",
+    "colPoints": "Points",
+    "points": "{points, number} pts",
+    "yourRow": "You",
+    "unrankedTitle": "You're not on the board yet.",
+    "unrankedBody": "Make your first prediction to enter the ranking.",
+    "unrankedCta": "Make a prediction",
+    "top3Medal1": "1st",
+    "top3Medal2": "2nd",
+    "top3Medal3": "3rd",
+    "seeRanking": "Ranking"
+  },
   "cta": {
     "title": "The World Cup hits different with skin in the game.",
     "subtitle": "Virtual skin, that is. Join F90+ free and turn every match into a moment.",
@@ -356,6 +398,62 @@
       "title": "The fixtures that matter",
       "subtitle": "The opener, the marquee ties and the World Cup markets — with the Analyst's conviction. Take your position with F90.",
       "predictSoon": "Predictions open soon"
+    }
+  },
+  "predictions": {
+    "marketEyebrow": "The Analyst's read",
+    "vs": "vs",
+    "draw": "Draw",
+    "outcomeWin": "{team} win",
+    "tagLean": "The Analyst",
+    "tagContrarian": "Contrarian",
+    "pointsIfRight": "+{points, number} pts",
+    "pointsIfRightLong": "+{points, number} pts if you're right",
+    "analystLeans": "The Analyst leans {team}. Challenge it and it's worth more.",
+    "analystLeansDraw": "The Analyst reads a draw. Challenge it and it's worth more.",
+    "firstHint": "Be one of the first Analysts to read this match.",
+    "closesAtKickoff": "Closes at kickoff",
+    "ctaChoose": "Choose my position",
+    "ctaTake": "Take a position",
+    "ticket": {
+      "label": "Your position · The Analyst engaged",
+      "stanceConsensus": "With The Analyst",
+      "stanceContrarian": "Contrarian read",
+      "rewardIfRight": "If you're right",
+      "rewardCoins": "Tokens F90",
+      "rewardPoints": "+{points, number} pts",
+      "rewardCoinsValue": "+{coins, number}",
+      "noteConsensus": "You're with The Analyst ({pct}%). The likelier call.",
+      "noteContrarian": "You're challenging The Analyst ({pct}%). Being right is worth more.",
+      "marketRead": "Market read",
+      "readSummary": "{home}% · X {draw}% · {away}%",
+      "youMarker": "YOU",
+      "locksAtKickoff": "Locks at kickoff",
+      "changePick": "Change my read"
+    },
+    "settled": {
+      "wonLabel": "Settled · you were right",
+      "lostLabel": "Settled · you missed",
+      "wonBadge": "+{points, number} earned",
+      "lostBadge": "No hit"
+    },
+    "error": {
+      "notAuthenticated": "Sign in to take your position.",
+      "invalidOutcome": "That option isn't valid. Pick home, draw or away.",
+      "notFound": "We couldn't find this match. Refresh and try again.",
+      "locked": "This match has closed: positions lock at kickoff.",
+      "unknown": "Something went wrong. Try again in a moment."
+    },
+    "page": {
+      "metaTitle": "My predictions · F90+",
+      "eyebrow": "Your history",
+      "title": "My predictions",
+      "subtitle": "All your World Cup positions — active and resolved.",
+      "activeTitle": "Active",
+      "resolvedTitle": "Resolved",
+      "emptyTitle": "You haven't taken any position yet.",
+      "emptyBody": "Pick a match and call the result — correct predictions earn points and Tokens F90.",
+      "emptyCta": "See matches"
     }
   }
 }

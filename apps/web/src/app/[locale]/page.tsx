@@ -24,7 +24,9 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
       {/* The live-market bar leads the page — pinned under the header, above the Hero. */}
       <MarketTicker />
       <Hero wcStatus={wcStatus} />
-      <TournamentCenter />
+      <div id="tournament" className="scroll-mt-24">
+        <TournamentCenter />
+      </div>
       <HowItWorks />
       <FantasyTeaser />
       <LeaderboardTeaser entries={rankings} />

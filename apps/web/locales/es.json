@@ -100,14 +100,37 @@
       "metaTitle": "Tu F90+",
       "eyebrow": "Tu vestuario",
       "greeting": "Hola, @{handle}",
-      "subtitle": "Tu Mundial empieza aquí.",
-      "balanceLabel": "Tu cartera",
-      "balanceValue": "{amount, number} Tokens F90",
+      "tokensLabel": "Tokens F90",
+      "tokensValue": "{amount, number}",
       "pointsLabel": "Puntos",
       "pointsValue": "{points, number}",
+      "rankLabel": "Ranking",
+      "rankValue": "#{rank, number}",
+      "rankUnranked": "—",
       "backing": "Vas con {country}",
-      "soon": "Las predicciones y los mercados llegan muy pronto. Mientras, explora el Mundial.",
-      "exploreCta": "Explorar el Mundial"
+      "predict": {
+        "eyebrow": "La jornada inaugural",
+        "title": "Haz tu predicción",
+        "seeAll": "Ver todos los partidos"
+      },
+      "upcoming": {
+        "title": "Próximos partidos",
+        "seeAll": "Mundial"
+      },
+      "myPredictions": {
+        "title": "Mis predicciones",
+        "seeAll": "Ver todas",
+        "statusPending": "Abierta · cierra al pitido",
+        "statusLocked": "Bloqueada · en juego",
+        "statusWon": "Acertaste · +{points, number} pts",
+        "statusLost": "Sin acierto",
+        "emptyTitle": "Aún no has tomado tu primera posición.",
+        "emptyBody": "Elige un partido arriba — los aciertos suman puntos y Tokens, y construyen tu efectividad como Analista."
+      },
+      "fixturesPreparing": {
+        "title": "Las fixtures del Mundial se están preparando.",
+        "body": "Estamos afinando los partidos y la lectura de El Analista. Vuelve pronto: tu primera posición te espera."
+      }
     }
   },
   "profile": {
@@ -264,6 +287,25 @@
     "you": "¿Tú?",
     "joinCta": "Reclama tu sitio"
   },
+  "ranking": {
+    "metaTitle": "Ranking global · F90+",
+    "eyebrow": "Ranking global",
+    "title": "La clasificación",
+    "subtitle": "Los analistas más afilados del Mundial, ordenados por puntos.",
+    "subtitleEmpty": "El tablero se abre cuando se resuelvan las primeras predicciones.",
+    "colRank": "#",
+    "colPlayer": "Jugador",
+    "colPoints": "Puntos",
+    "points": "{points, number} pts",
+    "yourRow": "Tú",
+    "unrankedTitle": "Aún no estás en el ranking.",
+    "unrankedBody": "Haz tu primera predicción para entrar en la clasificación.",
+    "unrankedCta": "Hacer una predicción",
+    "top3Medal1": "1.º",
+    "top3Medal2": "2.º",
+    "top3Medal3": "3.º",
+    "seeRanking": "Ranking"
+  },
   "cta": {
     "title": "El Mundial se vive distinto cuando te juegas algo.",
     "subtitle": "Algo virtual, claro. Únete a F90+ gratis y convierte cada partido en un momentazo.",
@@ -356,6 +398,62 @@
       "title": "Los partidos que importan",
       "subtitle": "El inaugural, los duelos estelares y los mercados del Mundial — con la convicción del Analista. Toma posición con tus F90.",
       "predictSoon": "Predicciones muy pronto"
+    }
+  },
+  "predictions": {
+    "marketEyebrow": "Lectura de El Analista",
+    "vs": "vs",
+    "draw": "Empate",
+    "outcomeWin": "{team} gana",
+    "tagLean": "El Analista",
+    "tagContrarian": "Contrario",
+    "pointsIfRight": "+{points, number} pts",
+    "pointsIfRightLong": "+{points, number} pts si aciertas",
+    "analystLeans": "El Analista se inclina por {team}. Desafíalo y vale más.",
+    "analystLeansDraw": "El Analista ve el empate. Desafíalo y vale más.",
+    "firstHint": "Sé de los primeros Analistas en leer este partido.",
+    "closesAtKickoff": "Cierra al pitido",
+    "ctaChoose": "Elegir mi posición",
+    "ctaTake": "Tomar posición",
+    "ticket": {
+      "label": "Tu posición · El Analista activado",
+      "stanceConsensus": "Con El Analista",
+      "stanceContrarian": "Análisis contrario",
+      "rewardIfRight": "Si aciertas",
+      "rewardCoins": "Tokens F90",
+      "rewardPoints": "+{points, number} pts",
+      "rewardCoinsValue": "+{coins, number}",
+      "noteConsensus": "Vas con El Analista ({pct}%). El acierto más probable.",
+      "noteContrarian": "Desafías a El Analista ({pct}%). Acertar vale más.",
+      "marketRead": "Lectura del mercado",
+      "readSummary": "{home}% · X {draw}% · {away}%",
+      "youMarker": "TÚ",
+      "locksAtKickoff": "Se bloquea al pitido",
+      "changePick": "Cambiar mi análisis"
+    },
+    "settled": {
+      "wonLabel": "Resuelto · acertaste",
+      "lostLabel": "Resuelto · fallaste",
+      "wonBadge": "+{points, number} ganados",
+      "lostBadge": "Sin acierto"
+    },
+    "error": {
+      "notAuthenticated": "Inicia sesión para tomar tu posición.",
+      "invalidOutcome": "Esa opción no es válida. Elige local, empate o visitante.",
+      "notFound": "No encontramos este partido. Recarga e inténtalo de nuevo.",
+      "locked": "El partido ya cerró: las posiciones se bloquean al pitido inicial.",
+      "unknown": "Algo salió mal. Inténtalo de nuevo en un momento."
+    },
+    "page": {
+      "metaTitle": "Mis predicciones · F90+",
+      "eyebrow": "Tu historial",
+      "title": "Mis predicciones",
+      "subtitle": "Todas tus posiciones en el Mundial — activas y resueltas.",
+      "activeTitle": "Activas",
+      "resolvedTitle": "Resueltas",
+      "emptyTitle": "Aún no has tomado ninguna posición.",
+      "emptyBody": "Elige un partido y predice el resultado del Mundial — los aciertos suman puntos y Tokens F90.",
+      "emptyCta": "Ver partidos"
     }
   }
 }

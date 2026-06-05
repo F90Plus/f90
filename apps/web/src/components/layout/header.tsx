@@ -23,7 +23,9 @@ export async function Header() {
   return (
     <header className="sticky top-0 z-50 border-b border-mist-500/10 bg-night-950/70 backdrop-blur-xl">
       <Container className="flex h-16 items-center justify-between gap-4">
-        <Logo height={38} priority />
+        {/* Brand: the official F90+ render with its signature gold/lime halo —
+            a deliberate, premium presence on the dark broadcast bar (founder tweak #2). */}
+        <Logo height={40} glow priority />
 
         <nav className="hidden items-center gap-8 md:flex">
           {NAV_LINKS.map((link) => (

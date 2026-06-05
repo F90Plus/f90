@@ -71,3 +71,17 @@ function deriveCode(name: string): string {
 export function teamMeta(name: string): TeamMeta {
   return TEAMS[name] ?? { code: deriveCode(name), accent: '#828FB2', strength: 1740 };
 }
+
+/** Reverse index: 3-letter broadcast code → openfootball team name. */
+const CODE_TO_NAME: Record<string, string> = Object.fromEntries(
+  Object.entries(TEAMS).map(([name, meta]) => [meta.code, name]),
+);
+
+/**
+ * Resolve a 3-letter broadcast code (e.g. fixtures' `home_code`/`away_code`) back
+ * to its canonical openfootball team name, or `null` if unknown. Bridges the
+ * code-keyed fixture data to the name-keyed flag/metadata helpers.
+ */
+export function teamNameForCode(code: string): string | null {
+  return CODE_TO_NAME[code.toUpperCase()] ?? null;
+}

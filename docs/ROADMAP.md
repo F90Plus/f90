@@ -73,15 +73,17 @@ Let people *be someone* on F90+ — and lay the **server-authoritative economy**
 - [x] DB schema v1: `profiles`, `wallets`, `coin_ledger`, `score_ledger`, `countries`, `global_rankings` *(T2/T3)*
 - **✅ CLOSED + MERGED + DEPLOYED + ENV-ACTIVATED (D-045/D-046):** T1–T11 DoD-passed · PR #2 merged → `main`=`7584f65` · `vercel --prod` → `www.f90.xyz` · env vars set + redeployed (`dpl_3PDv…`) → **500s resolved** (gates/404/OG/public all correct in prod). Only the **D-035 sign-in items** remain (founder). *(T9 D-043 · T10 D-044 · T11 D-045 · ship D-046.)*
 
-## ⏳ Phase 2 — Predictions Core & Scoring  *(generates the economy)*
+## ✅ Phase 2 — Predictions Core & Scoring  *(built — code-complete + DoD-passed; deploy operator-gated, D-051)*
 
 The heart and the daily habit: make a call before kickoff; correct calls **earn points +
-coins**.
+coins**. **Built on `feat/phase-2-predictions`** (not yet merged/deployed) — full record + the operator
+runbook: [PHASE_2_HANDOFF.md](PHASE_2_HANDOFF.md).
 
-- [ ] `fixtures` (synced from openfootball, stable IDs) + `predictions` schema
-- [ ] Predict flow (winner / scoreline / brackets / moments), optimistic UI, **lock at kickoff**
-- [ ] **Difficulty-honest scoring** via `model.ts` (underdog correct = more points)
-- [ ] Server-side settlement → `award_points` + `award_coins`; "my predictions" view
+- [x] `fixtures` + `predictions` schema (migration `0004`, stable openfootball IDs, RLS lock-at-kickoff)
+- [x] Predict flow (1X2), optimistic UI, **lock at kickoff** — server-authoritative `make_prediction` RPC (D-050); scoreline/brackets/moments deferred post-opener
+- [x] **Difficulty-honest scoring** (`lib/scoring.ts` ↔ the SQL: underdog correct = more points)
+- [x] Server-side settlement → `award_points` + `award_coins` (idempotent `settle_fixture`, migration `0005`) · **`/predictions`** + **`/ranking`** + premium **`/home`** hub (real flags, subtle atmosphere, honest no-fake-community)
+- **▶ Deploy (founder-gated):** apply 0004/0005 · env · D-035 · merge + `vercel --prod` · sync pre-opener · settle post-match — runbook in [PHASE_2_HANDOFF.md](PHASE_2_HANDOFF.md)
 
 ## ⏳ Phase 3 — Economy: Market + Fantasy XI  *(spends the economy)*
 
