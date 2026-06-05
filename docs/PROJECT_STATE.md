@@ -28,22 +28,21 @@ economy ratified in [DECISIONS.md](DECISIONS.md) D-027). The **foundation is CLO
 LIVE in production at https://www.f90.xyz** (GitHub `F90Plus/f90` → Vercel `f90` *(shared team,
 manual deploy — D-033)* → `www.f90.xyz` + SSL): bilingual i18n, premium branding, a deterministic AI Copilot ("The Analyst"), **real
 WC2026 fixtures**, **cinematic imagery**, and the flagship **3D World Cup globe hero** (gold
-hosts / green qualified, from real data). **Phase 1 (Identity & Accounts) is now IN PROGRESS** on
-branch `feat/phase-1-identity`: the Supabase backend (schema, economy, 48-country seed, RLS, grants)
+hosts / green qualified, from real data). **Phase 1 (Identity & Accounts) is CLOSED · MERGED · DEPLOYED · ENV-ACTIVATED** (D-048): the Supabase backend (schema, economy, 48-country seed, RLS, grants)
 is **applied & verified**, and **auth (T4) + onboarding (T5) + the `(app)` group (T6) + the public
 profile (T7) + settings/30-day cooldown (T8) are shipped + verified** (magic-link + Google, dual-mode
 callback, login/signup ES+EN, auth-aware header; onboarding via RLS self-update; a session-gated
 `/home` showing the **20,026 Tokens F90** welcome bonus, D-039; a public `/u/[username]` with a dynamic
 **localized** OG card; a gated `/settings` with the cooldown); plus **T9 real rankings teaser** (D-043),
-**T10 i18n/token/visual/debt sweep** (D-044), and **T11 DoD gate → Phase 1 CLOSED** (D-045). Production
-promotion is founder-gated. See [PHASE_1_HANDOFF.md](PHASE_1_HANDOFF.md).
+**T10 i18n/token/visual/debt sweep** (D-044), and **T11 DoD gate** (D-045). PR #2 merged → `main`=`7584f65`,
+deployed to `www.f90.xyz` + env-activated (D-046); only the **D-035 sign-in items** remain (founder). See [PHASE_1_HANDOFF.md](PHASE_1_HANDOFF.md).
 
-## Deploy state ✅ LIVE — incl. Phase 0.6 (updated 2026-06-04, D-033)
+## Deploy state ✅ LIVE — Phase 1 (updated 2026-06-05, D-046/D-048; deploy model D-033)
 - **GitHub:** `F90Plus/f90` — **own isolated org** (NOT PMS/PT/Chiribito/XPrediction),
-  branch **`main`** = `f2be258` (Phase 0.6). Repo synced.
-- **Production: Phase 0.6 LIVE** on **`www.f90.xyz`** (canonical; apex `f90.xyz` **308→www**),
-  deployment `dpl_ETMNzrovfdWkU3z1meLJUaRvkNLe` (READY). EN + ES verified (Tournament Center,
-  bracket, flags; fresh `x-vercel-cache: PRERENDER`).
+  branch **`main`** = `4959c6f` (Phase 1 closed, D-048). Repo synced.
+- **Production: Phase 1 LIVE** on **`www.f90.xyz`** (canonical; apex `f90.xyz` **308→www**),
+  latest deployment `dpl f90-pef578soh` (READY, env-activated). EN + ES verified (landing · route gates ·
+  localized OG); real end-user **sign-in pending the D-035** Supabase items.
 - **Vercel — IMPORTANT (D-033):** the `f90` project lives in the Vercel team
   **`chiribito293-7173s-projects`** (shared with Chiribito / xpredict), **NOT** an isolated F90+
   account, and is **NOT git-connected** → **production is published MANUALLY via `vercel --prod`**
@@ -51,7 +50,7 @@ promotion is founder-gated. See [PHASE_1_HANDOFF.md](PHASE_1_HANDOFF.md).
   → "REALITY CHECK".
 - **Domain:** `www.f90.xyz` + **SSL active** (apex `f90.xyz` redirects to www).
 - **Isolation:** code/repo isolated (`F90Plus/f90`); **Vercel team is currently shared with
-  Chiribito** — open governance item (D-033). No Supabase/backend yet.
+  Chiribito** — open governance item (D-033). Supabase `f90-production` is **active + isolated** (Phase 1).
 
 ## Phase 0.6 — Tournament Center ✅ CLOSED (2026-06-04)
 The premium, living **World Cup band** after the Hero — makes F90+ feel alive in the tournament's
@@ -141,10 +140,10 @@ Predictions generates the economy that Fantasy spends (D-029).
 ## Where to resume
 1. ✅ **Public launch — DONE** (GitHub + Vercel + `f90.xyz` + SSL, live & validated).
 2. ✅ **Phase 0.6 — Tournament Center — DONE** (merged to `main`, deployed; D-032).
-3. ✅ **Phase 1 — Identity & Accounts — CLOSED** (DoD passed, **D-045**) on branch
-   `feat/phase-1-identity` (pushed; `main` untouched; production still Phase 0.6). **Founder-gated to
-   ship:** PR → `main` + merge → `vercel --prod` (D-033) + pre-prod Supabase items (D-035). Full close
-   record: [PHASE_1_HANDOFF.md](PHASE_1_HANDOFF.md).
+3. ✅ **Phase 1 — Identity & Accounts — CLOSED · MERGED · DEPLOYED · ENV-ACTIVATED** (D-045/D-046/D-048).
+   PR [#2](https://github.com/F90Plus/f90/pull/2) merged → `main`=`7584f65` (close docs `4959c6f`);
+   `vercel --prod` → `www.f90.xyz`. Only the **D-035 sign-in items** remain (founder). Full close record:
+   [PHASE_1_HANDOFF.md](PHASE_1_HANDOFF.md).
 4. **▶ NEXT = Phase 2 — Predictions Core & Scoring:** `fixtures` + `predictions` schema · the predict
    flow (winner/scoreline/brackets) locking at kickoff · difficulty-honest scoring (`lib/football/model.ts`)
    · server-side settlement → `award_points`/`award_coins`. **Generates the economy + fills the rankings
