@@ -160,9 +160,9 @@ Predictions generates the economy that Fantasy spends (D-029).
 - Headless preview can't reliably screenshot WebGL — verify in a real browser.
 - A logo variant ("PREDICT. PLAY. WIN.") exists but was **not** adopted; gold-trophy primary.
 - **Vitest wired** (data-layer unit tests, 34, Phase 0.6); broader coverage (copilot engine,
-  Playwright) still queued. No LICENSE yet. Repo `eslint .` has a **pre-existing** flat-config
-  gap (no `eslint.config.*`; `@eslint/eslintrc` circular-structure) — typecheck + Vitest +
-  `next build` are the effective gates; a fix task is queued separately.
+  Playwright) still queued. No LICENSE yet. **ESLint flat-config gate FIXED (D-057)** — migrated to
+  eslint-config-next's native flat config; `pnpm lint` is now **green (0 problems)** and a real 4th
+  gate alongside typecheck + Vitest + `next build`.
 
 ## Where to resume
 1. ✅ **Public launch — DONE** (GitHub + Vercel + `f90.xyz` + SSL, live & validated).
