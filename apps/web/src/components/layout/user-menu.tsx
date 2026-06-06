@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
+import { useFormStatus } from 'react-dom';
 import { Link } from '@/i18n/navigation';
 import { cn } from '@/lib/utils';
 
@@ -117,16 +118,35 @@ export function UserMenu({
           <div aria-hidden className="my-2 h-px bg-mist-500/10" />
 
           <form action={signOutAction}>
-            <button
-              type="submit"
-              role="menuitem"
-              className="w-full rounded-pill border border-mist-500/15 px-4 py-2 text-sm font-medium text-mist-200 transition-colors hover:border-flare-500/40 hover:bg-flare-500/10 hover:text-flare-300"
-            >
-              {labels.signOut}
-            </button>
+            <SignOutButton label={labels.signOut} />
           </form>
         </div>
       )}
     </div>
+  );
+}
+
+/** Sign-out submit button with a pending affordance. Stays mounted while the server
+ *  action runs (aria-disabled, not the native `disabled`) so keyboard focus is
+ *  retained; `useFormStatus` reads the enclosing <form>'s submission state. */
+function SignOutButton({ label }: { label: string }) {
+  const { pending } = useFormStatus();
+  return (
+    <button
+      type="submit"
+      role="menuitem"
+      aria-disabled={pending || undefined}
+      aria-busy={pending || undefined}
+      onClick={(event) => {
+        if (pending) event.preventDefault();
+      }}
+      className={cn(
+        'w-full rounded-pill border border-mist-500/15 px-4 py-2 text-sm font-medium text-mist-200 transition-colors',
+        'hover:border-flare-500/40 hover:bg-flare-500/10 hover:text-flare-300',
+        'aria-disabled:opacity-60',
+      )}
+    >
+      {pending ? `${label}…` : label}
+    </button>
   );
 }
