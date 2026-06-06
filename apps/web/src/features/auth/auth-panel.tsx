@@ -36,6 +36,16 @@ export async function AuthPanel({
   const magicAction = signInWithMagicLink.bind(null, locale, next);
   const googleAction = signInWithGoogle.bind(null, locale, next);
 
+  // Carry a meaningful deep-link `next` across the login↔signup switch so it isn't
+  // dropped. Skip each page's own default (login → /home, signup → /onboarding) and
+  // the "/" fallback, so switching with no real target lets the other page apply its
+  // own default (a new signup still lands on onboarding).
+  const switchTarget = isLogin ? '/signup' : '/login';
+  const switchHref =
+    next !== '/' && next !== (isLogin ? '/home' : '/onboarding')
+      ? `${switchTarget}?next=${encodeURIComponent(next)}`
+      : switchTarget;
+
   return (
     <Card className="w-full max-w-md p-7 sm:p-8">
       <div className="flex flex-col items-center text-center">
@@ -72,7 +82,7 @@ export async function AuthPanel({
       <p className="mt-6 text-center text-sm text-mist-400">
         {isLogin ? t('switch.toSignupLead') : t('switch.toLoginLead')}{' '}
         <Link
-          href={isLogin ? '/signup' : '/login'}
+          href={switchHref}
           className="font-semibold text-led-300 transition-colors hover:text-led-200"
         >
           {isLogin ? t('switch.toSignup') : t('switch.toLogin')}

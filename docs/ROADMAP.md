@@ -148,7 +148,7 @@ The planet's living pulse (World × Time).
 - [ ] Typed i18n messages (next-intl augmentation)
 - [ ] Testing — Vitest **wired** (data-layer unit tests, Phase 0.6 / D-032); Playwright as features land
 - [ ] LICENSE — choose and add before any public, open release
-- [ ] Accessibility pass (focus rings, skip link — flagged in the audit)
+- [x] Accessibility: global focus-visible rings + a skip-to-content link (D-057); broader sweep (landmarks, full aria) still open
 - [ ] More languages — architecture supports it; add on demand
 
 ## Non-goals (kept off the roadmap on purpose)

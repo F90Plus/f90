@@ -79,7 +79,10 @@ export default async function LocaleLayout({
 
   // Enable static rendering for this locale.
   setRequestLocale(locale);
-  const messages = await getMessages();
+  const [messages, tCommon] = await Promise.all([
+    getMessages(),
+    getTranslations({ locale, namespace: 'common' }),
+  ]);
 
   return (
     <html
@@ -91,8 +94,16 @@ export default async function LocaleLayout({
         <AmbientBackdrop />
         <NextIntlClientProvider locale={locale} messages={messages}>
           <div className="flex min-h-screen flex-col">
+            <a
+              href="#main-content"
+              className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[100] focus:rounded-pill focus:bg-led-500 focus:px-4 focus:py-2 focus:font-display focus:text-sm focus:font-semibold focus:text-white focus:shadow-lg"
+            >
+              {tCommon('skipToContent')}
+            </a>
             <Header />
-            <main className="flex-1">{children}</main>
+            <main id="main-content" tabIndex={-1} className="flex-1 focus:outline-none">
+              {children}
+            </main>
             <Footer />
           </div>
         </NextIntlClientProvider>

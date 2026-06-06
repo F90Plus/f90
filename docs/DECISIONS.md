@@ -1058,3 +1058,42 @@ redirect allow-list apex `f90.xyz/**`, Resend SMTP), then `POST /api/admin/sync-
 [PHASE_2_HANDOFF.md](PHASE_2_HANDOFF.md).
 **Next milestone = Phase 3 (Economy: Market + Fantasy XI).** Free staking is its first brand/economy evaluation
 (PHASE_3_CANDIDATES C3-7).
+
+### D-057 — Quality & Hardening Pass: ESLint gate restored + a11y/UX polish (no new fronts) ✅ (2026-06-06)
+**Context:** Phase 2 is operatively closed (D-056); its remaining items are operator/credential-gated
+(migrations `0004`/`0005` · `ADMIN_SYNC_SECRET` · D-035 sign-in · admin jobs — **not code**, and not
+runnable from the build harness). Phase 3 (Economy) is gated behind "loop live + verified" (D-042) and opens
+with a **brand/economy** decision (free staking, PHASE_3_CANDIDATES C3-7) that needs explicit founder
+ratification — an escalation trigger, not autonomous work. The highest-value work that respects those gates was
+a **production-quality hardening pass** over the shipped surfaces: restore the broken lint gate and clear
+in-scope items from the audit backlog (PHASE_3_CANDIDATES "Optional polish backlog" + the ROADMAP a11y line),
+with **no new product surfaces/systems**.
+**Decision (branch `chore/quality-hardening-pass`, 6 atomic commits):**
+- **Lint gate RESTORED (the headline).** `eslint.config.mjs` bridged the shareable config through
+  `FlatCompat` + `@eslint/eslintrc`, which crashed ESLint 9 ("Converting circular structure to JSON") — so the
+  repo had **no working `pnpm lint`** (typecheck + Vitest + build were the de-facto gates). Migrated to
+  **eslint-config-next's native flat config (v16)** and fixed the **4 `react-hooks/set-state-in-effect`** errors
+  it surfaced, each behaviour-preserving: `countdown` (null-init + `setTimeout(0)` kick, drops the mount-gate
+  boolean), `predict-positions` (fold the kickoff-passed branch into `setTimeout(max(0,ms))`), `stat-counter`
+  (derive the reduced-motion/off-screen value during render), `onboarding-form` (store only the tagged async
+  result; derive idle/checking). `pnpm lint` is now a real **4th gate, 0 problems**, rule kept at full strength.
+- **a11y:** a **skip-to-content link** (sr-only → LED pill on focus; `<main id="main-content" tabIndex={-1}>`),
+  new `common.skipToContent` ES/EN. (Focus-visible rings were already global in `globals.css` — no change.)
+- **Auth UX:** the **login↔signup switch preserves a meaningful `?next=`** deep-link (skips each page's own
+  default — login `/home`, signup `/onboarding` — so a fresh signup still lands on onboarding); the account-menu
+  **sign-out shows a `useFormStatus` pending state** and stays mounted (`aria-disabled`) for focus retention.
+- **Responsive:** the **PredictCard team line stacks per-team on <375px** (no double-truncation) and keeps the
+  symmetric flag-bookend from `sm` up.
+- **DRY:** a shared **`<Eyebrow>` primitive** replaces the copy-pasted `.eyebrow` span across `SectionHeading` +
+  4 routes (one source for the class; the hero `<Badge>` left as-is).
+**Verification:** all four gates green — `tsc` clean · **243 vitest** · **`eslint .` 0 problems (newly working)** ·
+`next build` (23/23). Browser-verified on the public surfaces (countdown ticks real values; stat-counters reach
+48/104/16; eyebrows render; skip link 1×1 when blurred → focus pill; `?next=` carried as
+`/en/signup?next=%2Fsettings`; **0 console errors**; no 375px overflow). The **auth-gated** surfaces (predict
+card, standing strip, sign-out) are code + gate verified; their live render awaits the operator-gated loop (the
+documented "not visually verified with live data" caveat — type 2/3 per D-052, not a code gap).
+**Consequences:** a working lint gate (it immediately caught real cascading-render patterns) plus a cleaner,
+more accessible, more responsive shipped surface — **zero new product fronts**, D-037 vocab law and
+D-042/D-051 deferrals untouched. Shipped under **D-055** (merge→deploy on a met quality bar). **Left as-is
+(flagged):** the standing-strip tablet-midwidth wrap (a "consider" in the backlog) is acceptable with the
+current `flex-wrap`; revisit on the live authenticated surface.

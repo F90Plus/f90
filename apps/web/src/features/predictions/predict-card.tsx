@@ -43,13 +43,20 @@ export function PredictCard({ fixture }: { fixture: PredictableFixture }) {
         </span>
       </div>
 
-      {/* team line: flag · name vs name · flag */}
-      <div className="mb-2 mt-1 flex items-center justify-center gap-3">
-        <Flag code={fixture.homeCode} size="md" />
-        <span className="truncate font-display text-[1.02rem] font-bold text-mist-50">{homeName}</span>
+      {/* team line: each side is a [flag · name] unit — stacked on the narrowest
+          phones (full width per name → no double-truncation), and a symmetric
+          flag-bookended row from sm up (the away unit reverses so its flag sits
+          on the outer right). */}
+      <div className="mb-2 mt-1 flex flex-col items-center gap-1.5 sm:flex-row sm:justify-center sm:gap-3">
+        <div className="flex min-w-0 max-w-full items-center gap-2 sm:gap-3">
+          <Flag code={fixture.homeCode} size="md" />
+          <span className="truncate font-display text-[1.02rem] font-bold text-mist-50">{homeName}</span>
+        </div>
         <span className="shrink-0 text-[0.78rem] text-mist-500">{t('vs')}</span>
-        <span className="truncate font-display text-[1.02rem] font-bold text-mist-50">{awayName}</span>
-        <Flag code={fixture.awayCode} size="md" />
+        <div className="flex min-w-0 max-w-full items-center gap-2 sm:flex-row-reverse sm:gap-3">
+          <Flag code={fixture.awayCode} size="md" />
+          <span className="truncate font-display text-[1.02rem] font-bold text-mist-50">{awayName}</span>
+        </div>
       </div>
 
       {/* pre-pick context: group + kickoff, so the user is oriented before choosing */}

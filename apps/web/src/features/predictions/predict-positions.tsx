@@ -50,12 +50,10 @@ export function PredictPositions({ fixture }: { fixture: PredictableFixture }) {
   useEffect(() => {
     if (locked) return;
     const ms = new Date(fixture.kickoffISO).getTime() - Date.now();
-    if (ms <= 0) {
-      setLocked(true);
-      return;
-    }
     if (ms > MAX_TIMEOUT_MS) return;
-    const id = setTimeout(() => setLocked(true), ms);
+    // Flip through the timer callback (never a synchronous setState in the effect
+    // body): a kickoff already in the past schedules at 0ms → fires on the next tick.
+    const id = setTimeout(() => setLocked(true), Math.max(0, ms));
     return () => clearTimeout(id);
   }, [locked, fixture.kickoffISO]);
 
