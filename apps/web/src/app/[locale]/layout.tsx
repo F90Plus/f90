@@ -96,7 +96,7 @@ export default async function LocaleLayout({
           <div className="flex min-h-screen flex-col">
             <a
               href="#main-content"
-              className="sr-only rounded-pill bg-led-500 px-4 py-2 font-display text-sm font-semibold text-white focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[100] focus:shadow-lg"
+              className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[100] focus:rounded-pill focus:bg-led-500 focus:px-4 focus:py-2 focus:font-display focus:text-sm focus:font-semibold focus:text-white focus:shadow-lg"
             >
               {tCommon('skipToContent')}
             </a>
