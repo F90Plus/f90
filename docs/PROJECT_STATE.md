@@ -1,5 +1,7 @@
 # F90+ — Project State (Checkpoint)
 
+> **🟢 LIVE-LOOP AUDIT 2026-06-06 (DECISIONS D-058):** the **predict → lock → earn loop is OPERATIONALLY LIVE in production.** Supabase has **72 fixtures + 11 real predictions**; **all 4 Vercel env vars are set** (verified via `vercel env ls` + the admin endpoints returning 401-not-503); migrations **0004 + 0006 proven applied**; **D-035 site_url + redirect allow-list set**; deployed (D-057). **Only two items remain, neither blocking the live predict loop:** (1) **confirm migration 0005 `settle_fixture`** — `select to_regprocedure('public.settle_fixture(text)');` → non-null = applied — a **hard blocker for SETTLEMENT only** (activates with the first finished match, 11 Jun; almost certainly already applied, bracketed by the proven 0004 + 0006); (2) **Resend SMTP** for magic-link — a **recommendation** (Google OAuth already works; built-in email covers low volume). Evidence + reasoning: DECISIONS **D-058**.
+>
 > **✅ CHECKPOINT 2026-06-05 — PHASE 1 (Identity & Accounts) CLOSED · MERGED · DEPLOYED · ENV ACTIVATED · PRODUCTION VERIFIED — founder-approved (official close record: DECISIONS D-048).**
 > **`main` = `7584f65`** (PR [#2](https://github.com/F90Plus/f90/pull/2) merged) and **deployed to
 > production** (`vercel --prod`, `dpl_Dth9c2paTkJkBwi9WauResDUL7iQ`, aliased **`https://www.f90.xyz`**).
