@@ -1097,3 +1097,12 @@ more accessible, more responsive shipped surface — **zero new product fronts**
 D-042/D-051 deferrals untouched. Shipped under **D-055** (merge→deploy on a met quality bar). **Left as-is
 (flagged):** the standing-strip tablet-midwidth wrap (a "consider" in the backlog) is acceptable with the
 current `flex-wrap`; revisit on the live authenticated surface.
+
+**UPDATE (2026-06-06, shipped under D-055):** **PR [#6](https://github.com/F90Plus/f90/pull/6) MERGED** → `main` =
+`dca4431` (merge commit; feature branch `chore/quality-hardening-pass` deleted local+remote; only `main`, tree
+clean). **`vercel --prod`** → deployment **`dpl_EUUmCUnERCtQfft7BTf8MBXCBw27`** (READY, target production),
+**aliased `https://www.f90.xyz`**; remote build green (Next 16.2.7, 23/23). **Prod-verified (HTTP):** landing `/`
+→ 200 with the skip link live (`id="main-content"` + "Skip to content"/"Saltar al contenido" present) · `/home` ·
+`/predictions` → 307 (auth gate) · `/u/[unknown]` → 404 · `/login?next=/settings` → 200 carrying
+`/signup?next=%2Fsettings` (the `?next=` fix live). The auth-gated predict/standing/sign-out surfaces ship
+dormant until the operator-gated loop goes live. Independent adversarial review pre-merge: SHIP.
