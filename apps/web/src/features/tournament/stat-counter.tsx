@@ -17,14 +17,12 @@ export function StatCounter({
   const ref = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { once: true, amount: 0.5 });
   const reduce = useReducedMotion();
-  const [display, setDisplay] = useState(0);
+  const [animated, setAnimated] = useState(0);
 
   useEffect(() => {
-    if (!inView) return;
-    if (reduce) {
-      setDisplay(value);
-      return;
-    }
+    // Reduced motion (or not yet on screen) has nothing to animate — that value is
+    // derived during render below, so the effect makes no synchronous setState.
+    if (!inView || reduce) return;
     let raf = 0;
     let startedAt: number | null = null;
     const duration = 950;
@@ -32,12 +30,16 @@ export function StatCounter({
       startedAt ??= now;
       const progress = Math.min(1, (now - startedAt) / duration);
       const eased = 1 - Math.pow(1 - progress, 3);
-      setDisplay(Math.round(eased * value));
+      setAnimated(Math.round(eased * value));
       if (progress < 1) raf = requestAnimationFrame(tick);
     };
     raf = requestAnimationFrame(tick);
     return () => cancelAnimationFrame(raf);
   }, [inView, reduce, value]);
+
+  // Reduced motion snaps straight to the final number (once in view); otherwise the
+  // animated value drives the display.
+  const display = reduce ? (inView ? value : 0) : animated;
 
   return (
     <div ref={ref} className={cn('flex flex-col items-center gap-1 text-center', className)}>

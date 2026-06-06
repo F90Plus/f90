@@ -30,17 +30,23 @@ function remainingUntil(target: number): Remaining {
 export function Countdown() {
   const t = useTranslations('countdown');
   const target = new Date(WORLD_CUP_KICKOFF_ISO).getTime();
-  const [time, setTime] = useState<Remaining>(() => remainingUntil(target));
-  const [mounted, setMounted] = useState(false);
+  // Client-only ticking value. It starts null so the server and the first client
+  // paint render the same "--" placeholder (no hydration mismatch); the first real
+  // value is written on the next tick — from a timer callback, never a synchronous
+  // setState in the effect body — and then refreshed once per second.
+  const [time, setTime] = useState<Remaining | null>(null);
 
   useEffect(() => {
-    setMounted(true);
-    setTime(remainingUntil(target));
-    const id = window.setInterval(() => setTime(remainingUntil(target)), 1000);
-    return () => window.clearInterval(id);
+    const sync = () => setTime(remainingUntil(target));
+    const kick = window.setTimeout(sync, 0);
+    const id = window.setInterval(sync, 1000);
+    return () => {
+      window.clearTimeout(kick);
+      window.clearInterval(id);
+    };
   }, [target]);
 
-  if (time.done) {
+  if (time?.done) {
     return (
       <Card className="flex items-center gap-3 px-5 py-4">
         <LiveDot />
@@ -53,10 +59,10 @@ export function Countdown() {
   }
 
   const units = [
-    { value: time.days, label: t('days') },
-    { value: time.hours, label: t('hours') },
-    { value: time.minutes, label: t('minutes') },
-    { value: time.seconds, label: t('seconds') },
+    { value: time?.days, label: t('days') },
+    { value: time?.hours, label: t('hours') },
+    { value: time?.minutes, label: t('minutes') },
+    { value: time?.seconds, label: t('seconds') },
   ];
 
   return (
@@ -75,7 +81,7 @@ export function Countdown() {
               className="nums font-display text-2xl font-extrabold text-mist-50 sm:text-3xl"
               suppressHydrationWarning
             >
-              {mounted ? String(unit.value).padStart(2, '0') : '--'}
+              {time ? String(unit.value).padStart(2, '0') : '--'}
             </span>
             <span className="mt-1 text-[0.65rem] uppercase tracking-widest text-mist-500">
               {unit.label}

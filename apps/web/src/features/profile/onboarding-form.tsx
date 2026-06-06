@@ -30,7 +30,9 @@ export function OnboardingForm({
   );
 
   const [username, setUsername] = useState('');
-  const [check, setCheck] = useState<Check>({ state: 'idle' });
+  // Only the async availability result is stored, tagged with the exact (trimmed)
+  // handle it belongs to so a stale resolution is ignored once the input moves on.
+  const [asyncCheck, setAsyncCheck] = useState<{ user: string; check: Check } | null>(null);
   const [query, setQuery] = useState('');
   const [selected, setSelected] = useState('');
 
@@ -40,27 +42,35 @@ export function OnboardingForm({
     return q ? countries.filter((c) => c.name.toLowerCase().includes(q)) : countries;
   }, [countries, query]);
 
-  // Debounced live availability check, guarded against out-of-order resolutions.
+  const handle = username.trim().toLowerCase();
+
+  // Debounced live availability check, guarded against out-of-order resolutions. The
+  // transient idle/checking states are derived during render (below); the effect only
+  // writes the resolved result from the timer callback — never a synchronous setState.
   useEffect(() => {
-    const v = username.trim().toLowerCase();
-    if (v.length < 3) {
-      setCheck({ state: 'idle' });
-      return;
-    }
-    setCheck({ state: 'checking' });
+    if (handle.length < 3) return;
     let active = true;
     const id = setTimeout(() => {
-      checkUsername(v).then((res) => {
+      checkUsername(handle).then((res) => {
         if (!active) return;
-        if (res.error) setCheck({ state: 'invalid', error: res.error });
-        else setCheck({ state: res.available ? 'available' : 'taken' });
+        const result: Check = res.error
+          ? { state: 'invalid', error: res.error }
+          : { state: res.available ? 'available' : 'taken' };
+        setAsyncCheck({ user: handle, check: result });
       });
     }, 400);
     return () => {
       active = false;
       clearTimeout(id);
     };
-  }, [username]);
+  }, [handle]);
+
+  const check: Check =
+    handle.length < 3
+      ? { state: 'idle' }
+      : asyncCheck && asyncCheck.user === handle
+        ? asyncCheck.check
+        : { state: 'checking' };
 
   const countryOk = parseCountryCode(selected, validCodes).ok;
   const canSubmit = check.state === 'available' && countryOk && !isPending;
