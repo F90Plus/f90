@@ -37,10 +37,10 @@
 > (towering, ~7% opacity, blur/fade, gold glow — atmosphere, never a logo). **Narrow scope — no new
 > surfaces/systems, D-037 vocab law intact, D-051 deferred craft NOT reopened.** Gates: **243 vitest · tsc ·
 > next build · i18n ES/EN 356/356** · final review MERGE-READY. Founder verified locally (:3300); **merged +
-> deployed + prod-verified** (D-056). `main` == `origin/main` == `372072c`; only `main`; tree clean. **Remaining
-> = operator/data only (NOT a code blocker):** the predict→settle→ranking loop goes live with real data after the
-> operator runbook (migrations `0004`/`0005` · `ADMIN_SYNC_SECRET` · D-035 sign-in items · sync/settle) — until
-> then the predict surfaces show the honest empty-state. **NEXT MILESTONE = Phase 3 (Economy: Market + Fantasy XI);
+> deployed + prod-verified** (D-056). `main` == `origin/main` == `372072c`; only `main`; tree clean. **✅ LOOP LIVE + VERIFIED (D-058, 2026-06-06):** the operator runbook was executed — migrations
+> `0004`/`0005`/`0006` applied · all 4 Vercel env vars set · D-035 sign-in configured · fixtures synced — so the
+> predict→lock→earn loop is operational in prod (72 fixtures + real predictions) and the settlement path is
+> installed (`settle_fixture` confirmed; run `POST /api/admin/settle` per matchday). **NEXT MILESTONE = Phase 3 (Economy: Market + Fantasy XI);
 > free staking = its first brand/economy evaluation.** Phase-3 candidates in [PHASE_3_CANDIDATES.md](PHASE_3_CANDIDATES.md).
 > Read [PHASE_1_HANDOFF.md](PHASE_1_HANDOFF.md) +
 > [ROADMAP.md](ROADMAP.md) + [DECISIONS.md](DECISIONS.md). **NEXT MILESTONE = Phase 3 (Economy: Market +
@@ -71,7 +71,7 @@ deployed to `www.f90.xyz` + env-activated (D-046); only the **D-035 sign-in item
   branch **`main`** = `4959c6f` (Phase 1 closed, D-048). Repo synced.
 - **Production: Phase 1 LIVE** on **`www.f90.xyz`** (canonical; apex `f90.xyz` **308→www**),
   latest deployment `dpl f90-pef578soh` (READY, env-activated). EN + ES verified (landing · route gates ·
-  localized OG); real end-user **sign-in pending the D-035** Supabase items.
+  localized OG). **✅ Sign-in D-035 configured** (site_url + redirect allow-list); Resend SMTP for magic-link at scale = recommendation (Google OAuth works).
 - **Vercel — IMPORTANT (D-033):** the `f90` project lives in the Vercel team
   **`chiribito293-7173s-projects`** (shared with Chiribito / xpredict), **NOT** an isolated F90+
   account, and is **NOT git-connected** → **production is published MANUALLY via `vercel --prod`**
@@ -173,12 +173,11 @@ Predictions generates the economy that Fantasy spends (D-029).
    PR [#2](https://github.com/F90Plus/f90/pull/2) merged → `main`=`7584f65` (close docs `4959c6f`);
    `vercel --prod` → `www.f90.xyz`. Only the **D-035 sign-in items** remain (founder). Full close record:
    [PHASE_1_HANDOFF.md](PHASE_1_HANDOFF.md).
-4. ✅ **Phase 2 — Predictions Core & Scoring — MERGED** (PR [#4](https://github.com/F90Plus/f90/pull/4), merge
-   `2d3dc37`; D-051). Full **predict → settle → points/Tokens → ranking** loop in `main` (migrations
-   `0004`/`0005`, `make_prediction`/`settle_fixture`, predict card + `/home` + `/predictions` + `/ranking`);
-   gates green (243 vitest · build · i18n 343/343). **DEPLOY = operator runbook** in
-   [PHASE_2_HANDOFF.md](PHASE_2_HANDOFF.md) (apply 0004/0005 · env · D-035 · `vercel --prod` · sync pre-opener
-   · settle post-match) — verify the loop in prod, then capture the first real visual.
+4. ✅ **Phase 2 — Predictions Core & Scoring — COMPLETE · DEPLOYED · LOOP LIVE + VERIFIED** (PR [#4](https://github.com/F90Plus/f90/pull/4)
+   + #5; D-051/D-056/**D-058**). The full **predict → lock → settle → points/Tokens → ranking** loop runs in prod
+   (migrations `0004`/`0005`/`0006`, `make_prediction`/`settle_fixture`, predict card + `/home` + `/predictions` +
+   `/ranking`); 72 fixtures + real predictions. Operator runbook executed; recurring op = `POST /api/admin/settle`
+   per matchday. Reference: [PHASE_2_HANDOFF.md](PHASE_2_HANDOFF.md).
 5. **▶ NEXT = Phase 3 — Economy: Market + Fantasy XI** (spends the Tokens the predict loop generates;
    `players`/`squads`/`lineups` pre-designed in [SCHEMA_V1.md](SCHEMA_V1.md) "Forward contract"). Map:
    [ROADMAP.md](ROADMAP.md).

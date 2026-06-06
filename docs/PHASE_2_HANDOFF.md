@@ -6,9 +6,11 @@
 > vocab law D-037 upheld · zero forbidden patterns. Every integrity-critical unit was caught/hardened by adversarial
 > review (see "Reviews caught").
 >
-> **▶ NOT YET LIVE TO USERS.** `main` carries Phase 2 but production still runs the prior Phase-1 deploy until the
-> **operator runbook** below is executed. Those steps require credentials/environments not available in the
-> build harness — `vercel --prod`, the Supabase SQL Editor / Management API, and the dashboard configuration.
+> **✅ LIVE TO USERS + VERIFIED (2026-06-06, D-058).** Phase 2 is deployed to production on `https://www.f90.xyz` and
+> the **predict → lock → earn loop is operational**: Supabase carries **72 fixtures + real predictions**, all four
+> Vercel env vars are set, migrations `0004`/`0005`/`0006` are applied (settlement path installed — `settle_fixture`
+> confirmed in prod), and the D-035 sign-in config (site_url + redirect allow-list) is in place. The operator runbook
+> below was **executed**; it now reads as the recurring operational reference (run `settle` after each matchday).
 >
 > Read order: this file → [DECISIONS.md](DECISIONS.md) (D-050 server-authoritative predictions · D-051 Phase 2 close + craft direction · **D-053 polish pass**) → [SCHEMA_V1.md](SCHEMA_V1.md) → [ROADMAP.md](ROADMAP.md).
 
@@ -54,10 +56,12 @@ A focused "works → feels finished" pass on the shipped Phase-2 surfaces, on br
    `/home`·`/predictions`·`/ranking` → 307 → `/login` · `/u/[unknown]` → 404. The authenticated polish lands on
    `www.f90.xyz` (auth works there) — first founder visual when logged in.
 
-**Phase 2 (core PR #4 + polish PR #5) = OPERATIVELY CLOSED.** The one remaining item is **operator/data, NOT a
-code blocker**: the predict→settle→ranking loop goes live with real data after the operator runbook below
-(migrations + env + D-035 + sync/settle). Phase-3 candidates (do not implement before Phase 3):
-[PHASE_3_CANDIDATES.md](PHASE_3_CANDIDATES.md). **Next = Phase 3 (Economy: Market + Fantasy XI).**
+**Phase 2 (core PR #4 + polish PR #5) = COMPLETE · DEPLOYED · LOOP LIVE + VERIFIED (D-058).** The operator runbook
+has been executed (migrations `0004`/`0005`/`0006` applied · env set · D-035 sign-in configured · fixtures synced),
+the predict→lock→earn loop is operational in production, and the settlement path is installed (`settle_fixture`
+confirmed). The only recurring operator action is **`POST /api/admin/settle` after each matchday** (idempotent).
+Phase-3 candidates (do not implement before Phase 3): [PHASE_3_CANDIDATES.md](PHASE_3_CANDIDATES.md); readiness
+gate: [PHASE_3_READINESS.md](PHASE_3_READINESS.md). **Next = Phase 3 (Economy: Market + Fantasy XI).**
 
 ## What was built — the full loop
 
@@ -100,9 +104,11 @@ Apply via the Supabase SQL Editor (or the Management API + PAT, as Phase 1's 000
 
 ---
 
-## ▶ OPERATOR RUNBOOK — make the loop live
+## ✅ OPERATOR RUNBOOK — EXECUTED (loop live; kept as the recurring reference)
 
-**Order matters. Steps A–E get *predicting* live for the opener; F settles after matches.**
+**Status (2026-06-06, D-058): A–E DONE — predicting is live (72 fixtures synced, real predictions in); the
+settlement path (0005 `settle_fixture`) is installed. F (settle) is the recurring per-matchday action; G verified.
+Steps are kept below as the operational reference for re-running settle.**
 
 - **A — Apply migrations** `0004` then `0005` to `f90-production` (SQL Editor). Run each migration's verify queries.
 - **B — Env:** set `ADMIN_SYNC_SECRET` (local + Vercel) + ensure `SUPABASE_SECRET_KEY` is available where you'll run the admin jobs (local `.env.local`, or Vercel if hitting prod).
@@ -115,11 +121,11 @@ Apply via the Supabase SQL Editor (or the Management API + PAT, as Phase 1's 000
 ---
 
 ## Open risks / honest caveats
-- **Not visually verified with live data.** The harness denies `.env.local`/secrets, and the preview screenshot pipeline hung this session — so the implemented UI was verified by typecheck + build + unit tests + adherence to the **approved mock** + the founder's reference, **not** by a live render. First live render (post-deploy + sync) is the visual confirmation; expect a polish pass.
-- **D-035 sign-in items** are required for real end-user login (founder).
+- **Live now with real users** (72 fixtures · real predictions in prod). The original UI was verified by gates + the approved mock, not a session live-render — so the **first authed visual capture + a craft/polish pass** are the natural next product step (see [PRODUCT_OBSERVATIONS.md](PRODUCT_OBSERVATIONS.md)).
+- ✅ **D-035 sign-in configured** (site_url + redirect allow-list). Resend SMTP for magic-link at scale = recommendation (Google OAuth already works); confirm if magic-link is a launch channel.
 - **Admin jobs are manual** (no cron yet) — the operator runs sync (pre-opener) + settle (post-match).
 - Migrations applied as raw SQL (Management API / SQL Editor), no CLI history — consistent with Phase 1.
-- ESLint flat-config still broken (pre-existing) — typecheck + Vitest + build are the gates.
+- ✅ ESLint flat-config **FIXED** (D-057): `pnpm lint` is green (0 problems) — now a 4th gate alongside typecheck + Vitest + build.
 - football-data live adapter remains dormant (openfootball is the source).
 
 ## What's NOT built (deliberately — post-loop / later phases)
@@ -128,6 +134,7 @@ Apply via the Supabase SQL Editor (or the Management API + PAT, as Phase 1's 000
 - Markets / Fantasy / player trading (D-042 / Phase 3) — documented-not-built.
 
 ## Resume / next
-1. Operator runs the runbook (A–G) → the predict→settle→points→ranking loop is LIVE.
-2. Verify the loop end-to-end in prod; capture the first real visual.
-3. Then: post-loop craft/polish passes (the reference trajectory above) + Phase 3.
+1. ✅ Runbook executed → the predict→lock→earn loop is LIVE in prod (D-058); settlement path installed.
+2. Recurring: `POST /api/admin/settle` after each matchday (post-opener 11 Jun) → points/Tokens + ranking populate.
+3. Product: the prediction-card UX-clarity initiative — see [PRODUCT_OBSERVATIONS.md](PRODUCT_OBSERVATIONS.md).
+4. Next milestone: Phase 3 (Economy) — readiness gate in [PHASE_3_READINESS.md](PHASE_3_READINESS.md).

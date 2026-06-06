@@ -73,12 +73,12 @@ Let people *be someone* on F90+ — and lay the **server-authoritative economy**
 - [x] DB schema v1: `profiles`, `wallets`, `coin_ledger`, `score_ledger`, `countries`, `global_rankings` *(T2/T3)*
 - **✅ CLOSED + MERGED + DEPLOYED + ENV-ACTIVATED (D-045/D-046):** T1–T11 DoD-passed · PR #2 merged → `main`=`7584f65` · `vercel --prod` → `www.f90.xyz` · env vars set + redeployed (`dpl_3PDv…`) → **500s resolved** (gates/404/OG/public all correct in prod). Only the **D-035 sign-in items** remain (founder). *(T9 D-043 · T10 D-044 · T11 D-045 · ship D-046.)*
 
-## ✅ Phase 2 — Predictions Core & Scoring  *(MERGED + DEPLOYED · polish D-053/D-054 · operatively CLOSED D-056; loop-with-data = operator runbook)*
+## ✅ Phase 2 — Predictions Core & Scoring  *(COMPLETE · DEPLOYED · LOOP LIVE + VERIFIED — D-056/D-058)*
 
 The heart and the daily habit: make a call before kickoff; correct calls **earn points +
-coins**. **PR [#4](https://github.com/F90Plus/f90/pull/4) MERGED → `main` = `2d3dc37`** (2026-06-05);
-**`vercel --prod` + Supabase migrations + admin jobs are operator-gated** — full record + the operator
-runbook: [PHASE_2_HANDOFF.md](PHASE_2_HANDOFF.md).
+coins**. **PRs [#4](https://github.com/F90Plus/f90/pull/4) + #5 MERGED + DEPLOYED**, and the runbook is **executed**:
+migrations `0004`/`0005`/`0006` applied · env set · D-035 sign-in configured · fixtures synced → the **loop is LIVE +
+verified in prod** (72 fixtures + real predictions; `settle_fixture` installed; D-058). Full record: [PHASE_2_HANDOFF.md](PHASE_2_HANDOFF.md).
 
 - [x] `fixtures` + `predictions` schema (migration `0004`, stable openfootball IDs, RLS lock-at-kickoff)
 - [x] Predict flow (1X2), optimistic UI, **lock at kickoff** — server-authoritative `make_prediction` RPC (D-050); scoreline/brackets/moments deferred post-opener
@@ -87,7 +87,7 @@ runbook: [PHASE_2_HANDOFF.md](PHASE_2_HANDOFF.md).
 - [x] **Polish & production cohesion pass (D-053):** auth-aware navigation · predict-flow feedback (in-flight · reactive lock · clearer change-pick) · /home premium cohesion · resolved-row reveal · AA contrast — narrow scope, no new surfaces, D-051 craft deferred. On `feat/phase-2-polish`, gated (preview → founder → prod). Phase-3 candidates: [PHASE_3_CANDIDATES.md](PHASE_3_CANDIDATES.md)
 - [x] **Commitment & value pass (D-054):** reward visible pre-pick (dual points + Tokens F90) · Tokens in lime in the flow · difficulty↔reward rule explicit · what's-at-stake named (record + ranking) · **WC trophy as premium /home atmosphere** (atmosphere, not a logo). Stake is reputational — **free staking deferred to Phase 3 / Economy** (brand call). D-037 intact.
 - [x] **Code MERGED + DEPLOYED** (D-056): PR #4 + PR #5 → `main` `372072c` · `vercel --prod` `dpl_DNiLgBUgPKNAUcy5MXpyBQbor4rS` → `www.f90.xyz` (prod-verified). Deployed autonomously per **D-055**.
-- **▶ Loop live with data (operator/data, not a code blocker):** apply `0004`/`0005` · `ADMIN_SYNC_SECRET` · D-035 sign-in items · sync pre-opener · settle post-match — runbook in [PHASE_2_HANDOFF.md](PHASE_2_HANDOFF.md)
+- [x] **Loop LIVE + verified in prod (D-058):** migrations `0004`/`0005`/`0006` applied · env set · D-035 sign-in configured · 72 fixtures synced · real predictions in. Recurring op = `POST /api/admin/settle` per matchday. Runbook reference: [PHASE_2_HANDOFF.md](PHASE_2_HANDOFF.md)
 
 ## ⏳ Phase 3 — Economy: Market + Fantasy XI  *(spends the economy)*
 
