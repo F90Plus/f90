@@ -3,6 +3,7 @@ import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { createClient } from '@/lib/supabase/server';
 import { Container } from '@/components/ui/container';
 import { Card } from '@/components/ui/card';
+import { Eyebrow } from '@/components/ui/eyebrow';
 import { Link } from '@/i18n/navigation';
 import { getRankingPage, type RankingPageEntry } from '@/lib/rankings';
 import { avatarColors, avatarInitial } from '@/lib/avatar';
@@ -58,7 +59,7 @@ export default async function RankingPage({ params }: Props) {
     <Container className="py-10 sm:py-14">
       {/* ── PAGE HEADER ──────────────────────────────────────────────── */}
       <div className="mb-8">
-        <span className="eyebrow">{t('eyebrow')}</span>
+        <Eyebrow>{t('eyebrow')}</Eyebrow>
         <h1 className="mt-2 font-display text-2xl font-extrabold tracking-tight text-white sm:text-[1.9rem]">
           {t('title')}
         </h1>

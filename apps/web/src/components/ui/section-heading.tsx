@@ -1,5 +1,6 @@
 import type { ReactNode } from 'react';
 import { cn } from '@/lib/utils';
+import { Eyebrow } from '@/components/ui/eyebrow';
 
 interface SectionHeadingProps {
   eyebrow?: ReactNode;
@@ -25,7 +26,7 @@ export function SectionHeading({
         className,
       )}
     >
-      {eyebrow ? <span className="eyebrow">{eyebrow}</span> : null}
+      {eyebrow ? <Eyebrow>{eyebrow}</Eyebrow> : null}
       <h2 className="text-3xl font-bold text-balance sm:text-4xl md:text-[2.75rem] md:leading-[1.05]">
         {title}
       </h2>

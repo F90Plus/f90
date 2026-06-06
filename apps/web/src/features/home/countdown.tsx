@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { useTranslations } from 'next-intl';
 import { Card } from '@/components/ui/card';
 import { LiveDot } from '@/components/ui/live-dot';
+import { Eyebrow } from '@/components/ui/eyebrow';
 import { WORLD_CUP_KICKOFF_ISO } from '@/lib/constants';
 
 interface Remaining {
@@ -68,7 +69,7 @@ export function Countdown() {
   return (
     <Card className="px-5 py-4">
       <div className="mb-3 flex flex-wrap items-baseline gap-x-2 gap-y-1">
-        <span className="eyebrow">{t('eyebrow')}</span>
+        <Eyebrow>{t('eyebrow')}</Eyebrow>
         <span className="text-sm text-mist-400">{t('label')}</span>
       </div>
       <div className="grid grid-cols-4 gap-2">

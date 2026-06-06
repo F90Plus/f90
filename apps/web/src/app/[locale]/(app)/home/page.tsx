@@ -9,6 +9,7 @@ import { getPredictableFixtures, getUserPredictions } from '@/features/predictio
 import { splitFeatured, recentPredictions } from '@/features/predictions/home-model';
 import { PredictCard } from '@/features/predictions/predict-card';
 import { MyPredictionsStrip } from '@/features/predictions/my-predictions-strip';
+import { Eyebrow } from '@/components/ui/eyebrow';
 import { Link } from '@/i18n/navigation';
 
 type Props = { params: Promise<{ locale: string }> };
@@ -96,7 +97,7 @@ export default async function AppHomePage({ params }: Props) {
             scrolls to; scroll-mt clears the sticky header. */}
         <section id="predict" className="mt-10 scroll-mt-24">
           <div className="mb-3.5">
-            <span className="eyebrow">{t('home.predict.eyebrow')}</span>
+            <Eyebrow>{t('home.predict.eyebrow')}</Eyebrow>
             <h2 className="mt-2 font-display text-2xl font-extrabold text-mist-50 sm:text-[1.7rem]">
               {t('home.predict.title')}
             </h2>
