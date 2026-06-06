@@ -20,10 +20,10 @@
 > merge commit `2d3dc37`, 2026-06-05). The full **predict → lock → settle → points/Tokens → ranking** loop
 > (migrations `0004`/`0005`, `make_prediction`/`settle_fixture` server-authoritative functions, predict card
 > + position ticket with real flags, premium `/home` hub, `/predictions`, `/ranking`). **243 vitest · build ·
-> i18n 343/343 · vocab D-037 · adversarially reviewed** (D-050/D-051). **Deploy = operator runbook:** apply
-> `0004`+`0005` to Supabase · Vercel env (`SUPABASE_SECRET_KEY` + new `ADMIN_SYNC_SECRET`) · D-035 sign-in
-> dashboard items · `vercel --prod` · `POST /api/admin/sync-fixtures` → ~72 fixtures · `POST /api/admin/settle`
-> post-match. See [PHASE_2_HANDOFF.md](PHASE_2_HANDOFF.md).
+> i18n 343/343 · vocab D-037 · adversarially reviewed** (D-050/D-051). **Deploy = ✅ DONE (D-058):** the runbook was
+> executed — migrations `0004`/`0005`/`0006` applied · all 4 Vercel env vars set · D-035 sign-in configured ·
+> `vercel --prod` · `sync-fixtures` → 72 fixtures · `settle_fixture` installed (recurring op `POST /api/admin/settle`
+> per matchday). See [PHASE_2_HANDOFF.md](PHASE_2_HANDOFF.md).
 > **✅ PHASE 2 POLISH PASS (D-053 + D-054) — MERGED + DEPLOYED; PHASE 2 OPERATIVELY CLOSED (D-056).** PR [#5](https://github.com/F90Plus/f90/pull/5) merged → `main` = `372072c`; `vercel --prod` → `dpl_DNiLgBUgPKNAUcy5MXpyBQbor4rS` (READY) aliased **`https://www.f90.xyz`**; prod-verified (trophy.webp 200 · landing 200 · gates 307→/login · 404). Deployed autonomously under the new standing directive **D-055** (merge→deploy when the quality bar is met).**
 > Turns Phase 2 from "works" to "finished": auth-aware navigation (header/footer/account-menu + profile links;
 > the old landing-anchor dead-ends fixed), predict-flow feedback (in-flight "Confirmando…" · **reactive kickoff
